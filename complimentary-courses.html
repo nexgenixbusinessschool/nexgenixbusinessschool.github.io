@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nex Genix Business School</title>
+    <link rel="icon" type="image/x-icon" href="favicon-bs.ico">
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="responsive.css" />    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&family=Yellowtail&display=swap" rel="stylesheet">
+  </head>
+  <body>
+<!-- Navigation Bar -->
+<nav id="navbar">
+    <div class="logo">
+        <img src="logo-bs.png" alt="logo" class="logo">
+        <p class="logo-title"><a href="#">NEX GENIX BUSINESS SCHOOL</a></p>
+	<p class="short-title"><a href="#">NGBS</a></p>
+    </div>
+
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+    <ul class="nav-list">
+        <li><a href="https://nexgenixbusinessschool.github.io/home/">Home</a></li>
+        <li><a href="https://nexgenixbusinessschool.github.io/home/#about_us">About Us</a></li>
+        <li><a href="https://nexgenixbusinessschool.github.io/home/#products_and_services">Products & Services</a></li>
+        <li><a href="https://nexgenixbusinessschool.github.io/home/#reviews">Reviews</a></li>
+	<li><a href="#careers">Careers</a></li>
+        <li><a href="https://nexgenixbusinessschool.github.io/home/#contact">Contact</a></li>
+    </ul>
+<div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn">Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard/" class="dashboard-btn">Dashboard</a>
+</div>
+
+</nav>
+
+<!-- COMPLIMENTARY COURSES -->
+    <div class="complimentary-courses-container">
+        <h1>Complimentary Courses</h1>
+	<img src="online-class.png" alt="online class" class="online-class">
+        <div class="complimentary-courses-description">Nex Genix Business School offers complimentary, self-paced learning programs designed to equip individuals with essential knowledge and skills across various business disciplines, providing a strong foundation for professional growth and career advancement. Upon successful completion, participants earn micro-certifications that enhance credibility and competitiveness in the freelancing marketplace. To verify the authenticity of your certificate, please <a href="https://nexgenixbusinessschool.github.io/verify-certificate/">click here</a>.</div>
+    </div>
+
+    <div class="complimentary-courses-products">
+        <div class="product card">
+	    <img src="LESSON1.png" class="lesson1" alt="Lesson 1 Image">
+            <div class="product-title">LESSON 1</div>
+            <div class="product-description">The Basics</div>
+            <button class="cta-button">Enroll</button>
+        </div>
+
+        <div class="product card">
+	    <img src="LESSON2.png" class="lesson2" alt="Lesson 2 Image">
+            <div class="product-title">LESSON 2</div>
+            <div class="product-description">Logo Creation</div>
+            <button class="cta-button">Enroll</button>
+        </div>
+
+        <div class="product card">
+	    <img src="LESSON3.png" class="lesson3" alt="Lesson 3 Image">
+            <div class="product-title">LESSON 3</div>
+            <div class="product-description">Nurturing Your Product</div>
+            <button class="cta-button">Enroll</button>
+        </div>
+
+        <div class="product card">
+	    <img src="LESSON4.png" class="lesson4" alt="Lesson 4 Image">
+            <div class="product-title">LESSON 4</div>
+            <div class="product-description">Marketing: The Power of Pursuasion</div>
+            <button class="cta-button">Enroll</button>
+        </div>
+
+        <div class="product card">
+	    <img src="LESSON5.png" class="lesson5" alt="Lesson 5 Image">
+            <div class="product-title">LESSON 5</div>
+            <div class="product-description">The Art of Selling</div>
+            <button class="cta-button">Enroll</button>
+        </div>
+
+    </div> 
+
+<!-- FOOTER SECTION -->
+<footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
+
+    <!-- JavaScript for Toggle -->
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-list').classList.toggle('active');
+            document.querySelector('.hamburger-menu').classList.toggle('open');
+        }
+    </script>
+
+</body>
+</html>
