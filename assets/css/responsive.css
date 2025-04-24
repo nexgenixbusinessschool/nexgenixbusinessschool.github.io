@@ -443,5 +443,51 @@
     .label {
     	font-size: 10px;
     }
+}
 
+/* Contact Section Responsive Styles */
+
+@media (max-width: 768px) {
+	.counter-container {
+    		flex-wrap: wrap;
+    		gap: 10px;
+  	}
+  
+	.counter-item {
+		max-width: 150px;
+		padding: 15px;
+	}
+  
+	.counter {
+		font-size: 30px;
+	}
+  
+	.contact-btn {
+		width: 40px;
+		height: 40px;
+		font-size: 16px;
+	}
+}
+
+
+
+@media (max-width: 480px) {
+	.counter-item {
+		max-width: 120px;
+		padding: 10px;
+	}
+  
+	.counter {  
+		font-size: 24px;
+	}
+
+	.label {    
+		font-size: 12px;
+	}
+  
+	.contact-btn {  
+		width: 35px;
+		height: 35px;
+		font-size: 14px;
+	}
 }
