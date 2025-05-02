@@ -305,7 +305,7 @@ p {
   align-items: center;
   gap: 20px;
   width: 90%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .counter-item {
@@ -349,7 +349,7 @@ p {
 }
 
 .contact-btn {
-    background-color: #121212; /* dark background */
+    background-color: #121212; 
     border: 2px solid white;
     color: white;
     width: 50px;
@@ -364,21 +364,21 @@ p {
 }
 
 .contact-btn:hover {
-    background-color: #00ff00; /* green glow on hover */
+    background-color: #00ff00; 
     color: black;
     transform: scale(1.1);
 }
 
 .contact-buttons a {
-    text-decoration: none; /* Remove underline */
+    text-decoration: none; 
 }
 
 .contact-buttons a:visited {
-    color: inherit; /* Prevent purple visited color */
+    color: inherit;
 }
 
 .contact-buttons a {
-    color: inherit; /* Inherit color from the button */
+    color: inherit;
 }
 
 /* Footer */
@@ -709,7 +709,7 @@ text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
     padding: 10px;
 }
 
-.languages-image {
+.languages-image, .business-image {
     width: 90%;
     max-width: 350px;
     height: auto;
@@ -821,6 +821,18 @@ text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
     }
 }
 /* END */
+
+.business-product-card {
+    width: 90%;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 900px;
+}
 
 .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
     font-size: 18px;
