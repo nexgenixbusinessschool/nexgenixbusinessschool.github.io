@@ -698,7 +698,7 @@ text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
     padding: 20px;
 }
 
-.online-class, .ddvcs-image, .awa-image, .pws-image {
+.online-class, .ddvcs-image, .awa-image, .pws-image, .language-image, .business-image {
     width: 100%;
     max-width: 90%;
     height: auto;
