@@ -21,7 +21,13 @@ body {
 }
 
 h1, .detail-label {
-  text-shadow: 0 0 10px #f57c00, 0 0 20px #f57c00;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+  color: #00ff66;
+  text-shadow: 0 0 6px #00ff66;
+}
+
 }
 
     .main-content {
@@ -48,7 +54,7 @@ h1, .detail-label {
     }
 
     button {
-      background-color: #f57c00;
+      background-color: #00ff88;
       color: white;
       border: none;
       cursor: pointer;
@@ -91,7 +97,7 @@ h1, .detail-label {
     }
 
     a {
-      color: #f57c00;
+      color: #00ff88;
       text-decoration: none;
     }
 
@@ -102,6 +108,16 @@ h1, .detail-label {
     .logo img {
       height: 40px;
     }
+
+#displayName,
+#displayID,
+#displayCourse,
+#displayScore,
+#displayDate {
+  color: white;
+  text-shadow: 0 0 5px #00ff66;
+}
+
   </style>
 </head>
 <body>
@@ -180,7 +196,7 @@ h1, .detail-label {
 
     if (cert) {
       resultDiv.textContent = "✅ Certificate is valid!";
-      resultDiv.style.color = "#4CAF50";
+      resultDiv.style.color = "#00ff88";
 
       certImage.src = cert.image;
       nameEl.textContent = cert.owner;
