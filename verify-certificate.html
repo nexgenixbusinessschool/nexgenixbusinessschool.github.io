@@ -6,8 +6,8 @@
   <title>Verify Certificate</title>
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
@@ -26,6 +26,7 @@
 
     .main-content {
       max-width: 1000px;
+      width: 95%;
       margin: auto;
       background: #1a1a1a;
       padding: 30px;
@@ -35,15 +36,16 @@
 
     form {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     input {
       padding: 12px;
-      width: 90%;
-      margin: 10px auto;
-      font-size: 16px;
+      width: 70%;
+      font-size: 14px;
       border-radius: 8px;
       border: 1px solid #888;
       background-color: #222;
@@ -58,7 +60,6 @@
       color: white;
       border: none;
       cursor: pointer;
-      margin-top: 10px;
       width: fit-content;
     }
 
@@ -104,18 +105,27 @@
       max-width: 100%;
     }
 
-    .issued-by {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 20px;
+    /* Updated issued by styles */
+    .detail-row:last-of-type {
+      align-items: center; /* vertically center label and value */
     }
 
-    .issued-by img {
-      height: 30px;
+    .issuer-logo {
+      max-width: 150px;
+      height: auto;
+      display: block;
     }
 
     @media (max-width: 768px) {
+      form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input {
+        width: 90%;
+      }
+
       .detail-row {
         flex-direction: column;
       }
@@ -123,6 +133,10 @@
       .detail-label,
       .detail-value {
         width: 100%;
+      }
+
+      .issuer-logo {
+        max-width: 100px;
       }
     }
   </style>
@@ -173,9 +187,11 @@
         <div id="displayDate" class="detail-value"></div>
       </div>
 
-      <div class="issued-by">
-        <strong>Issued By:</strong>
-        <img src="banner-bs.png" alt="Nex Genix Business School Logo" />
+      <div class="detail-row">
+        <div class="detail-label">Issued By:</div>
+        <div class="detail-value">
+          <img src="banner-bs.png" alt="Nex Genix Business School Logo" class="issuer-logo" />
+        </div>
       </div>
     </div>
   </div>
@@ -210,7 +226,7 @@
           course: "From Branding to Sales Mastery",
           score: "98.88%",
           issuedOn: "January 28, 2025",
-          image: "gioia-certificate.png"
+          image: "assets/images/gioia-certificate.png"
         },
         {
           id: "NGBS002-28012025-AC02",
@@ -218,7 +234,7 @@
           course: "Business Communication",
           score: "98.88%",
           issuedOn: "January 28, 2025",
-          image: "jayvee-certificate.png"
+          image: "assets/images/jayvee-certificate.png"
         }
       ];
 
