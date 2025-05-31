@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verify Certificate</title>
 
-  <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -144,7 +145,7 @@
 <body>
   <nav id="navbar">
     <div class="logo">
-      <img src="assets/images/logo-bs.png" alt="logo" class="logo" style="height: 40px;" />
+      <img src="assets/images/logo.png" alt="logo" class="logo" style="height: 40px;" />
       <p class="logo-title"><a href="https://nexgenixcreativesolutions.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
       <p class="short-title"><a href="https://nexgenixcreativesolutions.github.io">NGBS</a></p>
     </div>
@@ -198,68 +199,69 @@
   
 <!-- Footer Section -->
 <footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
-  <script>
-    document.getElementById("verifyForm").addEventListener("submit", function (event) {
-      event.preventDefault();
+<script>
+  document.getElementById("verifyForm").addEventListener("submit", function (event) {
+    event.preventDefault();
 
-      const certificateID = document.getElementById("certificateID").value.trim();
-      const resultDiv = document.getElementById("verificationResult");
-      const detailsDiv = document.getElementById("certificateDetails");
+    const certificateID = document.getElementById("certificateID").value.trim();
+    const resultDiv = document.getElementById("verificationResult");
+    const detailsDiv = document.getElementById("certificateDetails");
 
-      const certImage = document.getElementById("certificateImage");
-      const nameEl = document.getElementById("displayName");
-      const idEl = document.getElementById("displayID");
-      const courseEl = document.getElementById("displayCourse");
-      const scoreEl = document.getElementById("displayScore");
-      const dateEl = document.getElementById("displayDate");
+    const certImage = document.getElementById("certificateImage");
+    const nameEl = document.getElementById("displayName");
+    const idEl = document.getElementById("displayID");
+    const courseEl = document.getElementById("displayCourse");
+    const scoreEl = document.getElementById("displayScore");
+    const dateEl = document.getElementById("displayDate");
 
-      const certificates = [
-        {
-          id: "DEMO-0000",
-          owner: "Elmer Reed",
-          course: "Business Communication",
-          score: "89%",
-          issuedOn: "August 7, 2023",
-          image: "certificate-sample.png"
-        },
-        {
-          id: "NGBS001-28012025-AC01",
-          owner: "Gioia Antonette Pavan",
-          course: "From Branding to Sales Mastery",
-          score: "98.88%",
-          issuedOn: "January 28, 2025",
-          image: "assets/images/gioia-certificate.png"
-        },
-        {
-          id: "NGBS002-28012025-AC02",
-          owner: "Jayvee Brylle Limjoco",
-          course: "Business Communication",
-          score: "98.88%",
-          issuedOn: "January 28, 2025",
-          image: "assets/images/jayvee-certificate.png"
-        }
-      ];
-
-      const cert = certificates.find(c => c.id === certificateID);
-
-      if (cert) {
-        resultDiv.textContent = "✅ Certificate is valid!";
-        resultDiv.style.color = "limegreen";
-
-        certImage.src = cert.image;
-        nameEl.textContent = cert.owner;
-        idEl.textContent = cert.id;
-        courseEl.textContent = cert.course;
-        scoreEl.textContent = cert.score || "N/A";
-        dateEl.textContent = cert.issuedOn;
-
-        detailsDiv.style.display = "block";
-      } else {
-        resultDiv.textContent = "❌ Invalid certificate!";
-        resultDiv.style.color = "red";
-        detailsDiv.style.display = "none";
+    const certificates = [
+      {
+        id: "DEMO-0000",
+        owner: "Elmer Reed",
+        course: "Business Communication",
+        score: "89%",
+        issuedOn: "August 7, 2023",
+        image: "certificate-sample.png"
+      },
+      {
+        id: "NGBS001-28012025-AC01",
+        owner: "Gioia Antonette Pavan",
+        course: "From Branding to Sales Mastery",
+        score: "98.88%",
+        issuedOn: "January 28, 2025",
+        image: "assets/images/gioia-certificate.png"
+      },
+      {
+        id: "NGBS002-28012025-AC02",
+        owner: "Jayvee Brylle Limjoco",
+        course: "Business Communication",
+        score: "98.88%",
+        issuedOn: "January 28, 2025",
+        image: "assets/images/jayvee-certificate.png"
       }
-    });
-  </script>
+    ];
+
+    const cert = certificates.find(c => c.id === certificateID);
+
+    if (cert) {
+      resultDiv.innerHTML = '<i class="fas fa-circle-check" style="color: limegreen; font-size: 24px; margin-right: 8px;"></i><span style="color: 
+
+limegreen;">Certificate is valid!</span>';
+
+      certImage.src = cert.image;
+      nameEl.textContent = cert.owner;
+      idEl.textContent = cert.id;
+      courseEl.textContent = cert.course;
+      scoreEl.textContent = cert.score || "N/A";
+      dateEl.textContent = cert.issuedOn;
+
+      detailsDiv.style.display = "block";
+    } else {
+      resultDiv.textContent = "❌ Invalid certificate!";
+      resultDiv.style.color = "red";
+      detailsDiv.style.display = "none";
+    }
+  });
+</script>
 </body>
 </html>
