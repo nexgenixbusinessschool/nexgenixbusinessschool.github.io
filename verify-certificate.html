@@ -4,32 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verify Certificate</title>
+
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="responsive.css" />    
-  <style>
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #000;
-  background-image: radial-gradient(circle at 1px 1px, #2a2a2a 1px, transparent 0),
-                    radial-gradient(circle at 3px 3px, #1a1a1a 1px, transparent 0);
-  background-size: 50px 50px;
-  background-blend-mode: overlay;
-  color: #00ff00;
-  padding: 40px;
-}
+  <link rel="stylesheet" href="responsive.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-h1, .detail-label {
-  font-weight: bold;
-  margin-top: 10px;
-  display: block;
-color: #00ff00;
-text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
-}
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      background-color: #000;
+      color: #00ff00;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #00ff00;
+    }
 
     .main-content {
-      max-width: 700px;
+      max-width: 1000px;
       margin: auto;
       background: #1a1a1a;
       padding: 30px;
@@ -58,160 +54,204 @@ text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
       cursor: pointer;
     }
 
-    #certificateImage {
+    .result-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
       margin-top: 20px;
+    }
+
+    .result-box {
+      flex: 1 1 200px;
+      font-size: 20px;
+      text-align: left;
+      padding: 10px;
+      border-left: 4px solid #00ff88;
+    }
+
+    .details-box {
+      flex: 2 1 600px;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ff88;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      color: #00ff00;
+      width: 40%;
+    }
+
+    .detail-value {
+      color: white;
+      width: 58%;
+      text-align: left;
+    }
+
+    #certificateImage {
+      display: block;
+      margin: 20px auto;
       border: 1px solid #ccc;
       border-radius: 8px;
       max-width: 100%;
     }
 
-    .detail-label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
-      color: #00ff00;
-text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
-    }
-
     .issued-by {
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin-top: 20px;
       gap: 10px;
+      margin-top: 20px;
     }
 
     .issued-by img {
       height: 30px;
     }
 
-    #verificationResult {
-      font-size: 20px;
-      margin-top: 15px;
+    @media (max-width: 768px) {
+      .detail-row {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .detail-label,
+      .detail-value {
+        width: 100%;
+      }
+
+      .result-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
     }
-
-    footer {
-      margin-top: 40px;
-      color: #bbb;
-    }
-
-    a {
-      color: #00ff88;
-      text-decoration: none;
-    }
-
-    .logo-title, .short-title {
-      color: #fff;
-    }
-
-    .logo img {
-      height: 40px;
-    }
-
-#displayName,
-#displayID,
-#displayCourse,
-#displayScore,
-#displayDate {
-color: white;
-}
-
   </style>
 </head>
 <body>
+  <nav id="navbar">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="logo" class="logo" style="height: 40px;" />
+      <p class="logo-title"><a href="https://nexgenixcreativesolutions.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
+      <p class="short-title"><a href="https://nexgenixcreativesolutions.github.io">NGBS</a></p>
+    </div>
+  </nav>
 
-<!-- Navigation Bar -->
-<nav id="navbar">
-  <div class="logo">
-    <img src="assets/images/logo.png" alt="logo" class="logo">
-    <p class="logo-title"><a href="https://nexgenixcreativesolutions.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
-    <p class="short-title"><a href="https://nexgenixcreativesolutions.github.io">NGBS</a></p>
-  </div>
-</nav>
+  <div class="main-content">
+    <h1>Verify E-Certificate</h1>
+    <form id="verifyForm">
+      <input id="certificateID" name="certificateID" required type="text" placeholder="NGBS####-DDMMYYYY-AC##"/>
+      <button type="submit">Verify</button>
+    </form>
 
-<!-- Main Content -->
-<div class="main-content">
-  <h1 style="color: #00ff00;
-text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;">Verify E-Certificate</h1>
-  <form id="verifyForm">
-    <input id="certificateID" name="certificateID" required type="text" placeholder="Enter Certificate ID"/>
-    <button type="submit">Verify</button>
-  </form>
+    <div class="result-wrapper">
+      <div id="verificationResult" class="result-box"></div>
 
-  <div id="verificationResult"></div>
+      <div id="certificateDetails" class="details-box" style="display: none;">
+        <img id="certificateImage" src="" alt="Certificate Preview"/>
+        
+        <div class="detail-row">
+          <div class="detail-label">Learner Name:</div>
+          <div id="displayName" class="detail-value"></div>
+        </div>
 
-  <div id="certificateDetails" style="display: none;">
-    <img id="certificateImage" src="" alt="Certificate Preview"/>
-    <div class="detail-label">Learner Name:</div> <div id="displayName"></div>
-    <div class="detail-label">Certificate ID:</div> <div id="displayID"></div>
-    <div class="detail-label">Course Name:</div> <div id="displayCourse"></div>
-    <div class="detail-label">Average Score:</div> <div id="displayScore"></div>
-    <div class="detail-label">Issued On:</div> <div id="displayDate"></div>
-    <div class="issued-by">
-      <span><strong>Issued By:</strong></span>
-      <img src="banner-bs.png" alt="Nex Genix Business School Logo" />
+        <div class="detail-row">
+          <div class="detail-label">Certificate ID:</div>
+          <div id="displayID" class="detail-value"></div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">Course Name:</div>
+          <div id="displayCourse" class="detail-value"></div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">Average Score:</div>
+          <div id="displayScore" class="detail-value"></div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">Issued On:</div>
+          <div id="displayDate" class="detail-value"></div>
+        </div>
+
+        <div class="issued-by">
+          <strong>Issued By:</strong>
+          <img src="banner-bs.png" alt="Nex Genix Business School Logo" />
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Footer -->
-<footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
+  <script>
+    document.getElementById("verifyForm").addEventListener("submit", function (event) {
+      event.preventDefault();
 
-<script>
-  document.getElementById("verifyForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+      const certificateID = document.getElementById("certificateID").value.trim();
+      const resultDiv = document.getElementById("verificationResult");
+      const detailsDiv = document.getElementById("certificateDetails");
 
-    const certificateID = document.getElementById("certificateID").value.trim();
-    const resultDiv = document.getElementById("verificationResult");
-    const detailsDiv = document.getElementById("certificateDetails");
+      const certImage = document.getElementById("certificateImage");
+      const nameEl = document.getElementById("displayName");
+      const idEl = document.getElementById("displayID");
+      const courseEl = document.getElementById("displayCourse");
+      const scoreEl = document.getElementById("displayScore");
+      const dateEl = document.getElementById("displayDate");
 
-    const certImage = document.getElementById("certificateImage");
-    const nameEl = document.getElementById("displayName");
-    const idEl = document.getElementById("displayID");
-    const courseEl = document.getElementById("displayCourse");
-    const scoreEl = document.getElementById("displayScore");
-    const dateEl = document.getElementById("displayDate");
+      const certificates = [
+        {
+          id: "DEMO-0000",
+          owner: "Elmer Reed",
+          course: "Business Communication",
+          score: "89%",
+          issuedOn: "August 7, 2023",
+          image: "certificate-sample.png"
+        },
+        {
+          id: "NGBS001-28012025-AC01",
+          owner: "Gioia Antonette Pavan",
+          course: "From Branding to Sales Mastery",
+          score: "92%",
+          issuedOn: "January 28, 2025",
+          image: "gioia-certificate.png"
+        },
+        {
+          id: "NGBS002-28012025-AC02",
+          owner: "Jayvee Brylle Limjoco",
+          course: "Business Communication",
+          score: "98.88%",
+          issuedOn: "January 28, 2025",
+          image: "jayvee-certificate.png"
+        }
+      ];
 
-    const certificates = [
-      {
-        id: "DEMO-0000",
-        owner: "Elmer Reed",
-        course: "Business Communication",
-        score: "89%",
-        issuedOn: "August 7, 2023",
-        image: "certificate-sample.png"
-      },
-      {
-        id: "NGBS001-28012025-AC01",
-        owner: "Gioia Antonette Pavan",
-        course: "From Branding to Sales Mastery",
-        score: "98.88%",
-        issuedOn: "January 28, 2025",
-        image: "gioia-certificate.png"
+      const cert = certificates.find(c => c.id === certificateID);
+
+      if (cert) {
+        resultDiv.textContent = "✅ Certificate is valid!";
+        resultDiv.style.color = "limegreen";
+
+        certImage.src = cert.image;
+        nameEl.textContent = cert.owner;
+        idEl.textContent = cert.id;
+        courseEl.textContent = cert.course;
+        scoreEl.textContent = cert.score || "N/A";
+        dateEl.textContent = cert.issuedOn;
+
+        detailsDiv.style.display = "block";
+      } else {
+        resultDiv.textContent = "❌ Invalid certificate!";
+        resultDiv.style.color = "red";
+        detailsDiv.style.display = "none";
       }
-    ];
-
-    const cert = certificates.find(c => c.id === certificateID);
-
-    if (cert) {
-      resultDiv.textContent = "✅ Certificate is valid!";
-      resultDiv.style.color = "#00ff88";
-
-      certImage.src = cert.image;
-      nameEl.textContent = cert.owner;
-      idEl.textContent = cert.id;
-      courseEl.textContent = cert.course;
-      scoreEl.textContent = cert.score || "N/A";
-      dateEl.textContent = cert.issuedOn;
-
-      detailsDiv.style.display = "block";
-    } else {
-      resultDiv.textContent = "❌ Invalid certificate!";
-      resultDiv.style.color = "#f44336";
-      detailsDiv.style.display = "none";
-    }
-  });
-</script>
-
+    });
+  </script>
 </body>
 </html>
