@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>From Branding to Sales Mastery</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      max-width: 100%;
+    }
+
+    .left, .right {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 25px;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #555;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px;
+      border: none;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-outline {
+      border: 2px solid #007bff;
+      color: #007bff;
+      background-color: transparent;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    img.course-image {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .right {
+        display: none;
+      }
+
+      .mobile-only {
+        display: block;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+
+      h3, li, .btn {
+        font-size: 0.95rem;
+      }
+
+      .btn {
+        padding: 10px;
+      }
+
+      body {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Left Block -->
+    <div class="left">
+      <h1>Course Title: From Branding to Sales Mastery</h1>
+
+      <img src="your-course-image.jpg" alt="Course Preview" class="course-image mobile-only" />
+
+      <h2>Course Description:</h2>
+      <h3>This course equips aspiring entrepreneurs and professionals with the tools needed to build a powerful brand, develop irresistible products, and master 
+
+persuasive sales techniques to scale their businesses.</h3>
+
+      <h2>Learning Objectives:</h2>
+      <ul>
+        <li>Understand the fundamentals of branding and brand positioning</li>
+        <li>Learn how to develop customer-focused products</li>
+        <li>Gain practical skills in persuasive and ethical sales strategies</li>
+      </ul>
+
+      <h2>Modules:</h2>
+      <ul>
+        <li>Introduction to Business Success Principles</li>
+        <li>Crafting a Compelling Brand Identity</li>
+        <li>Product Development &amp; Market Fit</li>
+        <li>Sales Psychology and Consumer Behavior</li>
+        <li>Sales Funnel and Lead Generation</li>
+        <li>Closing Deals &amp; Building Loyalty</li>
+      </ul>
+
+      <h2>Outcomes:</h2>
+      <ul>
+        <li>Launch or rebrand a business with clarity and confidence</li>
+        <li>Develop and test products aligned with market needs</li>
+        <li>Communicate and sell effectively to different customer types</li>
+      </ul>
+
+      <h2>Ideal for:</h2>
+      <h3>Entrepreneurs, startup founders, marketing and sales professionals</h3>
+
+      <!-- CTA for mobile -->
+      <div class="cta-buttons mobile-only">
+        <a href="/enroll" class="btn btn-primary">Pay with PayPal</a>
+        <a href="/faq-or-form" class="btn btn-outline">Ask a Question</a>
+        <a href="/contact-support" class="btn btn-secondary">Need Human Assistance</a>
+      </div>
+    </div>
+
+    <!-- Right Block for large screens -->
+    <div class="right">
+      <img src="your-course-image.jpg" alt="Course Preview" class="course-image" />
+      <div class="cta-buttons">
+        <a href="/enroll" class="btn btn-primary">Pay with PayPal</a>
+        <a href="/faq-or-form" class="btn btn-outline">Ask a Question</a>
+        <a href="/contact-support" class="btn btn-secondary">Need Human Assistance</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
