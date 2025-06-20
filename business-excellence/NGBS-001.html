@@ -7,140 +7,148 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f9f9f9;
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #333;
-      overflow-x: hidden;
-    }
+  body {
+    text-align: justify;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+  }
 
+  .container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .left {
+    flex: 1 1 60%;
+    min-width: 300px;
+  }
+
+  .right {
+    flex: 1 1 35%;
+    min-width: 260px;
+  }
+
+  .course-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+
+  .course-detail-label {
+    font-size: 1.2rem;
+    margin-top: 25px;
+    color: #444;
+    font-weight: 600;
+  }
+
+  .course-details {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+
+  li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: stretch;
+  }
+
+  .btn {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn-outline {
+    border: 2px solid #007bff;
+    background: transparent;
+    color: #007bff;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+
+  img.course-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  /* Responsive styling for mobile / smaller screens */
+  @media (max-width: 960px) {
     .container {
-      display: flex;
-      gap: 30px;
-      align-items: flex-start;
-      flex-wrap: nowrap;
-      max-width: 100%;
+      flex-direction: column;
     }
 
     .left, .right {
-      flex: 1;
-    }
-
-    .course-title {
-      font-size: 1.6rem;
-      margin-bottom: 20px;
-    }
-
-    .course-detail-label {
-      font-size: 1.2rem;
-      margin-top: 25px;
-      color: #444;
-    }
-
-    .course-details {
-      font-size: 1rem;
-      font-weight: normal;
-      color: #555;
-    }
-
-    ul {
-      padding-left: 20px;
-      margin-top: 10px;
-    }
-
-    li {
-      margin-bottom: 10px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 12px;
-      border: none;
-      text-align: center;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1rem;
       width: 100%;
     }
 
-    .btn-primary {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .btn-outline {
-      border: 2px solid #007bff;
-      color: #007bff;
-      background-color: transparent;
-    }
-
-    .btn-secondary {
-      background-color: #6c757d;
-      color: white;
-    }
-
-    img.course-image {
-      width: 100%;
-      height: auto;
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .mobile-only {
+    .right {
       display: none;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .right {
-        display: none;
-      }
-
-      .mobile-only {
-        display: block;
-      }
-
-      .course-title {
-        font-size: 1.3rem;
-      }
-
-      .course-detail-label {
-        font-size: 1.1rem;
-      }
-
-      .course-details, li, .btn {
-        font-size: 0.95rem;
-      }
-
-      .btn {
-        padding: 10px;
-      }
-
-      body {
-        padding: 16px;
-      }
+    .mobile-only {
+      display: block;
     }
-  </style>
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .btn {
+      width: 100%;
+      font-size: 1rem;
+      padding: 12px;
+    }
+  }
+</style>
+
+
 </head>
 <body>
 
@@ -153,11 +161,11 @@
       <img src="your-course-image.jpg" alt="Course Preview" class="course-image mobile-only" />
 
       <div class="course-detail-label">Course Description:</div>
-      <div class="course-details">This course equips aspiring entrepreneurs and professionals with the tools needed to build a powerful brand, develop irresistible 
+      <div class="course-details">
+        This course equips aspiring entrepreneurs and professionals with the tools needed to build a powerful brand, develop irresistible products, and master 
 
-products, and master 
-
-persuasive sales techniques to scale their businesses.</div>
+persuasive sales techniques to scale their businesses.
+      </div>
 
       <div class="course-detail-label">Learning Objectives:</div>
       <ul>
@@ -184,9 +192,9 @@ persuasive sales techniques to scale their businesses.</div>
       </ul>
 
       <div class="course-detail-label">Ideal for:</div>
-      <h3>Entrepreneurs, startup founders, marketing and sales professionals</div>
+      <h3>Entrepreneurs, startup founders, marketing and sales professionals</h3>
 
-      <!-- CTA for mobile -->
+      <!-- CTA for mobile only -->
       <div class="cta-buttons mobile-only">
         <a href="/enroll" class="btn btn-primary">Pay with PayPal</a>
         <a href="/faq-or-form" class="btn btn-outline">Ask a Question</a>
