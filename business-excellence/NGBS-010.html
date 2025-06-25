@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nex Genix Business School</title>
+  <link rel="icon" type="image/x-icon" href="../assets/images/favicon-
+
+bs.ico">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: justify;
+      background-color: #111111;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1 1 60%;
+      min-width: 300px;
+    }
+
+    .right {
+      flex: 1 1 35%;
+      min-width: 260px;
+    }
+
+    .course-title {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    .course-detail-label {
+      font-size: 1.2rem;
+      margin-top: 25px;
+      color: #139E01;
+      font-weight: 600;
+    }
+
+    .course-details {
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .cta-buttons {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+      place-items: center; 
+    }
+
+    .uniform-button {
+      text-align: center;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      height: 3.125rem;
+      padding: 0 2rem;
+      font-weight: bold;
+      color: #ffffff;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .green {
+      background-color: #E4E30C;
+    }
+
+    .red {
+      background-color: #FF4D27;
+    }
+
+    .enroll {
+      background-color: #139E01;
+    }
+
+    img.course-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+
+    @media (max-width: 960px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+
+      .right {
+        display: none;
+      }
+
+      .mobile-only {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav id="navbar">
+    <div class="logo">
+        <img src="../assets/images/logo-bs.png" alt="logo" class="logo">
+        <p class="logo-title"><a 
+
+href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS 
+
+SCHOOL</a></p>
+	<p class="short-title"><a 
+
+href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+    </div>
+
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+    <ul class="nav-list">
+        <li><a href="https://nexgenixbusinessschool.github.io">Home</a></li>
+        <li><a 
+
+href="https://nexgenixbusinessschool.github.io/#about_us">About Us</a></li>
+        <li><a 
+
+href="https://nexgenixbusinessschool.github.io/#products_and_services">Produc
+
+ts & Services</a></li>
+        <li><a 
+
+href="https://nexgenixbusinessschool.github.io/#reviews">Reviews</a></li>
+	<li><a href="#careers">Careers</a></li>
+        <li><a 
+
+href="https://nexgenixbusinessschool.github.io/#contact">Contact</a></li>
+    </ul>
+<div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn">Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard" 
+
+class="dashboard-btn">Dashboard</a>
+</div>
+
+</nav>
+  
+  <div class="container">
+
+    <!-- Left Block -->
+    <div class="left">
+      <div class="course-title">Strategic Management</div>
+
+      <img src="../assets/images/ngbs010.png" alt="Strategic Management" class="course-image mobile-only" />
+
+      <div class="course-detail-label">Course Description:</div>
+      <div class="course-details">
+         Learn to make strategic decisions by analyzing market trends, allocating resources, and aligning teams to long-term business goals.
+      </div>
+
+      <div class="course-detail-label">Learning Objectives:</div>
+      <ul>
+        <li>Conduct SWOT and competitive analysis</li>
+        <li>Design and execute strategic initiatives</li>
+        <li>Monitor progress and adapt strategies</li>
+      </ul>
+
+      <div class="course-detail-label">Modules:</div>
+      <ul>
+        <li><b>Introduction to Strategy</b></li>
+        
+        <li><b>Industry and Competitor Analysis</b></li>
+
+        <li><b>Corporate and Business-Level Strategies</b></li>
+
+        <li><b>Strategy Implementation and KPIs</b></li>
+
+        <li><b>Change Management</b></li>
+
+        <li><b>Strategic Innovation and Sustainability</b></li>
+      </ul>
+
+      <div class="course-detail-label">Outcomes:</div>
+      <ul>
+        <li>Lead strategic planning sessions</li>
+        <li>Align resources with business objectives</li>
+        <li>Drive sustainable competitive advantage</li>
+      </ul>
+
+      <div class="course-detail-label">Ideal for:</div>
+      <p>Executives, business owners, strategic planners</p>
+
+      <!-- CTA for mobile only -->
+<div class="cta-buttons mobile-only">
+  <a href="/faq-or-form" class="uniform-button green">Ask a Question</a>
+  <a href="/contact-support" class="uniform-button red">Need Human 
+
+Assistance</a>
+  <a href="https://www.paypal.com/ncp/payment/7HTWRNB2WFVWN" class="uniform-
+
+button enroll" target="_blank">Enroll now</a>
+</div>
+    </div>
+
+<!-- Right Block (for wide screens only) -->
+<div class="right">
+  <img src="../assets/images/ngbs010.png" alt="Strategic Management" class="course-image" />
+  <div class="cta-buttons">
+    <a href="/faq-or-form" class="uniform-button green">Ask a Question</a>
+    <a href="/contact-support" class="uniform-button red">Need Human 
+
+Assistance</a>
+    <a href="https://www.paypal.com/ncp/payment/7HTWRNB2WFVWN" 
+
+class="uniform-button enroll" target="_blank">Enroll now</a>
+  </div>
+</div>
+	
+  <!-- Footer Section -->
+<footer>&copy; 2025 <span>Nex Genix Business School</span> All rights 
+
+reserved.</footer>
+</body>
+</html>
