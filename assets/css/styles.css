@@ -1027,7 +1027,8 @@ text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00;
 
 .cta-button a {
     text-decoration: none;
-    color: inherit;
+    color: white;
     display: inline-block;
 }
+
 
