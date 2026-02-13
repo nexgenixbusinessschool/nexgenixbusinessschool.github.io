@@ -231,7 +231,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 15px;
     margin-top: 15px;
     flex-wrap: wrap;
     width: 100%;
@@ -239,25 +239,34 @@ p {
 }
 
 .highlight-item {
-    display: flex;
-    flex-direction: column;
+    background: linear-gradient(135deg, #39FF14, #2ecc71);
+    color: black;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    min-width: 90px;
-    flex: 0 1 auto;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.6);
+    transform: translateY(-2px);
 }
 
 .highlight-item i {
-    font-size: 26px;
-    color: #39FF14;
-    text-shadow: 0 0 10px #39FF14;
+    font-size: 14px;
+    color: black;
 }
 
 .highlight-item span {
     font-size: 11px;
-    color: white;
+    color: black;
     text-align: center;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1.3;
 }
 
