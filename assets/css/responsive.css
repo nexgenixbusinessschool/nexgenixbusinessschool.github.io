@@ -1,3 +1,4 @@
+
 /* =================== RESPONSIVE DESIGN =================== */
 @media (max-width: 1030px) {
     /* NAVBAR ADJUSTMENTS */
@@ -94,24 +95,36 @@
         line-height: 1; 
     }
 
-    /* LEARNING PATH RESPONSIVE */
+    /* LEARNING PATH STAYS HORIZONTAL */
+    .learning-path-section {
+        padding: 35px 15px;
+    }
+
     .learning-path {
-        flex-direction: column;
-        gap: 30px;
+        gap: 10px;
+    }
+
+    .path-step {
+        min-width: 80px;
+    }
+
+    .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .step-title {
+        font-size: 13px;
+    }
+
+    .step-desc {
+        font-size: 10px;
     }
 
     .path-connector {
-        width: 2px;
-        height: 40px;
-        background: linear-gradient(to bottom, #39FF14, transparent);
-        transform: rotate(0);
-    }
-
-    .path-connector::after {
-        content: '▼';
-        right: -8px;
-        top: auto;
-        bottom: -15px;
+        width: 30px;
     }
 
     /* BENEFITS GRID */
@@ -136,18 +149,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 30px 15px;
+        padding: 40px 15px;
         background-color: black;
     }
 
     .counter-container {
         display: flex;
         justify-content: center;
-        align-items: center;
-        gap: 10px;
+        align-items: stretch;
+        gap: 15px;
         width: 100%;
         flex-wrap: wrap;
-        max-width: 800px;
+        max-width: 900px;
     }
 
     .counter-item {
@@ -156,24 +169,24 @@
         align-items: center;
         justify-content: center;
         background: rgba(255, 255, 255, 0.1);
-        padding: 10px;
-        border-radius: 8px;
+        padding: 20px 15px;
+        border-radius: 10px;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(5px);
         text-align: center;
         flex: 1;
-        min-width: 120px; 
-        max-width: 150px;
-        height: 100px;
+        min-width: 140px; 
+        max-width: 180px;
     }
 
     .counter-icon {
-        font-size: 24px;
+        font-size: 28px;
+        margin-bottom: 10px;
     }
 
     .counter {
         font-family: "Silkscreen", sans-serif;
-        font-size: 30px;
+        font-size: 32px;
         color: #39FF14;
         text-shadow: 0 0 8px #39FF14;
         margin-bottom: 5px;
@@ -182,7 +195,8 @@
     .label {
         font-size: 12px;
         color: white;
-        opacity: 0.8;
+        opacity: 0.85;
+        margin-top: 5px;
     }
 
     #welcome-section {
@@ -360,12 +374,14 @@
 
    /* FEATURE HIGHLIGHTS */
    .feature-highlights {
-       flex-direction: column;
-       gap: 10px;
+       flex-direction: row;
+       gap: 15px;
+       flex-wrap: wrap;
+       justify-content: center;
    }
 
    .highlight-item i {
-       font-size: 20px;
+       font-size: 22px;
    }
 
    .highlight-item span {
@@ -759,26 +775,28 @@
     }
 
     .counter-container {
-        gap: 5px;
+        gap: 10px;
     }
 
     .counter-item {
-        min-width: 100px;
-        max-width: 120px;
-        height: 80px;
-        padding: 8px;
+        min-width: 130px;
+        max-width: 160px;
+        padding: 20px 12px;
     }
 
     .counter-icon {
-        font-size: 20px;
+        font-size: 24px;
+        margin-bottom: 8px;
     }
 
     .counter {  
-        font-size: 24px;
+        font-size: 28px;
+        margin-bottom: 5px;
     }
 
     .label {    
-        font-size: 10px;
+        font-size: 11px;
+        margin-top: 5px;
     }
 
     .contact-btn {  
