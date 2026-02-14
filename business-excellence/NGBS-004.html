@@ -14,7 +14,22 @@
 
     body {
       text-align: justify;
-      background-color: #111111;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(19, 158, 1, 0.03) 2px, rgba(19, 158, 1, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(19, 158, 1, 0.03) 2px, rgba(19, 158, 1, 0.03) 4px);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
@@ -25,22 +40,44 @@
       padding: 40px 20px;
       align-items: flex-start;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
 
     .left {
       flex: 1 1 60%;
       min-width: 300px;
+      background: rgba(17, 17, 17, 0.85);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid rgba(19, 158, 1, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
     }
 
     .right {
       flex: 1 1 35%;
       min-width: 260px;
+      background: rgba(17, 17, 17, 0.85);
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid rgba(19, 158, 1, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 20px;
     }
 
     .course-title {
       font-size: 1.8rem;
       margin-bottom: 25px;
       font-weight: bold;
+      color: #139E01;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 3px solid #139E01;
+      padding-bottom: 15px;
+      text-shadow: 0 0 10px rgba(19, 158, 1, 0.3);
     }
 
     .course-detail-label {
@@ -48,11 +85,40 @@
       margin-top: 25px;
       color: #139E01;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-left: 4px solid #139E01;
+      padding-left: 12px;
+      margin-left: -15px;
     }
 
     .course-details {
       font-size: 1rem;
       margin-top: 10px;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+
+    ul {
+      margin-top: 15px;
+      padding-left: 25px;
+    }
+
+    ul li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      color: #d0d0d0;
+      position: relative;
+    }
+
+    ul li::marker {
+      color: #139E01;
+      font-weight: bold;
+    }
+
+    ul li b {
+      color: #139E01;
+      font-weight: 600;
     }
 
     .cta-buttons {
@@ -79,18 +145,39 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .uniform-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 
     .yellow {
-      background-color: #E4E30C;
+      background: linear-gradient(135deg, #E4E30C 0%, #b8b709 100%);
+    }
+
+    .yellow:hover {
+      background: linear-gradient(135deg, #f5f50d 0%, #E4E30C 100%);
     }
 
     .red {
-      background-color: #FF4D27;
+      background: linear-gradient(135deg, #FF4D27 0%, #d63d1e 100%);
+    }
+
+    .red:hover {
+      background: linear-gradient(135deg, #ff6242 0%, #FF4D27 100%);
     }
 
     .enroll {
-      background-color: #139E01;
+      background: linear-gradient(135deg, #139E01 0%, #0f7a01 100%);
+    }
+
+    .enroll:hover {
+      background: linear-gradient(135deg, #16b801 0%, #139E01 100%);
     }
 
     img.course-image {
@@ -98,16 +185,46 @@
       height: auto;
       border-radius: 10px;
       margin-bottom: 10px;
+      border: 3px solid rgba(19, 158, 1, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
 
     .mobile-only {
       display: none;
     }
 
+    body, .container, .left, .right, .course-details, ul, p {
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .course-title::before {
+      content: '📚 ';
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+
+    footer {
+      margin: 0;
+      padding: 10px 0;
+      position: relative;
+      z-index: 1;
+    }
+
     @media (max-width: 960px) {
+      body::before {
+        background-size: 3px 3px;
+      }
+
       .container {
         flex-direction: column;
-	padding: 40px 10px;
+        padding: 40px 10px;
+      }
+
+      .left {
+        padding: 20px;
       }
 
       .left, .right {
@@ -120,6 +237,32 @@
 
       .mobile-only {
         display: block;
+        background: rgba(17, 17, 17, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid rgba(19, 158, 1, 0.3);
+        margin-top: 20px;
+      }
+
+      img.course-image {
+        max-width: 90%;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+        margin-bottom: 15px;
+      }
+
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .uniform-button {
+        width: 100%;
+        max-width: 400px;
       }
     }
   </style>
@@ -130,31 +273,31 @@
     <div class="logo">
         <img src="../assets/images/logo-bs.png" alt="logo" class="logo">
         <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
-	<p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+        <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
     </div>
 
-        <!-- Hamburger Menu Icon -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
 
     <ul class="nav-list">
         <li><a href="https://nexgenixbusinessschool.github.io">Home</a></li>
         <li><a href="https://nexgenixbusinessschool.github.io/#about_us">About Us</a></li>
         <li><a href="https://nexgenixbusinessschool.github.io/#products_and_services">Products & Services</a></li>
         <li><a href="https://nexgenixbusinessschool.github.io/#reviews">Reviews</a></li>
-	<li><a href="#careers">Careers</a></li>
+        <li><a href="#careers">Careers</a></li>
         <li><a href="https://nexgenixbusinessschool.github.io/#contact">Contact</a></li>
     </ul>
-<div class="auth-buttons" id="auth-buttons">
-    <button onclick="handleLogout()" class="logout-btn">Logout</button>
-    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn">Dashboard</a>
-</div>
 
+    <div class="auth-buttons" id="auth-buttons">
+        <button onclick="handleLogout()" class="logout-btn">Logout</button>
+        <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn">Dashboard</a>
+    </div>
 </nav>
-  
+
   <div class="container">
 
     <!-- Left Block -->
@@ -178,7 +321,7 @@
       <div class="course-detail-label">Modules:</div>
       <ul>
         <li><b>Introduction to Business Law</b></li>
-        
+
         <li><b>Contracts and Obligations</b></li>
 
         <li><b>Employment Law Essentials</b></li>
@@ -188,6 +331,7 @@
         <li><b>Regulatory Compliance & Reporting</b></li>
 
         <li><b>Legal Risks Management</b></li>
+
       </ul>
 
       <div class="course-detail-label">Outcomes:</div>
@@ -201,26 +345,26 @@
       <p>Startup founders, managers, HR professionals</p>
 
       <!-- CTA for mobile only -->
-<div class="cta-buttons mobile-only">
-  <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
-  <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
-  <a href="https://www.paypal.com/ncp/payment/8MHFHSGFLQW9C" class="uniform-button enroll" target="_blank">Enroll now</a>
-</div>
+      <div class="cta-buttons mobile-only">
+        <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
+        <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
+        <a href="https://www.paypal.com/ncp/payment/8MHFHSGFLQW9C" class="uniform-button enroll" target="_blank">Enroll now</a>
+      </div>
     </div>
 
-<!-- Right Block (for wide screens only) -->
-<div class="right">
-  <img src="../assets/images/ngbs004.png" alt="Business Law and Regulations" class="course-image" />
-  <div class="cta-buttons">
-    <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
-    <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
-    <a href="https://www.paypal.com/ncp/payment/8MHFHSGFLQW9C" class="uniform-button enroll" target="_blank">Enroll now</a>
-  </div>
-</div>
-	
-  <!-- Footer Section -->
-<footer>&copy; 2025 <span>Nex Genix Business School</span> All rights 
+    <!-- Right Block (for wide screens only) -->
+    <div class="right">
+      <img src="../assets/images/ngbs004.png" alt="Business Law and Regulations" class="course-image" />
+      <div class="cta-buttons">
+        <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
+        <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
+        <a href="https://www.paypal.com/ncp/payment/8MHFHSGFLQW9C" class="uniform-button enroll" target="_blank">Enroll now</a>
+      </div>
+    </div>
 
-reserved.</footer>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
 </body>
 </html>
