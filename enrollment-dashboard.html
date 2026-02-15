@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Enrollment Dashboard</title>
+    <title>NEX GENIX - Learning Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,31 +12,81 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+        :root {
+            --primary-dark: #0a0e27;
+            --secondary-dark: #141b3d;
+            --accent-blue: #00d9ff;
+            --accent-purple: #7c3aed;
+            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --card-bg: #1a1f3a;
+            --hover-bg: #252d4f;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
         .navbar {
-            background: white;
+            background: var(--secondary-dark);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 15px 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
         }
 
         .logo {
             font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
             display: flex;
+            gap: 30px;
             align-items: center;
-            gap: 10px;
+        }
+
+        .nav-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-item.active {
+            color: var(--accent-blue);
         }
 
         .backpack-cart {
@@ -49,137 +100,344 @@
         }
 
         .backpack-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 45px;
+            height: 45px;
+            background: var(--accent-gradient);
             border-radius: 10px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .backpack-icon::before {
-            content: '🎒';
-            font-size: 28px;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
         }
 
         .cart-badge {
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #ff4757;
+            background: var(--danger);
             color: white;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 11px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.5);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+            padding: 60px 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px;
         }
 
         .container {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 30px;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
+        /* Course Section */
         .courses-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: var(--secondary-dark);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover, .filter-tab.active {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
         }
 
         .category {
             margin-bottom: 40px;
         }
 
-        .category-title {
-            color: #667eea;
-            font-size: 24px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+        .category-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .category-icon {
+            font-size: 28px;
+        }
+
+        .category-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .category-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: auto;
         }
 
         .course-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .course-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--secondary-dark);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .course-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .course-card:hover::before {
+            opacity: 1;
         }
 
         .course-card.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #764ba2;
+            background: var(--accent-gradient);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .course-card.selected::before {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
         }
 
         .course-name {
             font-weight: 600;
+            font-size: 16px;
             margin-bottom: 8px;
         }
 
-        .course-type {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-bottom: 8px;
-        }
-
-        .course-duration {
+        .course-type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 11px;
-            opacity: 0.7;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
+        .badge-instructor {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .badge-self-paced {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .course-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .course-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .checkmark {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            color: var(--accent-purple);
+            font-weight: bold;
+            font-size: 16px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-card.selected .checkmark {
+            display: flex;
+        }
+
+        /* Sidebar */
         .sidebar {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        .calendar-section {
-            background: white;
+        .sidebar-card {
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 217, 255, 0.1);
         }
 
-        .calendar-title {
-            color: #667eea;
-            font-size: 20px;
-            margin-bottom: 15px;
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--accent-blue);
         }
 
+        /* Calendar */
         .calendar {
-            background: #f5f7fa;
+            background: var(--secondary-dark);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 15px;
+        }
+
+        .calendar-month {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            font-size: 15px;
         }
 
         .calendar-header {
@@ -191,10 +449,10 @@
 
         .calendar-day {
             text-align: center;
-            font-weight: bold;
-            font-size: 12px;
-            color: #667eea;
-            padding: 5px;
+            font-weight: 600;
+            font-size: 11px;
+            color: var(--accent-blue);
+            padding: 8px 5px;
         }
 
         .calendar-dates {
@@ -209,88 +467,140 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
-            border-radius: 5px;
-            background: white;
-            position: relative;
+            border-radius: 8px;
+            background: var(--primary-dark);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .calendar-date:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
         }
 
         .calendar-date.has-class {
-            background: #667eea;
+            background: var(--accent-gradient);
             color: white;
-            font-weight: bold;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
         }
 
         .calendar-date.today {
-            border: 2px solid #ff4757;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
         }
 
+        /* Schedule */
         .schedule-list {
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .schedule-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .schedule-list::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+            border-radius: 10px;
+        }
+
+        .schedule-list::-webkit-scrollbar-thumb {
+            background: var(--accent-purple);
+            border-radius: 10px;
         }
 
         .schedule-item {
-            background: #f5f7fa;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid #667eea;
+            background: var(--secondary-dark);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            background: var(--hover-bg);
+            transform: translateX(5px);
         }
 
         .schedule-course {
             font-weight: 600;
-            color: #667eea;
-            margin-bottom: 3px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
         }
 
         .schedule-time {
             font-size: 12px;
-            color: #666;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 3px;
         }
 
+        .empty-state {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 40px 20px;
+            font-size: 14px;
+        }
+
+        /* Warning */
         .warning-note {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            border-radius: 10px;
-            padding: 15px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 20px;
             margin-top: 15px;
         }
 
         .warning-note strong {
-            color: #856404;
-            display: block;
-            margin-bottom: 8px;
+            color: var(--warning);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
 
         .warning-note p {
-            color: #856404;
+            color: var(--text-secondary);
             font-size: 13px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
+        /* Buttons */
         .enroll-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--accent-gradient);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 16px 30px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
         }
 
-        .enroll-button:hover {
-            transform: scale(1.05);
+        .enroll-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
         }
 
         .enroll-button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
+            box-shadow: none;
         }
 
-        /* Student Dashboard */
+        /* Dashboard */
         .student-dashboard {
             display: none;
         }
@@ -299,23 +609,43 @@
             display: block;
         }
 
-        .dashboard-header {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .dashboard-title {
-            color: #667eea;
-            font-size: 28px;
+        .dashboard-stat-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+        }
+
+        .stat-card-icon {
+            font-size: 32px;
             margin-bottom: 10px;
         }
 
-        .dashboard-subtitle {
-            color: #666;
-            font-size: 16px;
+        .stat-card-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .dashboard-content {
@@ -325,80 +655,135 @@
         }
 
         .my-courses {
-            background: white;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 217, 255, 0.1);
         }
 
         .course-item {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: var(--secondary-dark);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-gradient);
         }
 
         .course-item:hover {
             transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .course-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
         }
 
         .course-item-title {
             font-size: 18px;
-            font-weight: bold;
-            color: #667eea;
+            font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 8px;
         }
 
-        .course-item-type {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-bottom: 8px;
+        .progress-bar-container {
+            background: var(--primary-dark);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
         }
 
         .course-item-details {
-            font-size: 14px;
-            color: #666;
-            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .course-action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .course-action-btn {
-            background: #667eea;
+            flex: 1;
+            background: var(--accent-gradient);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 13px;
         }
 
         .course-action-btn:hover {
-            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
         }
 
-        .dashboard-calendar {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .course-action-btn.secondary {
+            background: var(--secondary-dark);
+            border: 1px solid rgba(0, 217, 255, 0.3);
         }
 
-        @media (max-width: 1024px) {
+        /* Responsive */
+        @media (max-width: 1200px) {
             .container, .dashboard-content {
                 grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
             .course-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                display: none;
             }
         }
     </style>
@@ -407,47 +792,192 @@
     <!-- Enrollment View -->
     <div id="enrollmentView">
         <nav class="navbar">
-            <div class="logo">
-                📚 Learning Academy
-            </div>
-            <div class="backpack-cart" onclick="toggleCart()">
-                <div class="backpack-icon"></div>
-                <div class="cart-badge" id="cartBadge">0</div>
+            <div class="nav-container">
+                <div class="logo">NEX GENIX LEARNING</div>
+                <div class="nav-menu">
+                    <a href="#" class="nav-item active">Courses</a>
+                    <a href="#" class="nav-item">My Learning</a>
+                    <a href="#" class="nav-item">Catalog</a>
+                    <a href="#" class="nav-item">Community</a>
+                </div>
+                <div class="backpack-cart" onclick="toggleCart()">
+                    <div class="backpack-icon">🎒</div>
+                    <div class="cart-badge" id="cartBadge">0</div>
+                </div>
             </div>
         </nav>
 
-        <div class="container">
-            <div class="courses-section">
-                <!-- Language Mastery -->
-                <div class="category">
-                    <h2 class="category-title">🌍 Language Mastery</h2>
-                    <div class="course-grid" id="languageCourses">
-                        <!-- Courses will be generated here -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Learning Journey</h1>
+                <p class="hero-subtitle">Transform your career with industry-leading courses • Learn at your own pace • Expert instructors</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Courses</div>
                     </div>
-                </div>
-
-                <!-- Business Excellence -->
-                <div class="category">
-                    <h2 class="category-title">💼 Business Excellence</h2>
-                    <div class="course-grid" id="businessCourses">
-                        <!-- Courses will be generated here -->
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Online</div>
                     </div>
-                </div>
-
-                <!-- K-12 Learning Series -->
-                <div class="category">
-                    <h2 class="category-title">🎓 K-12 Learning Series</h2>
-                    <div class="course-grid" id="k12Courses">
-                        <!-- Courses will be generated here -->
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Access</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Opportunities</div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="sidebar">
-                <div class="calendar-section">
-                    <h3 class="calendar-title">📅 Your Schedule</h3>
+        <div class="main-container">
+            <div class="container">
+                <div class="courses-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Browse Courses</h2>
+                        <div class="filter-tabs">
+                            <div class="filter-tab active" onclick="filterAll()">All</div>
+                            <div class="filter-tab" onclick="filterType('Instructor-Led')">Instructor-Led</div>
+                            <div class="filter-tab" onclick="filterType('Self-Paced')">Self-Paced</div>
+                        </div>
+                    </div>
+
+                    <!-- Language Mastery -->
+                    <div class="category">
+                        <div class="category-header">
+                            <span class="category-icon">🌍</span>
+                            <h3 class="category-title">Language Mastery</h3>
+                            <span class="category-count">6 courses</span>
+                        </div>
+                        <div class="course-grid" id="languageCourses"></div>
+                    </div>
+
+                    <!-- Business Excellence -->
+                    <div class="category">
+                        <div class="category-header">
+                            <span class="category-icon">💼</span>
+                            <h3 class="category-title">Business Excellence</h3>
+                            <span class="category-count">10 courses</span>
+                        </div>
+                        <div class="course-grid" id="businessCourses"></div>
+                    </div>
+
+                    <!-- K-12 Learning Series -->
+                    <div class="category">
+                        <div class="category-header">
+                            <span class="category-icon">🎓</span>
+                            <h3 class="category-title">K-12 Learning Series</h3>
+                            <span class="category-count">3 courses</span>
+                        </div>
+                        <div class="course-grid" id="k12Courses"></div>
+                    </div>
+                </div>
+
+                <div class="sidebar">
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">📅 Your Schedule</h3>
+                        
+                        <div class="calendar">
+                            <div class="calendar-month" id="calendarMonth">February 2026</div>
+                            <div class="calendar-header">
+                                <div class="calendar-day">Sun</div>
+                                <div class="calendar-day">Mon</div>
+                                <div class="calendar-day">Tue</div>
+                                <div class="calendar-day">Wed</div>
+                                <div class="calendar-day">Thu</div>
+                                <div class="calendar-day">Fri</div>
+                                <div class="calendar-day">Sat</div>
+                            </div>
+                            <div class="calendar-dates" id="calendarDates"></div>
+                        </div>
+
+                        <div class="schedule-list" id="scheduleList">
+                            <div class="empty-state">
+                                <p>📚 Select courses to build your schedule</p>
+                            </div>
+                        </div>
+
+                        <div class="warning-note">
+                            <strong>⚠️ Enrollment Advisory</strong>
+                            <p>Avoid over-enrollment. Each course demands focus and dedication. Overcommitting may result in poor time management and course abandonment. <strong>No refunds available</strong> - choose wisely to maximize your investment.</p>
+                        </div>
+
+                        <button class="enroll-button" id="enrollButton" onclick="enrollCourses()" disabled>
+                            🚀 Enroll Now (<span id="enrollCount">0</span> courses)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard View -->
+    <div id="dashboardView" class="student-dashboard">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">NEX GENIX LEARNING</div>
+                <div class="nav-menu">
+                    <a href="#" class="nav-item active">Dashboard</a>
+                    <a href="#" class="nav-item">My Courses</a>
+                    <a href="#" class="nav-item">Calendar</a>
+                    <a href="#" class="nav-item">Progress</a>
+                </div>
+                <div style="color: var(--accent-blue); font-weight: 600;">Welcome back, Student 👋</div>
+            </div>
+        </nav>
+
+        <div class="hero-section" style="padding: 40px 30px;">
+            <div class="hero-content">
+                <h1 class="hero-title" style="font-size: 36px;">Learning Dashboard</h1>
+                <p class="hero-subtitle">Track your progress and manage your courses</p>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="dashboard-grid" id="dashboardStats">
+                <div class="dashboard-stat-card">
+                    <div class="stat-card-icon">📚</div>
+                    <div class="stat-card-value" id="totalCourses">0</div>
+                    <div class="stat-card-label">Total Courses</div>
+                </div>
+                <div class="dashboard-stat-card">
+                    <div class="stat-card-icon">⏳</div>
+                    <div class="stat-card-value" id="inProgress">0</div>
+                    <div class="stat-card-label">In Progress</div>
+                </div>
+                <div class="dashboard-stat-card">
+                    <div class="stat-card-icon">✅</div>
+                    <div class="stat-card-value" id="completed">0</div>
+                    <div class="stat-card-label">Completed</div>
+                </div>
+                <div class="dashboard-stat-card">
+                    <div class="stat-card-icon">🏆</div>
+                    <div class="stat-card-value" id="certificates">0</div>
+                    <div class="stat-card-label">Certificates</div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="my-courses">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <h2 style="color: var(--accent-blue); font-size: 24px; font-weight: 700;">📖 My Enrolled Courses</h2>
+                        <select style="background: var(--secondary-dark); color: var(--text-primary); border: 1px solid rgba(0, 217, 255, 0.3); padding: 8px 15px; border-radius: 8px; cursor: pointer;">
+                            <option>All Courses</option>
+                            <option>In Progress</option>
+                            <option>Not Started</option>
+                            <option>Completed</option>
+                        </select>
+                    </div>
+                    <div id="enrolledCoursesList"></div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📅 Class Schedule</h3>
                     
                     <div class="calendar">
+                        <div class="calendar-month">February 2026</div>
                         <div class="calendar-header">
                             <div class="calendar-day">Sun</div>
                             <div class="calendar-day">Mon</div>
@@ -457,72 +987,12 @@
                             <div class="calendar-day">Fri</div>
                             <div class="calendar-day">Sat</div>
                         </div>
-                        <div class="calendar-dates" id="calendarDates">
-                            <!-- Calendar dates will be generated here -->
-                        </div>
+                        <div class="calendar-dates" id="dashboardCalendarDates"></div>
                     </div>
 
-                    <div class="schedule-list" id="scheduleList">
-                        <p style="text-align: center; color: #999;">Select courses to see your schedule</p>
-                    </div>
-
-                    <div class="warning-note">
-                        <strong>⚠️ Important Notice</strong>
-                        <p>Please avoid over-enrollment. Each course requires focus and dedication. Taking on too many courses may lead to poor time management and potentially dropping courses later. Remember: <strong>No refunds are available</strong> once enrolled, so choose wisely to avoid wasting your payment.</p>
-                    </div>
-
-                    <button class="enroll-button" id="enrollButton" onclick="enrollCourses()" disabled>
-                        Enroll Now
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Student Dashboard View -->
-    <div id="dashboardView" class="student-dashboard">
-        <nav class="navbar">
-            <div class="logo">
-                📚 Learning Academy - Dashboard
-            </div>
-            <div style="color: #667eea; font-weight: bold;">Welcome, Student!</div>
-        </nav>
-
-        <div class="dashboard-header">
-            <h1 class="dashboard-title">My Learning Dashboard</h1>
-            <p class="dashboard-subtitle">Manage your courses and track your progress</p>
-        </div>
-
-        <div class="dashboard-content">
-            <div class="my-courses">
-                <h2 style="color: #667eea; margin-bottom: 20px;">📖 My Enrolled Courses</h2>
-                <div id="enrolledCoursesList">
-                    <!-- Enrolled courses will appear here -->
-                </div>
-            </div>
-
-            <div class="dashboard-calendar">
-                <h3 class="calendar-title">📅 Class Schedule</h3>
-                
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <div class="calendar-day">Sun</div>
-                        <div class="calendar-day">Mon</div>
-                        <div class="calendar-day">Tue</div>
-                        <div class="calendar-day">Wed</div>
-                        <div class="calendar-day">Thu</div>
-                        <div class="calendar-day">Fri</div>
-                        <div class="calendar-day">Sat</div>
-                    </div>
-                    <div class="calendar-dates" id="dashboardCalendarDates">
-                        <!-- Calendar dates will be generated here -->
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px;">
-                    <h4 style="color: #667eea; margin-bottom: 10px;">Upcoming Classes</h4>
-                    <div id="upcomingClasses">
-                        <!-- Upcoming classes will appear here -->
+                    <div style="margin-top: 20px;">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px; font-size: 16px;">🔔 Upcoming Classes</h4>
+                        <div id="upcomingClasses"></div>
                     </div>
                 </div>
             </div>
@@ -530,38 +1000,38 @@
     </div>
 
     <script>
-        // Course Data
+        // Course Data with TalentLMS-like structure
         const coursesData = {
             language: [
-                { name: 'English', type: 'Instructor-Led', duration: '12 weeks', schedule: 'Mon/Wed 6:00 PM' },
-                { name: 'Spanish', type: 'Instructor-Led', duration: '12 weeks', schedule: 'Tue/Thu 6:00 PM' },
-                { name: 'Mandarin', type: 'Self-Paced', duration: '16 weeks', schedule: 'Flexible' },
-                { name: 'Japanese', type: 'Instructor-Led', duration: '14 weeks', schedule: 'Mon/Wed 7:30 PM' },
-                { name: 'Italian', type: 'Self-Paced', duration: '12 weeks', schedule: 'Flexible' },
-                { name: 'Malay', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Sat 10:00 AM' }
+                { name: 'English Mastery', type: 'Instructor-Led', duration: '12 weeks', schedule: 'Mon/Wed 6:00 PM', progress: 0, lessons: 48, students: 234 },
+                { name: 'Spanish Essentials', type: 'Instructor-Led', duration: '12 weeks', schedule: 'Tue/Thu 6:00 PM', progress: 0, lessons: 48, students: 189 },
+                { name: 'Mandarin Chinese', type: 'Self-Paced', duration: '16 weeks', schedule: 'Flexible', progress: 0, lessons: 64, students: 156 },
+                { name: 'Japanese Language', type: 'Instructor-Led', duration: '14 weeks', schedule: 'Mon/Wed 7:30 PM', progress: 0, lessons: 56, students: 142 },
+                { name: 'Italian Conversation', type: 'Self-Paced', duration: '12 weeks', schedule: 'Flexible', progress: 0, lessons: 48, students: 98 },
+                { name: 'Malay Language', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Sat 10:00 AM', progress: 0, lessons: 40, students: 67 }
             ],
             business: [
-                { name: 'Business Strategy', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Tue 7:00 PM' },
-                { name: 'Financial Management', type: 'Self-Paced', duration: '10 weeks', schedule: 'Flexible' },
-                { name: 'Marketing Fundamentals', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Thu 7:00 PM' },
-                { name: 'Leadership & Management', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Wed 6:30 PM' },
-                { name: 'Project Management', type: 'Self-Paced', duration: '12 weeks', schedule: 'Flexible' },
-                { name: 'Business Analytics', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Fri 6:00 PM' },
-                { name: 'Entrepreneurship', type: 'Self-Paced', duration: '8 weeks', schedule: 'Flexible' },
-                { name: 'Digital Marketing', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Tue/Thu 8:00 PM' },
-                { name: 'Human Resources', type: 'Self-Paced', duration: '10 weeks', schedule: 'Flexible' },
-                { name: 'Operations Management', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Mon 7:00 PM' }
+                { name: 'Strategic Business Planning', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Tue 7:00 PM', progress: 0, lessons: 32, students: 445 },
+                { name: 'Financial Management Pro', type: 'Self-Paced', duration: '10 weeks', schedule: 'Flexible', progress: 0, lessons: 40, students: 523 },
+                { name: 'Marketing Fundamentals', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Thu 7:00 PM', progress: 0, lessons: 32, students: 389 },
+                { name: 'Leadership Excellence', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Wed 6:30 PM', progress: 0, lessons: 40, students: 412 },
+                { name: 'Project Management (PMP)', type: 'Self-Paced', duration: '12 weeks', schedule: 'Flexible', progress: 0, lessons: 48, students: 634 },
+                { name: 'Business Analytics & Data', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Fri 6:00 PM', progress: 0, lessons: 40, students: 298 },
+                { name: 'Entrepreneurship Bootcamp', type: 'Self-Paced', duration: '8 weeks', schedule: 'Flexible', progress: 0, lessons: 32, students: 567 },
+                { name: 'Digital Marketing Mastery', type: 'Instructor-Led', duration: '8 weeks', schedule: 'Tue/Thu 8:00 PM', progress: 0, lessons: 32, students: 723 },
+                { name: 'HR Management', type: 'Self-Paced', duration: '10 weeks', schedule: 'Flexible', progress: 0, lessons: 40, students: 234 },
+                { name: 'Operations & Supply Chain', type: 'Instructor-Led', duration: '10 weeks', schedule: 'Mon 7:00 PM', progress: 0, lessons: 40, students: 178 }
             ],
             k12: [
-                { name: 'Mathematics Tutoring', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Mon/Wed/Fri 4:00 PM' },
-                { name: 'Science Tutoring', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Tue/Thu 4:00 PM' },
-                { name: 'Social Studies Tutoring', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Wed/Fri 5:00 PM' }
+                { name: 'Mathematics Tutoring', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Mon/Wed/Fri 4:00 PM', progress: 0, lessons: 120, students: 89 },
+                { name: 'Science Exploration', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Tue/Thu 4:00 PM', progress: 0, lessons: 80, students: 76 },
+                { name: 'Social Studies', type: 'Instructor-Led', duration: 'Ongoing', schedule: 'Wed/Fri 5:00 PM', progress: 0, lessons: 60, students: 54 }
             ]
         };
 
         let selectedCourses = [];
+        let enrolledCourses = [];
 
-        // Initialize courses
         function initializeCourses() {
             renderCourses('languageCourses', coursesData.language);
             renderCourses('businessCourses', coursesData.business);
@@ -573,24 +1043,38 @@
         function renderCourses(containerId, courses) {
             const container = document.getElementById(containerId);
             container.innerHTML = courses.map((course, index) => `
-                <div class="course-card" onclick="toggleCourse('${containerId}', ${index}, '${course.name}', '${course.type}', '${course.schedule}', '${course.duration}')">
-                    <div class="course-name">${course.name}</div>
-                    <div class="course-type">${course.type}</div>
-                    <div class="course-duration">Duration: ${course.duration}</div>
+                <div class="course-card" data-type="${course.type}" onclick="toggleCourse('${containerId}', ${index})">
+                    <div class="checkmark">✓</div>
+                    <div class="course-header">
+                        <div>
+                            <div class="course-name">${course.name}</div>
+                            <span class="course-type-badge ${course.type === 'Instructor-Led' ? 'badge-instructor' : 'badge-self-paced'}">
+                                ${course.type === 'Instructor-Led' ? '👨‍🏫 Instructor-Led' : '🎯 Self-Paced'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="course-meta">
+                        <div class="course-meta-item">📚 ${course.lessons} lessons</div>
+                        <div class="course-meta-item">⏱️ ${course.duration}</div>
+                        <div class="course-meta-item">👥 ${course.students} students</div>
+                        <div class="course-meta-item">📅 ${course.schedule}</div>
+                    </div>
                 </div>
             `).join('');
         }
 
-        function toggleCourse(containerId, index, name, type, schedule, duration) {
-            const card = document.querySelectorAll(`#${containerId} .course-card`)[index];
-            const courseKey = `${name}`;
+        function toggleCourse(containerId, index) {
+            const cards = document.querySelectorAll(`#${containerId} .course-card`);
+            const card = cards[index];
+            const category = containerId.replace('Courses', '');
+            const course = coursesData[category][index];
             
             if (card.classList.contains('selected')) {
                 card.classList.remove('selected');
-                selectedCourses = selectedCourses.filter(c => c.name !== name);
+                selectedCourses = selectedCourses.filter(c => c.name !== course.name);
             } else {
                 card.classList.add('selected');
-                selectedCourses.push({ name, type, schedule, duration });
+                selectedCourses.push({...course});
             }
             
             updateCartBadge();
@@ -600,21 +1084,25 @@
 
         function updateCartBadge() {
             document.getElementById('cartBadge').textContent = selectedCourses.length;
+            document.getElementById('enrollCount').textContent = selectedCourses.length;
         }
 
         function updateSchedule() {
             const scheduleList = document.getElementById('scheduleList');
             
             if (selectedCourses.length === 0) {
-                scheduleList.innerHTML = '<p style="text-align: center; color: #999;">Select courses to see your schedule</p>';
+                scheduleList.innerHTML = '<div class="empty-state"><p>📚 Select courses to build your schedule</p></div>';
                 return;
             }
 
             scheduleList.innerHTML = selectedCourses.map(course => `
                 <div class="schedule-item">
                     <div class="schedule-course">${course.name}</div>
-                    <div class="schedule-time">${course.type} - ${course.schedule}</div>
-                    <div class="schedule-time">Ends: ${calculateEndDate(course.duration)}</div>
+                    <div class="schedule-time">
+                        ${course.type === 'Instructor-Led' ? '🔴' : '🟢'} ${course.type} - ${course.schedule}
+                    </div>
+                    <div class="schedule-time">📚 ${course.lessons} lessons</div>
+                    <div class="schedule-time">🏁 Ends: ${calculateEndDate(course.duration)}</div>
                 </div>
             `).join('');
 
@@ -639,12 +1127,10 @@
             
             let html = '';
             
-            // Empty cells for days before month starts
             for (let i = 0; i < startingDayOfWeek; i++) {
                 html += '<div class="calendar-date"></div>';
             }
             
-            // Days of the month
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const isToday = day === today.getDate();
                 html += `<div class="calendar-date ${isToday ? 'today' : ''}" id="${containerId}-day-${day}">${day}</div>`;
@@ -654,24 +1140,19 @@
         }
 
         function updateCalendarWithClasses() {
-            // Clear previous highlights
-            document.querySelectorAll('.calendar-date').forEach(el => {
+            document.querySelectorAll('#calendarDates .calendar-date').forEach(el => {
                 el.classList.remove('has-class');
             });
 
-            // Highlight days with classes (simplified - showing instructor-led courses)
             const instructorLedCourses = selectedCourses.filter(c => c.type === 'Instructor-Led');
             
             if (instructorLedCourses.length > 0) {
-                // Highlight Mon, Wed, Fri (example pattern)
                 const today = new Date();
-                const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
                 
                 for (let day = 1; day <= 31; day++) {
                     const date = new Date(today.getFullYear(), today.getMonth(), day);
                     const dayOfWeek = date.getDay();
                     
-                    // Highlight days based on course schedules
                     if (instructorLedCourses.some(c => {
                         const schedule = c.schedule.toLowerCase();
                         return (
@@ -698,41 +1179,78 @@
         function enrollCourses() {
             if (selectedCourses.length === 0) return;
             
-            // Switch to dashboard view
+            enrolledCourses = selectedCourses.map(course => ({
+                ...course,
+                progress: 0,
+                status: 'Not Started',
+                startDate: new Date().toLocaleDateString()
+            }));
+            
             document.getElementById('enrollmentView').style.display = 'none';
             document.getElementById('dashboardView').classList.add('active');
             
-            // Populate enrolled courses
+            updateDashboardStats();
             renderEnrolledCourses();
             generateCalendar('dashboardCalendarDates');
             updateDashboardCalendar();
         }
 
+        function updateDashboardStats() {
+            document.getElementById('totalCourses').textContent = enrolledCourses.length;
+            document.getElementById('inProgress').textContent = enrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length;
+            document.getElementById('completed').textContent = enrolledCourses.filter(c => c.progress === 100).length;
+            document.getElementById('certificates').textContent = enrolledCourses.filter(c => c.progress === 100).length;
+        }
+
         function renderEnrolledCourses() {
             const container = document.getElementById('enrolledCoursesList');
             
-            container.innerHTML = selectedCourses.map(course => `
+            container.innerHTML = enrolledCourses.map((course, index) => `
                 <div class="course-item">
-                    <div class="course-item-title">${course.name}</div>
-                    <span class="course-item-type">${course.type}</span>
-                    <div class="course-item-details">
-                        <div>📅 ${course.schedule}</div>
-                        <div>⏱️ Duration: ${course.duration}</div>
-                        <div>🏁 Ends: ${calculateEndDate(course.duration)}</div>
+                    <div class="course-item-header">
+                        <div>
+                            <div class="course-item-title">${course.name}</div>
+                            <span class="course-type-badge ${course.type === 'Instructor-Led' ? 'badge-instructor' : 'badge-self-paced'}">
+                                ${course.type}
+                            </span>
+                        </div>
                     </div>
-                    ${course.type === 'Self-Paced' 
-                        ? '<button class="course-action-btn" onclick="startSelfPacedCourse(\'' + course.name + '\')">Start/Resume Course</button>'
-                        : '<button class="course-action-btn" onclick="viewCourseDetails(\'' + course.name + '\')">View Course Details</button>'
-                    }
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${course.progress}%"></div>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">
+                        Progress: ${course.progress}% • ${course.status}
+                    </div>
+                    
+                    <div class="course-item-details">
+                        <div class="detail-item">📅 ${course.schedule}</div>
+                        <div class="detail-item">📚 ${course.lessons} lessons</div>
+                        <div class="detail-item">⏱️ ${course.duration}</div>
+                        <div class="detail-item">🏁 ${calculateEndDate(course.duration)}</div>
+                    </div>
+                    
+                    <div class="course-action-buttons">
+                        ${course.type === 'Self-Paced' 
+                            ? `<button class="course-action-btn" onclick="startCourse(${index})">
+                                ${course.progress === 0 ? '▶️ Start Course' : '▶️ Continue Learning'}
+                               </button>`
+                            : `<button class="course-action-btn" onclick="startCourse(${index})">
+                                📖 View Course
+                               </button>`
+                        }
+                        <button class="course-action-btn secondary" onclick="viewCourseDetails(${index})">
+                            ℹ️ Details
+                        </button>
+                    </div>
                 </div>
             `).join('');
 
-            // Update upcoming classes
             updateUpcomingClasses();
         }
 
         function updateDashboardCalendar() {
-            const instructorLedCourses = selectedCourses.filter(c => c.type === 'Instructor-Led');
+            const instructorLedCourses = enrolledCourses.filter(c => c.type === 'Instructor-Led');
             
             if (instructorLedCourses.length > 0) {
                 const today = new Date();
@@ -761,39 +1279,80 @@
 
         function updateUpcomingClasses() {
             const container = document.getElementById('upcomingClasses');
-            const instructorLedCourses = selectedCourses.filter(c => c.type === 'Instructor-Led');
+            const instructorLedCourses = enrolledCourses.filter(c => c.type === 'Instructor-Led');
             
             if (instructorLedCourses.length === 0) {
-                container.innerHTML = '<p style="color: #999; font-size: 14px;">No instructor-led classes scheduled</p>';
+                container.innerHTML = '<div class="empty-state"><p style="font-size: 13px;">No instructor-led classes scheduled</p></div>';
                 return;
             }
 
             container.innerHTML = instructorLedCourses.map(course => `
                 <div class="schedule-item">
                     <div class="schedule-course">${course.name}</div>
-                    <div class="schedule-time">${course.schedule}</div>
+                    <div class="schedule-time">🔴 Live • ${course.schedule}</div>
                 </div>
             `).join('');
         }
 
-        function startSelfPacedCourse(courseName) {
-            alert(`Starting ${courseName}!\n\nYou can start, pause, and resume this course at any time. Your progress will be saved automatically.`);
+        function startCourse(index) {
+            const course = enrolledCourses[index];
+            if (course.type === 'Self-Paced') {
+                alert(`🎯 Starting ${course.name}!\n\n✅ You can start, pause, and resume anytime\n💾 Your progress is automatically saved\n📚 ${course.lessons} lessons available\n\n${course.progress === 0 ? 'Ready to begin your learning journey!' : 'Continuing from where you left off...'}`);
+                
+                if (course.progress === 0) {
+                    enrolledCourses[index].progress = 5;
+                    enrolledCourses[index].status = 'In Progress';
+                }
+            } else {
+                alert(`📖 ${course.name}\n\n🔴 Instructor-Led Course\n📅 Schedule: ${course.schedule}\n📚 ${course.lessons} live sessions\n\n✅ Your next class begins as scheduled\n🔔 You'll receive reminders before each session`);
+            }
+            
+            updateDashboardStats();
+            renderEnrolledCourses();
         }
 
-        function viewCourseDetails(courseName) {
-            const course = selectedCourses.find(c => c.name === courseName);
-            alert(`${courseName}\n\nType: ${course.type}\nSchedule: ${course.schedule}\nDuration: ${course.duration}\n\nYour next class will begin as scheduled. Please check your schedule regularly!`);
+        function viewCourseDetails(index) {
+            const course = enrolledCourses[index];
+            alert(`📋 Course Details\n\n📖 ${course.name}\n📌 Type: ${course.type}\n📅 Schedule: ${course.schedule}\n⏱️ Duration: ${course.duration}\n📚 Lessons: ${course.lessons}\n👥 Students: ${course.students}\n📈 Your Progress: ${course.progress}%\n🏁 Completion Date: ${calculateEndDate(course.duration)}\n\n${course.type === 'Self-Paced' ? '✅ Learn at your own pace' : '🔴 Attend live sessions as scheduled'}`);
         }
 
         function toggleCart() {
             if (selectedCourses.length > 0) {
-                alert(`Your Backpack 🎒\n\nSelected Courses (${selectedCourses.length}):\n\n${selectedCourses.map(c => `• ${c.name} (${c.type})`).join('\n')}`);
+                const courseList = selectedCourses.map(c => `• ${c.name} (${c.type})`).join('\n');
+                alert(`🎒 Your Learning Backpack\n\n📚 Selected Courses (${selectedCourses.length}):\n\n${courseList}\n\n💡 Ready to enroll? Click the "Enroll Now" button!`);
             } else {
-                alert('Your backpack is empty! Select some courses to get started.');
+                alert('🎒 Your backpack is empty!\n\n📚 Browse courses below and select the ones you\'d like to take.');
             }
         }
 
-        // Initialize on page load
+        function filterAll() {
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.style.display = 'block';
+            });
+            updateFilterTabs(0);
+        }
+
+        function filterType(type) {
+            document.querySelectorAll('.course-card').forEach(card => {
+                if (card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            updateFilterTabs(type === 'Instructor-Led' ? 1 : 2);
+        }
+
+        function updateFilterTabs(activeIndex) {
+            document.querySelectorAll('.filter-tab').forEach((tab, index) => {
+                if (index === activeIndex) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
         initializeCourses();
     </script>
 </body>
