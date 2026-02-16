@@ -25,7 +25,7 @@
     }
 
     .hamburger-menu .bar {
-        background-color: white;
+        background-color: var(--paper-white);
         height: 2px;
         width: 20px;
         margin: 3px 0;
@@ -36,7 +36,7 @@
     .nav-list {
         display: flex; /* Keep structure */
         flex-direction: column;
-        background: #333;
+        background: var(--charcoal);
         width: 100%;
         position: absolute;
         top: 50px;
@@ -149,7 +149,7 @@
         justify-content: center;
         align-items: center;
         padding: 40px 15px;
-        background-color: black;
+        background-color: var(--pure-black);
     }
 
     .counter-container {
@@ -186,14 +186,14 @@
     .counter {
         font-family: "Silkscreen", sans-serif;
         font-size: 32px;
-        color: #39FF14;
-        text-shadow: 0 0 8px #39FF14;
+        color: var(--scholar-gold);
+        text-shadow: 0 0 8px var(--scholar-gold);
         margin-bottom: 5px;
     }
 
     .label {
         font-size: 12px;
-        color: white;
+        color: var(--paper-white);
         opacity: 0.85;
         margin-top: 5px;
     }
@@ -408,8 +408,8 @@
 
   .short-title {
         display: block;
-        color: #39FF14;
-        text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
+        color: var(--scholar-gold);
+        text-shadow: 0 0 5px var(--scholar-gold), 0 0 10px var(--scholar-gold);
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
@@ -461,315 +461,152 @@
        font-size: 9px;
    }
 
-   /* COURSE BADGES */
+   /* COURSE CARDS */
+   .course-card {
+       max-width: 100%;
+       padding: 12px;
+   }
+
    .course-badge {
-       top: -8px;
-       right: 10px;
-       padding: 4px 12px;
+       top: -10px;
+       right: 15px;
+       padding: 5px 12px;
        font-size: 9px;
    }
 
-   .e-certificate-container {
-        padding: 10px;
-        max-width: 90%; 
-        margin: auto;
-        text-align: center;
+   .level {
+       font-size: 16px;
+       margin: 12px 0 8px 0;
    }
 
-   .verification-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+   .product ol {
+       font-size: 13px;
+       padding-left: 15px;
    }
 
-   .verification-description {
-        font-size: 14px;
-        text-align: justify;
-        line-height: 1.5;
-        max-width: 95%;
+   .product ol li {
+       font-size: 13px;
+       margin: 6px 0;
    }
 
-   .certificate-img {
-        max-width: 90%;
-        height: auto;
-        margin-top: 10px;
-        border-radius: 8px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+   .btn {
+       padding: 10px 20px;
+       font-size: 12px;
+       margin-top: 12px;
    }
 
-    /* FORM ADJUSTMENTS */
-    #verifyForm {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-    }
+   /* TESTIMONIALS */
+   .testimonial {
+       padding: 18px;
+       margin: 15px auto;
+   }
 
-    .certificate-id-label {
-        font-size: 14px;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-    }
+   .student-avatar {
+       width: 40px;
+       height: 40px;
+       font-size: 18px;
+   }
 
-    #certificateID {
-        width: 90%;
-        padding: 8px;
-        font-size: 14px;
-        border-radius: 4px;
-    }
+   .student-info h3 {
+       font-size: 16px;
+   }
 
-    button {
-        width: 90%;
-        padding: 10px;
-        font-size: 14px;
-        background: #39FF14;
-        color: black;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-    }
+   .student-badge {
+       font-size: 11px;
+       padding: 3px 10px;
+   }
 
-    button:hover {
-        background: #2ecc71;
-    }
+   .testimonial p {
+       font-size: 13px;
+   }
 
-    /* VERIFICATION STYLING RESULT */
-    #verificationResult, #certificateOwner, #courseDetails {
-        font-size: 14px;
-        padding: 5px;
-        text-align: center;
-    }
+   .reviewer-name {
+       font-size: 12px;
+   }
 
-    /* GALLERY ADJUSTMENTS */
-    .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px;
-    }
+   .star-rating i {
+       font-size: 14px;
+   }
 
-    .gallery img {
-        max-width: 90%;
-        height: auto;
-        border-radius: 5px;
-    }
+   /* COUNTER SECTION */
+   .counter-container {
+       gap: 12px;
+   }
 
-    /* SECTION INTRO */
-    .section-intro {
-        font-size: 13px;
-    }
+   .counter-item {
+       min-width: 120px;
+       max-width: 150px;
+       padding: 18px 12px;
+   }
 
-    /* LEARNING PATH SECTION */
-    .learning-path-section {
-        padding: 25px 10px;
-    }
+   .counter-icon {
+       font-size: 24px;
+       margin-bottom: 8px;
+   }
 
-    .section-title, .stats-title {
-        font-size: 18px;
-        flex-direction: column;
-    }
+   .counter {
+       font-size: 28px;
+       margin-bottom: 5px;
+   }
 
-    /* ABOUT INTRO BOX */
-    .about-intro-box {
-        padding: 15px;
-    }
+   .label {
+       font-size: 11px;
+       margin-top: 5px;
+   }
 
-    .intro-text {
-        font-size: 14px;
-        padding-left: 20px;
-    }
+   /* CONTACT BUTTONS */
+   .contact-btn {
+       width: 40px;
+       height: 40px;
+       font-size: 16px;
+   }
 
-    /* BENEFITS CARDS */
-    .benefit-card {
-        padding: 20px;
-    }
+   /* SECTION TITLES */
+   .section-title, .stats-title {
+       font-size: 18px;
+   }
 
-    .benefit-card i {
-        font-size: 28px;
-    }
+   /* BENEFITS CARDS */
+   .benefit-card {
+       padding: 18px;
+   }
 
-    .benefit-card h4 {
-        font-size: 16px;
-    }
+   .benefit-card i {
+       font-size: 28px;
+       margin-bottom: 12px;
+   }
 
-    .benefit-card p {
-        font-size: 13px;
-    }
+   .benefit-card h4 {
+       font-size: 16px;
+   }
+
+   .benefit-card p {
+       font-size: 13px;
+   }
 }
 
-
-@media (max-width: 768px) {
-    .counter-container {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .counter-item {
-        max-width: 150px;
-        padding: 15px;
-    }
-
-    .counter {
-        font-size: 30px;
-    }
-
-    .contact-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    /* LEARNING PATH */
-    .path-step {
-        min-width: 100px;
-    }
-
-    .step-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 28px;
-    }
-
-    /* TESTIMONIALS */
-    .student-avatar {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-
-    .testimonial h3 {
-        font-size: 16px;
-    }
-
-    .student-badge {
-        font-size: 10px;
-    }
-}
-
-
-@media (max-width: 500px) {
-   .logo-title {
-        display: none;
-   }
-
-  .short-title {
-        display: block;
-        color: #39FF14;
-        text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
-        font-size: 16px;
-        font-weight: bold;
-        text-decoration: none;
-        font-family: 'Courier New', monospace;
-   }
-
-   .e-certificate-container {
-        padding: 10px;
-        max-width: 90%; 
-        margin: auto;
-        text-align: center;
-   }
-
-   .verification-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-   }
-
-   .verification-description {
-        font-size: 14px;
-        text-align: justify;
-        line-height: 1.5;
-        max-width: 95%;
-   }
-
-   .certificate-img {
-        max-width: 90%;
-        height: auto;
-        margin-top: 10px;
-        border-radius: 8px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-   }
-
-    /* FORM ADJUSTMENTS */
-    #verifyForm {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-    }
-
-    .certificate-id-label {
-        font-size: 14px;
-        font-weight: bold;
-        text-align: center;
-        width: 100%;
-    }
-
-    #certificateID {
-        width: 90%;
-        padding: 8px;
-        font-size: 14px;
-        border-radius: 4px;
-    }
-
-    button {
-        width: 90%;
-        padding: 10px;
-        font-size: 14px;
-        background: #39FF14;
-        color: black;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #2ecc71;
-    }
-
-    /* VERIFICATION STYLING RESULT */
-    #verificationResult, #certificateOwner, #courseDetails {
-        font-size: 14px;
-        padding: 5px;
-        text-align: center;
-    }
-
-    /* GALLERY ADJUSTMENTS */
-    .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px;
-    }
-
-    .gallery img {
-        max-width: 90%;
-        height: auto;
-        border-radius: 5px;
-    }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 380px) {
     body {
-        padding: 70px 10px 90px 10px;
+        padding: 70px 8px 90px 8px;
     }
 
+    #navbar .logo img {
+        height: 25px;
+        width: 25px;
+    }
+
+    /* WELCOME SECTION */
     #welcome-section {
-        padding: 12px 8px; 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
+        padding: 12px 8px;
     }
 
     .virtual-classroom-badge {
-        font-size: 8px;
-        padding: 5px 10px;
-        margin-bottom: 8px;
+        font-size: 7px;
+        padding: 4px 10px;
+    }
+
+    .virtual-classroom-badge i {
+        font-size: 9px;
     }
 
     .subtitle-tagline {
@@ -817,8 +654,8 @@
 
     .short-title {
         display: block;
-        color: #39FF14;
-        text-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
+        color: var(--scholar-gold);
+        text-shadow: 0 0 5px var(--scholar-gold), 0 0 10px var(--scholar-gold);
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
@@ -838,7 +675,7 @@
     }
 
     .hamburger-menu .bar {
-        background-color: white;
+        background-color: var(--paper-white);
         height: 2px;
         width: 18px;
         margin: 3px 0;
