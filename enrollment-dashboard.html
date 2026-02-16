@@ -17,7 +17,7 @@
             --secondary-dark: #141b3d;
             --accent-blue: #00d9ff;
             --accent-purple: #7c3aed;
-            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
             --text-primary: #ffffff;
             --text-secondary: #a0aec0;
             --card-bg: #1a1f3a;
@@ -43,7 +43,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
         }
 
         .nav-container {
@@ -387,7 +387,7 @@
             right: 10px;
             width: 24px;
             height: 24px;
-            background: white;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             border-radius: 50%;
             color: var(--accent-purple);
             font-weight: bold;
@@ -878,7 +878,7 @@
                 <div class="sidebar">
                     <div class="sidebar-card">
                         <h3 class="sidebar-title">📅 Your Schedule</h3>
-                        
+
                         <div class="calendar">
                             <div class="calendar-month" id="calendarMonth">February 2026</div>
                             <div class="calendar-header">
@@ -975,7 +975,7 @@
 
                 <div class="sidebar-card">
                     <h3 class="sidebar-title">📅 Class Schedule</h3>
-                    
+
                     <div class="calendar">
                         <div class="calendar-month">February 2026</div>
                         <div class="calendar-header">
@@ -1068,7 +1068,7 @@
             const card = cards[index];
             const category = containerId.replace('Courses', '');
             const course = coursesData[category][index];
-            
+
             if (card.classList.contains('selected')) {
                 card.classList.remove('selected');
                 selectedCourses = selectedCourses.filter(c => c.name !== course.name);
@@ -1076,7 +1076,7 @@
                 card.classList.add('selected');
                 selectedCourses.push({...course});
             }
-            
+
             updateCartBadge();
             updateSchedule();
             updateEnrollButton();
@@ -1089,7 +1089,7 @@
 
         function updateSchedule() {
             const scheduleList = document.getElementById('scheduleList');
-            
+
             if (selectedCourses.length === 0) {
                 scheduleList.innerHTML = '<div class="empty-state"><p>📚 Select courses to build your schedule</p></div>';
                 return;
@@ -1112,7 +1112,7 @@
         function calculateEndDate(duration) {
             const weeks = parseInt(duration);
             if (isNaN(weeks)) return 'Ongoing';
-            
+
             const endDate = new Date();
             endDate.setDate(endDate.getDate() + (weeks * 7));
             return endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -1124,18 +1124,18 @@
             const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
             const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
             const startingDayOfWeek = firstDay.getDay();
-            
+
             let html = '';
-            
+
             for (let i = 0; i < startingDayOfWeek; i++) {
                 html += '<div class="calendar-date"></div>';
             }
-            
+
             for (let day = 1; day <= lastDay.getDate(); day++) {
                 const isToday = day === today.getDate();
                 html += `<div class="calendar-date ${isToday ? 'today' : ''}" id="${containerId}-day-${day}">${day}</div>`;
             }
-            
+
             container.innerHTML = html;
         }
 
@@ -1145,14 +1145,14 @@
             });
 
             const instructorLedCourses = selectedCourses.filter(c => c.type === 'Instructor-Led');
-            
+
             if (instructorLedCourses.length > 0) {
                 const today = new Date();
-                
+
                 for (let day = 1; day <= 31; day++) {
                     const date = new Date(today.getFullYear(), today.getMonth(), day);
                     const dayOfWeek = date.getDay();
-                    
+
                     if (instructorLedCourses.some(c => {
                         const schedule = c.schedule.toLowerCase();
                         return (
@@ -1178,17 +1178,17 @@
 
         function enrollCourses() {
             if (selectedCourses.length === 0) return;
-            
+
             enrolledCourses = selectedCourses.map(course => ({
                 ...course,
                 progress: 0,
                 status: 'Not Started',
                 startDate: new Date().toLocaleDateString()
             }));
-            
+
             document.getElementById('enrollmentView').style.display = 'none';
             document.getElementById('dashboardView').classList.add('active');
-            
+
             updateDashboardStats();
             renderEnrolledCourses();
             generateCalendar('dashboardCalendarDates');
@@ -1204,7 +1204,7 @@
 
         function renderEnrolledCourses() {
             const container = document.getElementById('enrolledCoursesList');
-            
+
             container.innerHTML = enrolledCourses.map((course, index) => `
                 <div class="course-item">
                     <div class="course-item-header">
@@ -1251,14 +1251,14 @@
 
         function updateDashboardCalendar() {
             const instructorLedCourses = enrolledCourses.filter(c => c.type === 'Instructor-Led');
-            
+
             if (instructorLedCourses.length > 0) {
                 const today = new Date();
-                
+
                 for (let day = 1; day <= 31; day++) {
                     const date = new Date(today.getFullYear(), today.getMonth(), day);
                     const dayOfWeek = date.getDay();
-                    
+
                     if (instructorLedCourses.some(c => {
                         const schedule = c.schedule.toLowerCase();
                         return (
@@ -1280,7 +1280,7 @@
         function updateUpcomingClasses() {
             const container = document.getElementById('upcomingClasses');
             const instructorLedCourses = enrolledCourses.filter(c => c.type === 'Instructor-Led');
-            
+
             if (instructorLedCourses.length === 0) {
                 container.innerHTML = '<div class="empty-state"><p style="font-size: 13px;">No instructor-led classes scheduled</p></div>';
                 return;
@@ -1298,7 +1298,7 @@
             const course = enrolledCourses[index];
             if (course.type === 'Self-Paced') {
                 alert(`🎯 Starting ${course.name}!\n\n✅ You can start, pause, and resume anytime\n💾 Your progress is automatically saved\n📚 ${course.lessons} lessons available\n\n${course.progress === 0 ? 'Ready to begin your learning journey!' : 'Continuing from where you left off...'}`);
-                
+
                 if (course.progress === 0) {
                     enrolledCourses[index].progress = 5;
                     enrolledCourses[index].status = 'In Progress';
@@ -1306,7 +1306,7 @@
             } else {
                 alert(`📖 ${course.name}\n\n🔴 Instructor-Led Course\n📅 Schedule: ${course.schedule}\n📚 ${course.lessons} live sessions\n\n✅ Your next class begins as scheduled\n🔔 You'll receive reminders before each session`);
             }
-            
+
             updateDashboardStats();
             renderEnrolledCourses();
         }
