@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,11 +13,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&family=Yellowtail&display=swap" rel="stylesheet">
-    
+
     <style>
+        /* Import color palette variables */
+        :root {
+            --university-navy: #1a2332;
+            --academic-burgundy: #8b2635;
+            --scholar-gold: #d4af37;
+            --campus-green: #2d5016;
+            --code-cyan: #00d4ff;
+            --terminal-green: #00ff88;
+            --syntax-purple: #a855f7;
+            --debug-orange: #ff6b35;
+            --paper-white: #fafafa;
+            --chalk-gray: #e5e7eb;
+            --slate-medium: #64748b;
+            --charcoal: #1e293b;
+            --pure-black: #0f172a;
+        }
+        
         /* School-themed book store styling */
         .announcement-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
             color: white;
             padding: 15px 20px;
             text-align: center;
@@ -24,7 +42,7 @@
             border-radius: 8px;
             animation: slideDown 0.5s ease-out;
         }
-        
+
         @keyframes slideDown {
             from {
                 transform: translateY(-100%);
@@ -35,18 +53,18 @@
                 opacity: 1;
             }
         }
-        
+
         .announcement-banner i {
             margin-right: 10px;
         }
-        
+
         .bookstore-header {
             text-align: center;
             padding: 40px 20px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             margin-bottom: 30px;
         }
-        
+
         .bookstore-header h1 {
             margin: 0 0 15px 0;
             display: flex;
@@ -55,32 +73,32 @@
             gap: 15px;
             font-size: 2.5rem;
         }
-        
+
         .bookstore-header h1 i {
-            color: #667eea;
+            color: #1a2332;
         }
-        
+
         .bookstore-subtitle {
             font-size: 1.2rem;
-            color: #666;
+            color: #e5e7eb;
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .book-showcase {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
-        
+
         .featured-book {
-            background: white;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
             overflow: hidden;
             margin-bottom: 40px;
         }
-        
+
         .book-hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -88,7 +106,7 @@
             padding: 40px;
             align-items: center;
         }
-        
+
         @media (max-width: 768px) {
             .book-hero {
                 grid-template-columns: 1fr;
@@ -96,30 +114,30 @@
                 padding: 30px 20px;
             }
         }
-        
+
         .book-images {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .main-book-image {
             width: 100%;
             border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
             transition: transform 0.3s ease;
         }
-        
+
         .main-book-image:hover {
             transform: scale(1.03);
         }
-        
+
         .book-thumbnails {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
-        
+
         .thumbnail {
             width: 100%;
             border-radius: 8px;
@@ -127,98 +145,98 @@
             border: 3px solid transparent;
             transition: all 0.3s ease;
         }
-        
+
         .thumbnail:hover,
         .thumbnail.active {
-            border-color: #667eea;
+            border-color: #1a2332;
             transform: scale(1.05);
         }
-        
+
         .book-details {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .book-title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #333;
+            color: #fafafa;
             margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .book-subtitle {
             font-size: 1.3rem;
-            color: #666;
+            color: #e5e7eb;
             margin: 0;
         }
-        
+
         .author-info {
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 1.1rem;
-            color: #555;
+            color: #64748b;
         }
-        
+
         .author-info i {
-            color: #667eea;
+            color: #1a2332;
         }
-        
+
         .book-rating {
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 1rem;
         }
-        
+
         .stars {
             color: #ffc107;
             font-size: 1.2rem;
         }
-        
+
         .rating-count {
-            color: #666;
+            color: #e5e7eb;
         }
-        
+
         .book-price {
             display: flex;
             align-items: baseline;
             gap: 15px;
             margin: 10px 0;
         }
-        
+
         .current-price {
             font-size: 3rem;
             font-weight: 700;
-            color: #667eea;
+            color: #1a2332;
         }
-        
+
         .original-price {
             font-size: 1.5rem;
             color: #999;
             text-decoration: line-through;
         }
-        
+
         .discount-badge {
-            background: #ff6b6b;
+            background: #ff6b35;
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.9rem;
         }
-        
+
         .book-badges {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
-        
+
         .badge {
             padding: 8px 16px;
             border-radius: 20px;
@@ -228,89 +246,89 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .badge-bestseller {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #8b2635 0%, #d4af37 100%);
             color: white;
         }
-        
+
         .badge-new {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
         }
-        
+
         .badge-certified {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .book-description {
             line-height: 1.8;
-            color: #555;
+            color: #64748b;
             font-size: 1.05rem;
         }
-        
+
         .purchase-section {
-            background: #f8f9fa;
+            background: rgba(26, 35, 50, 0.5);
             padding: 25px;
             border-radius: 10px;
             margin-top: 20px;
         }
-        
+
         .quantity-selector {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
+
         .quantity-label {
             font-weight: 600;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .quantity-controls {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         .qty-btn {
             width: 40px;
             height: 40px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
+            border: 2px solid #1a2332;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            color: #1a2332;
             border-radius: 8px;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .qty-btn:hover {
-            background: #667eea;
+            background: #1a2332;
             color: white;
         }
-        
+
         .qty-display {
             width: 60px;
             text-align: center;
             font-size: 1.2rem;
             font-weight: 700;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .action-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
-        
+
         .btn-primary {
             flex: 1;
             min-width: 200px;
             padding: 18px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
             color: white;
             border: none;
             border-radius: 30px;
@@ -320,91 +338,91 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
-        
+
         .btn-secondary {
             flex: 1;
             min-width: 200px;
             padding: 18px 40px;
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            color: #1a2332;
+            border: 2px solid #1a2332;
             border-radius: 30px;
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .btn-secondary:hover {
-            background: #667eea;
+            background: #1a2332;
             color: white;
         }
-        
+
         .book-features {
-            background: white;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             padding: 40px;
             border-radius: 15px;
             margin-top: 40px;
         }
-        
+
         .features-title {
             font-size: 2rem;
             margin-bottom: 30px;
-            color: #333;
+            color: #fafafa;
             text-align: center;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
         }
-        
+
         .feature-item {
             display: flex;
             align-items: flex-start;
             gap: 15px;
             padding: 20px;
-            background: #f8f9fa;
+            background: rgba(26, 35, 50, 0.5);
             border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #1a2332;
         }
-        
+
         .feature-icon {
             font-size: 2rem;
-            color: #667eea;
+            color: #1a2332;
             margin-top: 5px;
         }
-        
+
         .feature-content h3 {
             margin: 0 0 8px 0;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .feature-content p {
             margin: 0;
-            color: #666;
+            color: #e5e7eb;
             font-size: 0.95rem;
             line-height: 1.6;
         }
-        
+
         .synopsis-section {
             background: #1a1a1a;
             color: white;
             padding: 50px 20px;
             margin: 40px 0;
         }
-        
+
         .synopsis-container {
             max-width: 900px;
             margin: 0 auto;
         }
-        
+
         .synopsis-title {
             font-size: 2.5rem;
             text-align: center;
@@ -412,82 +430,82 @@
             color: #4facfe;
             font-family: 'Courier New', monospace;
         }
-        
+
         .synopsis-content {
             line-height: 1.9;
             font-size: 1.05rem;
             color: #e0e0e0;
         }
-        
+
         .synopsis-content p {
             margin-bottom: 20px;
             text-align: justify;
         }
-        
+
         .testimonial-section {
-            background: #f8f9fa;
+            background: rgba(26, 35, 50, 0.5);
             padding: 40px 20px;
             border-radius: 10px;
             margin: 40px 0;
         }
-        
+
         .testimonial-box {
-            background: white;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             padding: 30px;
             border-radius: 10px;
-            border-left: 5px solid #667eea;
+            border-left: 5px solid #1a2332;
             font-style: italic;
-            color: #555;
+            color: #64748b;
             line-height: 1.8;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
         }
-        
+
         .testimonial-author {
             margin-top: 20px;
             font-style: normal;
             font-weight: 700;
-            color: #333;
+            color: #fafafa;
             text-align: right;
         }
-        
+
         .book-specs {
-            background: white;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
             padding: 40px;
             border-radius: 15px;
             margin-top: 40px;
         }
-        
+
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
-        
+
         .spec-item {
             text-align: center;
             padding: 20px;
-            background: #f8f9fa;
+            background: rgba(26, 35, 50, 0.5);
             border-radius: 10px;
         }
-        
+
         .spec-icon {
             font-size: 2.5rem;
-            color: #667eea;
+            color: #1a2332;
             margin-bottom: 10px;
         }
-        
+
         .spec-label {
             font-size: 0.9rem;
-            color: #666;
+            color: #e5e7eb;
             margin-bottom: 5px;
         }
-        
+
         .spec-value {
             font-size: 1.2rem;
             font-weight: 700;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .guarantee-section {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             padding: 40px;
@@ -495,30 +513,30 @@
             margin: 40px 0;
             text-align: center;
         }
-        
+
         .guarantee-section h3 {
             font-size: 2rem;
             margin-bottom: 15px;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .guarantee-section p {
             font-size: 1.1rem;
-            color: #333;
+            color: #fafafa;
             margin: 0;
         }
-        
+
         .related-products {
             margin-top: 60px;
         }
-        
+
         .related-title {
             font-size: 2rem;
             text-align: center;
             margin-bottom: 30px;
-            color: #333;
+            color: #fafafa;
         }
-        
+
         .copyright-section {
             text-align: center;
             padding: 30px 20px;
@@ -526,7 +544,7 @@
             color: #999;
             margin-top: 40px;
         }
-        
+
         .nex-genix-logo {
             max-width: 200px;
             margin-bottom: 15px;
@@ -588,17 +606,17 @@
                     <img src="assets/images/book2.png" alt="Book Cover 2" class="thumbnail" onclick="changeImage(this, 'assets/images/book2.png')">
                 </div>
             </div>
-            
+
             <!-- Book Details -->
             <div class="book-details">
                 <h1 class="book-title">The Business Minded</h1>
                 <p class="book-subtitle">From Branding to Sales Mastery</p>
-                
+
                 <div class="author-info">
                     <i class="fas fa-user-edit"></i>
                     <span><strong>Author:</strong> Arriane Doris Nuevo</span>
                 </div>
-                
+
                 <div class="book-rating">
                     <div class="stars">
                         <i class="fas fa-star"></i>
@@ -609,23 +627,23 @@
                     </div>
                     <span class="rating-count">5.0 (124 reviews)</span>
                 </div>
-                
+
                 <div class="book-badges">
                     <span class="badge badge-bestseller"><i class="fas fa-trophy"></i> Bestseller</span>
                     <span class="badge badge-new"><i class="fas fa-sparkles"></i> New Release</span>
                     <span class="badge badge-certified"><i class="fas fa-check-circle"></i> NGBS Certified</span>
                 </div>
-                
+
                 <div class="book-description">
                     <p>A comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
                 </div>
-                
+
                 <div class="book-price">
                     <span class="current-price">$29.99</span>
                     <span class="original-price">$37.49</span>
                     <span class="discount-badge">20% OFF</span>
                 </div>
-                
+
                 <div class="purchase-section">
                     <div class="quantity-selector">
                         <span class="quantity-label">Quantity:</span>
@@ -635,7 +653,7 @@
                             <button class="qty-btn" onclick="incrementQty()">+</button>
                         </div>
                     </div>
-                    
+
                     <div class="action-buttons">
                         <button class="btn-primary" onclick="addToCart()">
                             <i class="fas fa-shopping-cart"></i> Add to Cart
@@ -648,7 +666,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Book Features -->
     <div class="book-features">
         <h2 class="features-title"><i class="fas fa-star"></i> What's Inside</h2>
@@ -660,7 +678,7 @@
                     <p>Learn about brand identity, logo design, color psychology, and creating memorable brand stories</p>
                 </div>
             </div>
-            
+
             <div class="feature-item">
                 <i class="fas fa-lightbulb feature-icon"></i>
                 <div class="feature-content">
@@ -668,7 +686,7 @@
                     <p>Master the product life cycle, market research, prototyping, and pricing strategies</p>
                 </div>
             </div>
-            
+
             <div class="feature-item">
                 <i class="fas fa-handshake feature-icon"></i>
                 <div class="feature-content">
@@ -676,7 +694,7 @@
                     <p>Explore proven sales techniques, negotiation strategies, and building customer relationships</p>
                 </div>
             </div>
-            
+
             <div class="feature-item">
                 <i class="fas fa-book-open feature-icon"></i>
                 <div class="feature-content">
@@ -684,7 +702,7 @@
                     <p>Real-world case studies and actionable insights from successful businesses</p>
                 </div>
             </div>
-            
+
             <div class="feature-item">
                 <i class="fas fa-chalkboard-teacher feature-icon"></i>
                 <div class="feature-content">
@@ -692,7 +710,7 @@
                     <p>Written in an easy-to-understand style perfect for entrepreneurs and students</p>
                 </div>
             </div>
-            
+
             <div class="feature-item">
                 <i class="fas fa-certificate feature-icon"></i>
                 <div class="feature-content">
@@ -702,25 +720,25 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Synopsis Section -->
     <div class="synopsis-section">
         <div class="synopsis-container">
             <h2 class="synopsis-title">SYNOPSIS</h2>
             <div class="synopsis-content">
                 <p>"The Business Minded: From Branding to Sales Mastery" offers a comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
-                
+
                 <p>The first section of the book delves into the importance of branding and how to create a memorable brand identity. Readers will learn about the elements of successful branding, including logo design, color psychology, and brand messaging. Through practical tips and case studies, they will discover how to craft a compelling brand story that resonates with their target audience.</p>
-                
+
                 <p>Moving forward, the book explores the intricacies of product development and management. From ideation to execution, readers will gain a deep understanding of the product life cycle, market research, prototyping, and pricing strategies. With actionable advice and real-world examples, they will learn how to develop products that meet consumer needs and stand out in a crowded marketplace.</p>
-                
+
                 <p>In the final section, "Business Essentials" dives into the art of selling and persuasion. Readers will explore proven sales techniques, negotiation strategies, and effective communication skills essential for closing deals and building long-term customer relationships. Whether selling products or services, this section equips readers with the tools and mindset needed to succeed in sales.</p>
-                
+
                 <p>Written in a clear and accessible style, "The Business Minded: From Branding to Sales Mastery" is an indispensable resource for entrepreneurs, small business owners, marketers, and anyone looking to thrive in the competitive business landscape. Packed with practical advice, actionable insights, and real-world examples, this book empowers readers to build a strong brand, develop successful products, and master the art of selling.</p>
             </div>
         </div>
     </div>
-    
+
     <!-- Testimonial -->
     <div class="testimonial-section">
         <div class="testimonial-box">
@@ -728,7 +746,7 @@
             <p class="testimonial-author">— Irene C., Sound Native, CEO</p>
         </div>
     </div>
-    
+
     <!-- Book Specifications -->
     <div class="book-specs">
         <h2 class="features-title"><i class="fas fa-info-circle"></i> Book Details</h2>
@@ -738,31 +756,31 @@
                 <div class="spec-label">Format</div>
                 <div class="spec-value">Paperback</div>
             </div>
-            
+
             <div class="spec-item">
                 <i class="fas fa-file-alt spec-icon"></i>
                 <div class="spec-label">Pages</div>
                 <div class="spec-value">280 pages</div>
             </div>
-            
+
             <div class="spec-item">
                 <i class="fas fa-language spec-icon"></i>
                 <div class="spec-label">Language</div>
                 <div class="spec-value">English</div>
             </div>
-            
+
             <div class="spec-item">
                 <i class="fas fa-calendar-alt spec-icon"></i>
                 <div class="spec-label">Published</div>
                 <div class="spec-value">2025</div>
             </div>
-            
+
             <div class="spec-item">
                 <i class="fas fa-tag spec-icon"></i>
                 <div class="spec-label">ISBN</div>
                 <div class="spec-value">978-1234567890</div>
             </div>
-            
+
             <div class="spec-item">
                 <i class="fas fa-ruler spec-icon"></i>
                 <div class="spec-label">Dimensions</div>
@@ -770,7 +788,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Guarantee Section -->
     <div class="guarantee-section">
         <h3><i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee</h3>
@@ -802,47 +820,47 @@
     <!-- JavaScript -->
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         let quantity = 1;
-        
+
         function toggleMenu() {
             document.querySelector('.nav-list').classList.toggle('active');
             document.querySelector('.hamburger-menu').classList.toggle('open');
         }
-        
+
         function changeImage(thumbnail, imagePath) {
             // Update main image
             document.getElementById('mainImage').src = imagePath;
-            
+
             // Update active thumbnail
             document.querySelectorAll('.thumbnail').forEach(thumb => {
                 thumb.classList.remove('active');
             });
             thumbnail.classList.add('active');
         }
-        
+
         function incrementQty() {
             if (quantity < 99) {
                 quantity++;
                 document.getElementById('qtyDisplay').textContent = quantity;
             }
         }
-        
+
         function decrementQty() {
             if (quantity > 1) {
                 quantity--;
                 document.getElementById('qtyDisplay').textContent = quantity;
             }
         }
-        
+
         function addToCart() {
             alert(`Added ${quantity} copy/copies of "The Business Minded" to your cart!`);
             // Here you would implement actual cart functionality
         }
-        
+
         function buyNow() {
             alert(`Proceeding to checkout with ${quantity} copy/copies of "The Business Minded"`);
             // Here you would implement actual checkout functionality
         }
-        
+
         // Smooth scroll for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -856,13 +874,13 @@
                 }
             });
         });
-        
+
         // Scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
-        
+
         const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -870,12 +888,12 @@
                 }
             });
         }, observerOptions);
-        
+
         document.querySelectorAll('.feature-item, .spec-item').forEach(el => {
             observer.observe(el);
         });
     </script>
-    
+
     <style>
         @keyframes fadeInUp {
             from {
