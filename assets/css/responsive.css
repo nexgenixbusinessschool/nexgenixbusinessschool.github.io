@@ -9,7 +9,7 @@
     }
 
     body {
-        padding: 90px 15px 80px 15px;
+        padding: 70px 15px 80px 15px;
     }
 
     /* Show Hamburger Menu */
@@ -97,35 +97,7 @@
 
     /* LEARNING PATH */
     .learning-path-section {
-        padding: 22px 12px 18px;
-    }
-
-    .learning-path {
-        gap: 4px;
-    }
-
-    .path-step {
-        min-width: 50px;
-    }
-
-    .step-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 16px;
-        margin-bottom: 6px;
-    }
-
-    .step-title {
-        font-size: 9px;
-    }
-
-    .step-desc {
-        font-size: 8.5px;
-    }
-
-    .path-connector {
-        width: 16px;
-        min-width: 8px;
+        padding: 20px 10px 16px;
     }
 
     /* BENEFITS GRID */
@@ -201,20 +173,7 @@
         padding: 20px 15px;
         margin-bottom: 20px;
     }
-
-    .online-status-badge {
-        font-size: 9px;
-        padding: 4px 10px;
-        top: 10px;
-        right: 10px;
-    }
-
-    .live-dot {
-        width: 8px;
-        height: 8px;
-    }
-
-    .subtitle-tagline {
+.subtitle-tagline {
         font-size: 12px;
         letter-spacing: 1.2px;
         margin-bottom: 12px;
@@ -259,10 +218,6 @@
     }
 
     /* ANNOUNCEMENT STRIP */
-    .announcement-strip {
-        top: 50px;
-    }
-
     .announce-item {
         font-size: 10.5px;
         padding: 0 28px;
@@ -323,7 +278,7 @@
 
 @media (max-width: 700px) {
     body {
-        padding: 90px 10px 80px 10px;
+        padding: 70px 10px 80px 10px;
     }
 
     #welcome-section {
@@ -332,18 +287,7 @@
         background: linear-gradient(160deg, #0f1e30 0%, #182d44 50%, #0d1b2e 100%);
         margin-bottom: 20px;
     }
-
-    .online-status-badge {
-        font-size: 9.5px;
-        padding: 5px 12px;
-    }
-
-    .live-dot {
-        width: 7px;
-        height: 7px;
-    }
-
-    .banner {
+.banner {
         margin: 10px auto;
         height: 250px;
     }
@@ -386,25 +330,6 @@
         display: none;
     }
 
-    /* LEARNING PATH MOBILE */
-    .learning-path {
-        gap: 4px;
-    }
-
-    .step-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 16px;
-    }
-
-    .step-title {
-        font-size: 9px;
-    }
-
-    .step-desc {
-        font-size: 8.5px;
-    }
-
     /* TESTIMONIALS */
     .testimonial-header {
         flex-direction: column;
@@ -425,7 +350,7 @@
 
 @media (max-width: 500px) {
     body {
-        padding: 90px 10px 85px 10px;
+        padding: 70px 10px 85px 10px;
     }
 
     .logo-title {
@@ -445,18 +370,7 @@
     #welcome-section {
         padding: 15px 10px;
     }
-
-    .online-status-badge {
-        font-size: 9px;
-        padding: 4px 11px;
-    }
-
-    .live-dot {
-        width: 7px;
-        height: 7px;
-    }
-
-    .subtitle-tagline {
+.subtitle-tagline {
         font-size: 10.5px;
         letter-spacing: 0.8px;
         margin-top: 10px;
@@ -491,21 +405,9 @@
 
 @media (max-width: 380px) {
     body {
-        padding: 90px 8px 85px 8px;
+        padding: 70px 8px 85px 8px;
     }
-
-    .online-status-badge {
-        font-size: 8px;
-        padding: 4px 10px;
-        margin-top: 8px;
-    }
-
-    .live-dot {
-        width: 7px;
-        height: 7px;
-    }
-
-    .banner {
+.banner {
         height: 200px;
         max-width: 95%;
         margin: 8px auto;
@@ -624,26 +526,6 @@
         width: 40px;
         height: 40px;
         font-size: 16px;
-    }
-
-    /* LEARNING PATH VERY SMALL */
-    .step-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 15px;
-    }
-
-    .step-title {
-        font-size: 8.5px;
-    }
-
-    .step-desc {
-        font-size: 8px;
-    }
-
-    .path-connector {
-        width: 12px;
-        min-width: 6px;
     }
 
     /* TESTIMONIAL ADJUSTMENTS */
