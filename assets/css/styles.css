@@ -1,29 +1,42 @@
 /* =================== COLOR PALETTE VARIABLES =================== */
 :root {
-    /* Primary Academic Colors */
-    --university-navy: #1a2332;
-    --academic-burgundy: #8b2635;
-    --scholar-gold: #d4af37;
-    --campus-green: #2d5016;
-    
-    /* IT Developer Accents */
-    --code-cyan: #00d4ff;
-    --terminal-green: #00ff88;
-    --syntax-purple: #a855f7;
-    --debug-orange: #ff6b35;
-    
-    /* Neutral Foundation */
-    --paper-white: #fafafa;
-    --chalk-gray: #e5e7eb;
-    --slate-medium: #64748b;
-    --charcoal: #1e293b;
-    --pure-black: #0f172a;
-    
-    /* Gradient Backgrounds */
-    --grad-academic: linear-gradient(135deg, var(--university-navy) 0%, var(--academic-burgundy) 100%);
-    --grad-tech: linear-gradient(135deg, var(--university-navy) 0%, #1e40af 100%);
-    --grad-success: linear-gradient(135deg, var(--campus-green) 0%, var(--terminal-green) 100%);
-    --grad-premium: linear-gradient(135deg, var(--academic-burgundy) 0%, var(--scholar-gold) 100%);
+    /* Primary Academic Colors - Softened & refined */
+    --university-navy: #0d1b2e;
+    --academic-deep: #162032;
+    --academic-surface: #1c2d42;
+    --card-surface: #1a2a3e;
+
+    /* Scholar Accents - warmer, easier on eyes */
+    --scholar-gold: #c9a84c;
+    --scholar-gold-glow: rgba(201, 168, 76, 0.35);
+    --scholar-gold-light: #e2c97a;
+
+    /* Tech Accents - softer tones */
+    --code-cyan: #4fc3d8;
+    --code-cyan-soft: rgba(79, 195, 216, 0.15);
+    --code-cyan-glow: rgba(79, 195, 216, 0.3);
+    --terminal-green: #3ecf7a;
+    --terminal-green-soft: rgba(62, 207, 122, 0.15);
+    --syntax-purple: #9b79d4;
+    --debug-orange: #e8855a;
+
+    /* Text & Neutral */
+    --paper-white: #eef2f7;
+    --text-muted: #94a3b8;
+    --chalk-gray: #c8d4e3;
+    --slate-medium: #6b80a0;
+    --charcoal: #131f2e;
+    --pure-black: #090f1a;
+    --border-subtle: rgba(79, 195, 216, 0.15);
+    --border-gold: rgba(201, 168, 76, 0.25);
+
+    /* Gradients */
+    --grad-academic: linear-gradient(135deg, #0d1b2e 0%, #1a2d4a 100%);
+    --grad-tech: linear-gradient(135deg, #0d1b2e 0%, #0e2442 100%);
+    --grad-success: linear-gradient(135deg, #1a4a2e 0%, #3ecf7a 100%);
+    --grad-premium: linear-gradient(135deg, #3a1a08 0%, #c9a84c 100%);
+    --grad-card: linear-gradient(145deg, #1c2d42 0%, #131f2e 100%);
+    --grad-announce: linear-gradient(90deg, #0d1b2e, #162840, #1a3050, #162840, #0d1b2e);
 }
 
 html, body {
@@ -34,13 +47,14 @@ html, body {
 body {
     width: 90%;
     max-width: 1100px;
-    font-family: Roboto, sans-serif;
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
     font-size: 15px;
     color: var(--paper-white);
     text-align: center;
-    padding: 70px 20px 80px 20px;
+    padding: 90px 20px 80px 20px;
     background-color: var(--pure-black);
     margin: auto;
+    line-height: 1.6;
 }
 
 * {
@@ -48,41 +62,124 @@ body {
 }
 
 h2, h3 {
-  font-family: "Montserrat Alternates", sans-serif;
-  font-weight: 600;
-  font-style: normal;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.3px;
 }
 
 h2 {
-  margin: 30px 0 20px 0;
+    margin: 30px 0 20px 0;
+    color: var(--paper-white);
 }
 
 h3 {
-  margin: 25px 0 15px 0;
+    margin: 25px 0 15px 0;
 }
 
-/* JUSTIFY ONLY P */
 p {
     text-align: justify;
     margin: 15px 0;
+    color: var(--chalk-gray);
+    line-height: 1.75;
 }
 
-/* SECTION INTRO TEXT */
+/* =================== ANNOUNCEMENT STRIP =================== */
+.announcement-strip {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    background: linear-gradient(90deg, #0a1520, #0f2035, #0a1520);
+    border-bottom: 1px solid var(--border-subtle);
+    border-top: 1px solid rgba(79, 195, 216, 0.1);
+    overflow: hidden;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+}
+
+.announcement-track {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-announce 50s linear infinite;
+    will-change: transform;
+}
+
+.announcement-track:hover {
+    animation-play-state: paused;
+}
+
+.announce-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 40px;
+    font-size: 11.5px;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.5px;
+    color: var(--chalk-gray);
+    flex-shrink: 0;
+}
+
+.announce-item.congrats {
+    color: var(--scholar-gold-light);
+}
+
+.announce-item.congrats i {
+    color: var(--scholar-gold);
+    animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.announce-item.cert {
+    color: var(--terminal-green);
+}
+
+.announce-item.cert i {
+    color: var(--terminal-green);
+}
+
+.announce-item.news {
+    color: var(--code-cyan);
+}
+
+.announce-item.news i {
+    color: var(--code-cyan);
+}
+
+.announce-divider {
+    color: var(--slate-medium);
+    padding: 0 10px;
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+@keyframes scroll-announce {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.2) rotate(15deg); opacity: 0.8; }
+}
+
+/* =================== SECTION TITLES =================== */
 .section-intro {
     text-align: center;
-    font-size: 16px;
-    color: var(--chalk-gray);
+    font-size: 15px;
+    color: var(--text-muted);
     margin-bottom: 20px;
     margin-top: 10px;
     font-style: italic;
 }
 
-/* SECTION TITLES WITH ICONS */
 .section-title {
     font-family: "Orbitron", sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     color: var(--code-cyan);
-    text-shadow: 0 0 10px var(--code-cyan);
+    text-shadow: 0 0 12px var(--code-cyan-glow);
     margin-bottom: 30px;
     display: flex;
     align-items: center;
@@ -90,49 +187,51 @@ p {
     gap: 10px;
 }
 
-/* ABOUT US SECTION */
+/* =================== ABOUT SECTION =================== */
 .main-section {
     margin: 40px 0;
     padding: 20px 0;
 }
 
 #about_us p {
-    color: var(--paper-white);
+    color: var(--chalk-gray);
     max-width: 500px;
     margin: 0 auto;
-    line-height: 1.6;
-    opacity: 0.9;
+    line-height: 1.75;
+    opacity: 0.92;
     text-align: justify;
 }
 
 #about_us p strong {
     font-weight: 700 !important;
+    color: var(--paper-white);
 }
 
 .about-intro-box {
-    background: rgba(0, 212, 255, 0.05);
-    border-left: 4px solid var(--code-cyan);
-    padding: 20px;
+    background: rgba(79, 195, 216, 0.04);
+    border-left: 3px solid var(--code-cyan);
+    padding: 22px 25px;
     margin: 20px auto;
-    border-radius: 8px;
+    border-radius: 10px;
     position: relative;
     max-width: 800px;
 }
 
 .quote-icon {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--code-cyan);
-    opacity: 0.3;
+    opacity: 0.25;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
 }
 
 .intro-text {
     margin: 0;
-    font-size: 16px;
-    line-height: 1.8;
-    padding-left: 30px;
+    font-size: 15.5px;
+    line-height: 1.85;
+    padding-left: 28px;
+    color: var(--chalk-gray);
 }
 
 .wrapped-image {
@@ -149,53 +248,54 @@ p {
     clear: both;
 }
 
-/* BENEFITS GRID */
+/* =================== BENEFITS GRID =================== */
 .benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
     margin: 30px auto;
     max-width: 1000px;
 }
 
 .benefit-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: var(--grad-card);
+    padding: 26px 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle);
     transition: all 0.3s ease;
     text-align: center;
 }
 
 .benefit-card:hover {
-    background: rgba(0, 212, 255, 0.1);
+    background: linear-gradient(145deg, #1e3150, #131f2e);
     border-color: var(--code-cyan);
     transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 8px 28px var(--code-cyan-glow);
 }
 
 .benefit-card i {
-    font-size: 36px;
+    font-size: 34px;
     color: var(--code-cyan);
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     display: block;
+    opacity: 0.9;
 }
 
 .benefit-card h4 {
     font-family: "Orbitron", sans-serif;
     color: var(--scholar-gold);
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 16px;
+    margin: 8px 0;
 }
 
 .benefit-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--chalk-gray);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
     text-align: center;
 }
 
-/* IMAGE STYLING */
+/* =================== IMAGE STYLING =================== */
 .img {
     width: 100%;
     max-width: 350px;
@@ -206,111 +306,128 @@ p {
     margin: 0 auto;
 }
 
-/* WELCOME SECTION */
+/* =================== WELCOME SECTION =================== */
 #welcome-section {
     min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 25px 20px;
-    background: var(--grad-academic);
+    padding: 30px 20px;
+    background: linear-gradient(160deg, #0f1e30 0%, #182d44 50%, #0d1b2e 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
     text-align: center;
     position: relative;
     margin-bottom: 30px;
+    overflow: hidden;
+}
+
+#welcome-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(79, 195, 216, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(201, 168, 76, 0.05) 0%, transparent 60%);
+    pointer-events: none;
 }
 
 .virtual-classroom-badge {
-    background: var(--grad-success);
-    color: var(--pure-black);
-    padding: 8px 20px;
+    background: linear-gradient(135deg, #1a4535, #3ecf7a);
+    color: #071510;
+    padding: 7px 18px;
     border-radius: 20px;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 11px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-    animation: pulse 2s infinite;
+    gap: 7px;
+    margin-bottom: 14px;
+    box-shadow: 0 0 18px rgba(62, 207, 122, 0.35);
+    animation: pulse 2.5s ease-in-out infinite;
+    letter-spacing: 0.5px;
 }
 
 @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
-    50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.8); }
+    0%, 100% { box-shadow: 0 0 18px rgba(62, 207, 122, 0.35); }
+    50% { box-shadow: 0 0 28px rgba(62, 207, 122, 0.6); }
 }
 
 .subtitle-tagline {
     font-family: "Orbitron", sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     color: var(--code-cyan);
-    margin-bottom: 15px;
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+    margin-bottom: 14px;
+    letter-spacing: 1.8px;
+    opacity: 0.85;
 }
 
 .slogan {
-  font-family: "Yellowtail", cursive;
-  font-weight: 400;
+    font-family: "Yellowtail", cursive;
+    font-weight: 400;
 }
 
-/* FEATURE HIGHLIGHTS */
+/* =================== FEATURE HIGHLIGHTS =================== */
 .feature-highlights {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     margin-top: 15px;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 600px;
+    max-width: 620px;
 }
 
 .highlight-item {
-    background: var(--grad-success);
-    color: var(--pure-black);
-    padding: 8px 16px;
+    background: linear-gradient(135deg, #1c3820, #3ecf7a);
+    color: #061208;
+    padding: 7px 15px;
     border-radius: 20px;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 11px;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 2px 12px rgba(62, 207, 122, 0.25);
     transition: all 0.3s ease;
 }
 
 .highlight-item:hover {
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+    box-shadow: 0 4px 20px rgba(62, 207, 122, 0.45);
     transform: translateY(-2px);
 }
 
 .highlight-item i {
-    font-size: 14px;
-    color: var(--pure-black);
+    font-size: 13px;
+    color: #061208;
 }
 
 .highlight-item span {
     font-size: 11px;
-    color: var(--pure-black);
+    color: #061208;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 1.3;
 }
 
-/* LEARNING PATH SECTION */
+/* =================== LEARNING PATH =================== */
 .learning-path-section {
-    padding: 40px 20px;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 38px 20px;
+    background: var(--grad-card);
     margin: 30px 0;
-    border-radius: 15px;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle);
 }
 
 .learning-path {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: nowrap;
     max-width: 1000px;
     margin: 0 auto;
@@ -329,43 +446,44 @@ p {
 }
 
 .step-icon {
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
-    background: rgba(0, 212, 255, 0.1);
-    border: 2px solid var(--code-cyan);
+    background: rgba(79, 195, 216, 0.08);
+    border: 1.5px solid var(--code-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
+    font-size: 26px;
     color: var(--code-cyan);
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
 
 .path-step:hover .step-icon {
-    background: rgba(0, 212, 255, 0.2);
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    background: rgba(79, 195, 216, 0.15);
+    transform: scale(1.08);
+    box-shadow: 0 0 18px var(--code-cyan-glow);
 }
 
 .step-title {
     font-family: "Orbitron", sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     color: var(--scholar-gold);
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .step-desc {
     font-size: 11px;
     color: var(--slate-medium);
+    line-height: 1.4;
 }
 
 .path-connector {
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(to right, var(--code-cyan), transparent);
+    width: 38px;
+    height: 1.5px;
+    background: linear-gradient(to right, var(--code-cyan), rgba(79, 195, 216, 0.1));
     position: relative;
     flex-shrink: 0;
 }
@@ -376,10 +494,11 @@ p {
     right: -10px;
     top: -8px;
     color: var(--code-cyan);
-    font-size: 10px;
+    font-size: 9px;
+    opacity: 0.7;
 }
 
-/* Banner Image */
+/* =================== BANNER =================== */
 .banner {
     width: 100%;
     max-width: 100%;
@@ -387,27 +506,27 @@ p {
     object-fit: contain;
     border-radius: 10px;
     display: block;
-    margin: 10px auto 15px auto;
+    margin: 12px auto 16px auto;
     background-color: transparent;
 }
 
-/* Navbar Styling */
+/* =================== NAVBAR =================== */
 #navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 50px;
-    padding: 5px 20px;
-    background-color: var(--university-navy);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    padding: 5px 22px;
+    background: linear-gradient(90deg, #080f1a, #0d1b2e, #080f1a);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000;
+    z-index: 1001;
 }
 
-/* Logo Section */
 #navbar .logo {
     display: flex;
     align-items: center;
@@ -417,28 +536,28 @@ p {
 #navbar .logo img {
     height: 30px;
     width: 30px;
-    border-radius: 8px;
+    border-radius: 7px;
     object-fit: cover;
 }
 
 #navbar .logo a {
     color: var(--scholar-gold);
-    text-shadow: 0 0 5px var(--scholar-gold), 0 0 10px var(--scholar-gold);
-    font-size: 14px;
+    text-shadow: 0 0 6px var(--scholar-gold-glow);
+    font-size: 13.5px;
     font-weight: bold;
     text-decoration: none;
     font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
 }
 
 .short-title {
-  display: none;
+    display: none;
 }
 
-/* Navigation List */
 #navbar .nav-list {
     list-style: none;
     display: flex;
-    gap: 15px;
+    gap: 4px;
     padding: 0;
     margin: 0;
 }
@@ -451,44 +570,42 @@ p {
     display: flex;
     align-items: center;
     gap: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 #navbar .nav-list li a:hover {
     color: var(--code-cyan);
-    background: rgba(0, 212, 255, 0.1);
-    transform: translateY(-1px);
+    background: var(--code-cyan-soft);
 }
 
 #navbar .nav-list li a i {
-    font-size: 14px;
+    font-size: 13px;
+    opacity: 0.8;
 }
 
-/* Hide hamburger menu by default */
 .hamburger-menu {
     display: none;
 }
 
-/* Auth Buttons */
 .auth-buttons {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
 }
 
 .logout-btn, .dashboard-btn {
-    padding: 5px 12px;
-    background: var(--academic-burgundy);
+    padding: 5px 13px;
+    background: rgba(139, 38, 53, 0.7);
     color: var(--paper-white);
-    border: none;
-    border-radius: 5px;
+    border: 1px solid rgba(139, 38, 53, 0.4);
+    border-radius: 6px;
     cursor: pointer;
     font-size: 11px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -497,26 +614,27 @@ p {
 .logout-btn:hover, .dashboard-btn:hover {
     background: var(--scholar-gold);
     color: var(--pure-black);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    border-color: var(--scholar-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px var(--scholar-gold-glow);
 }
 
-/* Product Styling */
+/* =================== COURSE CARDS =================== */
 .product {
-    margin: 0 auto 20px auto;
+    margin: 0 auto 22px auto;
     width: 100%;
     max-width: 700px;
-    padding: 15px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    padding: 22px 24px;
+    border-radius: 12px;
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
     transition: all 0.3s ease;
     position: relative;
 }
 
 .product:hover {
     border-color: var(--code-cyan);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 8px 30px var(--code-cyan-glow);
     transform: translateY(-3px);
 }
 
@@ -529,24 +647,24 @@ p {
     position: absolute;
     top: -12px;
     right: 20px;
-    padding: 6px 16px;
+    padding: 5px 15px;
     border-radius: 20px;
     font-size: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     z-index: 10;
 }
 
 .free-badge {
-    background: var(--grad-success);
-    color: var(--pure-black);
+    background: linear-gradient(135deg, #1a4535, #3ecf7a);
+    color: #071510;
 }
 
 .premium-badge {
-    background: var(--grad-premium);
-    color: var(--pure-black);
+    background: linear-gradient(135deg, #3a1a08, #c9a84c);
+    color: #1a0d03;
 }
 
 .books-badge {
@@ -556,10 +674,10 @@ p {
 
 .level {
     font-family: "Orbitron", sans-serif;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: bold;
     color: var(--scholar-gold);
-    margin: 15px 0 10px 0;
+    margin: 15px 0 12px 0;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -572,35 +690,37 @@ p {
 
 .product ol {
     text-align: left;
-    margin: 15px auto;
-    padding-left: 20px;
+    margin: 12px auto;
+    padding-left: 5px;
+    list-style: none;
     max-width: 600px;
     color: var(--chalk-gray);
 }
 
 .product ol li {
-    margin: 8px 0;
+    margin: 9px 0;
     font-size: 14px;
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
 }
 
 .product ol li i {
     color: var(--terminal-green);
     margin-top: 3px;
     font-size: 12px;
+    flex-shrink: 0;
 }
 
-/* Button Styling */
+/* =================== BUTTONS =================== */
 .btn {
-    padding: 12px 28px;
-    background: var(--grad-academic);
-    color: var(--paper-white);
-    border: none;
+    padding: 11px 26px;
+    background: linear-gradient(135deg, #1a2d46, #243d5c);
+    color: var(--code-cyan);
+    border: 1px solid var(--code-cyan);
     border-radius: 25px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     margin-top: 15px;
     transition: all 0.3s ease;
@@ -610,39 +730,42 @@ p {
     font-family: "Orbitron", sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(139, 38, 53, 0.4);
 }
 
 .btn:hover {
-    background: var(--grad-premium);
+    background: var(--scholar-gold);
     color: var(--pure-black);
+    border-color: var(--scholar-gold);
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-}
-
-.btn i {
-    transition: transform 0.3s ease;
+    box-shadow: 0 6px 22px var(--scholar-gold-glow);
 }
 
 .btn:hover i {
     transform: translateX(3px);
 }
 
-/* Testimonials */
+.btn i {
+    transition: transform 0.3s ease;
+}
+
+/* =================== TESTIMONIALS =================== */
 .testimonial {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
-    padding: 25px;
-    border-radius: 12px;
+    background: var(--grad-card);
+    padding: 26px;
+    border-radius: 14px;
     margin: 20px auto;
     max-width: 800px;
-    border-left: 4px solid var(--scholar-gold);
+    border-left: 3px solid var(--scholar-gold);
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--scholar-gold);
     transition: all 0.3s ease;
 }
 
 .testimonial:hover {
+    border-color: var(--border-subtle);
     border-left-color: var(--code-cyan);
-    transform: translateX(5px);
-    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+    transform: translateX(4px);
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.3);
 }
 
 .testimonial-header {
@@ -656,12 +779,13 @@ p {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--code-cyan), var(--syntax-purple));
+    background: linear-gradient(135deg, rgba(79, 195, 216, 0.3), rgba(155, 121, 212, 0.3));
+    border: 1px solid var(--code-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    color: var(--paper-white);
+    font-size: 20px;
+    color: var(--code-cyan);
     flex-shrink: 0;
 }
 
@@ -671,8 +795,8 @@ p {
 }
 
 .student-info h3 {
-    font-size: 18px;
-    color: var(--scholar-gold);
+    font-size: 17px;
+    color: var(--scholar-gold-light);
     margin: 0 0 5px 0;
 }
 
@@ -680,30 +804,31 @@ p {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    background: rgba(0, 212, 255, 0.1);
-    padding: 4px 12px;
+    background: rgba(79, 195, 216, 0.08);
+    padding: 3px 11px;
     border-radius: 12px;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--code-cyan);
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid var(--border-subtle);
 }
 
 .student-badge i {
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .testimonial p {
     color: var(--chalk-gray);
-    line-height: 1.7;
+    line-height: 1.75;
     font-size: 14px;
-    margin: 15px 0;
+    margin: 14px 0;
+    text-align: justify;
 }
 
 .testimonial-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 14px;
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -721,22 +846,23 @@ p {
 
 .star-rating i {
     color: var(--scholar-gold);
-    font-size: 16px;
+    font-size: 15px;
 }
 
-/* Counter Section */
+/* =================== COUNTER SECTION =================== */
 .counter-section {
-    padding: 50px 20px;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 48px 20px;
+    background: var(--grad-card);
     margin: 40px 0;
-    border-radius: 15px;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle);
 }
 
 .stats-title {
     font-family: "Orbitron", sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     color: var(--scholar-gold);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    text-shadow: 0 0 12px var(--scholar-gold-glow);
     margin-bottom: 35px;
     display: flex;
     align-items: center;
@@ -747,88 +873,89 @@ p {
 .counter-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
+    gap: 22px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .counter-item {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-    padding: 30px 20px;
+    background: linear-gradient(145deg, #1a2d44, #0f1b2a);
+    padding: 28px 20px;
     border-radius: 12px;
     text-align: center;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid var(--border-subtle);
     transition: all 0.3s ease;
 }
 
 .counter-item:hover {
-    border-color: var(--code-cyan);
+    border-color: rgba(79, 195, 216, 0.4);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 8px 28px var(--code-cyan-glow);
 }
 
 .counter-icon {
-    font-size: 36px;
+    font-size: 34px;
     color: var(--code-cyan);
-    margin-bottom: 15px;
+    margin-bottom: 14px;
+    opacity: 0.85;
 }
 
 .counter {
     font-family: "Silkscreen", sans-serif;
-    font-size: 42px;
+    font-size: 38px;
     font-weight: bold;
     color: var(--scholar-gold);
-    text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+    text-shadow: 0 0 12px var(--scholar-gold-glow);
     margin-bottom: 8px;
 }
 
 .label {
-    font-size: 14px;
-    color: var(--chalk-gray);
+    font-size: 13px;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 }
 
-/* Contact Buttons */
+/* =================== CONTACT BUTTONS =================== */
 .contact-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 18px;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 22px;
 }
 
 .contact-btn {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: var(--grad-academic);
-    border: none;
-    color: var(--paper-white);
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--chalk-gray);
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(139, 38, 53, 0.3);
 }
 
 .contact-btn:hover {
-    background: var(--grad-premium);
-    color: var(--pure-black);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, #1a2d44, #243d5c);
+    color: var(--code-cyan);
+    border-color: var(--code-cyan);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 6px 20px var(--code-cyan-glow);
 }
 
-/* Footer */
+/* =================== FOOTER =================== */
 footer {
-    background: var(--charcoal);
+    background: linear-gradient(90deg, #090f1a, #0d1b2e, #090f1a);
     color: var(--chalk-gray);
-    padding: 20px;
+    padding: 22px;
     text-align: center;
     margin-top: 50px;
-    border-top: 2px solid var(--code-cyan);
+    border-top: 1px solid var(--border-subtle);
     font-size: 12px;
     border-radius: 10px 10px 0 0;
 }
@@ -852,11 +979,9 @@ footer span {
 }
 
 /* =================== ADDITIONAL PRODUCT SECTIONS =================== */
-
-/* Language Cards & Other Products */
 .product.card, .product-card-ddvcs {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 20px;
     margin: 15px;
@@ -866,22 +991,22 @@ footer span {
 }
 
 .product.card:hover, .product-card-ddvcs:hover {
-    border-color: var(--code-cyan);
+    border-color: rgba(79, 195, 216, 0.4);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+    box-shadow: 0 8px 28px var(--code-cyan-glow);
 }
 
 .product-title {
     font-family: "Orbitron", sans-serif;
     color: var(--scholar-gold);
-    font-size: 18px;
-    margin: 15px 0;
+    font-size: 17px;
+    margin: 14px 0;
 }
 
 .product-description {
     color: var(--chalk-gray);
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .teacher {
@@ -892,14 +1017,14 @@ footer span {
 }
 
 .cta-button {
-    background: var(--grad-academic);
-    color: var(--paper-white);
-    padding: 10px 20px;
+    background: linear-gradient(135deg, #1a2d46, #243d5c);
+    color: var(--code-cyan);
+    padding: 9px 20px;
     border-radius: 20px;
-    border: none;
+    border: 1px solid var(--code-cyan);
     cursor: pointer;
     font-weight: bold;
-    margin-top: 15px;
+    margin-top: 14px;
     transition: all 0.3s ease;
     text-transform: uppercase;
     font-size: 12px;
@@ -907,13 +1032,19 @@ footer span {
 }
 
 .cta-button:hover {
-    background: var(--grad-premium);
+    background: var(--scholar-gold);
     color: var(--pure-black);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    border-color: var(--scholar-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px var(--scholar-gold-glow);
 }
 
-/* Product Containers */
+.cta-button a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
 .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
     display: flex;
     justify-content: center;
@@ -924,126 +1055,31 @@ footer span {
     max-width: 1200px;
 }
 
-/* Product Descriptions */
 .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--chalk-gray);
-    line-height: 1.8;
+    line-height: 1.85;
     text-align: justify;
     max-width: 800px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 20px 24px;
     background: rgba(255, 255, 255, 0.02);
     border-radius: 10px;
-    border-left: 4px solid var(--code-cyan);
+    border-left: 3px solid var(--code-cyan);
 }
 
-/* =================== MEDIA QUERIES FOR PRODUCTS =================== */
-
-@media (max-width: 1200px) {
-    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
-        max-width: 90%;
-        font-size: 15px;
-        padding: 18px;
-    }
-
-    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
-        max-width: 400px;
-    }
-}
-
-@media (max-width: 1024px) { 
-    .product.card, .product-card-ddvcs {
-        width: 30%; 
-    }
-
-    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
-        font-size: 18px; 
-        padding: 15px;
-        text-align: justify;
-            max-width: 90%;
-            margin: auto;
-    }
-}
-
-@media (max-width: 900px) {
-    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
-        gap: 15px;
-    }
-
-    .product.card, .product-card-ddvcs {
-        width: 45%;
-        padding: 15px;
-    }
-
-    .product-title {
-        font-size: 16px;
-    }
-
-    .product-description, .teacher {
-        font-size: 12px;
-    }
-
-    .cta-button {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
-        font-size: 14px; 
-        padding: 10px;
-        max-width: 90%;
-        margin: auto;
-    }
-}
-
-@media (max-width: 600px) {
-    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product.card, .product-card-ddvcs {
-        width: 90%;
-        max-width: 300px;
-    }
-
-    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-descriptiion {
-            font-size: 12px;
-            line-height: 1.6;
-            text-align: justify;
-            max-width: 90%;
-            margin: auto;
-           padding: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
-        font-size: 10px;
-        padding: 8px;
-            max-width: 90%;
-            margin: auto;
-    }
-}
-
-.cta-button a {
-    text-decoration: none;
-    color: white;
-    display: inline-block;
+/* =================== CAREERS SECTION =================== */
+#careers h2, #careers h3, #careers p {
+    color: var(--chalk-gray);
 }
 
 /* =================== ABOUT US PAGE STYLES =================== */
-
-/* PAGE HEADER */
 .page-header {
-    background: var(--grad-academic);
+    background: linear-gradient(160deg, #0d1b2e 0%, #1a2d44 100%);
     padding: 60px 20px 40px 20px;
     text-align: center;
-    border-bottom: 2px solid var(--code-cyan);
+    border-bottom: 1px solid var(--border-subtle);
+    border-radius: 14px;
     margin-bottom: 40px;
 }
 
@@ -1055,31 +1091,31 @@ footer span {
 .header-icon {
     font-size: 48px;
     color: var(--scholar-gold);
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    margin-bottom: 18px;
+    text-shadow: 0 0 20px var(--scholar-gold-glow);
 }
 
 .page-header h1 {
     font-family: "Orbitron", sans-serif;
-    font-size: 42px;
+    font-size: 40px;
     color: var(--scholar-gold);
-    margin: 0 0 15px 0;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    margin: 0 0 14px 0;
+    text-shadow: 0 0 12px var(--scholar-gold-glow);
 }
 
 .header-subtitle {
-    font-size: 16px;
+    font-size: 15.5px;
     color: var(--chalk-gray);
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* FOUNDER SECTION */
 .founder-section {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--grad-card);
     padding: 50px 20px;
-    border-radius: 15px;
+    border-radius: 14px;
     margin: 40px 0;
+    border: 1px solid var(--border-subtle);
 }
 
 .founder-container {
@@ -1100,9 +1136,9 @@ footer span {
 .founder-image-placeholder {
     width: 280px;
     height: 280px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.05));
-    border: 2px solid var(--code-cyan);
+    border-radius: 14px;
+    background: rgba(79, 195, 216, 0.05);
+    border: 1.5px solid var(--code-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1111,13 +1147,13 @@ footer span {
 
 .founder-image-placeholder:hover {
     border-color: var(--scholar-gold);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 28px var(--scholar-gold-glow);
 }
 
 .founder-image-placeholder i {
     font-size: 120px;
     color: var(--code-cyan);
-    opacity: 0.3;
+    opacity: 0.2;
 }
 
 .founder-info {
@@ -1127,23 +1163,23 @@ footer span {
 
 .founder-name {
     font-family: "Orbitron", sans-serif;
-    font-size: 32px;
+    font-size: 30px;
     color: var(--scholar-gold);
     margin: 0 0 10px 0;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 8px var(--scholar-gold-glow);
 }
 
 .founder-title {
-    font-size: 18px;
+    font-size: 17px;
     color: var(--chalk-gray);
     font-style: italic;
     margin: 0 0 10px 0;
 }
 
 .founder-location {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--code-cyan);
-    margin: 0 0 25px 0;
+    margin: 0 0 24px 0;
 }
 
 .founder-location i {
@@ -1151,27 +1187,27 @@ footer span {
 }
 
 .founder-bio {
-    margin: 25px 0;
+    margin: 24px 0;
 }
 
 .founder-bio p {
     color: var(--chalk-gray);
-    line-height: 1.8;
-    margin: 15px 0;
+    line-height: 1.85;
+    margin: 14px 0;
     text-align: justify;
 }
 
 .founder-highlights {
     display: flex;
-    gap: 15px;
+    gap: 12px;
     flex-wrap: wrap;
-    margin-top: 25px;
+    margin-top: 24px;
 }
 
 .highlight-box {
-    background: rgba(0, 212, 255, 0.1);
-    border: 1px solid var(--code-cyan);
-    padding: 12px 20px;
+    background: rgba(79, 195, 216, 0.06);
+    border: 1px solid var(--border-subtle);
+    padding: 11px 18px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -1180,14 +1216,14 @@ footer span {
 }
 
 .highlight-box:hover {
-    background: rgba(0, 212, 255, 0.15);
+    background: rgba(79, 195, 216, 0.12);
     border-color: var(--scholar-gold);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .highlight-box i {
     color: var(--code-cyan);
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .highlight-box span {
@@ -1196,7 +1232,6 @@ footer span {
     font-weight: 500;
 }
 
-/* TEAM SECTION */
 .team-section {
     padding: 50px 20px;
 }
@@ -1204,69 +1239,69 @@ footer span {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    gap: 28px;
     max-width: 1200px;
     margin: 30px auto;
 }
 
 .team-card {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
-    border: 1px solid var(--code-cyan);
-    border-radius: 15px;
-    padding: 30px;
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 28px;
     text-align: center;
     transition: all 0.3s ease;
 }
 
 .team-card:hover {
-    border-color: var(--scholar-gold);
+    border-color: var(--border-gold);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
 }
 
 .team-image-placeholder {
-    width: 120px;
-    height: 120px;
+    width: 115px;
+    height: 115px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 212, 255, 0.05));
-    border: 2px solid var(--code-cyan);
+    background: rgba(79, 195, 216, 0.06);
+    border: 1.5px solid var(--code-cyan);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 18px auto;
     transition: all 0.3s ease;
 }
 
 .team-card:hover .team-image-placeholder {
     border-color: var(--scholar-gold);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 18px var(--scholar-gold-glow);
 }
 
 .team-image-placeholder i {
-    font-size: 50px;
+    font-size: 48px;
     color: var(--code-cyan);
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .team-name {
     font-family: "Orbitron", sans-serif;
-    font-size: 20px;
+    font-size: 19px;
     color: var(--scholar-gold);
-    margin: 0 0 8px 0;
+    margin: 0 0 7px 0;
 }
 
 .team-role {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--chalk-gray);
     font-style: italic;
-    margin: 0 0 15px 0;
+    margin: 0 0 14px 0;
 }
 
 .team-description {
     font-size: 13px;
-    color: var(--chalk-gray);
-    line-height: 1.6;
-    margin: 15px 0;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 14px 0;
     text-align: center;
 }
 
@@ -1275,14 +1310,14 @@ footer span {
     gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 14px;
 }
 
 .expertise-tag {
-    background: rgba(0, 212, 255, 0.1);
-    border: 1px solid var(--code-cyan);
-    padding: 5px 12px;
-    border-radius: 15px;
+    background: rgba(79, 195, 216, 0.07);
+    border: 1px solid var(--border-subtle);
+    padding: 4px 11px;
+    border-radius: 14px;
     font-size: 11px;
     color: var(--code-cyan);
     display: inline-flex;
@@ -1294,14 +1329,13 @@ footer span {
     font-size: 9px;
 }
 
-/* CTA SECTION */
 .cta-section {
-    background: var(--grad-academic);
+    background: linear-gradient(145deg, #0f1e30, #162840);
     padding: 60px 20px;
     text-align: center;
     margin: 50px 0;
-    border-radius: 15px;
-    border: 2px solid var(--code-cyan);
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle);
 }
 
 .cta-content {
@@ -1311,39 +1345,41 @@ footer span {
 
 .cta-content h2 {
     font-family: "Orbitron", sans-serif;
-    font-size: 32px;
+    font-size: 30px;
     color: var(--scholar-gold);
-    margin: 0 0 15px 0;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    margin: 0 0 14px 0;
+    text-shadow: 0 0 10px var(--scholar-gold-glow);
 }
 
 .cta-content p {
-    font-size: 16px;
+    font-size: 15.5px;
     color: var(--chalk-gray);
-    margin: 0 0 30px 0;
+    margin: 0 0 28px 0;
     text-align: center;
+    line-height: 1.7;
 }
 
 .cta-button-large {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--grad-success);
-    color: var(--pure-black);
-    padding: 15px 35px;
+    background: linear-gradient(135deg, #1a4535, #3ecf7a);
+    color: #071510;
+    padding: 14px 34px;
     border-radius: 30px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 18px rgba(62, 207, 122, 0.3);
     font-family: "Orbitron", sans-serif;
 }
 
 .cta-button-large:hover {
-    background: var(--grad-premium);
+    background: linear-gradient(135deg, #3a1a08, #c9a84c);
+    color: #1a0d03;
     transform: translateY(-3px);
-    box-shadow: 0 5px 30px rgba(212, 175, 55, 0.6);
+    box-shadow: 0 6px 28px var(--scholar-gold-glow);
 }
 
 .cta-button-large i {
@@ -1352,4 +1388,102 @@ footer span {
 
 .cta-button-large:hover i {
     transform: translateX(5px);
+}
+
+/* =================== VERIFICATION SECTION =================== */
+.certificate-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-gold);
+}
+
+/* =================== MEDIA QUERIES FOR PRODUCTS =================== */
+@media (max-width: 1200px) {
+    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
+        max-width: 90%;
+        font-size: 14.5px;
+        padding: 17px;
+    }
+
+    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .product.card, .product-card-ddvcs {
+        width: 30%;
+    }
+
+    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
+        font-size: 17px;
+        padding: 15px;
+        text-align: justify;
+        max-width: 90%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
+        gap: 14px;
+    }
+
+    .product.card, .product-card-ddvcs {
+        width: 45%;
+        padding: 15px;
+    }
+
+    .product-title {
+        font-size: 15px;
+    }
+
+    .product-description, .teacher {
+        font-size: 12px;
+    }
+
+    .cta-button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
+        font-size: 14px;
+        padding: 10px;
+        max-width: 90%;
+        margin: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .complimentary-courses-products, .premium-courses-products, .language-courses, .ddvcs-products {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product.card, .product-card-ddvcs {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
+        font-size: 12px;
+        line-height: 1.65;
+        text-align: justify;
+        max-width: 90%;
+        margin: auto;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .complimentary-courses-description, .premium-courses-description, .language-mastery-description, .ddvcs-description {
+        font-size: 11px;
+        padding: 8px;
+        max-width: 90%;
+        margin: auto;
+    }
 }
