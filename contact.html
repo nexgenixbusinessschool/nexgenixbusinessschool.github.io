@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us — Nex Genix Business School</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600;700&family=Orbitron:wght@400;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --university-navy: #0d1b2e;
+        --academic-surface: #1c2d42;
+        --card-surface: #1a2a3e;
+        --scholar-gold: #c9a84c;
+        --scholar-gold-light: #e2c97a;
+        --scholar-gold-glow: rgba(201, 168, 76, 0.35);
+        --code-cyan: #4fc3d8;
+        --code-cyan-soft: rgba(79, 195, 216, 0.12);
+        --code-cyan-glow: rgba(79, 195, 216, 0.3);
+        --terminal-green: #3ecf7a;
+        --paper-white: #eef2f7;
+        --chalk-gray: #c8d4e3;
+        --text-muted: #94a3b8;
+        --slate-medium: #6b80a0;
+        --charcoal: #131f2e;
+        --pure-black: #090f1a;
+        --border-subtle: rgba(79, 195, 216, 0.15);
+        --border-gold: rgba(201, 168, 76, 0.25);
+        --grad-card: linear-gradient(145deg, #1c2d42 0%, #131f2e 100%);
+        --error: #e8675a;
+        --success: #3ecf7a;
+      }
+
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        background-color: var(--pure-black);
+        color: var(--paper-white);
+        font-family: 'Montserrat Alternates', 'Trebuchet MS', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(90deg, #080f1a, #0d1b2e, #080f1a);
+        border-bottom: 1px solid var(--border-subtle);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+        z-index: 100;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      .nav-logo img {
+        height: 28px;
+        width: 28px;
+        border-radius: 6px;
+        object-fit: cover;
+      }
+
+      .nav-logo span {
+        color: var(--scholar-gold);
+        font-family: 'Courier New', monospace;
+        font-size: 13px;
+        font-weight: bold;
+        text-shadow: 0 0 6px var(--scholar-gold-glow);
+        letter-spacing: 0.5px;
+      }
+
+      .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--chalk-gray);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+        transition: all 0.25s ease;
+      }
+
+      .nav-back:hover {
+        color: var(--code-cyan);
+        border-color: var(--code-cyan);
+        background: var(--code-cyan-soft);
+      }
+
+      /* ── PAGE WRAPPER ── */
+      .page {
+        width: 90%;
+        max-width: 680px;
+        padding: 50px 0 80px;
+      }
+
+      /* ── PAGE HEADER ── */
+      .page-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .page-header .header-icon {
+        font-size: 42px;
+        color: var(--scholar-gold);
+        text-shadow: 0 0 18px var(--scholar-gold-glow);
+        margin-bottom: 14px;
+        display: block;
+      }
+
+      .page-header h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 28px;
+        color: var(--scholar-gold);
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px var(--scholar-gold-glow);
+      }
+
+      .page-header p {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      /* ── CONTACT FORM CARD ── */
+      .contact-card {
+        background: var(--grad-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        padding: 36px 32px;
+        margin-bottom: 36px;
+      }
+
+      .form-group {
+        margin-bottom: 22px;
+        text-align: left;
+      }
+
+      label {
+        display: block;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--code-cyan);
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 8px;
+      }
+
+      label i {
+        margin-right: 6px;
+        font-size: 11px;
+        opacity: 0.8;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      select,
+      textarea {
+        width: 100%;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border-subtle);
+        border-radius: 8px;
+        color: var(--paper-white);
+        font-family: 'Trebuchet MS', sans-serif;
+        font-size: 14px;
+        padding: 11px 14px;
+        outline: none;
+        transition: all 0.25s ease;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--code-cyan);
+        background: rgba(79, 195, 216, 0.05);
+        box-shadow: 0 0 0 3px rgba(79, 195, 216, 0.1);
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: var(--slate-medium);
+        opacity: 0.7;
+      }
+
+      select option {
+        background: #0d1b2e;
+        color: var(--paper-white);
+      }
+
+      /* custom select arrow */
+      .select-wrapper {
+        position: relative;
+      }
+
+      .select-wrapper::after {
+        content: '▾';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--code-cyan);
+        font-size: 14px;
+        pointer-events: none;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+        line-height: 1.6;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      /* char counter */
+      .char-count {
+        font-size: 11px;
+        color: var(--slate-medium);
+        text-align: right;
+        margin-top: 5px;
+      }
+
+      /* inline validation */
+      .field-error {
+        font-size: 11px;
+        color: var(--error);
+        margin-top: 5px;
+        display: none;
+      }
+
+      .form-group.has-error input,
+      .form-group.has-error select,
+      .form-group.has-error textarea {
+        border-color: var(--error);
+      }
+
+      .form-group.has-error .field-error {
+        display: block;
+      }
+
+      /* submit button */
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #1a2d46, #243d5c);
+        color: var(--code-cyan);
+        border: 1px solid var(--code-cyan);
+        border-radius: 10px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        margin-top: 8px;
+      }
+
+      .submit-btn:hover {
+        background: var(--scholar-gold);
+        color: var(--pure-black);
+        border-color: var(--scholar-gold);
+        box-shadow: 0 6px 22px var(--scholar-gold-glow);
+        transform: translateY(-2px);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .submit-btn.loading {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      /* success message */
+      .success-msg {
+        display: none;
+        background: rgba(62, 207, 122, 0.08);
+        border: 1px solid rgba(62, 207, 122, 0.35);
+        border-radius: 10px;
+        padding: 18px 20px;
+        margin-top: 18px;
+        color: var(--terminal-green);
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .success-msg i {
+        font-size: 22px;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      /* ── DIVIDER ── */
+      .section-divider {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .section-divider::before,
+      .section-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border-subtle);
+      }
+
+      .section-divider span {
+        font-family: "Orbitron", sans-serif;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+
+      /* ── SOCIAL ICONS ── */
+      .socmed-section {
+        text-align: center;
+      }
+
+      .socmed-section h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+        color: var(--chalk-gray);
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .socmed-section p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 22px;
+        line-height: 1.6;
+      }
+
+      .contact-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .contact-btn-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        text-decoration: none;
+      }
+
+      .contact-btn {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: var(--grad-card);
+        border: 1px solid var(--border-subtle);
+        color: var(--chalk-gray);
+        font-size: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .contact-btn:hover {
+        background: linear-gradient(135deg, #1a2d44, #243d5c);
+        color: var(--code-cyan);
+        border-color: var(--code-cyan);
+        transform: translateY(-4px) scale(1.08);
+        box-shadow: 0 6px 20px var(--code-cyan-glow);
+      }
+
+      .contact-btn.facebook:hover  { color: #1877f2; border-color: #1877f2; box-shadow: 0 6px 20px rgba(24,119,242,0.3); }
+      .contact-btn.instagram:hover { color: #e1306c; border-color: #e1306c; box-shadow: 0 6px 20px rgba(225,48,108,0.3); }
+      .contact-btn.reddit:hover    { color: #ff4500; border-color: #ff4500; box-shadow: 0 6px 20px rgba(255,69,0,0.3); }
+      .contact-btn.email:hover     { color: #ea4335; border-color: #ea4335; box-shadow: 0 6px 20px rgba(234,67,53,0.3); }
+      .contact-btn.whatsapp:hover  { color: #25d366; border-color: #25d366; box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
+
+      .btn-label {
+        font-size: 10px;
+        color: var(--slate-medium);
+        letter-spacing: 0.3px;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        width: 100%;
+        background: linear-gradient(90deg, #090f1a, #0d1b2e, #090f1a);
+        color: var(--chalk-gray);
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid var(--border-subtle);
+        font-size: 12px;
+        margin-top: auto;
+      }
+
+      footer i { color: var(--scholar-gold); margin-right: 5px; }
+      footer span { color: var(--code-cyan); font-weight: bold; }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 600px) {
+        .page { padding: 36px 0 60px; }
+        .contact-card { padding: 24px 18px; }
+        .form-row { grid-template-columns: 1fr; gap: 0; }
+        .page-header h1 { font-size: 22px; }
+        .page-header .header-icon { font-size: 34px; }
+        nav { padding: 0 14px; }
+        .nav-logo span { font-size: 11px; }
+      }
+
+      @media (max-width: 380px) {
+        .contact-card { padding: 18px 14px; }
+        .contact-btn { width: 46px; height: 46px; font-size: 18px; }
+        .page-header h1 { font-size: 19px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Nav -->
+    <nav>
+      <a class="nav-logo" href="https://nexgenixbusinessschool.github.io">
+        <img src="assets/images/logo-bs.png" alt="NGBS Logo">
+        <span>NEX GENIX BUSINESS SCHOOL</span>
+      </a>
+      <a class="nav-back" href="https://nexgenixbusinessschool.github.io">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+    </nav>
+
+    <div class="page">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <i class="fas fa-paper-plane header-icon"></i>
+        <h1>Get In Touch</h1>
+        <p>Have questions about our courses, certifications, or enrollment?<br>We're here to help — send us a message below.</p>
+      </div>
+
+      <!-- Contact Form Card -->
+      <div class="contact-card">
+        <form id="contactForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group" id="fg-firstname">
+              <label for="firstname"><i class="fas fa-user"></i> First Name</label>
+              <input type="text" id="firstname" name="firstname" placeholder="e.g. Maria" autocomplete="given-name">
+              <span class="field-error">Please enter your first name.</span>
+            </div>
+            <div class="form-group" id="fg-lastname">
+              <label for="lastname"><i class="fas fa-user"></i> Last Name</label>
+              <input type="text" id="lastname" name="lastname" placeholder="e.g. Santos" autocomplete="family-name">
+              <span class="field-error">Please enter your last name.</span>
+            </div>
+          </div>
+
+          <div class="form-group" id="fg-email">
+            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+            <span class="field-error">Please enter a valid email address.</span>
+          </div>
+
+          <div class="form-group" id="fg-phone">
+            <label for="phone"><i class="fas fa-phone"></i> Phone / WhatsApp <span style="color:var(--slate-medium);font-size:10px;text-transform:none;">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+63 917 000 0000" autocomplete="tel">
+          </div>
+
+          <div class="form-group" id="fg-subject">
+            <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+            <div class="select-wrapper">
+              <select id="subject" name="subject">
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="enrollment">Course Enrollment</option>
+                <option value="complimentary">Complimentary Courses</option>
+                <option value="premium">Premium Courses</option>
+                <option value="certification">Certification &amp; Verification</option>
+                <option value="books">Educational Books</option>
+                <option value="tutoring">Tutoring Services</option>
+                <option value="technical">Technical Support</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <span class="field-error">Please select a subject.</span>
+          </div>
+
+          <div class="form-group" id="fg-message">
+            <label for="message"><i class="fas fa-comment-dots"></i> Message</label>
+            <textarea id="message" name="message" maxlength="1000" placeholder="Write your message here…"></textarea>
+            <div class="char-count"><span id="charLeft">1000</span> characters remaining</div>
+            <span class="field-error">Please write a message (at least 20 characters).</span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+
+          <div class="success-msg" id="successMsg">
+            <i class="fas fa-check-circle"></i>
+            Thank you! Your message has been sent.<br>
+            We'll get back to you within 1–2 business days.
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Divider -->
+      <div class="section-divider">
+        <span>OR REACH US DIRECTLY</span>
+      </div>
+
+      <!-- Social Media -->
+      <div class="socmed-section">
+        <h2><i class="fas fa-satellite-dish"></i> &nbsp;Connect With Us</h2>
+        <p>Choose your preferred platform and we'll respond promptly.</p>
+
+        <div class="contact-buttons">
+
+          <a href="https://www.facebook.com/nexgenix.business.school" target="_blank" class="contact-btn-wrap" title="Facebook">
+            <span class="contact-btn facebook"><i class="fab fa-facebook-f"></i></span>
+            <span class="btn-label">Facebook</span>
+          </a>
+
+          <a href="https://www.instagram.com/nexgenix.business.school" target="_blank" class="contact-btn-wrap" title="Instagram">
+            <span class="contact-btn instagram"><i class="fab fa-instagram"></i></span>
+            <span class="btn-label">Instagram</span>
+          </a>
+
+          <a href="https://www.reddit.com/user/nexgenix" target="_blank" class="contact-btn-wrap" title="Reddit">
+            <span class="contact-btn reddit"><i class="fab fa-reddit-alien"></i></span>
+            <span class="btn-label">Reddit</span>
+          </a>
+
+          <a href="/cdn-cgi/l/email-protection#38565d405f5d5651405a4d4b51565d4b4b4b5b50575754785f55595154165b5755" class="contact-btn-wrap" title="Email">
+            <span class="contact-btn email"><i class="fas fa-envelope"></i></span>
+            <span class="btn-label">Email</span>
+          </a>
+
+          <a href="https://wa.me/+639171063504" target="_blank" class="contact-btn-wrap" title="WhatsApp">
+            <span class="contact-btn whatsapp"><i class="fab fa-whatsapp"></i></span>
+            <span class="btn-label">WhatsApp</span>
+          </a>
+
+        </div>
+      </div>
+
+    </div><!-- /page -->
+
+    <!-- Footer -->
+    <footer>
+      <i class="fas fa-graduation-cap"></i>
+      &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
+    </footer>
+
+    <script>
+      // Character counter
+      const msg = document.getElementById('message');
+      const charLeft = document.getElementById('charLeft');
+      msg.addEventListener('input', () => {
+        charLeft.textContent = 1000 - msg.value.length;
+      });
+
+      // Form validation & submission
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valid = true;
+
+        const fields = [
+          { id: 'firstname', groupId: 'fg-firstname', check: v => v.trim().length > 0 },
+          { id: 'lastname',  groupId: 'fg-lastname',  check: v => v.trim().length > 0 },
+          { id: 'email',     groupId: 'fg-email',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) },
+          { id: 'subject',   groupId: 'fg-subject',   check: v => v !== '' },
+          { id: 'message',   groupId: 'fg-message',   check: v => v.trim().length >= 20 },
+        ];
+
+        fields.forEach(f => {
+          const el = document.getElementById(f.id);
+          const group = document.getElementById(f.groupId);
+          if (!f.check(el.value)) {
+            group.classList.add('has-error');
+            valid = false;
+          } else {
+            group.classList.remove('has-error');
+          }
+        });
+
+        if (!valid) return;
+
+        // Simulate send
+        const btn = document.getElementById('submitBtn');
+        btn.classList.add('loading');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+        setTimeout(() => {
+          btn.style.display = 'none';
+          document.getElementById('successMsg').style.display = 'block';
+          document.getElementById('contactForm').reset();
+          charLeft.textContent = '1000';
+        }, 1800);
+      });
+
+      // Clear error on input
+      ['firstname','lastname','email','subject','message'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('input', () => {
+          document.getElementById('fg-' + id)?.classList.remove('has-error');
+        });
+      });
+    </script>
+
+  </body>
+</html>
