@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&family=Yellowtail&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   </head>
   <body>
+
 <!-- Navigation Bar -->
 <nav id="navbar">
     <div class="logo">
@@ -22,12 +23,12 @@
         <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
     </div>
 
-        <!-- Hamburger Menu Icon -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
 
     <ul class="nav-list">
         <li><a href="https://nexgenixbusinessschool.github.io"><i class="fas fa-home"></i> Home</a></li>
@@ -38,42 +39,80 @@
         <li><a href="#careers"><i class="fas fa-briefcase"></i> Careers</a></li>
         <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
     </ul>
-<div class="auth-buttons" id="auth-buttons">
-    <button onclick="handleLogout()" class="logout-btn">Logout</button>
-    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-</div>
-
+    <div class="auth-buttons" id="auth-buttons">
+        <button onclick="handleLogout()" class="logout-btn">Logout</button>
+        <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    </div>
 </nav>
+
+<!-- Announcement Strip -->
+<div class="announcement-strip">
+    <div class="announcement-track">
+        <!-- First set -->
+        <span class="announce-item congrats"><i class="fas fa-star"></i> Congratulations to Maria Santos — International Business Graduate!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-certificate"></i> New Certification Unlocked: Juan dela Cruz — Digital Marketing Specialist</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item congrats"><i class="fas fa-graduation-cap"></i> Congrats to Gioia Pavan — Certified in International Business!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item news"><i class="fas fa-bolt"></i> New Premium Course Available: Advanced Business Analytics</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-award"></i> Kathrine Mendez — Excellence Award in Entrepreneurship</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item congrats"><i class="fas fa-trophy"></i> Top Learner of the Month: Ana Reyes — Business Strategy</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item news"><i class="fas fa-book-open"></i> New Free Courses Released — Enroll Today!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-medal"></i> Certification Milestone: 22,500+ Certificates Granted</span>
+        <span class="announce-divider">◆</span>
+        <!-- Duplicate set for seamless loop -->
+        <span class="announce-item congrats"><i class="fas fa-star"></i> Congratulations to Maria Santos — International Business Graduate!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-certificate"></i> New Certification Unlocked: Juan dela Cruz — Digital Marketing Specialist</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item congrats"><i class="fas fa-graduation-cap"></i> Congrats to Gioia Pavan — Certified in International Business!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item news"><i class="fas fa-bolt"></i> New Premium Course Available: Advanced Business Analytics</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-award"></i> Kathrine Mendez — Excellence Award in Entrepreneurship</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item congrats"><i class="fas fa-trophy"></i> Top Learner of the Month: Ana Reyes — Business Strategy</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item news"><i class="fas fa-book-open"></i> New Free Courses Released — Enroll Today!</span>
+        <span class="announce-divider">◆</span>
+        <span class="announce-item cert"><i class="fas fa-medal"></i> Certification Milestone: 22,500+ Certificates Granted</span>
+        <span class="announce-divider">◆</span>
+    </div>
+</div>
 
 <!-- Welcome Section -->
 <section id="welcome-section">
-<div class="virtual-classroom-badge">
-    <i class="fas fa-laptop-code"></i>
-    <span>100% ONLINE</span>
-</div>
+    <div class="virtual-classroom-badge">
+        <i class="fas fa-laptop-code"></i>
+        <span>100% ONLINE</span>
+    </div>
 
-<img src="assets/images/banner-bs.png" alt="banner" class="banner">
-<div class="subtitle-tagline">Learn Anywhere • Anytime • At Your Own Pace</div>
-<div class="feature-highlights">
-    <div class="highlight-item">
-        <i class="fas fa-video"></i>
-        <span>Live & Recorded Sessions</span>
+    <img src="assets/images/banner-bs.png" alt="banner" class="banner">
+    <div class="subtitle-tagline">Learn Anywhere &bull; Anytime &bull; At Your Own Pace</div>
+    <div class="feature-highlights">
+        <div class="highlight-item">
+            <i class="fas fa-video"></i>
+            <span>Live &amp; Recorded Sessions</span>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-certificate"></i>
+            <span>Verified Certificates</span>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-users"></i>
+            <span>Expert Instructors</span>
+        </div>
+        <div class="highlight-item">
+            <i class="fas fa-clock"></i>
+            <span>Self-Paced</span>
+        </div>
     </div>
-    <div class="highlight-item">
-        <i class="fas fa-certificate"></i>
-        <span>Verified Certificates</span>
-    </div>
-    <div class="highlight-item">
-        <i class="fas fa-users"></i>
-        <span>Expert Instructors</span>
-    </div>
-    <div class="highlight-item">
-        <i class="fas fa-clock"></i>
-        <span>Self-Paced</span>
-    </div>
-</div>
 </section>
-
 
 <!-- Learning Path Indicator -->
 <section class="learning-path-section">
@@ -129,52 +168,49 @@
     </div>
 </div>
 
-</article>
-</section>
-
 <!-- Products and Services -->
 <section class="main-section" id="products_and_services">
 <article>
 <h2><i class="fas fa-graduation-cap"></i> Our Learning Programs</h2>
 <p class="section-intro">Choose the path that fits your learning style and goals</p>
 
-            <div class="product course-card" id="complimentary-courses">
-            <div class="course-badge free-badge">FREE</div>
-            <div class="level"><i class="fas fa-gift"></i> Complimentary Courses</div>
-            <ol>
-              <li><i class="fas fa-check-circle"></i> Beginner-Friendly & Accessible</li>
-              <li><i class="fas fa-check-circle"></i> Focused on Real-World Skills</li>
-              <li><i class="fas fa-check-circle"></i> Self-Paced & Flexible Modules</li>
-              <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
-            </ol>
-            <a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><button class="btn">Start Learning Free <i class="fas fa-arrow-right"></i></button></a>
-          </div>
+    <div class="product course-card" id="complimentary-courses">
+        <div class="course-badge free-badge">FREE</div>
+        <div class="level"><i class="fas fa-gift"></i> Complimentary Courses</div>
+        <ol>
+            <li><i class="fas fa-check-circle"></i> Beginner-Friendly &amp; Accessible</li>
+            <li><i class="fas fa-check-circle"></i> Focused on Real-World Skills</li>
+            <li><i class="fas fa-check-circle"></i> Self-Paced &amp; Flexible Modules</li>
+            <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
+        </ol>
+        <a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><button class="btn">Start Learning Free <i class="fas fa-arrow-right"></i></button></a>
+    </div>
 
-          <div class="product course-card" id="premium-courses">
-            <div class="course-badge premium-badge">PREMIUM</div>
-            <div class="level"><i class="fas fa-crown"></i> Premium Courses</div>
-            <ol>
-              <li><i class="fas fa-check-circle"></i> Flexible Learning</li>
-              <li><i class="fas fa-check-circle"></i> Comprehensive Curriculum</li>
-              <li><i class="fas fa-check-circle"></i> Practical and Actionable</li>
-              <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
-            </ol>
-            <a href="https://nexgenixbusinessschool.github.io/premium-courses"><button class="btn">Explore Premium <i class="fas fa-arrow-right"></i></button></a>
-          </div>
+    <div class="product course-card" id="premium-courses">
+        <div class="course-badge premium-badge">PREMIUM</div>
+        <div class="level"><i class="fas fa-crown"></i> Premium Courses</div>
+        <ol>
+            <li><i class="fas fa-check-circle"></i> Flexible Learning</li>
+            <li><i class="fas fa-check-circle"></i> Comprehensive Curriculum</li>
+            <li><i class="fas fa-check-circle"></i> Practical and Actionable</li>
+            <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
+        </ol>
+        <a href="https://nexgenixbusinessschool.github.io/premium-courses"><button class="btn">Explore Premium <i class="fas fa-arrow-right"></i></button></a>
+    </div>
 
-          <div class="product course-card" id="educational-books">
-            <div class="course-badge books-badge">RESOURCES</div>
-            <div class="level"><i class="fas fa-book"></i> Educational Books</div>
-            <ol>
-              <li><i class="fas fa-check-circle"></i> Classic Print Format</li>
-              <li><i class="fas fa-check-circle"></i> Free eBook Access</li>
-              <li><i class="fas fa-check-circle"></i> Flexible Reading</li>
-              <li><i class="fas fa-check-circle"></i> Durable and Collectible</li>
-            </ol>
-            <a href="https://nexgenixbusinessschool.github.io/bookstore.html"><button class="btn">Browse Books <i class="fas fa-arrow-right"></i></button></a>
-          </div>
-        </article>
-        </section>
+    <div class="product course-card" id="educational-books">
+        <div class="course-badge books-badge">RESOURCES</div>
+        <div class="level"><i class="fas fa-book"></i> Educational Books</div>
+        <ol>
+            <li><i class="fas fa-check-circle"></i> Classic Print Format</li>
+            <li><i class="fas fa-check-circle"></i> Free eBook Access</li>
+            <li><i class="fas fa-check-circle"></i> Flexible Reading</li>
+            <li><i class="fas fa-check-circle"></i> Durable and Collectible</li>
+        </ol>
+        <a href="https://nexgenixbusinessschool.github.io/bookstore.html"><button class="btn">Browse Books <i class="fas fa-arrow-right"></i></button></a>
+    </div>
+</article>
+</section>
 
 <!-- Reviews Section -->
 <section class="main-section" id="reviews">
@@ -182,68 +218,68 @@
         <h2><i class="fas fa-star"></i> Student Success Stories</h2>
         <p class="section-intro">Hear from our virtual learning community</p>
 
-               <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
-                        <div class="student-info">
-                            <h3>Reader</h3>
-                            <span class="student-badge"><i class="fas fa-book-reader"></i> Book Enthusiast</span>
-                        </div>
-                    </div>
-                    <p>"Been looking for the best business guide in the market for years now and I know that I got all that I need for my business right now. This book is a practical guide that seamlessly navigates the complex world of entrepreneurship. The author's straightforward approach and clear language make it easy for readers to grasp key concepts, from building a solid brand to mastering the art of sales. The real-life examples and actionable tips provide a valuable toolkit for anyone looking to succeed in business. Whether you're a budding entrepreneur or seasoned professional, this book offers a refreshingly accessible roadmap to elevate your business acumen. I love what I have in hand right now. Best business book so far!!!"</p>
-                    <div class="testimonial-footer">
-                        <p class="reviewer-name">- Irene Clemenz</p>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+        <div class="testimonial">
+            <div class="testimonial-header">
+                <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+                <div class="student-info">
+                    <h3>Reader</h3>
+                    <span class="student-badge"><i class="fas fa-book-reader"></i> Book Enthusiast</span>
                 </div>
+            </div>
+            <p>"Been looking for the best business guide in the market for years now and I know that I got all that I need for my business right now. This book is a practical guide that seamlessly navigates the complex world of entrepreneurship. The author's straightforward approach and clear language make it easy for readers to grasp key concepts, from building a solid brand to mastering the art of sales. The real-life examples and actionable tips provide a valuable toolkit for anyone looking to succeed in business. Whether you're a budding entrepreneur or seasoned professional, this book offers a refreshingly accessible roadmap to elevate your business acumen. I love what I have in hand right now. Best business book so far!!!"</p>
+            <div class="testimonial-footer">
+                <p class="reviewer-name">- Irene Clemenz</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
 
-                <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="student-avatar"><i class="fas fa-user-friends"></i></div>
-                        <div class="student-info">
-                            <h3>Parent of a Happy Learner</h3>  
-                            <span class="student-badge"><i class="fas fa-child"></i> Family Learning</span>
-                        </div>
-                    </div>
-                    <p>"This virtual business school is an excellent choice for anyone looking to grow their skills in business while also providing top-quality tutoring for children in math, science, and foreign languages. The courses are well-structured, engaging, and flexible, making learning convenient for both adults and kids. The tutors are patient, knowledgeable, and skilled at making complex subjects easy to understand. My child has improved greatly in math, and the foreign language lessons have been incredibly helpful. With expert instructors and a supportive learning environment, this school is a fantastic resource for both professional and academic growth. Highly recommended!"</p>
-                    <div class="testimonial-footer">
-                        <p class="reviewer-name">- Kathrine Mendez</p>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+        <div class="testimonial">
+            <div class="testimonial-header">
+                <div class="student-avatar"><i class="fas fa-user-friends"></i></div>
+                <div class="student-info">
+                    <h3>Parent of a Happy Learner</h3>
+                    <span class="student-badge"><i class="fas fa-child"></i> Family Learning</span>
                 </div>
+            </div>
+            <p>"This virtual business school is an excellent choice for anyone looking to grow their skills in business while also providing top-quality tutoring for children in math, science, and foreign languages. The courses are well-structured, engaging, and flexible, making learning convenient for both adults and kids. The tutors are patient, knowledgeable, and skilled at making complex subjects easy to understand. My child has improved greatly in math, and the foreign language lessons have been incredibly helpful. With expert instructors and a supportive learning environment, this school is a fantastic resource for both professional and academic growth. Highly recommended!"</p>
+            <div class="testimonial-footer">
+                <p class="reviewer-name">- Kathrine Mendez</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
 
-                <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="student-avatar"><i class="fas fa-certificate"></i></div>
-                        <div class="student-info">
-                            <h3>Learner</h3>
-                            <span class="student-badge"><i class="fas fa-globe"></i> International Business</span>
-                        </div>
-                    </div>
-                    <p>"I recently enrolled in International Business Course and received my certification, and it was an excellent experience. The course was well-structured, informative, and provided valuable insights relevant to my field. Earning this certificate has significantly strengthened my credentials, making me more competitive when applying for business roles. Highly recommend to anyone looking to advance their career!"</p>
-                    <div class="testimonial-footer">
-                        <p class="reviewer-name">- Gioia Pavan</p>
-                        <div class="star-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+        <div class="testimonial">
+            <div class="testimonial-header">
+                <div class="student-avatar"><i class="fas fa-certificate"></i></div>
+                <div class="student-info">
+                    <h3>Learner</h3>
+                    <span class="student-badge"><i class="fas fa-globe"></i> International Business</span>
                 </div>
+            </div>
+            <p>"I recently enrolled in International Business Course and received my certification, and it was an excellent experience. The course was well-structured, informative, and provided valuable insights relevant to my field. Earning this certificate has significantly strengthened my credentials, making me more competitive when applying for business roles. Highly recommend to anyone looking to advance their career!"</p>
+            <div class="testimonial-footer">
+                <p class="reviewer-name">- Gioia Pavan</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
 
     </article>
 </section>
@@ -290,88 +326,89 @@
         <p class="section-intro">Connect with us on your preferred platform</p>
         <div class="contact-buttons">
 
-    <!-- Facebook -->
-    <a href="https://www.facebook.com/nexgenix.business.school" target="_blank" title="Facebook">
-        <button class="contact-btn"><i class="fab fa-facebook-f"></i></button>
-    </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/nexgenix.business.school" target="_blank" title="Facebook">
+                <button class="contact-btn"><i class="fab fa-facebook-f"></i></button>
+            </a>
 
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/nexgenix.business.school" target="_blank" title="Instagram">
-        <button class="contact-btn"><i class="fab fa-instagram"></i></button>
-    </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/nexgenix.business.school" target="_blank" title="Instagram">
+                <button class="contact-btn"><i class="fab fa-instagram"></i></button>
+            </a>
 
-    <!-- Reddit -->
-    <a href="https://www.reddit.com/user/nexgenix" target="_blank" title="Reddit">
-        <button class="contact-btn"><i class="fab fa-reddit-alien"></i></button>
-    </a>
+            <!-- Reddit -->
+            <a href="https://www.reddit.com/user/nexgenix" target="_blank" title="Reddit">
+                <button class="contact-btn"><i class="fab fa-reddit-alien"></i></button>
+            </a>
 
-    <!-- Gmail -->
-    <a href="/cdn-cgi/l/email-protection#38565d405f5d5651405a4d4b51565d4b4b4b5b50575754785f55595154165b5755" title="Email">
-        <button class="contact-btn"><i class="fas fa-envelope"></i></button>
-    </a>
+            <!-- Gmail -->
+            <a href="/cdn-cgi/l/email-protection#38565d405f5d5651405a4d4b51565d4b4b4b5b50575754785f55595154165b5755" title="Email">
+                <button class="contact-btn"><i class="fas fa-envelope"></i></button>
+            </a>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/+639171063504" target="_blank" title="WhatsApp">
-        <button class="contact-btn"><i class="fab fa-whatsapp"></i></button>
-    </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/+639171063504" target="_blank" title="WhatsApp">
+                <button class="contact-btn"><i class="fab fa-whatsapp"></i></button>
+            </a>
 
-</div>
+        </div>
     </article>
 </section>
 
 <div data-tf-live="01JJ9DB004BWA8C98Q5JX89BA0"></div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://embed.typeform.com/next/embed.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://embed.typeform.com/next/embed.js"></script>
 
 <script src="script.js"></script>
 
 <!-- Footer Section -->
 <footer>
-    <i class="fas fa-graduation-cap"></i> &copy; 2025 <span>Nex Genix Business School</span> All rights reserved. 
+    <i class="fas fa-graduation-cap"></i> &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
     <span class="footer-tagline">Transforming Education Through Technology</span>
 </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; // Adjust speed of counting
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
 
-        const animateCounters = () => {
-            counters.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText.replace(/,/g, '');
-                    const increment = target / speed;
+    const animateCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText.replace(/,/g, '');
+                const increment = target / speed;
 
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + increment).toLocaleString();
-                        setTimeout(updateCount, 30);
-                    } else {
-                        counter.innerText = target.toLocaleString();
-                    }
-                };
-                updateCount();
-            });
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.disconnect();
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment).toLocaleString();
+                    setTimeout(updateCount, 30);
+                } else {
+                    counter.innerText = target.toLocaleString();
                 }
-            });
-        }, { threshold: 0.5 });
+            };
+            updateCount();
+        });
+    };
 
-        observer.observe(document.querySelector('.counter-container'));
-    </script>
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                observer.disconnect();
+            }
+        });
+    }, { threshold: 0.5 });
 
+    observer.observe(document.querySelector('.counter-container'));
+</script>
 
-    <!-- JavaScript for Toggle -->
-    <script>
-        function toggleMenu() {
-            document.querySelector('.nav-list').classList.toggle('active');
-            document.querySelector('.hamburger-menu').classList.toggle('open');
-        }
-    </script>
+<!-- JavaScript for Toggle -->
+<script>
+    function toggleMenu() {
+        document.querySelector('.nav-list').classList.toggle('active');
+        document.querySelector('.hamburger-menu').classList.toggle('open');
+    }
+</script>
 
 </body>
 </html>
