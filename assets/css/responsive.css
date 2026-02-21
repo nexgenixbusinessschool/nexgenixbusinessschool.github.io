@@ -9,19 +9,19 @@
     }
 
     body {
-        padding: 70px 15px 80px 15px;
+        padding: 90px 15px 80px 15px;
     }
 
     /* Show Hamburger Menu */
     .hamburger-menu {
-        display: flex; /* Ensure it appears */
+        display: flex;
         flex-direction: column;
         cursor: pointer;
         position: absolute;
         top: 50%;
         right: 15px;
         transform: translateY(-50%) scale(0.7);
-        z-index: 1000;
+        z-index: 1002;
     }
 
     .hamburger-menu .bar {
@@ -34,9 +34,9 @@
 
     /* HIDE NAVIGATION LINKS BY DEFAULT */
     .nav-list {
-        display: flex; /* Keep structure */
+        display: flex;
         flex-direction: column;
-        background: var(--charcoal);
+        background: linear-gradient(180deg, #0d1b2e, #080f1a);
         width: 100%;
         position: absolute;
         top: 50px;
@@ -47,7 +47,8 @@
         z-index: 999;
         opacity: 0;
         transform: translateY(-10px);
-        visibility: hidden; 
+        visibility: hidden;
+        border-bottom: 1px solid var(--border-subtle);
     }
 
     /* SHOW MENU WHEN ACTIVE */
@@ -88,15 +89,15 @@
     .auth-buttons button, .auth-buttons .dashboard-btn {
         padding: 3px 7px;
         font-size: 9px;
-        border-radius: 2.5px;
-        min-width: 65px; 
-        height: 20px;
-        line-height: 1; 
+        border-radius: 4px;
+        min-width: 65px;
+        height: 22px;
+        line-height: 1;
     }
 
-    /* LEARNING PATH STAYS HORIZONTAL */
+    /* LEARNING PATH */
     .learning-path-section {
-        padding: 35px 15px;
+        padding: 30px 15px;
     }
 
     .learning-path {
@@ -108,14 +109,14 @@
     }
 
     .step-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
+        width: 58px;
+        height: 58px;
+        font-size: 22px;
         margin-bottom: 8px;
     }
 
     .step-title {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .step-desc {
@@ -123,7 +124,7 @@
     }
 
     .path-connector {
-        width: 30px;
+        width: 28px;
     }
 
     /* BENEFITS GRID */
@@ -133,7 +134,7 @@
 
     /* FEATURE HIGHLIGHTS */
     .feature-highlights {
-        gap: 15px;
+        gap: 14px;
     }
 
     .highlight-item {
@@ -146,17 +147,17 @@
 
     .counter-section {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 40px 15px;
-        background-color: var(--pure-black);
+        padding: 36px 15px;
     }
 
     .counter-container {
         display: flex;
         justify-content: center;
         align-items: stretch;
-        gap: 15px;
+        gap: 14px;
         width: 100%;
         flex-wrap: wrap;
         max-width: 900px;
@@ -167,34 +168,31 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.1);
         padding: 20px 15px;
         border-radius: 10px;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(5px);
         text-align: center;
         flex: 1;
-        min-width: 140px; 
+        min-width: 140px;
         max-width: 180px;
     }
 
     .counter-icon {
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 10px;
     }
 
     .counter {
         font-family: "Silkscreen", sans-serif;
-        font-size: 32px;
+        font-size: 30px;
         color: var(--scholar-gold);
-        text-shadow: 0 0 8px var(--scholar-gold);
+        text-shadow: 0 0 8px var(--scholar-gold-glow);
         margin-bottom: 5px;
     }
 
     .label {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--paper-white);
-        opacity: 0.85;
+        opacity: 0.8;
         margin-top: 5px;
     }
 
@@ -205,12 +203,12 @@
 
     .virtual-classroom-badge {
         font-size: 10px;
-        padding: 7px 16px;
+        padding: 6px 15px;
         margin-bottom: 12px;
     }
 
     .subtitle-tagline {
-        font-size: 13px;
+        font-size: 12px;
         letter-spacing: 1.2px;
         margin-bottom: 12px;
     }
@@ -221,7 +219,7 @@
     }
 
     .feature-highlights {
-        gap: 20px;
+        gap: 18px;
         margin-top: 12px;
     }
 
@@ -230,7 +228,7 @@
     }
 
     .highlight-item i {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .highlight-item span {
@@ -246,15 +244,25 @@
     }
 
     footer {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .footer-tagline {
         display: none;
     }
+
+    /* ANNOUNCEMENT STRIP */
+    .announcement-strip {
+        top: 50px;
+    }
+
+    .announce-item {
+        font-size: 10.5px;
+        padding: 0 28px;
+    }
 }
 
-@media (min-width: 836px) { 
+@media (min-width: 836px) {
     .verification-container {
         display: flex;
         flex-direction: row;
@@ -270,7 +278,7 @@
 
     .certificate-img {
         width: 50%;
-        max-width: 450px; 
+        max-width: 450px;
         height: auto;
         margin-top: 0;
     }
@@ -279,48 +287,48 @@
 @media (max-width: 835px) {
     .verification-container {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .certificate-img {
-        max-width: 90%; 
+        max-width: 90%;
         height: auto;
         margin-top: 10px;
     }
 
     /* LEARNING PATH */
     .learning-path-section {
-        padding: 30px 15px;
+        padding: 26px 14px;
     }
 
     .section-title, .stats-title {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     /* BENEFITS GRID */
     .benefits-grid {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 14px;
     }
 }
 
 @media (max-width: 700px) {
     body {
-        padding: 70px 10px 80px 10px;
+        padding: 90px 10px 80px 10px;
     }
 
     #welcome-section {
         padding: 20px 10px;
         display: flex !important;
-        background: transparent;
+        background: linear-gradient(160deg, #0f1e30 0%, #182d44 50%, #0d1b2e 100%);
         margin-bottom: 20px;
     }
 
     .virtual-classroom-badge {
         font-size: 9px;
-        padding: 6px 14px;
+        padding: 5px 13px;
     }
 
     .banner {
@@ -329,290 +337,149 @@
     }
 
     .subtitle-tagline {
-        font-size: 12px;
+        font-size: 11px;
         letter-spacing: 1px;
         margin-top: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 14px;
     }
 
     .feature-highlights {
-        gap: 10px;
+        gap: 9px;
         max-width: 100%;
         margin-top: 10px;
     }
 
     .highlight-item {
-        padding: 6px 12px;
+        padding: 5px 11px;
         font-size: 10px;
     }
 
     .highlight-item i {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .highlight-item span {
         font-size: 10px;
     }
 
-   .responsive-slogan {
-       display: none;
-   }
+    .responsive-slogan {
+        display: none;
+    }
 
-   .responsive-banner {
-       display: none;
-   }
+    .responsive-banner {
+        display: none;
+    }
 
-   .responsive-description {
-       display: none;
-   }
+    .responsive-description {
+        display: none;
+    }
 
-   /* LEARNING PATH MOBILE */
-   .learning-path {
-       gap: 20px;
-   }
+    /* LEARNING PATH MOBILE */
+    .learning-path {
+        gap: 18px;
+    }
 
-   .step-icon {
-       width: 60px;
-       height: 60px;
-       font-size: 24px;
-   }
+    .step-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 22px;
+    }
 
-   .step-title {
-       font-size: 14px;
-   }
+    .step-title {
+        font-size: 13px;
+    }
 
-   .step-desc {
-       font-size: 11px;
-   }
+    .step-desc {
+        font-size: 10.5px;
+    }
 
-   /* TESTIMONIALS */
-   .testimonial-header {
-       flex-direction: column;
-       text-align: center;
-   }
+    /* TESTIMONIALS */
+    .testimonial-header {
+        flex-direction: column;
+        text-align: center;
+    }
 
-   .testimonial-footer {
-       flex-direction: column;
-       gap: 10px;
-   }
+    .testimonial-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* ANNOUNCEMENT STRIP */
+    .announce-item {
+        font-size: 10px;
+        padding: 0 22px;
+    }
 }
 
 @media (max-width: 500px) {
-   body {
-       padding: 70px 10px 85px 10px;
-   }
+    body {
+        padding: 90px 10px 85px 10px;
+    }
 
-   .logo-title {
+    .logo-title {
         display: none;
-   }
+    }
 
-  .short-title {
+    .short-title {
         display: block;
         color: var(--scholar-gold);
-        text-shadow: 0 0 5px var(--scholar-gold), 0 0 10px var(--scholar-gold);
+        text-shadow: 0 0 5px var(--scholar-gold-glow), 0 0 10px var(--scholar-gold-glow);
         font-size: 16px;
         font-weight: bold;
         text-decoration: none;
         font-family: 'Courier New', monospace;
-   }
+    }
 
-   /* VIRTUAL BADGE */
-   #welcome-section {
-       padding: 15px 10px;
-       background: transparent;
-   }
+    #welcome-section {
+        padding: 15px 10px;
+    }
 
-   .virtual-classroom-badge {
-       font-size: 8px;
-       padding: 5px 12px;
-   }
+    .virtual-classroom-badge {
+        font-size: 8px;
+        padding: 5px 11px;
+    }
 
-   .subtitle-tagline {
-       font-size: 11px;
-       letter-spacing: 0.8px;
-       margin-top: 10px;
-   }
+    .subtitle-tagline {
+        font-size: 10.5px;
+        letter-spacing: 0.8px;
+        margin-top: 10px;
+    }
 
-   .banner {
-       height: 220px;
-       margin: 8px auto 10px auto;
-   }
+    .banner {
+        height: 220px;
+        margin: 8px auto 10px auto;
+    }
 
-   /* FEATURE HIGHLIGHTS */
-   .feature-highlights {
-       flex-direction: row;
-       gap: 8px;
-       flex-wrap: wrap;
-       justify-content: center;
-       margin-top: 10px;
-   }
+    /* FEATURE HIGHLIGHTS */
+    .feature-highlights {
+        flex-direction: row;
+        gap: 7px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
 
-   .highlight-item {
-       padding: 5px 10px;
-       font-size: 9px;
-       min-width: auto;
-   }
+    .highlight-item {
+        padding: 5px 10px;
+        font-size: 9px;
+        min-width: auto;
+    }
 
-   .highlight-item i {
-       font-size: 10px;
-   }
-
-   .highlight-item span {
-       font-size: 9px;
-   }
-
-   /* COURSE CARDS */
-   .course-card {
-       max-width: 100%;
-       padding: 12px;
-   }
-
-   .course-badge {
-       top: -10px;
-       right: 15px;
-       padding: 5px 12px;
-       font-size: 9px;
-   }
-
-   .level {
-       font-size: 16px;
-       margin: 12px 0 8px 0;
-   }
-
-   .product ol {
-       font-size: 13px;
-       padding-left: 15px;
-   }
-
-   .product ol li {
-       font-size: 13px;
-       margin: 6px 0;
-   }
-
-   .btn {
-       padding: 10px 20px;
-       font-size: 12px;
-       margin-top: 12px;
-   }
-
-   /* TESTIMONIALS */
-   .testimonial {
-       padding: 18px;
-       margin: 15px auto;
-   }
-
-   .student-avatar {
-       width: 40px;
-       height: 40px;
-       font-size: 18px;
-   }
-
-   .student-info h3 {
-       font-size: 16px;
-   }
-
-   .student-badge {
-       font-size: 11px;
-       padding: 3px 10px;
-   }
-
-   .testimonial p {
-       font-size: 13px;
-   }
-
-   .reviewer-name {
-       font-size: 12px;
-   }
-
-   .star-rating i {
-       font-size: 14px;
-   }
-
-   /* COUNTER SECTION */
-   .counter-container {
-       gap: 12px;
-   }
-
-   .counter-item {
-       min-width: 120px;
-       max-width: 150px;
-       padding: 18px 12px;
-   }
-
-   .counter-icon {
-       font-size: 24px;
-       margin-bottom: 8px;
-   }
-
-   .counter {
-       font-size: 28px;
-       margin-bottom: 5px;
-   }
-
-   .label {
-       font-size: 11px;
-       margin-top: 5px;
-   }
-
-   /* CONTACT BUTTONS */
-   .contact-btn {
-       width: 40px;
-       height: 40px;
-       font-size: 16px;
-   }
-
-   /* SECTION TITLES */
-   .section-title, .stats-title {
-       font-size: 18px;
-   }
-
-   /* BENEFITS CARDS */
-   .benefit-card {
-       padding: 18px;
-   }
-
-   .benefit-card i {
-       font-size: 28px;
-       margin-bottom: 12px;
-   }
-
-   .benefit-card h4 {
-       font-size: 16px;
-   }
-
-   .benefit-card p {
-       font-size: 13px;
-   }
+    /* ANNOUNCEMENT STRIP */
+    .announce-item {
+        font-size: 9.5px;
+        padding: 0 18px;
+    }
 }
 
 @media (max-width: 380px) {
     body {
-        padding: 70px 8px 90px 8px;
-    }
-
-    #navbar .logo img {
-        height: 25px;
-        width: 25px;
-    }
-
-    /* WELCOME SECTION */
-    #welcome-section {
-        padding: 12px 8px;
+        padding: 90px 8px 85px 8px;
     }
 
     .virtual-classroom-badge {
-        font-size: 7px;
+        font-size: 8px;
         padding: 4px 10px;
-    }
-
-    .virtual-classroom-badge i {
-        font-size: 9px;
-    }
-
-    .subtitle-tagline {
-        font-size: 10px;
-        letter-spacing: 0.6px;
-        margin-bottom: 8px;
         margin-top: 8px;
     }
 
@@ -642,21 +509,21 @@
 
     /* Navbar Adjustments */
     #navbar {
-        padding: 8px 13px;
+        padding: 8px 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     .logo-title {
-        display none;
+        display: none;
     }
 
     .short-title {
         display: block;
         color: var(--scholar-gold);
-        text-shadow: 0 0 5px var(--scholar-gold), 0 0 10px var(--scholar-gold);
-        font-size: 16px;
+        text-shadow: 0 0 5px var(--scholar-gold-glow), 0 0 10px var(--scholar-gold-glow);
+        font-size: 15px;
         font-weight: bold;
         text-decoration: none;
         font-family: 'Courier New', monospace;
@@ -664,14 +531,14 @@
 
     /* Show Hamburger Menu */
     .hamburger-menu {
-        display: flex; /* Ensure it appears */
+        display: flex;
         flex-direction: column;
         cursor: pointer;
         position: absolute;
         top: 50%;
         right: 10px;
         transform: translateY(-50%) scale(0.7);
-        z-index: 1000;
+        z-index: 1002;
     }
 
     .hamburger-menu .bar {
@@ -696,10 +563,10 @@
     .auth-buttons button, .auth-buttons .dashboard-btn {
         padding: 3px 7px;
         font-size: 9px;
-        border-radius: 2.5px;
-        min-width: 65px; 
+        border-radius: 3px;
+        min-width: 60px;
         height: 20px;
-        line-height: 1; 
+        line-height: 1;
     }
 
     .wrapped-image {
@@ -707,45 +574,45 @@
     }
 
     .counter-container {
-        gap: 10px;
+        gap: 9px;
     }
 
     .counter-item {
-        min-width: 130px;
-        max-width: 160px;
-        padding: 20px 12px;
+        min-width: 125px;
+        max-width: 155px;
+        padding: 18px 10px;
     }
 
     .counter-icon {
-        font-size: 24px;
+        font-size: 22px;
         margin-bottom: 8px;
     }
 
-    .counter {  
-        font-size: 28px;
+    .counter {
+        font-size: 26px;
         margin-bottom: 5px;
     }
 
-    .label {    
-        font-size: 11px;
+    .label {
+        font-size: 10px;
         margin-top: 5px;
     }
 
-    .contact-btn {  
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
+    .contact-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
 
     /* LEARNING PATH VERY SMALL */
     .step-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
+        width: 48px;
+        height: 48px;
+        font-size: 19px;
     }
 
     .step-title {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .step-desc {
@@ -753,63 +620,59 @@
     }
 
     .path-connector {
-        height: 30px;
+        height: 28px;
     }
 
-    /* VIRTUAL BADGE */
     .virtual-classroom-badge {
-        font-size: 9px;
-        padding: 5px 12px;
+        font-size: 8px;
+        padding: 5px 10px;
     }
 
     .virtual-classroom-badge i {
-        font-size: 10px;
+        font-size: 9px;
     }
 
-    /* FEATURE HIGHLIGHTS */
     .highlight-item i {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .highlight-item span {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     /* TESTIMONIAL ADJUSTMENTS */
     .student-avatar {
         width: 40px;
         height: 40px;
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .testimonial h3 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .testimonial p {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .star-rating i {
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    /* SECTION TITLES */
     .section-title, .stats-title {
-        font-size: 16px;
+        font-size: 15px;
     }
 
-    /* BENEFITS */
     .benefit-card {
-        padding: 15px;
+        padding: 14px;
     }
 
     .benefit-card i {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .benefit-card h4 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .benefit-card p {
@@ -829,11 +692,11 @@
     }
 
     .page-header h1 {
-        font-size: 36px;
+        font-size: 34px;
     }
 
     .founder-container {
-        gap: 30px;
+        gap: 28px;
     }
 
     .founder-image-wrapper {
@@ -850,16 +713,16 @@
     }
 
     .founder-name {
-        font-size: 28px;
+        font-size: 27px;
     }
 
     .team-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
+        gap: 22px;
     }
 
     .cta-content h2 {
-        font-size: 28px;
+        font-size: 26px;
     }
 }
 
@@ -869,21 +732,21 @@
     }
 
     .header-icon {
-        font-size: 36px;
+        font-size: 34px;
     }
 
     .page-header h1 {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     .header-subtitle {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     .founder-container {
         flex-direction: column;
         align-items: center;
-        gap: 25px;
+        gap: 22px;
     }
 
     .founder-image-wrapper {
@@ -904,11 +767,11 @@
     }
 
     .founder-name {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .founder-title {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .founder-bio p {
@@ -921,46 +784,46 @@
 
     .team-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
+        gap: 18px;
     }
 
     .team-card {
-        padding: 25px;
+        padding: 22px;
     }
 
     .cta-section {
-        padding: 50px 15px;
+        padding: 46px 15px;
     }
 
     .cta-content h2 {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .cta-content p {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .cta-button-large {
-        padding: 12px 28px;
-        font-size: 15px;
+        padding: 11px 26px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 500px) {
     .page-header {
-        padding: 35px 10px 25px 10px;
+        padding: 34px 10px 24px 10px;
     }
 
     .header-icon {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     .page-header h1 {
-        font-size: 28px;
+        font-size: 26px;
     }
 
     .header-subtitle {
-        font-size: 13px;
+        font-size: 12.5px;
     }
 
     .founder-image-placeholder {
@@ -973,23 +836,23 @@
     }
 
     .founder-name {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .founder-title {
-        font-size: 15px;
-    }
-
-    .founder-location {
-        font-size: 13px;
-    }
-
-    .founder-bio p {
         font-size: 14px;
     }
 
+    .founder-location {
+        font-size: 12.5px;
+    }
+
+    .founder-bio p {
+        font-size: 13.5px;
+    }
+
     .highlight-box {
-        padding: 10px 15px;
+        padding: 9px 14px;
     }
 
     .highlight-box span {
@@ -998,55 +861,55 @@
 
     .team-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 18px;
     }
 
     .team-card {
-        padding: 20px;
+        padding: 18px;
     }
 
     .team-image-placeholder {
-        width: 100px;
-        height: 100px;
+        width: 95px;
+        height: 95px;
     }
 
     .team-image-placeholder i {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     .team-name {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .team-role {
-        font-size: 13px;
+        font-size: 12.5px;
     }
 
     .team-description {
-        font-size: 12px;
+        font-size: 11.5px;
     }
 
     .cta-section {
-        padding: 40px 10px;
+        padding: 38px 10px;
     }
 
     .cta-content h2 {
-        font-size: 22px;
+        font-size: 21px;
     }
 
     .cta-content p {
-        font-size: 14px;
+        font-size: 13.5px;
     }
 
     .cta-button-large {
-        padding: 12px 24px;
-        font-size: 14px;
+        padding: 11px 22px;
+        font-size: 13px;
     }
 }
 
 @media (max-width: 480px) {
     .page-header h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .founder-image-placeholder {
@@ -1059,10 +922,10 @@
     }
 
     .founder-name {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .cta-content h2 {
-        font-size: 20px;
+        font-size: 19px;
     }
 }
