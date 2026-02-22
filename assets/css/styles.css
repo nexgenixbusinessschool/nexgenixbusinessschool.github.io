@@ -39,7 +39,11 @@
     --grad-announce: linear-gradient(90deg, #0d1b2e, #162840, #1a3050, #162840, #0d1b2e);
 }
 
-html, body {
+html {
+    max-width: 100%;
+}
+
+body {
     max-width: 100%;
     overflow-x: hidden;
 }
@@ -99,7 +103,7 @@ p {
 .announcement-track {
     display: flex;
     white-space: nowrap;
-    animation: scroll-announce 25s linear infinite;
+    animation: scroll-announce 15s linear infinite;
     will-change: transform;
 }
 
