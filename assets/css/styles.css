@@ -51,7 +51,7 @@ body {
     font-size: 15px;
     color: var(--paper-white);
     text-align: center;
-    padding: 70px 20px 80px 20px;
+    padding: 70px 20px 70px 20px;
     background-color: var(--pure-black);
     margin: auto;
     line-height: 1.6;
@@ -975,14 +975,18 @@ p {
 
 /* =================== FOOTER =================== */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background: linear-gradient(90deg, #090f1a, #0d1b2e, #090f1a);
     color: var(--chalk-gray);
-    padding: 22px;
+    padding: 14px 22px;
     text-align: center;
-    margin-top: 50px;
     border-top: 1px solid var(--border-subtle);
     font-size: 12px;
-    border-radius: 10px 10px 0 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.6);
 }
 
 footer i {
@@ -997,10 +1001,27 @@ footer span {
 
 .footer-tagline {
     display: block;
-    margin-top: 8px;
+    margin-top: 5px;
     font-style: italic;
     color: var(--slate-medium);
     font-size: 11px;
+}
+
+/* =================== HOMEPAGE FIXED ANNOUNCEMENT STRIP =================== */
+/* Used only on index.html — sits fixed above the footer */
+.announcement-strip-fixed {
+    position: fixed;
+    bottom: 50px; /* sits directly above the fixed footer */
+    left: 0;
+    width: 100%;
+    height: 34px;
+    background: linear-gradient(90deg, #060e18, #0d1e32, #060e18);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    z-index: 999;
 }
 
 /* =================== ADDITIONAL PRODUCT SECTIONS =================== */
