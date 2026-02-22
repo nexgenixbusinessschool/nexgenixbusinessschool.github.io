@@ -218,9 +218,9 @@
         display: none;
     }
 
-    /* HOMEPAGE FIXED ANNOUNCEMENT STRIP */
+    /* HOMEPAGE FIXED ANNOUNCEMENT STRIP — mobile footer is ~34px tall */
     .announcement-strip-fixed {
-        bottom: 38px; /* above the shorter fixed footer on mobile */
+        bottom: 34px !important;
     }
 
     /* ANNOUNCEMENT STRIP */
