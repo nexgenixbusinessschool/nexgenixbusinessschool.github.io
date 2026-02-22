@@ -1,911 +1,827 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Books for Sale - Nex Genix Business School</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/responsive.css" />    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&family=Yellowtail&display=swap" rel="stylesheet">
-
-    <style>
-        /* Import color palette variables */
-        :root {
-            --university-navy: #1a2332;
-            --academic-burgundy: #8b2635;
-            --scholar-gold: #d4af37;
-            --campus-green: #2d5016;
-            --code-cyan: #00d4ff;
-            --terminal-green: #00ff88;
-            --syntax-purple: #a855f7;
-            --debug-orange: #ff6b35;
-            --paper-white: #fafafa;
-            --chalk-gray: #e5e7eb;
-            --slate-medium: #64748b;
-            --charcoal: #1e293b;
-            --pure-black: #0f172a;
-        }
-        
-        /* School-themed book store styling */
-        .announcement-banner {
-            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .announcement-banner i {
-            margin-right: 10px;
-        }
-
-        .bookstore-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            margin-bottom: 30px;
-        }
-
-        .bookstore-header h1 {
-            margin: 0 0 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            font-size: 2.5rem;
-        }
-
-        .bookstore-header h1 i {
-            color: #1a2332;
-        }
-
-        .bookstore-subtitle {
-            font-size: 1.2rem;
-            color: #e5e7eb;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .book-showcase {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .featured-book {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-
-        .book-hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            padding: 40px;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .book-hero {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 30px 20px;
-            }
-        }
-
-        .book-images {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .main-book-image {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .main-book-image:hover {
-            transform: scale(1.03);
-        }
-
-        .book-thumbnails {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .thumbnail {
-            width: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .thumbnail:hover,
-        .thumbnail.active {
-            border-color: #1a2332;
-            transform: scale(1.05);
-        }
-
-        .book-details {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .book-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fafafa;
-            margin: 0;
-            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .book-subtitle {
-            font-size: 1.3rem;
-            color: #e5e7eb;
-            margin: 0;
-        }
-
-        .author-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            color: #64748b;
-        }
-
-        .author-info i {
-            color: #1a2332;
-        }
-
-        .book-rating {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-
-        .stars {
-            color: #ffc107;
-            font-size: 1.2rem;
-        }
-
-        .rating-count {
-            color: #e5e7eb;
-        }
-
-        .book-price {
-            display: flex;
-            align-items: baseline;
-            gap: 15px;
-            margin: 10px 0;
-        }
-
-        .current-price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1a2332;
-        }
-
-        .original-price {
-            font-size: 1.5rem;
-            color: #999;
-            text-decoration: line-through;
-        }
-
-        .discount-badge {
-            background: #ff6b35;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        .book-badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .badge-bestseller {
-            background: linear-gradient(135deg, #8b2635 0%, #d4af37 100%);
-            color: white;
-        }
-
-        .badge-new {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        .badge-certified {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: #fafafa;
-        }
-
-        .book-description {
-            line-height: 1.8;
-            color: #64748b;
-            font-size: 1.05rem;
-        }
-
-        .purchase-section {
-            background: rgba(26, 35, 50, 0.5);
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .quantity-label {
-            font-weight: 600;
-            color: #fafafa;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            border: 2px solid #1a2332;
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            color: #1a2332;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .qty-btn:hover {
-            background: #1a2332;
-            color: white;
-        }
-
-        .qty-display {
-            width: 60px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fafafa;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            flex: 1;
-            min-width: 200px;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            flex: 1;
-            min-width: 200px;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            color: #1a2332;
-            border: 2px solid #1a2332;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: #1a2332;
-            color: white;
-        }
-
-        .book-features {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 40px;
-        }
-
-        .features-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #fafafa;
-            text-align: center;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            background: rgba(26, 35, 50, 0.5);
-            border-radius: 10px;
-            border-left: 4px solid #1a2332;
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: #1a2332;
-            margin-top: 5px;
-        }
-
-        .feature-content h3 {
-            margin: 0 0 8px 0;
-            color: #fafafa;
-        }
-
-        .feature-content p {
-            margin: 0;
-            color: #e5e7eb;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .synopsis-section {
-            background: #1a1a1a;
-            color: white;
-            padding: 50px 20px;
-            margin: 40px 0;
-        }
-
-        .synopsis-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .synopsis-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #4facfe;
-            font-family: 'Courier New', monospace;
-        }
-
-        .synopsis-content {
-            line-height: 1.9;
-            font-size: 1.05rem;
-            color: #e0e0e0;
-        }
-
-        .synopsis-content p {
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .testimonial-section {
-            background: rgba(26, 35, 50, 0.5);
-            padding: 40px 20px;
-            border-radius: 10px;
-            margin: 40px 0;
-        }
-
-        .testimonial-box {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 5px solid #1a2332;
-            font-style: italic;
-            color: #64748b;
-            line-height: 1.8;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-        }
-
-        .testimonial-author {
-            margin-top: 20px;
-            font-style: normal;
-            font-weight: 700;
-            color: #fafafa;
-            text-align: right;
-        }
-
-        .book-specs {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 40px;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .spec-item {
-            text-align: center;
-            padding: 20px;
-            background: rgba(26, 35, 50, 0.5);
-            border-radius: 10px;
-        }
-
-        .spec-icon {
-            font-size: 2.5rem;
-            color: #1a2332;
-            margin-bottom: 10px;
-        }
-
-        .spec-label {
-            font-size: 0.9rem;
-            color: #e5e7eb;
-            margin-bottom: 5px;
-        }
-
-        .spec-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fafafa;
-        }
-
-        .guarantee-section {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            padding: 40px;
-            border-radius: 15px;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .guarantee-section h3 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #fafafa;
-        }
-
-        .guarantee-section p {
-            font-size: 1.1rem;
-            color: #fafafa;
-            margin: 0;
-        }
-
-        .related-products {
-            margin-top: 60px;
-        }
-
-        .related-title {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 30px;
-            color: #fafafa;
-        }
-
-        .copyright-section {
-            text-align: center;
-            padding: 30px 20px;
-            background: #1a1a1a;
-            color: #999;
-            margin-top: 40px;
-        }
-
-        .nex-genix-logo {
-            max-width: 200px;
-            margin-bottom: 15px;
-        }
-    </style>
-  </head>
-  <body>
-<!-- Navigation Bar -->
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookstore — Nex Genix Business School</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,400&family=Silkscreen:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet">
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+  /* PAGE-SPECIFIC — all variables inherited from styles.css */
+
+  /* Announcement */
+  .page-announce {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--scholar-gold);
+    border-radius: 10px;
+    padding: 13px 20px;
+    color: var(--scholar-gold-light);
+    font-size: 12.5px;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.4px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+    animation: fadeSlideDown 0.5s ease-out;
+  }
+  .page-announce strong { color: var(--paper-white); }
+  @keyframes fadeSlideDown {
+    from { opacity:0; transform:translateY(-10px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* Stat grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 16px;
+    margin: 0 0 36px;
+  }
+  .stat-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 22px 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .stat-card:hover { border-color:var(--scholar-gold); transform:translateY(-4px); box-shadow:0 8px 24px var(--scholar-gold-glow); }
+  .stat-number { font-family:"Silkscreen",sans-serif; font-size:26px; color:var(--scholar-gold); text-shadow:0 0 10px var(--scholar-gold-glow); margin-bottom:7px; }
+  .stat-label { font-size:10.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-family:"Orbitron",sans-serif; }
+
+  /* Page Hero */
+  .page-hero {
+    background: linear-gradient(160deg,#0d1b2e 0%,#1e2a14 40%,#2a1a08 75%,#0d1b2e 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 36px 28px 30px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .page-hero::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 25% 35%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 65%, rgba(79,195,216,0.04) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .page-hero h1 {
+    font-family:"Orbitron",sans-serif;
+    font-size:clamp(18px,5vw,28px);
+    color:var(--scholar-gold);
+    text-shadow:0 0 14px var(--scholar-gold-glow);
+    margin:0 0 18px;
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    position:relative;
+  }
+  .page-hero h1 i { color:var(--code-cyan); }
+  .page-hero-desc {
+    font-size:clamp(12.5px,2.8vw,14.5px);
+    color:var(--chalk-gray); line-height:1.8;
+    max-width:700px; margin:0 auto; text-align:justify; position:relative;
+  }
+
+  /* Book Showcase */
+  .book-showcase {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 30px 28px;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .book-showcase-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  /* Book Images */
+  .book-images { display:flex; flex-direction:column; gap:14px; }
+  .main-book-image {
+    width:100%; border-radius:10px;
+    border:1px solid var(--border-gold);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+    display:block;
+  }
+  .main-book-image:hover { transform:scale(1.02); }
+  .book-thumbnails { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .thumb-img {
+    width:100%; border-radius:7px; cursor:pointer;
+    border:2px solid transparent;
+    transition:all 0.3s ease;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  .thumb-img:hover, .thumb-img.active { border-color:var(--scholar-gold); box-shadow:0 0 10px var(--scholar-gold-glow); }
+
+  /* Book Details */
+  .book-details { display:flex; flex-direction:column; gap:16px; text-align:left; }
+  .book-title {
+    font-family:"Orbitron",sans-serif;
+    font-size:clamp(16px,4vw,24px);
+    color:var(--scholar-gold);
+    text-shadow:0 0 10px var(--scholar-gold-glow);
+    margin:0; line-height:1.3;
+  }
+  .book-subtitle { font-size:14px; color:var(--chalk-gray); font-style:italic; margin:0; }
+  .author-line { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-muted); }
+  .author-line i { color:var(--scholar-gold); }
+
+  /* Stars */
+  .book-rating { display:flex; align-items:center; gap:10px; }
+  .stars { color:var(--scholar-gold); font-size:16px; letter-spacing:2px; text-shadow:0 0 6px var(--scholar-gold-glow); }
+  .rating-count { font-size:12px; color:var(--slate-medium); }
+
+  /* Badges row */
+  .book-badges { display:flex; flex-wrap:wrap; gap:8px; }
+  .bk-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:4px 13px; border-radius:18px;
+    font-family:"Orbitron",sans-serif;
+    font-size:9.5px; font-weight:700; letter-spacing:0.5px;
+  }
+  .bk-bestseller { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; }
+  .bk-new        { background:linear-gradient(135deg,#0d2a40,#4fc3d8); color:#051520; }
+  .bk-certified  { background:linear-gradient(135deg,#1a4535,#3ecf7a); color:#071510; }
+
+  .book-description { font-size:13px; color:var(--chalk-gray); line-height:1.75; text-align:justify; }
+
+  /* Price */
+  .book-price { display:flex; align-items:baseline; gap:14px; }
+  .current-price { font-family:"Silkscreen",sans-serif; font-size:2rem; color:var(--scholar-gold); text-shadow:0 0 10px var(--scholar-gold-glow); }
+  .original-price { font-size:1.1rem; color:var(--slate-medium); text-decoration:line-through; }
+  .discount-pill { background:var(--debug-orange); color:white; padding:4px 12px; border-radius:16px; font-size:11px; font-weight:700; font-family:"Orbitron",sans-serif; }
+
+  /* Purchase box */
+  .purchase-box {
+    background: rgba(79,195,216,0.04);
+    border:1px solid var(--border-subtle);
+    border-radius:10px; padding:20px;
+  }
+  .quantity-row { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .qty-label { font-family:"Orbitron",sans-serif; font-size:11px; color:var(--chalk-gray); letter-spacing:0.5px; }
+  .qty-controls { display:flex; align-items:center; gap:10px; }
+  .qty-btn {
+    width:38px; height:38px; border-radius:7px;
+    background:rgba(79,195,216,0.08); border:1.5px solid var(--code-cyan);
+    color:var(--code-cyan); font-size:1.2rem; cursor:pointer;
+    transition:all 0.25s ease; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .qty-btn:hover { background:var(--code-cyan); color:var(--pure-black); }
+  .qty-display { min-width:40px; text-align:center; font-family:"Silkscreen",sans-serif; font-size:1.1rem; color:var(--paper-white); }
+  .action-row { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn-order {
+    flex:1; min-width:140px; padding:12px 20px;
+    background:linear-gradient(135deg,#1a4535,#3ecf7a);
+    color:#071510; border:none; border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:12px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease;
+    box-shadow:0 0 14px rgba(62,207,122,0.25);
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn-order:hover { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; transform:translateY(-2px); box-shadow:0 6px 22px var(--scholar-gold-glow); }
+  .btn-order-sec {
+    flex:1; min-width:140px; padding:12px 20px;
+    background:rgba(79,195,216,0.06);
+    color:var(--code-cyan); border:1.5px solid var(--code-cyan); border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:12px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .btn-order-sec:hover { background:var(--code-cyan); color:var(--pure-black); transform:translateY(-2px); box-shadow:0 6px 20px var(--code-cyan-glow); }
+
+  /* Book Features */
+  .book-features {
+    background: linear-gradient(145deg,#1a1208 0%,#0d1b2e 100%);
+    border:1px solid var(--border-gold);
+    border-radius:14px; padding:36px 26px; margin:36px 0;
+  }
+  .features-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:16px; margin-top:22px;
+  }
+  .feature-card {
+    background:rgba(255,255,255,0.02);
+    border:1px solid var(--border-subtle);
+    border-radius:12px; padding:22px 16px;
+    text-align:center; transition:all 0.3s ease;
+  }
+  .feature-card:hover { border-color:var(--scholar-gold); background:rgba(201,168,76,0.04); transform:translateY(-4px); box-shadow:0 8px 24px var(--scholar-gold-glow); }
+  .feature-card i { font-size:28px; color:var(--code-cyan); margin-bottom:12px; display:block; opacity:0.9; }
+  .feature-card h3 { font-family:"Orbitron",sans-serif; font-size:11.5px; color:var(--scholar-gold); margin:0 0 8px; }
+  .feature-card p { font-size:12px; color:var(--text-muted); line-height:1.6; text-align:center; margin:0; }
+
+  /* Synopsis */
+  .synopsis-section {
+    background: var(--grad-card);
+    border:1px solid var(--border-subtle);
+    border-radius:14px; padding:40px 30px; margin:36px 0;
+  }
+  .synopsis-title {
+    font-family:"Orbitron",sans-serif; font-size:20px;
+    color:var(--code-cyan); text-shadow:0 0 10px var(--code-cyan-glow);
+    text-align:center; margin-bottom:24px; letter-spacing:2px;
+  }
+  .synopsis-content { max-width:800px; margin:0 auto; }
+  .synopsis-content p { font-size:13.5px; color:var(--chalk-gray); line-height:1.85; text-align:justify; margin:0 0 18px; }
+
+  /* Testimonial */
+  .testimonial-book {
+    background: var(--grad-card);
+    border:1px solid var(--border-gold);
+    border-left:3px solid var(--scholar-gold);
+    border-radius:14px; padding:28px; margin:36px auto;
+    max-width:800px; transition:all 0.3s ease;
+  }
+  .testimonial-book:hover { border-left-color:var(--code-cyan); transform:translateX(4px); box-shadow:0 5px 22px rgba(0,0,0,0.3); }
+  .testimonial-book p { font-size:13.5px; color:var(--chalk-gray); line-height:1.8; font-style:italic; margin:0 0 14px; text-align:justify; }
+  .t-author { font-style:normal; font-family:"Orbitron",sans-serif; font-size:11px; color:var(--scholar-gold); text-align:right; }
+
+  /* Book Specs */
+  .book-specs {
+    background: linear-gradient(145deg,#0f1e30,#162840);
+    border:1px solid var(--border-subtle);
+    border-radius:14px; padding:36px 26px; margin:36px 0;
+  }
+  .specs-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:16px; margin-top:22px;
+  }
+  .spec-card {
+    background:rgba(79,195,216,0.04);
+    border:1px solid var(--border-subtle);
+    border-radius:10px; padding:20px 14px; text-align:center;
+    transition:all 0.3s ease;
+  }
+  .spec-card:hover { border-color:var(--code-cyan); transform:translateY(-3px); }
+  .spec-card i { font-size:24px; color:var(--code-cyan); margin-bottom:10px; display:block; }
+  .spec-label { font-family:"Orbitron",sans-serif; font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:5px; }
+  .spec-value { font-size:13px; font-weight:700; color:var(--paper-white); }
+
+  /* Guarantee */
+  .guarantee-box {
+    background:linear-gradient(135deg,#0e3b1e,#1a4535,#3ecf7a);
+    border-radius:14px; padding:36px 26px; text-align:center; margin:36px 0;
+    box-shadow:0 0 28px rgba(62,207,122,0.2);
+  }
+  .guarantee-box h3 { font-family:"Orbitron",sans-serif; font-size:18px; color:var(--pure-black); margin:0 0 10px; }
+  .guarantee-box p { font-size:14px; color:#071510; margin:0; }
+
+  /* Copyright */
+  .copyright-strip {
+    text-align:center; padding:20px; background:rgba(0,0,0,0.3);
+    border-top:1px solid var(--border-subtle);
+    color:var(--slate-medium); font-size:11.5px; margin:30px -20px 0;
+    border-radius:0 0 14px 14px;
+  }
+
+  /* ============================================================
+     ORDER MODAL
+     ============================================================ */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(6,10,22,0.82);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-box {
+    background: linear-gradient(145deg,#1c2d42,#131f2e);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 34px 30px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 30px var(--scholar-gold-glow);
+    position: relative;
+    animation: modalIn 0.35s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @keyframes modalIn {
+    from { opacity:0; transform:translateY(28px) scale(0.97); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+  }
+  .modal-close {
+    position:absolute; top:14px; right:16px;
+    background:none; border:none;
+    font-size:1.4rem; color:var(--slate-medium);
+    cursor:pointer; line-height:1; transition:color 0.2s;
+  }
+  .modal-close:hover { color:var(--paper-white); }
+
+  .modal-title {
+    font-family:"Orbitron",sans-serif;
+    font-size:18px; color:var(--scholar-gold);
+    text-shadow:0 0 8px var(--scholar-gold-glow);
+    margin:0 0 4px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .modal-title i { color:var(--code-cyan); }
+  .modal-subtitle { font-size:12px; color:var(--text-muted); margin-bottom:22px; }
+
+  .order-summary {
+    background: rgba(201,168,76,0.06);
+    border:1px solid var(--border-gold);
+    border-radius:10px; padding:14px 18px;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:22px;
+  }
+  .order-summary-info { font-size:13px; color:var(--chalk-gray); }
+  .order-summary-info strong { color:var(--paper-white); display:block; margin-bottom:3px; }
+  .order-total { font-family:"Silkscreen",sans-serif; font-size:1.4rem; color:var(--scholar-gold); text-shadow:0 0 8px var(--scholar-gold-glow); }
+
+  .form-group { margin-bottom:14px; }
+  .form-group label {
+    display:block; font-family:"Orbitron",sans-serif;
+    font-size:10px; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:0.6px;
+    margin-bottom:6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width:100%; padding:10px 14px;
+    background: rgba(79,195,216,0.04);
+    border:1.5px solid var(--border-subtle);
+    border-radius:8px; color:var(--paper-white);
+    font-size:13px; font-family:inherit;
+    transition:border-color 0.2s;
+    box-sizing:border-box;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color:var(--slate-medium); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { outline:none; border-color:var(--scholar-gold); background:rgba(201,168,76,0.04); }
+  .form-group select { cursor:pointer; }
+  .form-group select option { background:#131f2e; color:var(--paper-white); }
+  .form-group textarea { resize:vertical; min-height:72px; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+  .submit-order-btn {
+    width:100%; padding:13px;
+    background:linear-gradient(135deg,#1a4535,#3ecf7a);
+    color:#071510; border:none; border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:13px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease;
+    box-shadow:0 0 16px rgba(62,207,122,0.25);
+    margin-top:8px;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .submit-order-btn:hover:not(:disabled) { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; box-shadow:0 6px 22px var(--scholar-gold-glow); }
+  .submit-order-btn:disabled { opacity:0.55; cursor:not-allowed; }
+
+  .form-msg {
+    padding:12px 16px; border-radius:8px;
+    font-size:12.5px; margin-top:12px;
+    display:none; align-items:center; gap:10px;
+    font-weight:600; font-family:"Orbitron",sans-serif;
+    letter-spacing:0.3px;
+  }
+  .form-msg.success { background:rgba(62,207,122,0.12); border:1px solid var(--terminal-green); color:var(--terminal-green); display:flex; }
+  .form-msg.error   { background:rgba(232,133,90,0.12); border:1px solid var(--debug-orange); color:var(--debug-orange); display:flex; }
+
+  /* Responsive */
+  @media (max-width:768px) {
+    .stat-grid { grid-template-columns:repeat(2,1fr); }
+    .book-showcase-inner { grid-template-columns:1fr; gap:24px; }
+    .features-grid { grid-template-columns:repeat(2,1fr); }
+    .specs-grid { grid-template-columns:repeat(2,1fr); }
+    .page-hero { padding:28px 18px 24px; }
+    .book-showcase { padding:22px 18px; }
+    .modal-box { padding:26px 18px; }
+  }
+  @media (max-width:500px) {
+    .stat-grid { gap:10px; }
+    .stat-number { font-size:22px; }
+    .features-grid, .specs-grid { grid-template-columns:1fr; }
+    .action-row { flex-direction:column; }
+    .form-row { grid-template-columns:1fr; }
+    .page-announce { font-size:11px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
 <nav id="navbar">
-    <div class="logo">
-        <img src="assets/images/logo-bs.png" alt="Logo">
-        <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
-        <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
-    </div>
-
-        <!-- Hamburger Menu Icon -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-
-    <ul class="nav-list">
-        <li><a href="https://nexgenixbusinessschool.github.io">Home</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#about_us">About Us</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#products_and_services">Products & Services</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#reviews">Reviews</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#careers">Careers</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#contact">Contact</a></li>
-    </ul>
-<div class="auth-buttons" id="auth-buttons">
-    <button onclick="handleLogout()" class="logout-btn">Logout</button>
-    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn">Dashboard</a>
-</div>
-
+  <div class="logo">
+    <img src="assets/images/logo-bs.png" alt="NGBS Logo" class="logo">
+    <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
+    <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+  </div>
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+  <ul class="nav-list">
+    <li><a href="https://nexgenixbusinessschool.github.io"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#about_us"><i class="fas fa-info-circle"></i> About Us</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><i class="fas fa-gift"></i> Free Courses</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/premium-courses"><i class="fas fa-crown"></i> Premium Courses</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </div>
 </nav>
 
-<!-- ANNOUNCEMENT BANNER -->
-<div class="announcement-banner">
-    <i class="fas fa-book-open"></i>
-    <strong>New Release!</strong> "The Business Minded" now available - Limited time offer: 20% off!
+<!-- ANNOUNCEMENT -->
+<div class="page-announce">
+  <i class="fas fa-book-open"></i>
+  <span><strong>New Release!</strong> "The Business Minded" now available — Limited time offer: 20% off for a limited period!</span>
 </div>
 
-<!-- BOOKSTORE HEADER -->
-<div class="bookstore-header">
-    <h1><i class="fas fa-book-reader"></i> NGBS Bookstore</h1>
-    <p class="bookstore-subtitle">Essential Reading for Business Excellence - Curated by Industry Experts</p>
+<!-- STATS -->
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-number">5.0</div><div class="stat-label">Rating</div></div>
+  <div class="stat-card"><div class="stat-number">124+</div><div class="stat-label">Reviews</div></div>
+  <div class="stat-card"><div class="stat-number">280</div><div class="stat-label">Pages</div></div>
+  <div class="stat-card"><div class="stat-number">2025</div><div class="stat-label">Published</div></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <h1><i class="fas fa-book-reader"></i> NGBS Bookstore</h1>
+  <p class="page-hero-desc">Essential reading for business excellence, curated by industry experts. Our books are designed to complement your learning journey — practical, actionable, and written by seasoned professionals with real-world experience.</p>
 </div>
 
 <!-- BOOK SHOWCASE -->
 <div class="book-showcase">
-    <div class="featured-book">
-        <div class="book-hero">
-            <!-- Book Images -->
-            <div class="book-images">
-                <img src="assets/images/book1.png" alt="The Business Minded - Main Cover" class="main-book-image" id="mainImage">
-                <div class="book-thumbnails">
-                    <img src="assets/images/book1.png" alt="Book Cover 1" class="thumbnail active" onclick="changeImage(this, 'assets/images/book1.png')">
-                    <img src="assets/images/book2.png" alt="Book Cover 2" class="thumbnail" onclick="changeImage(this, 'assets/images/book2.png')">
-                </div>
-            </div>
+  <h2 class="section-title" style="margin-top:0;"><i class="fas fa-star"></i> Featured Book</h2>
 
-            <!-- Book Details -->
-            <div class="book-details">
-                <h1 class="book-title">The Business Minded</h1>
-                <p class="book-subtitle">From Branding to Sales Mastery</p>
+  <div class="book-showcase-inner">
+    <!-- Images -->
+    <div class="book-images">
+      <img src="assets/images/book1.png" alt="The Business Minded — Cover" class="main-book-image" id="mainImage">
+      <div class="book-thumbnails">
+        <img src="assets/images/book1.png" alt="Front Cover" class="thumb-img active" onclick="changeImage(this,'assets/images/book1.png')">
+        <img src="assets/images/book2.png" alt="Back Cover"  class="thumb-img"        onclick="changeImage(this,'assets/images/book2.png')">
+      </div>
+    </div>
 
-                <div class="author-info">
-                    <i class="fas fa-user-edit"></i>
-                    <span><strong>Author:</strong> Arriane Doris Nuevo</span>
-                </div>
+    <!-- Details -->
+    <div class="book-details">
+      <h2 class="book-title">The Business Minded</h2>
+      <p class="book-subtitle">From Branding to Sales Mastery</p>
 
-                <div class="book-rating">
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="rating-count">5.0 (124 reviews)</span>
-                </div>
+      <div class="author-line">
+        <i class="fas fa-user-edit"></i>
+        <span><strong style="color:var(--paper-white);">Author:</strong> Arriane Doris Nuevo</span>
+      </div>
 
-                <div class="book-badges">
-                    <span class="badge badge-bestseller"><i class="fas fa-trophy"></i> Bestseller</span>
-                    <span class="badge badge-new"><i class="fas fa-sparkles"></i> New Release</span>
-                    <span class="badge badge-certified"><i class="fas fa-check-circle"></i> NGBS Certified</span>
-                </div>
+      <div class="book-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">5.0 (124 reviews)</span>
+      </div>
 
-                <div class="book-description">
-                    <p>A comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
-                </div>
+      <div class="book-badges">
+        <span class="bk-badge bk-bestseller"><i class="fas fa-trophy"></i> Bestseller</span>
+        <span class="bk-badge bk-new"><i class="fas fa-bolt"></i> New Release</span>
+        <span class="bk-badge bk-certified"><i class="fas fa-check-circle"></i> NGBS Certified</span>
+      </div>
 
-                <div class="book-price">
-                    <span class="current-price">$29.99</span>
-                    <span class="original-price">$37.49</span>
-                    <span class="discount-badge">20% OFF</span>
-                </div>
+      <p class="book-description">A comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
 
-                <div class="purchase-section">
-                    <div class="quantity-selector">
-                        <span class="quantity-label">Quantity:</span>
-                        <div class="quantity-controls">
-                            <button class="qty-btn" onclick="decrementQty()">−</button>
-                            <div class="qty-display" id="qtyDisplay">1</div>
-                            <button class="qty-btn" onclick="incrementQty()">+</button>
-                        </div>
-                    </div>
+      <div class="book-price">
+        <span class="current-price">$29.99</span>
+        <span class="original-price">$37.49</span>
+        <span class="discount-pill">20% OFF</span>
+      </div>
 
-                    <div class="action-buttons">
-                        <button class="btn-primary" onclick="addToCart()">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                        <button class="btn-secondary" onclick="buyNow()">
-                            <i class="fas fa-bolt"></i> Buy Now
-                        </button>
-                    </div>
-                </div>
-            </div>
+      <div class="purchase-box">
+        <div class="quantity-row">
+          <span class="qty-label"><i class="fas fa-sort-amount-up"></i> Quantity</span>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="decrementQty()">−</button>
+            <div class="qty-display" id="qtyDisplay">1</div>
+            <button class="qty-btn" onclick="incrementQty()">+</button>
+          </div>
         </div>
-    </div>
-
-    <!-- Book Features -->
-    <div class="book-features">
-        <h2 class="features-title"><i class="fas fa-star"></i> What's Inside</h2>
-        <div class="features-grid">
-            <div class="feature-item">
-                <i class="fas fa-palette feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Branding Excellence</h3>
-                    <p>Learn about brand identity, logo design, color psychology, and creating memorable brand stories</p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <i class="fas fa-lightbulb feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Product Development</h3>
-                    <p>Master the product life cycle, market research, prototyping, and pricing strategies</p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <i class="fas fa-handshake feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Sales Mastery</h3>
-                    <p>Explore proven sales techniques, negotiation strategies, and building customer relationships</p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <i class="fas fa-book-open feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Practical Examples</h3>
-                    <p>Real-world case studies and actionable insights from successful businesses</p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <i class="fas fa-chalkboard-teacher feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Clear & Accessible</h3>
-                    <p>Written in an easy-to-understand style perfect for entrepreneurs and students</p>
-                </div>
-            </div>
-
-            <div class="feature-item">
-                <i class="fas fa-certificate feature-icon"></i>
-                <div class="feature-content">
-                    <h3>Expert Author</h3>
-                    <p>Written by industry professional with years of business experience</p>
-                </div>
-            </div>
+        <div class="action-row">
+          <button class="btn-order" onclick="openModal('cart')">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+          <button class="btn-order-sec" onclick="openModal('buy')">
+            <i class="fas fa-bolt"></i> Buy Now
+          </button>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Synopsis Section -->
-    <div class="synopsis-section">
-        <div class="synopsis-container">
-            <h2 class="synopsis-title">SYNOPSIS</h2>
-            <div class="synopsis-content">
-                <p>"The Business Minded: From Branding to Sales Mastery" offers a comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
-
-                <p>The first section of the book delves into the importance of branding and how to create a memorable brand identity. Readers will learn about the elements of successful branding, including logo design, color psychology, and brand messaging. Through practical tips and case studies, they will discover how to craft a compelling brand story that resonates with their target audience.</p>
-
-                <p>Moving forward, the book explores the intricacies of product development and management. From ideation to execution, readers will gain a deep understanding of the product life cycle, market research, prototyping, and pricing strategies. With actionable advice and real-world examples, they will learn how to develop products that meet consumer needs and stand out in a crowded marketplace.</p>
-
-                <p>In the final section, "Business Essentials" dives into the art of selling and persuasion. Readers will explore proven sales techniques, negotiation strategies, and effective communication skills essential for closing deals and building long-term customer relationships. Whether selling products or services, this section equips readers with the tools and mindset needed to succeed in sales.</p>
-
-                <p>Written in a clear and accessible style, "The Business Minded: From Branding to Sales Mastery" is an indispensable resource for entrepreneurs, small business owners, marketers, and anyone looking to thrive in the competitive business landscape. Packed with practical advice, actionable insights, and real-world examples, this book empowers readers to build a strong brand, develop successful products, and master the art of selling.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Testimonial -->
-    <div class="testimonial-section">
-        <div class="testimonial-box">
-            <p>"Been looking for the best business guide in the market for years now and I know that I got all that I need for my business right now. This book is a practical guide that seamlessly navigates the complex world of entrepreneurship. The author's straightforward approach and clear language make it easy for readers to grasp key concepts, from building a solid brand to mastering the art of sales. The real-life examples and actionable tips provide a valuable toolkit for anyone looking to succeed in business. Whether you're a budding entrepreneur or seasoned professional, this book offers a refreshingly accessible roadmap to elevate your business acumen. I love what I have in hand right now. Best business book so far!!!"</p>
-            <p class="testimonial-author">— Irene C., Sound Native, CEO</p>
-        </div>
-    </div>
-
-    <!-- Book Specifications -->
-    <div class="book-specs">
-        <h2 class="features-title"><i class="fas fa-info-circle"></i> Book Details</h2>
-        <div class="specs-grid">
-            <div class="spec-item">
-                <i class="fas fa-book spec-icon"></i>
-                <div class="spec-label">Format</div>
-                <div class="spec-value">Paperback</div>
-            </div>
-
-            <div class="spec-item">
-                <i class="fas fa-file-alt spec-icon"></i>
-                <div class="spec-label">Pages</div>
-                <div class="spec-value">280 pages</div>
-            </div>
-
-            <div class="spec-item">
-                <i class="fas fa-language spec-icon"></i>
-                <div class="spec-label">Language</div>
-                <div class="spec-value">English</div>
-            </div>
-
-            <div class="spec-item">
-                <i class="fas fa-calendar-alt spec-icon"></i>
-                <div class="spec-label">Published</div>
-                <div class="spec-value">2025</div>
-            </div>
-
-            <div class="spec-item">
-                <i class="fas fa-tag spec-icon"></i>
-                <div class="spec-label">ISBN</div>
-                <div class="spec-value">978-1234567890</div>
-            </div>
-
-            <div class="spec-item">
-                <i class="fas fa-ruler spec-icon"></i>
-                <div class="spec-label">Dimensions</div>
-                <div class="spec-value">6" x 9"</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Guarantee Section -->
-    <div class="guarantee-section">
-        <h3><i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee</h3>
-        <p>Not satisfied with your purchase? Return it within 30 days for a full refund. No questions asked!</p>
-    </div>
+  <div class="copyright-strip">
+    Copyright &copy; 2025 by Arriane Doris Nuevo &nbsp;|&nbsp; nex-genix-business-school.company.site
+  </div>
 </div>
 
-<!-- Copyright Section -->
-<div class="copyright-section">
-    <p style="margin-bottom: 10px; font-size: 0.9rem;">Copyright © 2025 by Arriane Doris Nuevo</p>
-    <p style="margin: 0; font-size: 0.9rem;">nex-genix-business-school.company.site</p>
+<!-- BOOK FEATURES -->
+<section class="book-features">
+  <h2 class="section-title" style="margin-top:0;"><i class="fas fa-star"></i> What's Inside</h2>
+  <p class="section-intro">Three powerful sections to transform your business mindset</p>
+  <div class="features-grid">
+    <div class="feature-card"><i class="fas fa-palette"></i><h3>Branding Excellence</h3><p>Learn brand identity, logo design, color psychology, and how to craft compelling brand stories</p></div>
+    <div class="feature-card"><i class="fas fa-lightbulb"></i><h3>Product Development</h3><p>Master the product life cycle, market research, prototyping, and pricing strategies</p></div>
+    <div class="feature-card"><i class="fas fa-handshake"></i><h3>Sales Mastery</h3><p>Proven sales techniques, negotiation strategies, and building lasting customer relationships</p></div>
+    <div class="feature-card"><i class="fas fa-book-open"></i><h3>Practical Examples</h3><p>Real-world case studies and actionable insights from successful businesses</p></div>
+    <div class="feature-card"><i class="fas fa-chalkboard-teacher"></i><h3>Clear &amp; Accessible</h3><p>Written in an easy-to-understand style perfect for entrepreneurs and students</p></div>
+    <div class="feature-card"><i class="fas fa-certificate"></i><h3>Expert Author</h3><p>Written by an industry professional with years of business experience</p></div>
+  </div>
+</section>
+
+<!-- SYNOPSIS -->
+<div class="synopsis-section">
+  <h2 class="synopsis-title"><i class="fas fa-file-alt"></i> SYNOPSIS</h2>
+  <div class="synopsis-content">
+    <p>"The Business Minded: From Branding to Sales Mastery" offers a comprehensive guide to navigating the intricacies of the business world, from establishing a strong brand identity to mastering the art of selling. This book provides invaluable insights into fundamental business principles, logo design, product development, and effective sales strategies.</p>
+    <p>The first section of the book delves into the importance of branding and how to create a memorable brand identity. Readers will learn about the elements of successful branding, including logo design, color psychology, and brand messaging. Through practical tips and case studies, they will discover how to craft a compelling brand story that resonates with their target audience.</p>
+    <p>Moving forward, the book explores the intricacies of product development and management. From ideation to execution, readers will gain a deep understanding of the product life cycle, market research, prototyping, and pricing strategies. With actionable advice and real-world examples, they will learn how to develop products that meet consumer needs and stand out in a crowded marketplace.</p>
+    <p>In the final section, "Business Essentials" dives into the art of selling and persuasion. Readers will explore proven sales techniques, negotiation strategies, and effective communication skills essential for closing deals and building long-term customer relationships. Whether selling products or services, this section equips readers with the tools and mindset needed to succeed in sales.</p>
+    <p>Written in a clear and accessible style, "The Business Minded" is an indispensable resource for entrepreneurs, small business owners, marketers, and anyone looking to thrive in the competitive business landscape. Packed with practical advice, actionable insights, and real-world examples, this book empowers readers to build a strong brand, develop successful products, and master the art of selling.</p>
+  </div>
 </div>
 
-<!-- FOOTER SECTION -->
+<!-- TESTIMONIAL -->
+<div class="testimonial-book">
+  <p>"Been looking for the best business guide in the market for years now and I know that I got all that I need for my business right now. This book is a practical guide that seamlessly navigates the complex world of entrepreneurship. The author's straightforward approach and clear language make it easy for readers to grasp key concepts, from building a solid brand to mastering the art of sales. The real-life examples and actionable tips provide a valuable toolkit for anyone looking to succeed in business. Whether you're a budding entrepreneur or seasoned professional, this book offers a refreshingly accessible roadmap to elevate your business acumen. Best business book so far!!!"</p>
+  <p class="t-author">— Irene C., Sound Native, CEO &nbsp;★★★★★</p>
+</div>
+
+<!-- BOOK SPECS -->
+<section class="book-specs">
+  <h2 class="section-title" style="margin-top:0;"><i class="fas fa-info-circle"></i> Book Details</h2>
+  <div class="specs-grid">
+    <div class="spec-card"><i class="fas fa-book"></i><div class="spec-label">Format</div><div class="spec-value">Paperback</div></div>
+    <div class="spec-card"><i class="fas fa-file-alt"></i><div class="spec-label">Pages</div><div class="spec-value">280 pages</div></div>
+    <div class="spec-card"><i class="fas fa-language"></i><div class="spec-label">Language</div><div class="spec-value">English</div></div>
+    <div class="spec-card"><i class="fas fa-calendar-alt"></i><div class="spec-label">Published</div><div class="spec-value">2025</div></div>
+    <div class="spec-card"><i class="fas fa-tag"></i><div class="spec-label">ISBN</div><div class="spec-value">978-1234567890</div></div>
+    <div class="spec-card"><i class="fas fa-ruler"></i><div class="spec-label">Dimensions</div><div class="spec-value">6" × 9"</div></div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee-box">
+  <h3><i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee</h3>
+  <p>Not satisfied with your purchase? Return it within 30 days for a full refund. No questions asked!</p>
+</div>
+
+<!-- FOOTER -->
 <footer>
-    <div style="margin-bottom: 10px;">
-        <i class="fas fa-graduation-cap"></i>
-    </div>
-    &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
-    <div style="margin-top: 10px; font-size: 0.9rem;">
-        <i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdafa2a2a6beb9a2bfa88da3a8b5aaa8a3a4b5afbee3aea2a0">[email&#160;protected]</a> | 
-        <i class="fas fa-phone"></i> 1-800-NEXGENIX
-    </div>
-    <div style="margin-top: 10px; font-size: 0.85rem;">
-        <i class="fas fa-shopping-cart"></i> Secure checkout with SSL encryption
-    </div>
+  <i class="fas fa-graduation-cap"></i>
+  &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
+  <span class="footer-tagline">Transforming Education Through Technology</span>
+  <span class="footer-tagline" style="margin-top:4px;">
+    <i class="fas fa-shopping-cart" style="color:var(--scholar-gold);"></i> Secure checkout with SSL encryption
+  </span>
 </footer>
 
-    <!-- JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        let quantity = 1;
+<!-- ================================================================
+     ORDER MODAL
+     ================================================================ -->
+<div class="modal-overlay" id="orderModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
 
-        function toggleMenu() {
-            document.querySelector('.nav-list').classList.toggle('active');
-            document.querySelector('.hamburger-menu').classList.toggle('open');
-        }
+    <h2 class="modal-title" id="modalHeading"><i class="fas fa-shopping-bag"></i> Place Your Order</h2>
+    <p class="modal-subtitle">Fill in your details and we'll process your order right away!</p>
 
-        function changeImage(thumbnail, imagePath) {
-            // Update main image
-            document.getElementById('mainImage').src = imagePath;
+    <div class="order-summary">
+      <div class="order-summary-info">
+        <strong>The Business Minded</strong>
+        <span>Qty: <span id="modalQty">1</span> &nbsp;×&nbsp; $29.99</span>
+      </div>
+      <div class="order-total" id="modalTotal">$29.99</div>
+    </div>
 
-            // Update active thumbnail
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            thumbnail.classList.add('active');
-        }
+    <form id="orderForm" onsubmit="submitOrder(event)" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+        </div>
+      </div>
 
-        function incrementQty() {
-            if (quantity < 99) {
-                quantity++;
-                document.getElementById('qtyDisplay').textContent = quantity;
-            }
-        }
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+      </div>
 
-        function decrementQty() {
-            if (quantity > 1) {
-                quantity--;
-                document.getElementById('qtyDisplay').textContent = quantity;
-            }
-        }
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900" required>
+      </div>
 
-        function addToCart() {
-            alert(`Added ${quantity} copy/copies of "The Business Minded" to your cart!`);
-            // Here you would implement actual cart functionality
-        }
+      <div class="form-group">
+        <label for="address">Delivery Address *</label>
+        <input type="text" id="address" name="address" placeholder="123 Main St, City, Country" required>
+      </div>
 
-        function buyNow() {
-            alert(`Proceeding to checkout with ${quantity} copy/copies of "The Business Minded"`);
-            // Here you would implement actual checkout functionality
-        }
+      <div class="form-row">
+        <div class="form-group">
+          <label for="payment">Payment Method *</label>
+          <select id="payment" name="payment" required>
+            <option value="">Select method…</option>
+            <option value="GCash">GCash</option>
+            <option value="PayMaya">PayMaya</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="Credit / Debit Card">Credit / Debit Card</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="orderType">Order Type</label>
+          <select id="orderType" name="orderType">
+            <option value="Standard">Standard Delivery</option>
+            <option value="Express">Express Delivery</option>
+          </select>
+        </div>
+      </div>
 
-        // Smooth scroll for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      <div class="form-group">
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" placeholder="Special instructions, gift message, etc."></textarea>
+      </div>
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+      <button type="submit" class="submit-order-btn" id="submitBtn">
+        <i class="fas fa-paper-plane"></i>
+        <span id="submitTxt">Confirm Order</span>
+      </button>
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
-                }
-            });
-        }, observerOptions);
+      <div class="form-msg" id="successMsg">
+        <i class="fas fa-check-circle"></i>
+        <span>Order placed! We'll contact you within 24 hours to confirm details.</span>
+      </div>
+      <div class="form-msg" id="errorMsg">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span id="errorTxt">Something went wrong. Please try again or contact us directly.</span>
+      </div>
+    </form>
+  </div>
+</div>
 
-        document.querySelectorAll('.feature-item, .spec-item').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+<!-- SCRIPTS -->
+<script>
+  /* -------------------------------------------------------
+     EmailJS — replace the three constants below with your
+     actual EmailJS credentials from emailjs.com
+     ------------------------------------------------------- */
+  (function(){ emailjs.init('YOUR_PUBLIC_KEY'); })();
 
-    <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+  const EMAILJS_SERVICE  = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE = 'YOUR_TEMPLATE_ID';
+  const BOOK_PRICE       = 29.99;
 
+  /* ---- Quantity ---- */
+  let qty = 1;
+  function incrementQty() { if (qty < 99) { qty++; syncQty(); } }
+  function decrementQty() { if (qty > 1)  { qty--; syncQty(); } }
+  function syncQty() { document.getElementById('qtyDisplay').textContent = qty; }
+
+  /* ---- Image swap ---- */
+  function changeImage(el, src) {
+    document.getElementById('mainImage').src = src;
+    document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  /* ---- Modal ---- */
+  function openModal(type) {
+    document.getElementById('modalQty').textContent   = qty;
+    document.getElementById('modalTotal').textContent = '$' + (BOOK_PRICE * qty).toFixed(2);
+    if (type === 'buy') document.getElementById('orderType').value = 'Express';
+    document.getElementById('orderModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('orderModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('orderModal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ---- Order Submit via EmailJS ---- */
+  function submitOrder(e) {
+    e.preventDefault();
+    const successEl = document.getElementById('successMsg');
+    const errorEl   = document.getElementById('errorMsg');
+    const btn       = document.getElementById('submitBtn');
+    const txtEl     = document.getElementById('submitTxt');
+    successEl.style.display = 'none';
+    errorEl.style.display   = 'none';
+
+    /* Validate required fields */
+    const required = ['firstName','lastName','email','phone','address','payment'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--debug-orange)';
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!valid) {
+      const et = document.getElementById('errorTxt');
+      et.textContent = 'Please fill in all required fields.';
+      showMsg(errorEl); return;
+    }
+
+    btn.disabled   = true;
+    txtEl.textContent = 'Sending…';
+
+    const params = {
+      from_name    : document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim(),
+      from_email   : document.getElementById('email').value.trim(),
+      phone        : document.getElementById('phone').value.trim(),
+      address      : document.getElementById('address').value.trim(),
+      payment      : document.getElementById('payment').value,
+      order_type   : document.getElementById('orderType').value,
+      notes        : document.getElementById('notes').value.trim() || 'None',
+      book_title   : 'The Business Minded: From Branding to Sales Mastery',
+      quantity     : qty,
+      unit_price   : '$' + BOOK_PRICE.toFixed(2),
+      total_price  : '$' + (BOOK_PRICE * qty).toFixed(2),
+    };
+
+    emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, params)
+      .then(() => {
+        showMsg(successEl);
+        document.getElementById('orderForm').reset();
+        syncQty();
+        btn.disabled = false;
+        txtEl.textContent = 'Confirm Order';
+      })
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        document.getElementById('errorTxt').textContent = 'Something went wrong. Please try again or contact us directly.';
+        showMsg(errorEl);
+        btn.disabled = false;
+        txtEl.textContent = 'Confirm Order';
+      });
+  }
+
+  function showMsg(el) {
+    el.style.display = 'flex';
+    setTimeout(() => { el.style.display = 'none'; }, 7000);
+  }
+
+  /* ---- Nav ---- */
+  function toggleMenu() {
+    document.querySelector('.nav-list').classList.toggle('active');
+    document.querySelector('.hamburger-menu').classList.toggle('open');
+  }
+
+  /* ---- Scroll reveal ---- */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold:0.1, rootMargin:'0px 0px -60px 0px' });
+
+  document.querySelectorAll('.feature-card, .spec-card, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+  });
+</script>
 </body>
 </html>
