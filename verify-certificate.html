@@ -1,592 +1,881 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Verify Certificate</title>
-
+  <title>Verify Certificate — Nex Genix Business School</title>
   <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,400&family=Silkscreen:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-        /* Import color palette variables */
-        :root {
-            --university-navy: #1a2332;
-            --academic-burgundy: #8b2635;
-            --scholar-gold: #d4af37;
-            --campus-green: #2d5016;
-            --code-cyan: #00d4ff;
-            --terminal-green: #00ff88;
-            --syntax-purple: #a855f7;
-            --debug-orange: #ff6b35;
-            --paper-white: #fafafa;
-            --chalk-gray: #e5e7eb;
-            --slate-medium: #64748b;
-            --charcoal: #1e293b;
-            --pure-black: #0f172a;
-        }
-        
-    /* School-themed enhancements */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-      color: #00ff88;
-      padding: 40px;
-      text-align: center;
-      position: relative;
-      overflow-x: hidden;
-    }
+  /* ── PAGE-SPECIFIC — inherits all vars from styles.css ── */
 
-    /* Academic background pattern */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 36px),
-        repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 36px);
-      pointer-events: none;
-      z-index: 0;
-    }
+  /* Floating background terms — subtle, professional */
+  .bg-terms {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.045;
+  }
+  .bg-terms .term {
+    position: absolute;
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--code-cyan);
+    white-space: nowrap;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: driftAcross linear infinite;
+  }
+  .bg-terms .term:nth-child(1)  { top:4%;  animation-duration:38s; animation-delay:0s; }
+  .bg-terms .term:nth-child(2)  { top:10%; animation-duration:44s; animation-delay:4s; }
+  .bg-terms .term:nth-child(3)  { top:17%; animation-duration:36s; animation-delay:8s; }
+  .bg-terms .term:nth-child(4)  { top:24%; animation-duration:42s; animation-delay:2s; }
+  .bg-terms .term:nth-child(5)  { top:31%; animation-duration:48s; animation-delay:10s; }
+  .bg-terms .term:nth-child(6)  { top:38%; animation-duration:34s; animation-delay:5s; }
+  .bg-terms .term:nth-child(7)  { top:45%; animation-duration:40s; animation-delay:12s; }
+  .bg-terms .term:nth-child(8)  { top:52%; animation-duration:37s; animation-delay:3s; }
+  .bg-terms .term:nth-child(9)  { top:59%; animation-duration:46s; animation-delay:7s; }
+  .bg-terms .term:nth-child(10) { top:66%; animation-duration:39s; animation-delay:1s; }
+  .bg-terms .term:nth-child(11) { top:74%; animation-duration:43s; animation-delay:9s; }
+  .bg-terms .term:nth-child(12) { top:82%; animation-duration:35s; animation-delay:6s; }
 
-    /* Floating business terms */
-    .school-icons {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.12;
-      overflow: hidden;
-    }
+  @keyframes driftAcross {
+    0%   { transform: translateX(100vw); opacity:0; }
+    8%   { opacity:1; }
+    92%  { opacity:1; }
+    100% { transform: translateX(-120%); opacity:0; }
+  }
 
-    .school-icons .term {
-      position: absolute;
-      font-size: 1.2rem;
-      color: #4a90e2;
-      font-weight: 600;
-      white-space: nowrap;
-      animation: floatLeftToRight 25s infinite linear;
-    }
+  /* Page wrap — overrides body max-width for this page */
+  .verify-wrap {
+    width: 94%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 80px 20px 80px;
+    position: relative;
+    z-index: 2;
+  }
 
-    .school-icons .term:nth-child(1) { top: 5%; animation-duration: 30s; animation-delay: 0s; }
-    .school-icons .term:nth-child(2) { top: 12%; animation-duration: 35s; animation-delay: 3s; }
-    .school-icons .term:nth-child(3) { top: 20%; animation-duration: 28s; animation-delay: 6s; }
-    .school-icons .term:nth-child(4) { top: 28%; animation-duration: 32s; animation-delay: 2s; }
-    .school-icons .term:nth-child(5) { top: 35%; animation-duration: 38s; animation-delay: 8s; }
-    .school-icons .term:nth-child(6) { top: 43%; animation-duration: 26s; animation-delay: 4s; }
-    .school-icons .term:nth-child(7) { top: 50%; animation-duration: 33s; animation-delay: 10s; }
-    .school-icons .term:nth-child(8) { top: 58%; animation-duration: 29s; animation-delay: 5s; }
-    .school-icons .term:nth-child(9) { top: 65%; animation-duration: 36s; animation-delay: 7s; }
-    .school-icons .term:nth-child(10) { top: 73%; animation-duration: 31s; animation-delay: 1s; }
-    .school-icons .term:nth-child(11) { top: 80%; animation-duration: 34s; animation-delay: 9s; }
-    .school-icons .term:nth-child(12) { top: 88%; animation-duration: 27s; animation-delay: 12s; }
+  /* ── HERO HEADER ── */
+  .verify-hero {
+    background: linear-gradient(160deg, #0d1b2e 0%, #182d44 55%, #0d1b2e 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 38px 28px 32px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
 
-    @keyframes floatLeftToRight {
-      0% { 
-        transform: translateX(100vw);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.12;
-      }
-      90% {
-        opacity: 0.12;
-      }
-      100% { 
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-    }
+  /* Top gold ribbon accent */
+  .verify-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 70%; height: 2.5px;
+    background: linear-gradient(90deg, transparent, var(--scholar-gold), transparent);
+  }
 
-    h1 {
-      color: #ffd700;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
+  /* Bottom subtle cyan line */
+  .verify-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 40%; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--code-cyan), transparent);
+  }
 
-    h1::before {
-      content: '🎓';
-      margin-right: 15px;
-    }
+  .verify-seal-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a2d46, #243d5c);
+    border: 2px solid var(--scholar-gold);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.15), 0 0 20px rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 30px;
+    color: var(--scholar-gold);
+    transition: all 0.3s ease;
+  }
 
-    h1::after {
-      content: '🎓';
-      margin-left: 15px;
-    }
+  .verify-hero:hover .verify-seal-icon {
+    box-shadow: 0 0 0 6px rgba(201,168,76,0.2), 0 0 30px rgba(201,168,76,0.35);
+    transform: scale(1.04);
+  }
 
-    .main-content {
-      max-width: 1000px;
-      width: 95%;
-      margin: 100px auto 40px auto;
-      background: rgba(26, 26, 26, 0.95);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 
-        0 4px 12px rgba(255, 255, 255, 0.1),
-        0 0 30px rgba(74, 144, 226, 0.3),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      border: 2px solid rgba(74, 144, 226, 0.3);
-      position: relative;
-      z-index: 2;
-    }
+  .verify-hero h1 {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(18px, 5vw, 26px);
+    color: var(--scholar-gold);
+    text-shadow: 0 0 14px var(--scholar-gold-glow);
+    margin: 0 0 10px;
+    letter-spacing: 0.5px;
+  }
 
-    /* Academic ribbon decoration */
-    .main-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ffd700, transparent);
-    }
+  .verify-hero-sub {
+    font-size: clamp(12px, 2.8vw, 13.5px);
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+    text-align: center;
+  }
 
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+  /* Trust badges strip */
+  .trust-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
 
-    input {
-      padding: 12px;
-      width: 70%;
-      font-size: 14px;
-      border-radius: 8px;
-      border: 2px solid #4a90e2;
-      background-color: #222;
-      color: #fff;
-      transition: all 0.3s ease;
-    }
+  .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 20px;
+    font-size: 10.5px;
+    color: var(--chalk-gray);
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.3px;
+  }
+  .trust-badge i { color: var(--scholar-gold); font-size: 11px; }
 
-    input:focus {
-      outline: none;
-      border-color: #ffd700;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-      background-color: #2a2a2a;
-    }
+  /* ── SEARCH CARD ── */
+  .search-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 30px 28px;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
 
-    button {
-      padding: 10px 16px;
-      font-size: 15px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-      color: white;
-      border: none;
-      cursor: pointer;
-      width: fit-content;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-      font-weight: 600;
-    }
+  /* Subtle corner accent */
+  .search-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--scholar-gold), transparent);
+    border-radius: 14px 0 0 14px;
+  }
 
-    button:hover {
-      background: linear-gradient(135deg, #357abd 0%, #2868a8 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(74, 144, 226, 0.4);
-    }
+  .search-label {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px;
+    color: var(--code-cyan);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-    button:active {
-      transform: translateY(0);
-    }
+  .search-label i { color: var(--scholar-gold); font-size: 13px; }
 
-    .details-box {
-      max-width: 800px;
-      margin: 20px auto;
-      background: linear-gradient(135deg, #111 0%, #1a1a2e 100%);
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 
-        0 0 20px rgba(74, 144, 226, 0.4),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      text-align: left;
-      border: 2px solid rgba(255, 215, 0, 0.3);
-    }
+  .search-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 
-    /* Certificate badge/seal decoration */
-    .details-box::before {
-      content: '🏆';
-      position: absolute;
-      top: -15px;
-      right: 20px;
-      font-size: 2rem;
-      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-    }
+  .cert-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    color: var(--paper-white);
+    transition: all 0.3s ease;
+    outline: none;
+  }
 
-    #verificationResult {
-      font-size: 20px;
-      margin-bottom: 15px;
-      text-align: center;
-      padding: 15px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
+  .cert-input::placeholder {
+    color: var(--slate-medium);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
 
-    .detail-row {
-      display: flex;
-      justify-content: space-between;
-      margin: 10px 0;
-      padding: 10px;
-      background: rgba(255,255,255,0.02);
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
+  .cert-input:focus {
+    border-color: var(--scholar-gold);
+    background: rgba(201,168,76,0.04);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+  }
 
-    .detail-row:hover {
-      background: rgba(74, 144, 226, 0.1);
-      transform: translateX(5px);
-    }
+  /* Verify button — mirrors .btn but gold themed */
+  .verify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    background: linear-gradient(135deg, #2a1a06, #3d2808);
+    color: var(--scholar-gold);
+    border: 1px solid var(--scholar-gold);
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: bold;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 
-    .detail-label {
-      font-weight: bold;
-      color: #4a90e2;
-      width: 40%;
-      display: flex;
-      align-items: center;
-    }
+  .verify-btn:hover {
+    background: var(--scholar-gold);
+    color: var(--pure-black);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px var(--scholar-gold-glow);
+  }
 
-    .detail-label::before {
-      content: '•';
-      margin-right: 8px;
-      font-size: 1.5rem;
-      color: #ffd700;
-    }
+  .verify-btn i { transition: transform 0.3s ease; }
+  .verify-btn:hover i { transform: translateX(2px); }
 
-    .detail-value {
-      color: white;
-      width: 58%;
-      text-align: left;
-    }
+  /* Format hint */
+  .format-hint {
+    margin-top: 11px;
+    font-size: 11.5px;
+    color: var(--slate-medium);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-style: italic;
+  }
+  .format-hint i { color: var(--code-cyan); font-size: 10px; flex-shrink: 0; }
 
-    #certificateImage {
-      display: block;
-      margin: 20px auto;
-      border: 3px solid #ffd700;
-      border-radius: 8px;
-      max-width: 100%;
-      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-      transition: transform 0.3s ease;
-    }
+  /* ── RESULT STATES ── */
+  .verify-result {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.3px;
+    animation: resultFadeIn 0.4s ease-out;
+  }
 
-    #certificateImage:hover {
-      transform: scale(1.02);
-      box-shadow: 0 12px 24px rgba(255, 215, 0, 0.3);
-    }
+  @keyframes resultFadeIn {
+    from { opacity:0; transform:translateY(8px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
 
-    /* Updated issued by styles */
-    .detail-row:last-of-type {
-      align-items: center;
-    }
+  .verify-result.success {
+    background: rgba(62,207,122,0.08);
+    border: 1px solid rgba(62,207,122,0.4);
+    border-left: 3px solid var(--terminal-green);
+    color: var(--terminal-green);
+  }
 
-    .issuer-logo {
-      max-width: 150px;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(255,255,255,0.2));
-    }
+  .verify-result.error {
+    background: rgba(232,103,90,0.08);
+    border: 1px solid rgba(232,103,90,0.35);
+    border-left: 3px solid #e8675a;
+    color: #e8675a;
+  }
 
-    /* Success/Error message styling */
-    .success-message {
-      background: linear-gradient(135deg, rgba(0,255,0,0.1) 0%, rgba(0,200,0,0.1) 100%);
-      border: 2px solid limegreen;
-    }
+  .result-icon { font-size: 22px; flex-shrink: 0; }
 
-    .error-message {
-      background: linear-gradient(135deg, rgba(255,0,0,0.1) 0%, rgba(200,0,0,0.1) 100%);
-      border: 2px solid red;
-    }
+  .result-text-group { flex: 1; }
+  .result-title { font-size: 14px; margin-bottom: 3px; }
+  .result-sub  {
+    font-size: 11px; font-weight: 400; font-family: 'Trebuchet MS', sans-serif;
+    font-style: italic; opacity: 0.8; letter-spacing: 0;
+  }
 
-    /* Academic achievement badge */
-    .achievement-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-      color: #1a1a1a;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      margin-left: 10px;
-      box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
-    }
+  /* ── CERTIFICATE DETAILS BOX ── */
+  .cert-details-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 30px 28px;
+    position: relative;
+    overflow: hidden;
+    animation: resultFadeIn 0.5s ease-out;
+  }
 
-    @media (max-width: 768px) {
-      body {
-        padding: 20px 10px;
-      }
+  /* Top gold ribbon */
+  .cert-details-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 80%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--scholar-gold), transparent);
+  }
 
-      h1 {
-        font-size: 1.5rem;
-        margin-top: 20px;
-      }
+  /* Watermark seal */
+  .cert-details-card::after {
+    content: '\f559';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    bottom: -10px; right: 20px;
+    font-size: 100px;
+    color: rgba(201,168,76,0.04);
+    pointer-events: none;
+    line-height: 1;
+  }
 
-      h1::before,
-      h1::after {
-        font-size: 1.2rem;
-      }
+  /* Cert details header */
+  .cert-details-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-gold);
+  }
 
-      .main-content {
-        margin: 80px auto 20px auto;
-        padding: 20px 15px;
-        width: 98%;
-      }
+  .cert-verified-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 16px;
+    background: rgba(62,207,122,0.1);
+    border: 1px solid rgba(62,207,122,0.35);
+    border-radius: 20px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--terminal-green);
+    letter-spacing: 0.5px;
+  }
+  .cert-verified-stamp i { font-size: 12px; }
 
-      .school-icons .term {
-        font-size: 0.9rem;
-      }
+  .cert-details-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 14px;
+    color: var(--scholar-gold);
+    letter-spacing: 0.5px;
+  }
 
-      form {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
+  /* Certificate image */
+  .cert-image-wrap {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-gold);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
 
-      input {
-        width: 100%;
-        font-size: 15px;
-        padding: 14px;
-      }
+  #certificateImage {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 6px;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in;
+  }
 
-      button {
-        width: 100%;
-        padding: 14px 20px;
-        font-size: 16px;
-      }
+  #certificateImage:hover {
+    transform: scale(1.015);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.25);
+  }
 
-      #verificationResult {
-        font-size: 16px;
-        padding: 12px;
-      }
+  /* Detail rows */
+  .detail-rows { display: flex; flex-direction: column; gap: 2px; }
 
-      .details-box {
-        padding: 15px;
-        margin: 15px auto;
-      }
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+  }
 
-      .detail-row {
-        flex-direction: column;
-        padding: 12px 8px;
-        margin: 8px 0;
-      }
+  .detail-row:nth-child(odd)  { background: rgba(255,255,255,0.02); }
+  .detail-row:nth-child(even) { background: rgba(255,255,255,0.01); }
 
-      .detail-label {
-        width: 100%;
-        font-size: 14px;
-        margin-bottom: 5px;
-      }
+  .detail-row:hover {
+    background: rgba(201,168,76,0.06);
+    transform: translateX(4px);
+  }
 
-      .detail-label::before {
-        font-size: 1.2rem;
-        margin-right: 6px;
-      }
+  .detail-icon {
+    width: 34px; flex-shrink: 0;
+    font-size: 14px; color: var(--scholar-gold); opacity: 0.8;
+  }
 
-      .detail-value {
-        width: 100%;
-        font-size: 14px;
-        padding-left: 20px;
-      }
+  .detail-label {
+    width: 160px;
+    flex-shrink: 0;
+    font-family: "Orbitron", sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--code-cyan);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
 
-      .issuer-logo {
-        max-width: 120px;
-        padding-left: 0;
-      }
+  .detail-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--border-subtle);
+    margin: 0 14px;
+    flex-shrink: 0;
+  }
 
-      .achievement-badge {
-        display: block;
-        margin: 8px 0 0 0;
-        width: fit-content;
-        font-size: 0.85rem;
-      }
+  .detail-value {
+    flex: 1;
+    font-size: 13.5px;
+    color: var(--paper-white);
+    font-weight: 500;
+    line-height: 1.4;
+  }
 
-      #certificateImage {
-        margin: 15px auto;
-        border-width: 2px;
-      }
-    }
+  /* Certified badge inline */
+  .certified-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+    padding: 2px 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 20px;
+    font-size: 10px;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    color: var(--scholar-gold);
+    vertical-align: middle;
+  }
 
-    @media (max-width: 480px) {
-      body {
-        padding: 15px 5px;
-      }
+  /* Issuer logo row */
+  .issuer-logo {
+    max-width: 140px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(201,168,76,0.15));
+    transition: filter 0.3s ease;
+  }
+  .issuer-logo:hover { filter: drop-shadow(0 2px 10px rgba(201,168,76,0.35)); }
 
-      h1 {
-        font-size: 1.3rem;
-      }
+  /* Footer action row */
+  .cert-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-gold);
+  }
 
-      .main-content {
-        margin: 70px auto 15px auto;
-        padding: 15px 10px;
-      }
+  .cert-action-note {
+    font-size: 11.5px;
+    color: var(--slate-medium);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cert-action-note i { color: var(--terminal-green); }
 
-      input {
-        font-size: 14px;
-        padding: 12px;
-      }
+  .print-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    background: rgba(79,195,216,0.07);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    color: var(--code-cyan);
+    font-size: 11.5px;
+    font-family: "Orbitron", sans-serif;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .print-btn:hover {
+    background: rgba(79,195,216,0.15);
+    border-color: var(--code-cyan);
+    box-shadow: 0 4px 14px var(--code-cyan-glow);
+  }
 
-      button {
-        font-size: 15px;
-        padding: 12px 16px;
-      }
+  /* ── HOW IT WORKS ── */
+  .how-it-works {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-top: 28px;
+  }
 
-      .detail-label,
-      .detail-value {
-        font-size: 13px;
-      }
+  .hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap: 16px;
+    margin-top: 18px;
+  }
 
-      .achievement-badge {
-        font-size: 0.8rem;
-        padding: 4px 12px;
-      }
-    }
+  .hiw-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 18px 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .hiw-card:hover {
+    border-color: var(--scholar-gold);
+    background: rgba(201,168,76,0.04);
+    transform: translateY(-3px);
+  }
+  .hiw-card i { font-size: 26px; color: var(--scholar-gold); margin-bottom: 10px; display: block; }
+  .hiw-card h4 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px; color: var(--code-cyan);
+    margin: 0 0 7px; letter-spacing: 0.3px;
+  }
+  .hiw-card p { font-size: 11.5px; color: var(--text-muted); margin: 0; text-align: center; line-height: 1.6; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .verify-wrap { padding: 72px 14px 60px; }
+    .verify-hero { padding: 28px 18px 24px; }
+    .search-card { padding: 22px 18px; }
+    .cert-details-card { padding: 22px 18px; }
+    .search-form { flex-direction: column; }
+    .cert-input { width: 100%; }
+    .verify-btn { width: 100%; justify-content: center; }
+    .detail-label { width: 120px; font-size: 9.5px; }
+    .trust-badges { gap: 8px; }
+    .trust-badge { font-size: 9.5px; padding: 4px 11px; }
+  }
+
+  @media (max-width: 500px) {
+    .verify-seal-icon { width: 56px; height: 56px; font-size: 24px; }
+    .verify-hero h1 { font-size: 17px; }
+    .cert-details-header { flex-direction: column; align-items: flex-start; }
+    .detail-row { flex-wrap: wrap; gap: 4px; padding: 11px 10px; }
+    .detail-label { width: 100%; margin-bottom: 2px; }
+    .detail-divider { display: none; }
+    .detail-value { width: 100%; padding-left: 34px; font-size: 13px; }
+    .cert-action-row { flex-direction: column; align-items: flex-start; }
+    .hiw-grid { grid-template-columns: repeat(2,1fr); }
+    .trust-badge { font-size: 9px; }
+  }
   </style>
 </head>
 <body>
-  <!-- Floating business terms background -->
-  <div class="school-icons">
-    <div class="term">LEADERSHIP</div>
-    <div class="term">INNOVATION</div>
-    <div class="term">STRATEGY</div>
-    <div class="term">ENTREPRENEURSHIP</div>
-    <div class="term">MARKETING</div>
-    <div class="term">FINANCE</div>
-    <div class="term">MANAGEMENT</div>
-    <div class="term">ANALYTICS</div>
-    <div class="term">BRANDING</div>
-    <div class="term">SALES</div>
-    <div class="term">EXCELLENCE</div>
-    <div class="term">GROWTH</div>
+
+<!-- Floating Background Terms -->
+<div class="bg-terms" aria-hidden="true">
+  <div class="term">LEADERSHIP</div>
+  <div class="term">INNOVATION</div>
+  <div class="term">STRATEGY</div>
+  <div class="term">ENTREPRENEURSHIP</div>
+  <div class="term">MARKETING</div>
+  <div class="term">FINANCE</div>
+  <div class="term">MANAGEMENT</div>
+  <div class="term">ANALYTICS</div>
+  <div class="term">BRANDING</div>
+  <div class="term">CERTIFICATION</div>
+  <div class="term">EXCELLENCE</div>
+  <div class="term">GROWTH</div>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="logo">
+    <img src="assets/images/logo-bs.png" alt="NGBS Logo" class="logo">
+    <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
+    <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+  </div>
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+  <ul class="nav-list">
+    <li><a href="https://nexgenixbusinessschool.github.io"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><i class="fas fa-gift"></i> Free Courses</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/premium-courses"><i class="fas fa-crown"></i> Premium</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </div>
+</nav>
+
+<div class="verify-wrap">
+
+  <!-- Hero -->
+  <div class="verify-hero">
+    <div class="verify-seal-icon"><i class="fas fa-certificate"></i></div>
+    <h1>Certificate Verification</h1>
+    <p class="verify-hero-sub">Enter your certificate ID below to authenticate and display your Nex Genix Business School credential. All issued certificates are digitally secured and instantly verifiable.</p>
+    <div class="trust-badges">
+      <span class="trust-badge"><i class="fas fa-shield-alt"></i> Digitally Secured</span>
+      <span class="trust-badge"><i class="fas fa-globe-americas"></i> Globally Recognized</span>
+      <span class="trust-badge"><i class="fas fa-qrcode"></i> QR Verifiable</span>
+      <span class="trust-badge"><i class="fab fa-linkedin"></i> LinkedIn Ready</span>
+    </div>
   </div>
 
-  <nav id="navbar">
-    <div class="logo">
-      <img src="assets/images/logo-bs.png" alt="logo" class="logo" style="height: 40px;" />
-      <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
-      <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
-    </div>
-  </nav>
-
-  <div class="main-content">
-    <h1>Verify E-Certificate</h1>
-    <form id="verifyForm">
-      <input id="certificateID" name="certificateID" required type="text" placeholder="NGBS####-DDMMYYYY-AC##"/>
-      <button type="submit"><i class="fas fa-search"></i> Verify</button>
+  <!-- Search Card -->
+  <div class="search-card">
+    <div class="search-label"><i class="fas fa-search"></i> Enter Certificate ID</div>
+    <form id="verifyForm" class="search-form" novalidate>
+      <input
+        id="certificateID"
+        class="cert-input"
+        type="text"
+        placeholder="e.g. NGBS001-28012025-AC01"
+        autocomplete="off"
+        spellcheck="false"
+        required
+      />
+      <button type="submit" class="verify-btn">
+        <i class="fas fa-search"></i> Verify
+      </button>
     </form>
+    <div class="format-hint">
+      <i class="fas fa-info-circle"></i>
+      Format: <strong style="color:var(--chalk-gray);margin-left:4px;">NGBS####-DDMMYYYY-AC##</strong>
+    </div>
+  </div>
 
-    <div id="verificationResult"></div>
+  <!-- Result message (injected by JS) -->
+  <div id="verificationResult"></div>
 
-    <div id="certificateDetails" class="details-box" style="display: none;">
-      <img id="certificateImage" src="" alt="Certificate Preview"/>
+  <!-- Certificate Details (hidden until verified) -->
+  <div id="certificateDetails" class="cert-details-card" style="display:none;">
+
+    <div class="cert-details-header">
+      <span class="cert-details-title"><i class="fas fa-id-card" style="color:var(--code-cyan);margin-right:8px;"></i>Certificate Record</span>
+      <span class="cert-verified-stamp"><i class="fas fa-circle-check"></i> Verified &amp; Authentic</span>
+    </div>
+
+    <!-- Certificate Image -->
+    <div class="cert-image-wrap">
+      <img id="certificateImage" src="" alt="Certificate Preview">
+    </div>
+
+    <!-- Detail Rows -->
+    <div class="detail-rows">
 
       <div class="detail-row">
-        <div class="detail-label">Learner Name:</div>
-        <div id="displayName" class="detail-value"></div>
+        <span class="detail-icon"><i class="fas fa-user-graduate"></i></span>
+        <span class="detail-label">Learner Name</span>
+        <span class="detail-divider"></span>
+        <span id="displayName" class="detail-value"></span>
       </div>
 
       <div class="detail-row">
-        <div class="detail-label">Certificate ID:</div>
-        <div id="displayID" class="detail-value"></div>
+        <span class="detail-icon"><i class="fas fa-fingerprint"></i></span>
+        <span class="detail-label">Certificate ID</span>
+        <span class="detail-divider"></span>
+        <span id="displayID" class="detail-value" style="font-family:'Courier New',monospace;font-size:13px;"></span>
       </div>
 
       <div class="detail-row">
-        <div class="detail-label">Course Name:</div>
-        <div id="displayCourse" class="detail-value"></div>
+        <span class="detail-icon"><i class="fas fa-book-open"></i></span>
+        <span class="detail-label">Course Name</span>
+        <span class="detail-divider"></span>
+        <span id="displayCourse" class="detail-value"></span>
       </div>
 
       <div class="detail-row">
-        <div class="detail-label">Average Score:</div>
-        <div id="displayScore" class="detail-value"></div>
+        <span class="detail-icon"><i class="fas fa-chart-bar"></i></span>
+        <span class="detail-label">Average Score</span>
+        <span class="detail-divider"></span>
+        <span id="displayScore" class="detail-value"></span>
       </div>
 
       <div class="detail-row">
-        <div class="detail-label">Issued On:</div>
-        <div id="displayDate" class="detail-value"></div>
+        <span class="detail-icon"><i class="fas fa-calendar-check"></i></span>
+        <span class="detail-label">Issued On</span>
+        <span class="detail-divider"></span>
+        <span id="displayDate" class="detail-value"></span>
       </div>
 
       <div class="detail-row">
-        <div class="detail-label">Issued By:</div>
-        <div class="detail-value">
-          <img src="assets/images/banner-bs.png" alt="Nex Genix Business School Logo" class="issuer-logo" />
-        </div>
+        <span class="detail-icon"><i class="fas fa-building-columns"></i></span>
+        <span class="detail-label">Issued By</span>
+        <span class="detail-divider"></span>
+        <span class="detail-value">
+          <img src="assets/images/banner-bs.png" alt="Nex Genix Business School" class="issuer-logo">
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Action row -->
+    <div class="cert-action-row">
+      <span class="cert-action-note">
+        <i class="fas fa-circle-check"></i>
+        This certificate has been verified as authentic and unaltered.
+      </span>
+      <button class="print-btn" onclick="window.print()">
+        <i class="fas fa-print"></i> Print Record
+      </button>
+    </div>
+
+  </div>
+
+  <!-- How It Works -->
+  <div class="how-it-works">
+    <h2 class="section-title" style="font-size:18px;"><i class="fas fa-shield-halved"></i> How Verification Works</h2>
+    <p class="section-intro" style="font-size:13px;">Our certificates are digitally authenticated — here's what you're seeing when you verify</p>
+    <div class="hiw-grid">
+      <div class="hiw-card">
+        <i class="fas fa-id-badge"></i>
+        <h4>Unique ID</h4>
+        <p>Every certificate carries a unique NGBS identifier tied to the learner and course</p>
+      </div>
+      <div class="hiw-card">
+        <i class="fas fa-database"></i>
+        <h4>Secure Records</h4>
+        <p>All credentials are stored in our verified registry and cross-referenced on lookup</p>
+      </div>
+      <div class="hiw-card">
+        <i class="fas fa-qrcode"></i>
+        <h4>QR Scanning</h4>
+        <p>Physical certificates include a QR code that directs employers here instantly</p>
+      </div>
+      <div class="hiw-card">
+        <i class="fas fa-circle-check"></i>
+        <h4>Instant Result</h4>
+        <p>Valid certificates display learner details in full — invalid ones are flagged clearly</p>
       </div>
     </div>
   </div>
 
-<!-- Footer Section -->
-<footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
+</div><!-- /verify-wrap -->
+
+<footer>
+  <i class="fas fa-graduation-cap"></i>
+  &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
+  <span class="footer-tagline">Transforming Education Through Technology</span>
+</footer>
+
 <script>
-  document.getElementById("verifyForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+  function toggleMenu() {
+    document.querySelector('.nav-list').classList.toggle('active');
+    document.querySelector('.hamburger-menu').classList.toggle('open');
+  }
 
-    const certificateID = document.getElementById("certificateID").value.trim();
-    const resultDiv = document.getElementById("verificationResult");
-    const detailsDiv = document.getElementById("certificateDetails");
+  const certificates = [
+    {
+      id: "DEMO-0000",
+      owner: "Elmer Reed",
+      course: "Business Communication",
+      score: "89%",
+      issuedOn: "August 7, 2023",
+      image: "certificate-sample.png"
+    },
+    {
+      id: "NGBS001-28012025-AC01",
+      owner: "Gioia Antonette Pavan",
+      course: "From Branding to Sales Mastery",
+      score: "98.88%",
+      issuedOn: "January 28, 2025",
+      image: "assets/images/gioia-certificate.png"
+    },
+    {
+      id: "NGBS002-28012025-AC02",
+      owner: "Jayvee Brylle Limjoco",
+      course: "Business Communication",
+      score: "98.88%",
+      issuedOn: "January 28, 2025",
+      image: "assets/images/jayvee-certificate.png"
+    }
+  ];
 
-    const certImage = document.getElementById("certificateImage");
-    const nameEl = document.getElementById("displayName");
-    const idEl = document.getElementById("displayID");
-    const courseEl = document.getElementById("displayCourse");
-    const scoreEl = document.getElementById("displayScore");
-    const dateEl = document.getElementById("displayDate");
+  document.getElementById("verifyForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-    const certificates = [
-      {
-        id: "DEMO-0000",
-        owner: "Elmer Reed",
-        course: "Business Communication",
-        score: "89%",
-        issuedOn: "August 7, 2023",
-        image: "certificate-sample.png"
-      },
-      {
-        id: "NGBS001-28012025-AC01",
-        owner: "Gioia Antonette Pavan",
-        course: "From Branding to Sales Mastery",
-        score: "98.88%",
-        issuedOn: "January 28, 2025",
-        image: "assets/images/gioia-certificate.png"
-      },
-      {
-        id: "NGBS002-28012025-AC02",
-        owner: "Jayvee Brylle Limjoco",
-        course: "Business Communication",
-        score: "98.88%",
-        issuedOn: "January 28, 2025",
-        image: "assets/images/jayvee-certificate.png"
-      }
-    ];
+    const inputID  = document.getElementById("certificateID").value.trim();
+    const resultEl = document.getElementById("verificationResult");
+    const detailEl = document.getElementById("certificateDetails");
+    const input    = document.getElementById("certificateID");
 
-    const cert = certificates.find(c => c.id === certificateID);
+    if (!inputID) {
+      input.style.borderColor = "#e8675a";
+      input.focus();
+      return;
+    }
+    input.style.borderColor = "";
+
+    const cert = certificates.find(c => c.id === inputID);
 
     if (cert) {
-      resultDiv.innerHTML = '<i class="fas fa-circle-check" style="color: limegreen; font-size: 24px; margin-right: 8px;"></i><span style="color: limegreen;">Certificate is valid!</span>';
-      resultDiv.className = 'success-message';
+      // ── VALID ──
+      resultEl.innerHTML = `
+        <div class="result-icon"><i class="fas fa-circle-check"></i></div>
+        <div class="result-text-group">
+          <div class="result-title">Certificate Verified Successfully</div>
+          <div class="result-sub">This credential was issued by Nex Genix Business School and is authentic.</div>
+        </div>`;
+      resultEl.className = "verify-result success";
 
-      certImage.src = cert.image;
-      nameEl.innerHTML = cert.owner + '<span class="achievement-badge">🎓 Certified</span>';
-      idEl.textContent = cert.id;
-      courseEl.textContent = cert.course;
-      scoreEl.textContent = cert.score || "N/A";
-      dateEl.textContent = cert.issuedOn;
+      document.getElementById("certificateImage").src = cert.image;
+      document.getElementById("displayName").innerHTML =
+        cert.owner + '<span class="certified-tag"><i class="fas fa-graduation-cap"></i> Certified</span>';
+      document.getElementById("displayID").textContent    = cert.id;
+      document.getElementById("displayCourse").textContent = cert.course;
+      document.getElementById("displayScore").textContent  = cert.score || "N/A";
+      document.getElementById("displayDate").textContent   = cert.issuedOn;
 
-      detailsDiv.style.display = "block";
+      detailEl.style.display = "block";
+
+      // Smooth scroll to result
+      setTimeout(() => resultEl.scrollIntoView({ behavior: "smooth", block: "nearest" }), 100);
+
     } else {
-      resultDiv.innerHTML = '<i class="fas fa-circle-xmark" style="color: red; font-size: 24px; margin-right: 8px;"></i><span style="color: red;">Invalid certificate!</span>';
-      resultDiv.className = 'error-message';
-      detailsDiv.style.display = "none";
+      // ── INVALID ──
+      resultEl.innerHTML = `
+        <div class="result-icon"><i class="fas fa-circle-xmark"></i></div>
+        <div class="result-text-group">
+          <div class="result-title">Certificate Not Found</div>
+          <div class="result-sub">No record matches this ID. Please check for typos or contact support.</div>
+        </div>`;
+      resultEl.className = "verify-result error";
+      detailEl.style.display = "none";
+
+      input.style.borderColor = "#e8675a";
+      setTimeout(() => { input.style.borderColor = ""; }, 2000);
     }
+  });
+
+  // Clear input border styling on type
+  document.getElementById("certificateID").addEventListener("input", function() {
+    this.style.borderColor = "";
   });
 </script>
 </body>
