@@ -211,10 +211,16 @@
 
     footer {
         font-size: 9px;
+        padding: 10px 15px;
     }
 
     .footer-tagline {
         display: none;
+    }
+
+    /* HOMEPAGE FIXED ANNOUNCEMENT STRIP */
+    .announcement-strip-fixed {
+        bottom: 38px; /* above the shorter fixed footer on mobile */
     }
 
     /* ANNOUNCEMENT STRIP */
