@@ -72,13 +72,12 @@
     100% { transform:translateX(-120%); opacity:0; }
   }
 
-  /* Page wrapper — override global text-align:center from styles.css body */
+  /* Page wrapper */
   .verify-wrap {
     width: 94%; max-width: 920px;
     margin: 0 auto;
     padding: 80px 20px 80px;
     position: relative; z-index: 2;
-    text-align: left;
   }
 
   /* ── AUTO-LOAD BANNER ─────────────────────────────────────────────────── */
@@ -149,8 +148,7 @@
   .verify-hero-sub {
     font-size:clamp(12px,2.8vw,13.5px);
     color:var(--text-muted); font-style:italic;
-    max-width:520px; margin:0 auto; line-height:1.7;
-    text-align:center; /* intentionally centered — it's under the seal icon */
+    max-width:520px; margin:0 auto; line-height:1.7; text-align:center;
   }
 
   .trust-badges {
@@ -184,7 +182,6 @@
     font-family:"Orbitron",sans-serif; font-size:11px;
     color:var(--code-cyan); letter-spacing:1px; text-transform:uppercase;
     margin-bottom:14px; display:flex; align-items:center; gap:8px;
-    text-align:left;
   }
   .search-label i { color:var(--scholar-gold); font-size:13px; }
 
@@ -307,7 +304,7 @@
   .cert-image-wrap {
     background:rgba(255,255,255,0.02);
     border:1px solid var(--border-gold);
-    border-radius:10px; padding:12px; margin-bottom:24px;
+    border-radius:10px; padding:12px; margin-bottom:24px; text-align:center;
   }
   #certificateImage {
     display:block; width:100%; max-width:700px; height:auto;
@@ -465,33 +462,13 @@
     background:var(--grad-card); border:1px solid var(--border-subtle);
     border-radius:14px; padding:28px 24px; margin-top:24px;
   }
-  /* Override styles.css centered flex for section-title / section-intro */
-  .how-it-works .section-title {
-    justify-content: flex-start;
-    text-align: left;
-  }
-  .how-it-works .section-intro {
-    text-align: left;
-    margin-left: 0;
-  }
-  /* Override section-title centering for the search and verify areas too */
-  .verify-wrap .section-title {
-    justify-content: flex-start;
-    text-align: left;
-  }
-  .verify-wrap .section-intro {
-    text-align: left;
-    margin-left: 0;
-  }
-  /* Autoload banner and result text always left */
-  .verify-result, .autoload-banner { text-align: left; }
   .hiw-grid {
     display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
     gap:16px; margin-top:18px;
   }
   .hiw-card {
     background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle);
-    border-radius:10px; padding:18px 14px; text-align:left;
+    border-radius:10px; padding:18px 14px; text-align:center;
     transition:all 0.3s ease;
   }
   .hiw-card:hover {
@@ -503,7 +480,7 @@
     font-family:"Orbitron",sans-serif; font-size:11px;
     color:var(--code-cyan); margin:0 0 7px; letter-spacing:0.3px;
   }
-  .hiw-card p { font-size:11.5px; color:var(--text-muted); margin:0; text-align:left; line-height:1.6; }
+  .hiw-card p { font-size:11.5px; color:var(--text-muted); margin:0; text-align:center; line-height:1.6; }
 
   /* ── RESPONSIVE ───────────────────────────────────────────────────────── */
   @media (max-width:768px) {
@@ -534,11 +511,19 @@
   }
 
   /* ── PRINT STYLES ─────────────────────────────────────────────────────── */
-  /* The printCertificate() JS function opens a dedicated print window
-     containing only the certificate image — so @media print here is a
-     safety fallback only (the main window is never printed directly). */
   @media print {
-    * { display: none !important; }
+    .bg-terms, #navbar, .verify-hero, .search-card,
+    .verify-result, .how-it-works, footer,
+    .cert-url-panel, .cert-action-row, .autoload-banner { display:none !important; }
+    .verify-wrap { padding:0; max-width:100%; }
+    .cert-details-card {
+      border:2px solid #c9a84c; border-radius:8px;
+      box-shadow:none; page-break-inside:avoid;
+    }
+    body { background:#fff; color:#000; }
+    .detail-label { color:#555; }
+    .detail-value { color:#000; }
+    .cert-details-title, .cert-verified-stamp { color:#c9a84c; }
   }
   </style>
 </head>
@@ -702,8 +687,8 @@
           <i class="fas fa-copy"></i> Copy Link
         </button>
         <!-- Print -->
-        <button class="share-btn share-btn-download" onclick="printCertificate()">
-          <i class="fas fa-print"></i> Print / Save PDF
+        <button class="share-btn share-btn-download" onclick="window.print()">
+          <i class="fas fa-print"></i> Print Record
         </button>
       </div>
       <div class="share-note">
@@ -1009,124 +994,8 @@ document.getElementById("certificateID").addEventListener("input", function() {
   this.classList.remove("error");
 });
 
-/* ── PRINT CERTIFICATE AS PDF ───────────────────────────────────────────
-   Opens a minimal popup window containing only the certificate image,
-   sized to fill an A4 landscape page (or portrait if taller than wide).
-   The user's browser "Print → Save as PDF" produces a clean single-page PDF
-   with no UI chrome, borders, or watermarks — just the certificate.
-   Works entirely without external libraries.
-─────────────────────────────────────────────────────────────────────── */
-function printCertificate() {
-  const img = document.getElementById("certificateImage");
-
-  if (!img || !img.src || img.src === window.location.href) {
-    alert("No certificate loaded yet. Please verify a certificate first.");
-    return;
-  }
-
-  // Determine orientation from natural image dimensions
-  const isLandscape = (img.naturalWidth || 800) >= (img.naturalHeight || 600);
-
-  // Build a self-contained print HTML document
-  const html = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Certificate — Nex Genix Business School</title>
-  <style>
-    /* Reset everything */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    /* Page size matches image orientation */
-    @page {
-      size: ${isLandscape ? 'A4 landscape' : 'A4 portrait'};
-      margin: 0;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      background: #ffffff;
-    }
-
-    .cert-page {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      page-break-inside: avoid;
-    }
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* Hide everything on screen — only render for printing */
-    @media screen {
-      body {
-        background: #1a1a1a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
-      .cert-page {
-        max-width: 900px;
-        box-shadow: 0 4px 40px rgba(0,0,0,0.5);
-      }
-      img {
-        border-radius: 4px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="cert-page">
-    <img src="${img.src}" alt="Certificate">
-  </div>
-  <script>
-    // Wait for image to fully load before printing
-    const certImg = document.querySelector('img');
-    function triggerPrint() {
-      window.focus();
-      setTimeout(function() {
-        window.print();
-        // Close popup after print dialog closes (slight delay for UX)
-        setTimeout(function() { window.close(); }, 500);
-      }, 250);
-    }
-    if (certImg.complete && certImg.naturalWidth > 0) {
-      triggerPrint();
-    } else {
-      certImg.onload  = triggerPrint;
-      certImg.onerror = function() {
-        alert('Could not load certificate image for printing.');
-        window.close();
-      };
-    }
-  <\/script>
-</body>
-</html>`;
-
-  // Open popup and write the print document into it
-  const popup = window.open('', '_blank', 'width=900,height=640,menubar=no,toolbar=no,location=no,status=no');
-  if (!popup) {
-    // Popup blocked — fallback: open image in new tab so user can print manually
-    window.open(img.src, '_blank');
-    return;
-  }
-  popup.document.open();
-  popup.document.write(html);
-  popup.document.close();
-}
-
-
+/* ── NAVBAR TOGGLE ─────────────────────────────────────────────────────── */
+function toggleMenu() {
   document.querySelector('.nav-list').classList.toggle('active');
   document.querySelector('.hamburger-menu').classList.toggle('open');
 }
