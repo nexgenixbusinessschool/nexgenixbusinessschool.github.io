@@ -99,7 +99,7 @@ p {
 .announcement-track {
     display: flex;
     white-space: nowrap;
-    animation: scroll-announce 50s linear infinite;
+    animation: scroll-announce 25s linear infinite;
     will-change: transform;
 }
 
@@ -975,18 +975,20 @@ p {
 
 /* =================== FOOTER =================== */
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
     background: linear-gradient(90deg, #090f1a, #0d1b2e, #090f1a);
     color: var(--chalk-gray);
     padding: 14px 22px;
     text-align: center;
     border-top: 1px solid var(--border-subtle);
     font-size: 12px;
-    z-index: 1000;
+    z-index: 1000 !important;
     box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.6);
+    margin: 0 !important;
+    border-radius: 0 !important;
 }
 
 footer i {
@@ -1010,10 +1012,10 @@ footer span {
 /* =================== HOMEPAGE FIXED ANNOUNCEMENT STRIP =================== */
 /* Used only on index.html — sits fixed above the footer */
 .announcement-strip-fixed {
-    position: fixed;
-    bottom: 50px; /* sits directly above the fixed footer */
-    left: 0;
-    width: 100%;
+    position: fixed !important;
+    bottom: 46px !important;
+    left: 0 !important;
+    width: 100% !important;
     height: 34px;
     background: linear-gradient(90deg, #060e18, #0d1e32, #060e18);
     border-top: 1px solid var(--border-subtle);
@@ -1021,7 +1023,8 @@ footer span {
     overflow: hidden;
     display: flex;
     align-items: center;
-    z-index: 999;
+    z-index: 999 !important;
+    margin: 0 !important;
 }
 
 /* =================== ADDITIONAL PRODUCT SECTIONS =================== */
