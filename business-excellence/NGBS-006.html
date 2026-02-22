@@ -1,370 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nex Genix Business School</title>
+  <title>International Business — Nex Genix Business School</title>
   <link rel="icon" type="image/x-icon" href="../assets/images/favicon-bs.ico">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,400&family=Silkscreen:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+  /* ── PAGE-SPECIFIC ─ all variables from styles.css ── */
 
-    body {
-      text-align: justify;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-      position: relative;
-    }
+  /* Course hero */
+  .course-hero {
+    background: linear-gradient(160deg,#0d1b2e 0%,#0e2442 40%,#162032 75%,#0d1b2e 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 32px 28px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .course-hero::before {
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 25% 35%, rgba(79,195,216,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 65%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    pointer-events:none;
+  }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(19, 158, 1, 0.03) 2px, rgba(19, 158, 1, 0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(19, 158, 1, 0.03) 2px, rgba(19, 158, 1, 0.03) 4px);
-      pointer-events: none;
-      z-index: 0;
-    }
+  /* Ribbon */
+  .ribbon-tag {
+    display: inline-flex; align-items:center; gap:6px;
+    padding: 5px 16px; border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    font-family: "Orbitron", sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    margin-bottom: 16px;
+  }
+  .ribbon-beginner     { background:linear-gradient(135deg,#0e3b1e,#3ecf7a); color:#051510; }
+  .ribbon-intermediate { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; }
+  .ribbon-advanced     { background:linear-gradient(135deg,#2e0a0a,#e8855a); color:#1a0603; }
 
-    .container {
-      display: flex;
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
+  .course-id-tag {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:3px 11px; border-radius:14px; font-size:10px;
+    font-family:'Courier New',monospace; font-weight:700;
+    color:var(--code-cyan); background:rgba(79,195,216,0.07);
+    border:1px solid var(--border-subtle); margin-bottom:12px;
+  }
+  .course-hero h1 {
+    font-family:"Orbitron",sans-serif;
+    font-size: clamp(16px,4vw,26px);
+    color: var(--scholar-gold);
+    text-shadow: 0 0 14px var(--scholar-gold-glow);
+    margin: 0 0 16px; line-height:1.3; position:relative;
+  }
+  .course-desc-box {
+    font-size:clamp(12.5px,2.8vw,14.5px);
+    color:var(--chalk-gray); line-height:1.8;
+    max-width:700px; margin:0 auto; text-align:justify; position:relative;
+  }
 
-    .left {
-      flex: 1 1 60%;
-      min-width: 300px;
-      background: rgba(17, 17, 17, 0.85);
-      padding: 30px;
-      border-radius: 15px;
-      border: 2px solid rgba(19, 158, 1, 0.3);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-    }
+  /* Layout */
+  .course-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 28px;
+    align-items: start;
+    margin-bottom: 36px;
+  }
 
-    .right {
-      flex: 1 1 35%;
-      min-width: 260px;
-      background: rgba(17, 17, 17, 0.85);
-      padding: 25px;
-      border-radius: 15px;
-      border: 2px solid rgba(19, 158, 1, 0.3);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 20px;
-    }
+  /* Main card */
+  .course-main {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .section-block {
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .section-block:last-child { border-bottom: none; }
+  .block-title {
+    font-family:"Orbitron",sans-serif;
+    font-size: 12px; color: var(--code-cyan);
+    text-transform:uppercase; letter-spacing:1px;
+    margin: 0 0 16px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .block-title i { font-size:13px; }
 
-    .course-title {
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-      font-weight: bold;
-      color: #139E01;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border-bottom: 3px solid #139E01;
-      padding-bottom: 15px;
-      text-shadow: 0 0 10px rgba(19, 158, 1, 0.3);
-    }
+  /* Objectives list */
+  .obj-list { list-style:none; padding:0; margin:0; }
+  .obj-list li {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13.5px; color:var(--chalk-gray);
+    padding: 6px 0; border-bottom:1px solid rgba(79,195,216,0.07);
+    line-height:1.6;
+  }
+  .obj-list li:last-child { border-bottom:none; }
+  .obj-list li i { color:var(--terminal-green); font-size:11px; margin-top:4px; flex-shrink:0; }
 
-    .course-detail-label {
-      font-size: 1.2rem;
-      margin-top: 25px;
-      color: #139E01;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-left: 4px solid #139E01;
-      padding-left: 12px;
-      margin-left: -15px;
-    }
+  /* Modules */
+  .module-item {
+    display:flex; gap:16px; align-items:flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(79,195,216,0.07);
+  }
+  .module-item:last-child { border-bottom:none; }
+  .module-num {
+    width:36px; height:36px; border-radius:50%;
+    background:linear-gradient(135deg,#1a2d46,#243d5c);
+    border:1.5px solid var(--code-cyan);
+    color:var(--code-cyan);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Silkscreen",sans-serif; font-size:13px; font-weight:700;
+    flex-shrink:0;
+    box-shadow: 0 0 8px var(--code-cyan-glow);
+  }
+  .module-body { flex:1; }
+  .module-body h4 {
+    font-family:"Orbitron",sans-serif;
+    font-size:12.5px; color:var(--scholar-gold);
+    margin:0 0 6px; line-height:1.3;
+  }
+  .module-body p { font-size:13px; color:var(--text-muted); margin:0; line-height:1.65; text-align:left; }
 
-    .course-details {
-      font-size: 1rem;
-      margin-top: 10px;
-      line-height: 1.8;
-      color: #e0e0e0;
-    }
+  /* Outcomes */
+  .out-list { list-style:none; padding:0; margin:0; }
+  .out-list li {
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:13.5px; color:var(--chalk-gray);
+    padding: 6px 0; border-bottom:1px solid rgba(201,168,76,0.07);
+    line-height:1.6;
+  }
+  .out-list li:last-child { border-bottom:none; }
+  .out-list li i { color:var(--scholar-gold); font-size:12px; margin-top:4px; flex-shrink:0; }
 
-    ul {
-      margin-top: 15px;
-      padding-left: 25px;
-    }
+  /* Ideal for */
+  .ideal-box {
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(79,195,216,0.06);
+    border:1px solid var(--border-subtle);
+    padding:10px 18px; border-radius:8px;
+    font-size:13px; color:var(--chalk-gray);
+  }
+  .ideal-box i { color:var(--code-cyan); }
 
-    ul li {
-      margin-bottom: 12px;
-      line-height: 1.6;
-      color: #d0d0d0;
-      position: relative;
-    }
+  /* Sidebar */
+  .course-sidebar {
+    display:flex; flex-direction:column; gap:18px;
+    position:sticky; top:70px;
+  }
+  .sidebar-card {
+    background: var(--grad-card);
+    border:1px solid var(--border-gold);
+    border-radius:14px; overflow:hidden;
+  }
+  .sidebar-img {
+    width:100%; height:auto; display:block;
+    border-bottom:1px solid var(--border-gold);
+  }
+  .sidebar-body { padding:20px; }
+  .sidebar-price {
+    font-family:"Silkscreen",sans-serif;
+    font-size:1.6rem; color:var(--scholar-gold);
+    text-shadow:0 0 10px var(--scholar-gold-glow);
+    margin-bottom:16px; display:block;
+  }
 
-    ul li::marker {
-      color: #139E01;
-      font-weight: bold;
-    }
+  /* CTA buttons */
+  .btn-enroll {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:13px;
+    background:linear-gradient(135deg,#1a4535,#3ecf7a);
+    color:#071510; border:none; border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:12px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease;
+    box-shadow:0 0 14px rgba(62,207,122,0.25);
+    text-decoration:none; margin-bottom:10px;
+  }
+  .btn-enroll:hover { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; transform:translateY(-2px); box-shadow:0 6px 22px var(--scholar-gold-glow); }
+  .btn-ask {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:11px;
+    background:rgba(201,168,76,0.08);
+    color:var(--scholar-gold); border:1.5px solid var(--scholar-gold); border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:11px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease; text-decoration:none; margin-bottom:10px;
+  }
+  .btn-ask:hover { background:var(--scholar-gold); color:var(--pure-black); transform:translateY(-2px); }
+  .btn-support {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:11px;
+    background:rgba(79,195,216,0.06);
+    color:var(--code-cyan); border:1.5px solid var(--code-cyan); border-radius:25px;
+    font-family:"Orbitron",sans-serif; font-size:11px; font-weight:bold;
+    text-transform:uppercase; letter-spacing:0.5px;
+    cursor:pointer; transition:all 0.3s ease; text-decoration:none;
+  }
+  .btn-support:hover { background:var(--code-cyan); color:var(--pure-black); transform:translateY(-2px); }
 
-    ul li b {
-      color: #139E01;
-      font-weight: 600;
-    }
+  /* Sidebar meta list */
+  .sidebar-meta { list-style:none; padding:0; margin:0 0 18px; }
+  .sidebar-meta li {
+    display:flex; align-items:center; gap:10px;
+    padding:8px 0; border-bottom:1px solid var(--border-subtle);
+    font-size:12.5px; color:var(--chalk-gray);
+  }
+  .sidebar-meta li:last-child { border-bottom:none; }
+  .sidebar-meta li i { color:var(--scholar-gold); font-size:12px; width:14px; text-align:center; }
 
-    .cta-buttons {
-      display: grid;
-      gap: 12px;
-      margin-top: 20px;
-      place-items: center; 
-    }
+  /* Cert badge */
+  .cert-badge {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(201,168,76,0.07);
+    border:1px solid var(--border-gold);
+    border-radius:8px; padding:12px 14px;
+    font-size:12px; color:var(--scholar-gold);
+    font-family:"Orbitron",sans-serif; letter-spacing:0.3px;
+  }
+  .cert-badge i { font-size:18px; }
 
-    .uniform-button {
-      text-align: center;
-      border: none;
-      border-radius: 10px;
-      width: 100%;
-      height: 3.125rem;
-      padding: 0 2rem;
-      font-weight: bold;
-      color: #ffffff;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .uniform-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .yellow {
-      background: linear-gradient(135deg, #E4E30C 0%, #b8b709 100%);
-    }
-
-    .yellow:hover {
-      background: linear-gradient(135deg, #f5f50d 0%, #E4E30C 100%);
-    }
-
-    .red {
-      background: linear-gradient(135deg, #FF4D27 0%, #d63d1e 100%);
-    }
-
-    .red:hover {
-      background: linear-gradient(135deg, #ff6242 0%, #FF4D27 100%);
-    }
-
-    .enroll {
-      background: linear-gradient(135deg, #139E01 0%, #0f7a01 100%);
-    }
-
-    .enroll:hover {
-      background: linear-gradient(135deg, #16b801 0%, #139E01 100%);
-    }
-
-    img.course-image {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      border: 3px solid rgba(19, 158, 1, 0.4);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .mobile-only {
-      display: none;
-    }
-
-    body, .container, .left, .right, .course-details, ul, p {
-      max-width: 100%;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .course-title::before {
-      content: '📚 ';
-      font-size: 1.5rem;
-      margin-right: 10px;
-    }
-
-    footer {
-      margin: 0;
-      padding: 10px 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 960px) {
-      body::before {
-        background-size: 3px 3px;
-      }
-
-      .container {
-        flex-direction: column;
-        padding: 40px 10px;
-      }
-
-      .left {
-        padding: 20px;
-      }
-
-      .left, .right {
-        width: 100%;
-      }
-
-      .right {
-        display: none;
-      }
-
-      .mobile-only {
-        display: block;
-        background: rgba(17, 17, 17, 0.85);
-        padding: 20px;
-        border-radius: 15px;
-        border: 2px solid rgba(19, 158, 1, 0.3);
-        margin-top: 20px;
-      }
-
-      img.course-image {
-        max-width: 90%;
-        margin: 0 auto;
-        display: block;
-        border-radius: 10px;
-        margin-bottom: 15px;
-      }
-
-      .cta-buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 20px;
-      }
-
-      .uniform-button {
-        width: 100%;
-        max-width: 400px;
-      }
-    }
+  /* Responsive */
+  @media (max-width:900px) {
+    .course-layout { grid-template-columns:1fr; }
+    .course-sidebar { position:static; order:-1; }
+    .course-main { order:1; }
+  }
+  @media (max-width:500px) {
+    .course-hero { padding:22px 14px 18px; }
+    .section-block { padding:18px 16px; }
+  }
   </style>
 </head>
 <body>
-<!-- Navigation Bar -->
+
+<!-- NAVBAR -->
 <nav id="navbar">
-    <div class="logo">
-        <img src="../assets/images/logo-bs.png" alt="logo" class="logo">
-        <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
-        <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
-    </div>
-
-    <!-- Hamburger Menu Icon -->
-    <div class="hamburger-menu" onclick="toggleMenu()">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-    <ul class="nav-list">
-        <li><a href="https://nexgenixbusinessschool.github.io">Home</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#about_us">About Us</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#products_and_services">Products & Services</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#reviews">Reviews</a></li>
-        <li><a href="#careers">Careers</a></li>
-        <li><a href="https://nexgenixbusinessschool.github.io/#contact">Contact</a></li>
-    </ul>
-
-    <div class="auth-buttons" id="auth-buttons">
-        <button onclick="handleLogout()" class="logout-btn">Logout</button>
-        <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn">Dashboard</a>
-    </div>
+  <div class="logo">
+    <img src="../assets/images/logo-bs.png" alt="NGBS Logo" class="logo">
+    <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
+    <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+  </div>
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+  <ul class="nav-list">
+    <li><a href="https://nexgenixbusinessschool.github.io"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#about_us"><i class="fas fa-info-circle"></i> About Us</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/business-excellence"><i class="fas fa-briefcase"></i> Business Excellence</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/bookstore.html"><i class="fas fa-book-open"></i> Bookstore</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </div>
 </nav>
 
-  <div class="container">
+<!-- COURSE HERO -->
+<div class="course-hero">
+  <div class="ribbon-tag ribbon-advanced"><i class="fas fa-signal"></i> Advanced</div>
+  <div class="course-id-tag"><i class="fas fa-barcode"></i> NGBS-006</div>
+  <h1>International Business</h1>
+  <p class="course-desc-box">Explore the complexities of global markets and learn strategies for managing international operations, trade, and multicultural teams.</p>
+</div>
 
-    <!-- Left Block -->
-    <div class="left">
-      <div class="course-title">International Business</div>
+<!-- COURSE LAYOUT -->
+<div class="course-layout">
 
-      <img src="../assets/images/ngbs006.png" alt="International Business" class="course-image mobile-only" />
+  <!-- MAIN CONTENT -->
+  <div class="course-main">
 
-      <div class="course-detail-label">Course Description:</div>
-      <div class="course-details">
-        Explore the complexities of global markets and learn strategies for managing international operations, trade, and multicultural teams.
-      </div>
-
-      <div class="course-detail-label">Learning Objectives:</div>
-      <ul>
-        <li>Understand global trade laws and foreign market dynamics</li>
-        <li>Develop entry strategies for new international markets</li>
-        <li>Manage cross-cultural teams effectively</li>
+    <!-- Objectives -->
+    <div class="section-block">
+      <h3 class="block-title"><i class="fas fa-bullseye"></i> Learning Objectives</h3>
+      <ul class="obj-list">
+          <li><i class="fas fa-circle"></i>Understand global trade laws and foreign market dynamics</li>
+          <li><i class="fas fa-circle"></i>Develop entry strategies for new international markets</li>
+          <li><i class="fas fa-circle"></i>Manage cross-cultural teams effectively</li>
       </ul>
-
-      <div class="course-detail-label">Modules:</div>
-      <ul>
-        <li><b>Fundamentals of International Business</b></li>
-
-        <li><b>Global Trade Agreements & Barriers</b></li>
-
-        <li><b>Market Entry Strategies (JV, Franchise, Subsidiary)</b></li>
-
-        <li><b>Cross-Cultural Communication & Management</b></li>
-
-        <li><b>Global Supply Chain Considerations</b></li>
-
-        <li><b>Risk Management in Global Business</b></li>
-
-      </ul>
-
-      <div class="course-detail-label">Outcomes:</div>
-      <ul>
-        <li>Build strategic plans for entering foreign markets</li>
-        <li>Lead multicultural teams with confidence</li>
-        <li>Navigate trade regulations and economic trends</li>
-      </ul>
-
-      <div class="course-detail-label">Ideal for:</div>
-      <p>Exporters, international managers, global strategists</p>
-
-      <!-- CTA for mobile only -->
-      <div class="cta-buttons mobile-only">
-        <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
-        <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
-        <a href="https://www.paypal.com/ncp/payment/YH5ZR5ERMFNWQ" class="uniform-button enroll" target="_blank">Enroll now</a>
-      </div>
     </div>
 
-    <!-- Right Block (for wide screens only) -->
-    <div class="right">
-      <img src="../assets/images/ngbs006.png" alt="International Business" class="course-image" />
-      <div class="cta-buttons">
-        <a href="/faq-or-form" class="uniform-button yellow">Ask a Question</a>
-        <a href="/contact-support" class="uniform-button red">Need Human Assistance</a>
-        <a href="https://www.paypal.com/ncp/payment/YH5ZR5ERMFNWQ" class="uniform-button enroll" target="_blank">Enroll now</a>
-      </div>
+    <!-- Modules -->
+    <div class="section-block">
+      <h3 class="block-title"><i class="fas fa-layer-group"></i> Course Modules</h3>
+
+          <div class="module-item">
+            <div class="module-num">01</div>
+            <div class="module-body">
+              <h4>Fundamentals of International Business</h4>
+              
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">02</div>
+            <div class="module-body">
+              <h4>Global Trade Agreements &amp; Barriers</h4>
+              
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">03</div>
+            <div class="module-body">
+              <h4>Market Entry Strategies (JV, Franchise, Subsidiary)</h4>
+              
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">04</div>
+            <div class="module-body">
+              <h4>Cross-Cultural Communication &amp; Management</h4>
+              
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">05</div>
+            <div class="module-body">
+              <h4>Global Supply Chain Considerations</h4>
+              
+            </div>
+          </div>
+          <div class="module-item">
+            <div class="module-num">06</div>
+            <div class="module-body">
+              <h4>Risk Management in Global Business</h4>
+              
+            </div>
+          </div>
     </div>
 
-  </div>
+    <!-- Outcomes -->
+    <div class="section-block">
+      <h3 class="block-title"><i class="fas fa-trophy"></i> Learning Outcomes</h3>
+      <ul class="out-list">
+          <li><i class="fas fa-check-circle"></i>Build strategic plans for entering foreign markets</li>
+          <li><i class="fas fa-check-circle"></i>Lead multicultural teams with confidence</li>
+          <li><i class="fas fa-check-circle"></i>Navigate trade regulations and economic trends</li>
+      </ul>
+    </div>
 
-  <!-- Footer Section -->
-  <footer>&copy; 2025 <span>Nex Genix Business School</span> All rights reserved.</footer>
+    <!-- Ideal for -->
+    <div class="section-block">
+      <h3 class="block-title"><i class="fas fa-users"></i> Ideal For</h3>
+      <div class="ideal-box"><i class="fas fa-user-check"></i> Exporters, international managers, global strategists</div>
+    </div>
+
+  </div><!-- /course-main -->
+
+  <!-- SIDEBAR -->
+  <div class="course-sidebar">
+    <div class="sidebar-card">
+      <img src="../assets/images/ngbs006.png" alt="International Business" class="sidebar-img">
+      <div class="sidebar-body">
+        <ul class="sidebar-meta">
+          <li><i class="fas fa-layer-group"></i> 6 Modules</li>
+          <li><i class="fas fa-award"></i> Certificate Included</li>
+          <li><i class="fas fa-globe"></i> Online &amp; Self-paced</li>
+          <li><i class="fas fa-language"></i> English</li>
+          <li><i class="fas fa-signal"></i> Advanced Level</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/YH5ZR5ERMFNWQ" class="btn-enroll" target="_blank">
+          <i class="fas fa-graduation-cap"></i> Enroll Now
+        </a>
+        <a href="/faq-or-form" class="btn-ask">
+          <i class="fas fa-question-circle"></i> Ask a Question
+        </a>
+        <a href="/contact-support" class="btn-support">
+          <i class="fas fa-headset"></i> Need Human Assistance
+        </a>
+        <div class="cert-badge">
+          <i class="fas fa-certificate"></i>
+          <span>Certificate upon completion — verifiable online</span>
+        </div>
+      </div>
+    </div>
+  </div><!-- /sidebar -->
+
+</div><!-- /course-layout -->
+
+<footer>
+  <i class="fas fa-graduation-cap"></i>
+  &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
+  <span class="footer-tagline">Transforming Education Through Technology</span>
+  <span class="footer-tagline" style="margin-top:4px;">
+    <a href="https://nexgenixbusinessschool.github.io/verify-certificate" style="color:var(--code-cyan);text-decoration:none;">
+      <i class="fas fa-certificate" style="color:var(--scholar-gold);"></i> Verify Certificate
+    </a>
+  </span>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.nav-list').classList.toggle('active');
+    document.querySelector('.hamburger-menu').classList.toggle('open');
+  }
+</script>
 </body>
 </html>
