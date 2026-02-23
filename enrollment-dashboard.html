@@ -265,12 +265,12 @@
     /* =================== COURSE CARDS =================== */
     .course-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      gap: 16px; padding-top: 14px;
     }
     .course-card {
       background: var(--grad-card); padding: 18px; border-radius: 12px;
       border: 1px solid var(--border-subtle); cursor: pointer;
-      transition: all 0.3s ease; position: relative; overflow: hidden;
+      transition: all 0.3s ease; position: relative; overflow: visible;
     }
     .course-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -327,28 +327,71 @@
       padding: 22px; border: 1px solid var(--border-subtle);
     }
 
-    /* =================== CALENDAR =================== */
-    .cal-widget { background: rgba(255,255,255,0.02); border-radius: 10px; padding: 14px; margin-bottom: 14px; }
+    /* =================== CALENDAR / WEEKLY SCHEDULE =================== */
+    .cal-widget { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
     .cal-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .cal-nav-btn {
-      background: none; border: 1px solid var(--border-subtle); color: var(--code-cyan);
-      border-radius: 6px; width: 26px; height: 26px; cursor: pointer; font-size: 11px;
-      transition: all 0.2s;
+      background: rgba(79,195,216,0.1); border: 1px solid var(--border-subtle); color: var(--code-cyan);
+      border-radius: 8px; width: 30px; height: 30px; cursor: pointer; font-size: 12px;
+      transition: all 0.2s; display: flex; align-items: center; justify-content: center;
     }
-    .cal-nav-btn:hover { background: var(--code-cyan-soft); }
-    .cal-month { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--chalk-gray); }
-    .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
-    .cal-day-label { text-align: center; font-size: 10px; color: var(--code-cyan); padding: 4px 0; font-weight: 600; }
-    .cal-date {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 11px; border-radius: 6px; background: var(--charcoal);
-      color: var(--text-muted); cursor: default; transition: all 0.2s;
+    .cal-nav-btn:hover { background: var(--code-cyan); color: var(--pure-black); }
+    .cal-month { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--scholar-gold); font-weight: 700; }
+
+    /* Week row */
+    .week-schedule {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
     }
-    .cal-date.today { border: 1.5px solid var(--code-cyan); color: var(--code-cyan); font-weight: 700; }
-    .cal-date.has-class {
-      background: var(--grad-premium); color: var(--pure-black); font-weight: 700;
-      box-shadow: 0 2px 8px var(--scholar-gold-glow);
+    .week-day-col {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
     }
+    .week-day-label {
+      font-family: "Orbitron", sans-serif; font-size: 9px; color: var(--code-cyan);
+      font-weight: 700; padding: 4px 0; text-transform: uppercase;
+    }
+    .week-day-cell {
+      width: 100%; min-height: 36px; border-radius: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid transparent;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 2px; padding: 4px 2px; transition: all 0.2s;
+    }
+    .week-day-cell.today {
+      border-color: var(--code-cyan); background: rgba(79,195,216,0.08);
+    }
+    .week-day-cell.has-class {
+      background: rgba(201,168,76,0.12); border-color: var(--scholar-gold);
+    }
+    .week-day-date {
+      font-size: 11px; font-weight: 700; color: var(--text-muted);
+    }
+    .week-day-cell.today .week-day-date { color: var(--code-cyan); }
+    .week-day-cell.has-class .week-day-date { color: var(--scholar-gold); }
+    .week-class-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--scholar-gold); flex-shrink: 0;
+    }
+    .week-class-dot.live { background: var(--danger); }
+
+    /* Class day details list */
+    .class-day-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .class-day-entry {
+      background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 10px;
+      border-left: 3px solid var(--scholar-gold); font-size: 11px;
+    }
+    .class-day-entry .cde-day { font-weight: 700; color: var(--scholar-gold); margin-bottom: 2px; font-family: "Orbitron", sans-serif; font-size: 10px; }
+    .class-day-entry .cde-name { color: var(--paper-white); margin-bottom: 1px; }
+    .class-day-entry .cde-time { color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+
+    /* Legend */
+    .cal-legend {
+      display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap;
+      padding: 8px 0; border-top: 1px solid var(--border-subtle);
+    }
+    .cal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-muted); }
+    .cal-legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .cal-legend-dot.today { background: transparent; border: 2px solid var(--code-cyan); }
+    .cal-legend-dot.class-day { background: var(--scholar-gold); }
+    .cal-legend-dot.no-class { background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); }
 
     /* =================== SCHEDULE LIST =================== */
     .schedule-list { max-height: 200px; overflow-y: auto; padding-right: 4px; }
@@ -573,7 +616,7 @@
       .nav-list li { margin: 8px 0; }
       .auth-btns { display: none; }
       .currency-select { display: none; }
-      .bag-btn { position: absolute; right: 55px; top: 50%; transform: translateY(-50%); }
+      .bag-btn { display: none; }
       .layout-grid { grid-template-columns: 1fr; }
       .dashboard-grid { grid-template-columns: 1fr; }
       .bottom-nav { display: flex; }
@@ -695,6 +738,26 @@
 
       <!-- LEFT: Course Listings -->
       <div>
+        <!-- Currency Selector (above course listings) -->
+        <div style="background:rgba(79,195,216,0.04); border:1px solid var(--border-subtle); border-radius:10px; padding:12px 16px; margin-bottom:18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:7px; font-family:'Orbitron',sans-serif; font-size:11px; color:var(--code-cyan);"><i class="fas fa-globe"></i> Tuition Currency</div>
+          <div style="font-size:12px; color:var(--text-muted);">All fees in: <strong style="color:var(--scholar-gold)" id="currentCurrencyLabel">USD — US Dollar</strong></div>
+          <select class="currency-select" style="margin-left:auto; padding:6px 10px; font-size:12px; border-radius:8px;" onchange="changeCurrency(this.value); document.getElementById('currencyDropdown').value=this.value;">
+            <option value="USD">💵 USD — US Dollar</option>
+            <option value="PHP">🇵🇭 PHP — Philippine Peso</option>
+            <option value="EUR">🇪🇺 EUR — Euro</option>
+            <option value="GBP">🇬🇧 GBP — British Pound</option>
+            <option value="JPY">🇯🇵 JPY — Japanese Yen</option>
+            <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
+            <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
+            <option value="SGD">🇸🇬 SGD — Singapore Dollar</option>
+            <option value="INR">🇮🇳 INR — Indian Rupee</option>
+            <option value="KRW">🇰🇷 KRW — Korean Won</option>
+            <option value="AED">🇦🇪 AED — UAE Dirham</option>
+            <option value="SAR">🇸🇦 SAR — Saudi Riyal</option>
+          </select>
+        </div>
+
         <!-- Search -->
         <div class="search-wrap">
           <i class="fas fa-search search-icon"></i>
@@ -760,19 +823,23 @@
             <i class="fas fa-calendar-alt"></i> Your Schedule
           </div>
 
-          <!-- Calendar -->
+          <!-- Weekly Schedule View -->
           <div class="cal-widget">
             <div class="cal-nav">
-              <button class="cal-nav-btn" onclick="prevMonth()"><i class="fas fa-chevron-left"></i></button>
-              <span class="cal-month" id="calMonth">February 2026</span>
-              <button class="cal-nav-btn" onclick="nextMonth()"><i class="fas fa-chevron-right"></i></button>
+              <button class="cal-nav-btn" onclick="prevWeek()"><i class="fas fa-chevron-left"></i></button>
+              <span class="cal-month" id="calWeekLabel">This Week</span>
+              <button class="cal-nav-btn" onclick="nextWeek()"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <div class="cal-grid">
-              <div class="cal-day-label">S</div><div class="cal-day-label">M</div>
-              <div class="cal-day-label">T</div><div class="cal-day-label">W</div>
-              <div class="cal-day-label">T</div><div class="cal-day-label">F</div>
-              <div class="cal-day-label">S</div>
-              <div id="calDates"></div>
+            <div class="week-schedule" id="weekSchedule"></div>
+            <div class="class-day-list" id="classDayList">
+              <div class="empty-state" style="padding:14px 0; font-size:12px;">
+                <i class="fas fa-calendar-plus" style="font-size:20px;"></i>
+                Add courses to see your class schedule
+              </div>
+            </div>
+            <div class="cal-legend">
+              <div class="cal-legend-item"><div class="cal-legend-dot today"></div> Today</div>
+              <div class="cal-legend-item"><div class="cal-legend-dot class-day"></div> Class day</div>
             </div>
           </div>
 
@@ -796,25 +863,6 @@
           </button>
         </div>
 
-        <!-- Currency Info -->
-        <div class="sidebar-card" style="padding: 16px;">
-          <div class="section-title" style="font-size:13px; margin-bottom:12px;"><i class="fas fa-globe"></i> Tuition Currency</div>
-          <p style="font-size: 12px; color: var(--text-muted); text-align: left; margin-bottom: 10px;">All fees shown in: <strong style="color:var(--scholar-gold)" id="currentCurrencyLabel">USD — US Dollar</strong></p>
-          <select class="form-select" style="font-size:12px;" onchange="changeCurrency(this.value); document.getElementById('currencyDropdown').value=this.value;">
-            <option value="USD">💵 USD — US Dollar</option>
-            <option value="PHP">🇵🇭 PHP — Philippine Peso</option>
-            <option value="EUR">🇪🇺 EUR — Euro</option>
-            <option value="GBP">🇬🇧 GBP — British Pound</option>
-            <option value="JPY">🇯🇵 JPY — Japanese Yen</option>
-            <option value="AUD">🇦🇺 AUD — Australian Dollar</option>
-            <option value="CAD">🇨🇦 CAD — Canadian Dollar</option>
-            <option value="SGD">🇸🇬 SGD — Singapore Dollar</option>
-            <option value="INR">🇮🇳 INR — Indian Rupee</option>
-            <option value="KRW">🇰🇷 KRW — Korean Won</option>
-            <option value="AED">🇦🇪 AED — UAE Dirham</option>
-            <option value="SAR">🇸🇦 SAR — Saudi Riyal</option>
-          </select>
-        </div>
       </div>
     </div>
   </div>
@@ -863,16 +911,20 @@
           <div class="section-title" style="font-size:14px; margin-bottom:12px;"><i class="fas fa-calendar-check"></i> Class Schedule</div>
           <div class="cal-widget">
             <div class="cal-nav">
-              <button class="cal-nav-btn" onclick="prevMonth(true)"><i class="fas fa-chevron-left"></i></button>
-              <span class="cal-month" id="dashCalMonth">February 2026</span>
-              <button class="cal-nav-btn" onclick="nextMonth(true)"><i class="fas fa-chevron-right"></i></button>
+              <button class="cal-nav-btn" onclick="prevWeek(true)"><i class="fas fa-chevron-left"></i></button>
+              <span class="cal-month" id="dashCalWeekLabel">This Week</span>
+              <button class="cal-nav-btn" onclick="nextWeek(true)"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <div class="cal-grid">
-              <div class="cal-day-label">S</div><div class="cal-day-label">M</div>
-              <div class="cal-day-label">T</div><div class="cal-day-label">W</div>
-              <div class="cal-day-label">T</div><div class="cal-day-label">F</div>
-              <div class="cal-day-label">S</div>
-              <div id="dashCalDates"></div>
+            <div class="week-schedule" id="dashWeekSchedule"></div>
+            <div class="class-day-list" id="dashClassDayList">
+              <div class="empty-state" style="padding:14px 0; font-size:12px;">
+                <i class="fas fa-calendar-times" style="font-size:20px;"></i>
+                No classes scheduled yet
+              </div>
+            </div>
+            <div class="cal-legend">
+              <div class="cal-legend-item"><div class="cal-legend-dot today"></div> Today</div>
+              <div class="cal-legend-item"><div class="cal-legend-dot class-day"></div> Class day</div>
             </div>
           </div>
           <div style="margin-top:14px;">
@@ -988,7 +1040,13 @@
 <nav class="bottom-nav" id="bottomNav">
   <button class="bottom-nav-item active" onclick="showView('enrollmentView'); setBottomActive(this)"><i class="fas fa-graduation-cap"></i>Enroll</button>
   <button class="bottom-nav-item" onclick="showView('dashboardView'); setBottomActive(this)"><i class="fas fa-tachometer-alt"></i>Dashboard</button>
-  <button class="bottom-nav-item" onclick="openBag()"><i class="fas fa-backpack"></i>My Bag</button>
+  <button class="bottom-nav-item" onclick="openBag(); setBottomActive(this)">
+    <span style="position:relative; display:inline-block;">
+      <i class="fas fa-backpack"></i>
+      <span id="bottomBagBadge" style="position:absolute;top:-6px;right:-8px;background:var(--danger);color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;">0</span>
+    </span>
+    My Bag
+  </button>
   <button class="bottom-nav-item"><i class="fas fa-user"></i>Profile</button>
 </nav>
 
@@ -1083,8 +1141,6 @@
   // Selected courses bag
   let selectedCourses = {};
   let enrolledCourses = [];
-  let calendarMonth = { year: 2026, month: 1 }; // 0-indexed
-  let dashCalendarMonth = { year: 2026, month: 1 };
 
   // =================== COURSE RENDERING ===================
   function renderAllCourses() {
@@ -1130,13 +1186,16 @@
     updateBadge();
     updateSchedule();
     updateEnrollBtn();
-    updateCalendar('calDates', calendarMonth, Object.values(selectedCourses));
+    updateWeekSchedule(Object.values(selectedCourses));
+    updateFormSummary(); // real-time update in enrollment form
   }
 
   function updateBadge() {
     const count = Object.keys(selectedCourses).length;
     document.getElementById('bagBadge').textContent = count;
     document.getElementById('enrollCount').textContent = count;
+    const bottomBadge = document.getElementById('bottomBagBadge');
+    if (bottomBadge) bottomBadge.textContent = count;
   }
 
   function updateEnrollBtn() {
@@ -1169,64 +1228,114 @@
     return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
   }
 
-  // =================== CALENDAR ===================
-  function renderCalendar(containerId, monthObj, highlightedCourses) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    const { year, month } = monthObj;
-    const today = new Date();
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
+  // =================== WEEK SCHEDULE ===================
+  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const DAY_FULL  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-    let html = '';
-    for (let i = 0; i < firstDay; i++) html += '<div class="cal-date"></div>';
-    for (let d = 1; d <= lastDate; d++) {
-      const date = new Date(year, month, d);
-      const dow = date.getDay();
-      const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-      const hasClass = highlightedCourses.some(c => {
+  let weekOffset = 0;      // enrollment view week offset
+  let dashWeekOffset = 0;  // dashboard week offset
+
+  function getWeekStart(offset) {
+    const d = new Date();
+    d.setHours(0,0,0,0);
+    const day = d.getDay();
+    d.setDate(d.getDate() - day + (offset * 7)); // start of week (Sunday)
+    return d;
+  }
+
+  function renderWeekSchedule(scheduleId, listId, labelId, offset, courses) {
+    const weekStart = getWeekStart(offset);
+    const today = new Date(); today.setHours(0,0,0,0);
+
+    // Week label
+    const weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 6);
+    const fmt = d => d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+    const labelEl = document.getElementById(labelId);
+    if (labelEl) labelEl.textContent = fmt(weekStart) + ' — ' + fmt(weekEnd);
+
+    // Build 7 columns
+    const grid = document.getElementById(scheduleId);
+    if (!grid) return;
+
+    // For each day of the week, find which courses meet that day
+    let gridHTML = '';
+    const classDays = []; // { dow, date, courses[] }
+
+    for (let dow = 0; dow < 7; dow++) {
+      const cellDate = new Date(weekStart);
+      cellDate.setDate(weekStart.getDate() + dow);
+      const isToday = cellDate.getTime() === today.getTime();
+      const dateNum = cellDate.getDate();
+
+      // Which instructor-led courses meet on this day?
+      const meetingCourses = courses.filter(c => {
         if (c.type !== 'Instructor-Led') return false;
         const s = c.schedule.toLowerCase();
-        return (s.includes('mon')&&dow===1)||(s.includes('tue')&&dow===2)||(s.includes('wed')&&dow===3)||
-               (s.includes('thu')&&dow===4)||(s.includes('fri')&&dow===5)||(s.includes('sat')&&dow===6)||(s.includes('sun')&&dow===0);
+        return (dow===0&&s.includes('sun'))||(dow===1&&s.includes('mon'))||
+               (dow===2&&s.includes('tue'))||(dow===3&&s.includes('wed'))||
+               (dow===4&&s.includes('thu'))||(dow===5&&s.includes('fri'))||
+               (dow===6&&s.includes('sat'));
       });
-      html += `<div class="cal-date ${isToday ? 'today':''} ${hasClass ? 'has-class':''}">${d}</div>`;
+
+      const hasClass = meetingCourses.length > 0;
+      if (hasClass) classDays.push({ dow, date: cellDate, courses: meetingCourses });
+
+      const dots = meetingCourses.map(() => `<div class="week-class-dot live"></div>`).join('');
+
+      gridHTML += `
+        <div class="week-day-col">
+          <div class="week-day-label">${DAY_NAMES[dow]}</div>
+          <div class="week-day-cell ${isToday ? 'today' : ''} ${hasClass ? 'has-class' : ''}">
+            <div class="week-day-date">${dateNum}</div>
+            ${dots}
+          </div>
+        </div>`;
     }
-    container.innerHTML = html;
-  }
+    grid.innerHTML = gridHTML;
 
-  function updateCalendar(containerId, monthObj, courses) {
-    renderCalendar(containerId, monthObj, courses);
-  }
-
-  function setCalMonthLabel(monthObj, labelId) {
-    const names = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const el = document.getElementById(labelId);
-    if (el) el.textContent = names[monthObj.month] + ' ' + monthObj.year;
-  }
-
-  function prevMonth(isDash) {
-    const obj = isDash ? dashCalendarMonth : calendarMonth;
-    obj.month--; if (obj.month < 0) { obj.month = 11; obj.year--; }
-    if (isDash) {
-      setCalMonthLabel(dashCalendarMonth, 'dashCalMonth');
-      updateCalendar('dashCalDates', dashCalendarMonth, enrolledCourses);
-    } else {
-      setCalMonthLabel(calendarMonth, 'calMonth');
-      updateCalendar('calDates', calendarMonth, Object.values(selectedCourses));
+    // Build class day detail list
+    const list = document.getElementById(listId);
+    if (!list) return;
+    if (classDays.length === 0) {
+      const isEmpty = courses.filter(c => c.type === 'Instructor-Led').length === 0;
+      list.innerHTML = `<div class="empty-state" style="padding:14px 0; font-size:12px;">
+        <i class="fas fa-${isEmpty ? 'calendar-plus' : 'calendar-check'}" style="font-size:20px;"></i>
+        ${isEmpty ? 'Add courses to see your class schedule' : 'No live classes this week — navigate to find your class days'}
+      </div>`;
+      return;
     }
+
+    list.innerHTML = classDays.map(({ dow, date, courses: dayCourses }) => {
+      const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+      const courseLines = dayCourses.map(c => {
+        // extract time from schedule e.g. "Mon/Wed 6:00 PM" → "6:00 PM"
+        const timePart = c.schedule.replace(/[a-zA-Z\/]+/g, '').trim() || c.schedule;
+        return `<div class="cde-name">🔴 ${c.name}</div>
+                <div class="cde-time"><i class="fas fa-clock"></i>${timePart}</div>`;
+      }).join('');
+      return `<div class="class-day-entry">
+        <div class="cde-day">${DAY_FULL[dow]}, ${dateStr}</div>
+        ${courseLines}
+      </div>`;
+    }).join('');
   }
 
-  function nextMonth(isDash) {
-    const obj = isDash ? dashCalendarMonth : calendarMonth;
-    obj.month++; if (obj.month > 11) { obj.month = 0; obj.year++; }
-    if (isDash) {
-      setCalMonthLabel(dashCalendarMonth, 'dashCalMonth');
-      updateCalendar('dashCalDates', dashCalendarMonth, enrolledCourses);
-    } else {
-      setCalMonthLabel(calendarMonth, 'calMonth');
-      updateCalendar('calDates', calendarMonth, Object.values(selectedCourses));
-    }
+  function updateWeekSchedule(courses) {
+    renderWeekSchedule('weekSchedule', 'classDayList', 'calWeekLabel', weekOffset, courses);
+  }
+
+  function updateDashWeekSchedule(courses) {
+    renderWeekSchedule('dashWeekSchedule', 'dashClassDayList', 'dashCalWeekLabel', dashWeekOffset, courses);
+  }
+
+  function prevWeek(isDash) {
+    if (isDash) { dashWeekOffset--; updateDashWeekSchedule(enrolledCourses); }
+    else { weekOffset--; updateWeekSchedule(Object.values(selectedCourses)); }
+  }
+
+  function nextWeek(isDash) {
+    if (isDash) { dashWeekOffset++; updateDashWeekSchedule(enrolledCourses); }
+    else { weekOffset++; updateWeekSchedule(Object.values(selectedCourses)); }
   }
 
   // =================== BAG MODAL ===================
@@ -1369,8 +1478,7 @@
     document.getElementById('statCompleted').textContent = enrolledCourses.filter(c => c.progress === 100).length;
     document.getElementById('statCerts').textContent = enrolledCourses.filter(c => c.progress === 100).length;
     renderEnrolledCourses(enrolledCourses);
-    updateCalendar('dashCalDates', dashCalendarMonth, enrolledCourses);
-    setCalMonthLabel(dashCalendarMonth, 'dashCalMonth');
+    updateDashWeekSchedule(enrolledCourses);
     renderUpcoming();
   }
 
@@ -1514,10 +1622,8 @@
   // =================== INIT ===================
   document.addEventListener('DOMContentLoaded', function() {
     renderAllCourses();
-    updateCalendar('calDates', calendarMonth, []);
-    setCalMonthLabel(calendarMonth, 'calMonth');
-    updateCalendar('dashCalDates', dashCalendarMonth, []);
-    setCalMonthLabel(dashCalendarMonth, 'dashCalMonth');
+    updateWeekSchedule([]);
+    updateDashWeekSchedule([]);
 
     // Close modals on overlay click
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
