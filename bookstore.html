@@ -426,6 +426,282 @@
     .form-row { grid-template-columns:1fr; }
     .page-announce { font-size:11px; }
   }
+
+  /* ============================================================
+     DIGITAL LIBRARY SECTION
+     ============================================================ */
+
+  /* Hero */
+  .lib-hero {
+    background: linear-gradient(160deg, #071220 0%, #0d2a1a 45%, #0a1e30 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 48px 30px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 48px 0 0;
+  }
+  .lib-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 40%, rgba(79,195,216,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 60%, rgba(201,168,76,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(62,207,122,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .lib-hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, #0d2a40, #4fc3d8);
+    color: #020d14; padding: 5px 16px; border-radius: 20px;
+    font-family: "Orbitron", sans-serif; font-size: 9.5px;
+    font-weight: 700; letter-spacing: 0.7px; margin-bottom: 18px;
+    position: relative;
+  }
+  .lib-hero h2 {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(20px, 5vw, 32px);
+    color: var(--code-cyan);
+    text-shadow: 0 0 18px var(--code-cyan-glow);
+    margin: 0 0 14px; line-height: 1.2;
+    position: relative;
+  }
+  .lib-hero h2 span { color: var(--scholar-gold); text-shadow: 0 0 14px var(--scholar-gold-glow); }
+  .lib-hero p {
+    font-size: clamp(12.5px, 2.5vw, 14.5px);
+    color: var(--chalk-gray); line-height: 1.8;
+    max-width: 620px; margin: 0 auto 28px;
+    text-align: center; position: relative;
+  }
+  .lib-hero-stats {
+    display: flex; justify-content: center; gap: 28px;
+    flex-wrap: wrap; position: relative;
+  }
+  .lib-hero-stat {
+    text-align: center;
+  }
+  .lib-hero-stat-num {
+    font-family: "Silkscreen", sans-serif;
+    font-size: 22px; color: var(--scholar-gold);
+    text-shadow: 0 0 10px var(--scholar-gold-glow);
+    display: block;
+  }
+  .lib-hero-stat-lbl {
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.7px;
+  }
+
+  /* Search */
+  .lib-search-wrap {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-top: none;
+    padding: 22px 24px;
+  }
+  .lib-search-inner {
+    display: flex; gap: 12px; align-items: center;
+    max-width: 700px; margin: 0 auto;
+  }
+  .lib-search-box {
+    flex: 1; position: relative;
+  }
+  .lib-search-box i {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--slate-medium); font-size: 14px; pointer-events: none;
+  }
+  .lib-search-input {
+    width: 100%; padding: 11px 14px 11px 40px;
+    background: rgba(79,195,216,0.04);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 25px; color: var(--paper-white);
+    font-size: 13px; font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+  }
+  .lib-search-input::placeholder { color: var(--slate-medium); }
+  .lib-search-input:focus { outline: none; border-color: var(--code-cyan); box-shadow: 0 0 12px rgba(79,195,216,0.15); }
+  .lib-search-clear {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--slate-medium);
+    cursor: pointer; font-size: 13px; padding: 2px 4px;
+    display: none; transition: color 0.2s;
+  }
+  .lib-search-clear:hover { color: var(--paper-white); }
+  .lib-search-clear.visible { display: block; }
+  .lib-view-toggle {
+    display: flex; gap: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px; padding: 3px;
+  }
+  .lib-view-btn {
+    width: 34px; height: 34px; border: none; border-radius: 6px;
+    background: transparent; color: var(--slate-medium);
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .lib-view-btn.active { background: rgba(79,195,216,0.15); color: var(--code-cyan); }
+  .lib-view-btn:hover:not(.active) { color: var(--paper-white); }
+
+  /* Categories */
+  .lib-cats {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-subtle);
+    border-top: none;
+    padding: 14px 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .lib-cats::-webkit-scrollbar { display: none; }
+  .lib-cats-inner { display: flex; gap: 8px; min-width: max-content; }
+  .lib-cat-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    font-family: "Orbitron", sans-serif; font-size: 9.5px;
+    font-weight: 600; letter-spacing: 0.4px;
+    cursor: pointer; transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+  .lib-cat-btn:hover { border-color: var(--code-cyan); color: var(--code-cyan); background: rgba(79,195,216,0.06); }
+  .lib-cat-btn.active { background: rgba(79,195,216,0.15); border-color: var(--code-cyan); color: var(--code-cyan); box-shadow: 0 0 10px rgba(79,195,216,0.2); }
+  .lib-cat-btn i { font-size: 11px; }
+
+  /* Results bar */
+  .lib-results-bar {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-top: none;
+    padding: 10px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: "Orbitron", sans-serif; font-size: 10px;
+    color: var(--text-muted); letter-spacing: 0.4px;
+  }
+  .lib-results-count { color: var(--code-cyan); }
+  .lib-no-results {
+    text-align: center; padding: 60px 20px;
+    color: var(--text-muted);
+    font-family: "Orbitron", sans-serif; font-size: 12px;
+    display: none;
+  }
+  .lib-no-results i { font-size: 40px; color: var(--border-gold); margin-bottom: 14px; display: block; }
+
+  /* Books grid */
+  .lib-books-wrap {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 24px;
+    min-height: 200px;
+  }
+  .lib-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .lib-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Book card — grid view */
+  .lib-book-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    animation: cardFadeIn 0.4s ease;
+  }
+  @keyframes cardFadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  .lib-book-card:hover { border-color: var(--code-cyan); transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(79,195,216,0.2); }
+  .lib-card-cover {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover; display: block;
+    background: linear-gradient(145deg, #0d1b2e, #1a2840);
+    transition: transform 0.3s ease;
+  }
+  .lib-book-card:hover .lib-card-cover { transform: scale(1.03); }
+  .lib-card-cover-wrap { overflow: hidden; position: relative; }
+  .lib-card-type-badge {
+    position: absolute; top: 8px; left: 8px;
+    padding: 3px 8px; border-radius: 10px;
+    font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 700;
+    letter-spacing: 0.4px; border: 1px solid currentColor;
+  }
+  .lib-card-free {
+    position: absolute; top: 8px; right: 8px;
+    padding: 3px 8px; border-radius: 10px;
+    font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 700;
+    background: rgba(62,207,122,0.15); color: #3ecf7a; border: 1px solid #3ecf7a;
+  }
+  .lib-card-premium {
+    position: absolute; top: 8px; right: 8px;
+    padding: 3px 8px; border-radius: 10px;
+    font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 700;
+    background: rgba(201,168,76,0.15); color: var(--scholar-gold); border: 1px solid var(--border-gold);
+  }
+  .lib-card-body { padding: 12px; }
+  .lib-card-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px; color: var(--paper-white);
+    margin: 0 0 5px; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .lib-card-author { font-size: 10.5px; color: var(--text-muted); margin: 0 0 6px; }
+  .lib-card-author i { color: var(--scholar-gold); margin-right: 4px; font-size: 9px; }
+  .lib-card-desc { font-size: 10px; color: var(--slate-medium); line-height: 1.5; margin: 0 0 10px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .lib-card-actions { display: flex; gap: 6px; }
+  .lib-card-btn {
+    flex: 1; padding: 6px 8px; border-radius: 16px; border: none;
+    font-family: "Orbitron", sans-serif; font-size: 8.5px; font-weight: 700;
+    letter-spacing: 0.3px; cursor: pointer; transition: all 0.25s;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .lib-card-btn-read { background: rgba(79,195,216,0.12); color: var(--code-cyan); border: 1px solid rgba(79,195,216,0.3); }
+  .lib-card-btn-read:hover { background: var(--code-cyan); color: #020d14; }
+  .lib-card-btn-dl { background: rgba(201,168,76,0.1); color: var(--scholar-gold); border: 1px solid rgba(201,168,76,0.25); }
+  .lib-card-btn-dl:hover { background: var(--scholar-gold); color: #1a0d03; }
+
+  /* Book card — list view */
+  .lib-grid.list-view .lib-book-card { border-radius: 10px; }
+  .lib-grid.list-view .lib-book-card .lib-card-cover-wrap { display: none; }
+  .lib-list-inner { display: flex; align-items: center; gap: 16px; padding: 14px; }
+  .lib-list-thumb {
+    width: 52px; height: 70px; object-fit: cover;
+    border-radius: 6px; flex-shrink: 0;
+    background: linear-gradient(145deg, #0d1b2e, #1a2840);
+  }
+  .lib-list-info { flex: 1; min-width: 0; }
+  .lib-list-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .lib-grid:not(.list-view) .lib-list-inner { display: none; }
+
+  /* Featured star */
+  .lib-card-featured {
+    position: absolute; bottom: 8px; left: 8px;
+    padding: 3px 8px; border-radius: 10px;
+    font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 700;
+    background: rgba(201,168,76,0.2); color: var(--scholar-gold); border: 1px solid var(--border-gold);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .lib-hero { padding: 32px 18px 28px; }
+    .lib-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .lib-search-inner { flex-wrap: wrap; }
+    .lib-hero-stats { gap: 18px; }
+    .lib-books-wrap { padding: 16px; }
+  }
   </style>
 </head>
 <body>
@@ -542,6 +818,71 @@
   </div>
 </div>
 
+<!-- ================================================================
+     DIGITAL LIBRARY SECTION
+     ================================================================ -->
+
+<!-- LIB HERO -->
+<div class="lib-hero">
+  <div class="lib-hero-badge"><i class="fas fa-bolt"></i> NexGenix Digital Library</div>
+  <h2><i class="fas fa-book-open"></i> Explore Our <span>Digital Library</span></h2>
+  <p>Browse thousands of curated business books, case studies, research papers, and learning resources — all hand-picked by NGBS experts to accelerate your growth.</p>
+  <div class="lib-hero-stats">
+    <div class="lib-hero-stat"><span class="lib-hero-stat-num">10K+</span><span class="lib-hero-stat-lbl">Titles</span></div>
+    <div class="lib-hero-stat"><span class="lib-hero-stat-num">15</span><span class="lib-hero-stat-lbl">Categories</span></div>
+    <div class="lib-hero-stat"><span class="lib-hero-stat-num">Free</span><span class="lib-hero-stat-lbl">Access</span></div>
+    <div class="lib-hero-stat"><span class="lib-hero-stat-num">24/7</span><span class="lib-hero-stat-lbl">Available</span></div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="lib-search-wrap">
+  <div class="lib-search-inner">
+    <div class="lib-search-box">
+      <i class="fas fa-search"></i>
+      <input class="lib-search-input" id="libSearch" type="text" placeholder="Search books, authors, topics…" oninput="libFilter()">
+      <button class="lib-search-clear" id="libClearBtn" onclick="libClear()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="lib-view-toggle">
+      <button class="lib-view-btn active" id="libViewGrid" onclick="libSetView('grid')" title="Grid view"><i class="fas fa-th"></i></button>
+      <button class="lib-view-btn" id="libViewList" onclick="libSetView('list')" title="List view"><i class="fas fa-list"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="lib-cats">
+  <div class="lib-cats-inner" id="libCats">
+    <button class="lib-cat-btn active" onclick="libSetCat('All', this)"><i class="fas fa-folder-open"></i> All</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Business & Entrepreneurship', this)"><i class="fas fa-briefcase"></i> Business & Entrepreneurship</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Marketing & Sales', this)"><i class="fas fa-chart-line"></i> Marketing & Sales</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Leadership & Management', this)"><i class="fas fa-users"></i> Leadership & Management</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Finance & Accounting', this)"><i class="fas fa-dollar-sign"></i> Finance & Accounting</button>
+    <button class="lib-cat-btn" onclick="libSetCat('International Business', this)"><i class="fas fa-globe"></i> International Business</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Communication', this)"><i class="fas fa-comments"></i> Communication</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Law & Ethics', this)"><i class="fas fa-balance-scale"></i> Law & Ethics</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Operations & Strategy', this)"><i class="fas fa-cogs"></i> Operations & Strategy</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Technology & Innovation', this)"><i class="fas fa-lightbulb"></i> Technology & Innovation</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Research Papers', this)"><i class="fas fa-file-alt"></i> Research Papers</button>
+    <button class="lib-cat-btn" onclick="libSetCat('Case Studies', this)"><i class="fas fa-folder"></i> Case Studies</button>
+  </div>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="lib-results-bar">
+  <span>Showing <span class="lib-results-count" id="libCount">12</span> results</span>
+  <span id="libActiveCat">Category: All</span>
+</div>
+
+<!-- BOOKS GRID -->
+<div class="lib-books-wrap">
+  <div class="lib-grid" id="libGrid"></div>
+  <div class="lib-no-results" id="libNoResults">
+    <i class="fas fa-search"></i>
+    No books found. Try a different search or category.
+  </div>
+</div>
+
 <!-- BOOK FEATURES -->
 <section class="book-features">
   <h2 class="section-title" style="margin-top:0;"><i class="fas fa-star"></i> What's Inside</h2>
@@ -591,6 +932,46 @@
 <div class="guarantee-box">
   <h3><i class="fas fa-shield-alt"></i> 100% Satisfaction Guarantee</h3>
   <p>Not satisfied with your purchase? Return it within 30 days for a full refund. No questions asked!</p>
+</div>
+
+<!-- ================================================================
+     DIGITAL LIBRARY SECTION
+     ================================================================ -->
+<div class="digital-library-section">
+
+  <!-- Header -->
+  <div class="digital-library-header">
+    <div class="digital-library-header-left">
+      <div class="digital-library-badge"><i class="fas fa-bolt"></i> NEW — Powered by NexGenix</div>
+      <h2 class="digital-library-title"><i class="fas fa-book-open"></i> NexGenix Digital Library</h2>
+      <p class="digital-library-desc">Access our full digital library — browse, read, and explore curated business learning resources, all in one place. Fully integrated with your NGBS account.</p>
+    </div>
+    <div class="digital-library-meta">
+      <div class="lib-stat-pill"><i class="fas fa-layer-group"></i> Full Course Library</div>
+      <div class="lib-stat-pill"><i class="fas fa-lock-open"></i> Free Access Included</div>
+      <div class="lib-stat-pill"><i class="fas fa-mobile-alt"></i> Mobile Friendly</div>
+    </div>
+  </div>
+
+  <!-- iframe embed -->
+  <div class="digital-library-frame-wrap">
+    <iframe
+      class="library-iframe"
+      src="https://nexgenix-learn-hub.base44.app"
+      title="NexGenix Digital Library"
+      allow="fullscreen"
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- Footer bar -->
+  <div class="digital-library-footer">
+    <span><i class="fas fa-info-circle" style="color:var(--code-cyan);margin-right:5px;"></i> Having trouble viewing? Try opening in a new tab.</span>
+    <a class="lib-footer-link" href="https://nexgenix-learn-hub.base44.app" target="_blank" rel="noopener">
+      <i class="fas fa-external-link-alt"></i> Open Full Library
+    </a>
+  </div>
+
 </div>
 
 <!-- FOOTER -->
@@ -822,6 +1203,149 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     obs.observe(el);
   });
+
+  /* ================================================================
+     DIGITAL LIBRARY — Data & Logic
+     ================================================================ */
+  const LIB_BOOKS = [
+    { id:1,  title:'The Business Minded',          author:'Arriane Doris Nuevo',   category:'Business & Entrepreneurship', type:'eBook',           free:true,  featured:true,  desc:'From branding to sales mastery — the essential NGBS guide for entrepreneurs.',   cover:'assets/images/book1.png' },
+    { id:2,  title:'Brand Identity Blueprint',      author:'Marcus Chen',           category:'Marketing & Sales',          type:'PDF',             free:true,  featured:false, desc:'A step-by-step framework for building memorable brand identities.',               cover:'' },
+    { id:3,  title:'The Leadership Code',           author:'Sarah Mitchell',        category:'Leadership & Management',    type:'eBook',           free:false, featured:true,  desc:'Unlock the seven principles of transformational leadership.',                     cover:'' },
+    { id:4,  title:'Financial Intelligence',        author:'Karen Berman',          category:'Finance & Accounting',       type:'Textbook',        free:false, featured:false, desc:'Understand financial statements and metrics that drive business decisions.',       cover:'' },
+    { id:5,  title:'Global Business Strategy',      author:'Dr. Ramon Santos',      category:'International Business',    type:'Research Paper',  free:true,  featured:false, desc:'Navigating cross-border markets in the modern global economy.',                   cover:'' },
+    { id:6,  title:'The Art of Communication',      author:'Lisa Harper',           category:'Communication',              type:'eBook',           free:true,  featured:false, desc:'Master persuasion, negotiation, and public speaking for business success.',       cover:'' },
+    { id:7,  title:'Ethics in Business Practice',  author:'Prof. John Reyes',      category:'Law & Ethics',               type:'PDF',             free:true,  featured:false, desc:'Case-based exploration of ethical dilemmas in modern corporations.',              cover:'' },
+    { id:8,  title:'Operations Excellence',        author:'David Kim',             category:'Operations & Strategy',      type:'eBook',           free:false, featured:false, desc:'Lean principles and agile methods for operational efficiency at scale.',           cover:'' },
+    { id:9,  title:'AI & the Future of Work',      author:'Dr. Priya Nair',        category:'Technology & Innovation',   type:'Industry Report', free:true,  featured:true,  desc:'How artificial intelligence is reshaping industries and job markets globally.',   cover:'' },
+    { id:10, title:'Consumer Behavior Analysis',   author:'Emma Thornton',         category:'Research Papers',            type:'Research Paper',  free:true,  featured:false, desc:'Data-driven insights into modern consumer decision-making processes.',            cover:'' },
+    { id:11, title:'Amazon: Customer Obsession',   author:'NGBS Editorial Team',   category:'Case Studies',               type:'Case Study',      free:true,  featured:false, desc:'How Amazon built the world\'s most customer-centric company.',                   cover:'' },
+    { id:12, title:'Sales Acceleration Formula',   author:'Mark Roberge',          category:'Marketing & Sales',          type:'eBook',           free:false, featured:false, desc:'Build a predictable, scalable sales engine using data and technology.',           cover:'' },
+  ];
+
+  const TYPE_COLORS = {
+    'eBook':          'color:#22d3ee; border-color:rgba(34,211,238,0.4); background:rgba(34,211,238,0.08)',
+    'PDF':            'color:#fbbf24; border-color:rgba(251,191,36,0.4); background:rgba(251,191,36,0.08)',
+    'Case Study':     'color:#c084fc; border-color:rgba(192,132,252,0.4); background:rgba(192,132,252,0.08)',
+    'Research Paper': 'color:#f87171; border-color:rgba(248,113,113,0.4); background:rgba(248,113,113,0.08)',
+    'Industry Report':'color:#34d399; border-color:rgba(52,211,153,0.4); background:rgba(52,211,153,0.08)',
+    'Textbook':       'color:#60a5fa; border-color:rgba(96,165,250,0.4); background:rgba(96,165,250,0.08)',
+  };
+
+  const FALLBACK_COVERS = [
+    'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=300&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300&h=400&fit=crop',
+    'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=300&h=400&fit=crop',
+  ];
+
+  let libCurrentCat  = 'All';
+  let libCurrentView = 'grid';
+
+  function libGetCover(book) {
+    if (book.cover) return book.cover;
+    return FALLBACK_COVERS[(book.id - 1) % FALLBACK_COVERS.length];
+  }
+
+  function libBuildCard(book) {
+    const typeStyle = TYPE_COLORS[book.type] || 'color:#94a3b8; border-color:rgba(148,163,184,0.3); background:rgba(148,163,184,0.05)';
+    const cover    = libGetCover(book);
+    const freeTag  = book.free
+      ? `<span class="lib-card-free"><i class="fas fa-lock-open"></i> Free</span>`
+      : `<span class="lib-card-premium"><i class="fas fa-crown"></i> Premium</span>`;
+    const featuredTag = book.featured ? `<span class="lib-card-featured"><i class="fas fa-star"></i> Featured</span>` : '';
+
+    /* Grid card */
+    const gridCard = `
+      <div class="lib-book-card" data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-cat="${book.category}" data-id="${book.id}">
+        <div class="lib-card-cover-wrap">
+          <img class="lib-card-cover" src="${cover}" alt="${book.title}" onerror="this.src='${FALLBACK_COVERS[0]}'">
+          <span class="lib-card-type-badge" style="${typeStyle}">${book.type}</span>
+          ${freeTag}
+          ${featuredTag}
+        </div>
+        <div class="lib-card-body">
+          <p class="lib-card-title">${book.title}</p>
+          <p class="lib-card-author"><i class="fas fa-user-edit"></i>${book.author}</p>
+          <p class="lib-card-desc">${book.desc}</p>
+          <div class="lib-card-actions">
+            <button class="lib-card-btn lib-card-btn-read"><i class="fas fa-eye"></i> Read</button>
+            ${book.free ? `<button class="lib-card-btn lib-card-btn-dl"><i class="fas fa-download"></i> Save</button>` : ''}
+          </div>
+        </div>
+        <!-- List view inner (hidden in grid) -->
+        <div class="lib-list-inner">
+          <img class="lib-list-thumb" src="${cover}" alt="${book.title}" onerror="this.src='${FALLBACK_COVERS[0]}'">
+          <div class="lib-list-info">
+            <p class="lib-card-title" style="-webkit-line-clamp:1">${book.title}</p>
+            <p class="lib-card-author"><i class="fas fa-user-edit"></i>${book.author}</p>
+            <p class="lib-card-desc" style="-webkit-line-clamp:1">${book.desc}</p>
+          </div>
+          <div class="lib-list-actions">
+            <span class="lib-card-type-badge" style="${typeStyle};padding:4px 10px;border-radius:12px;">${book.type}</span>
+            <button class="lib-card-btn lib-card-btn-read" style="padding:6px 12px;border-radius:16px;"><i class="fas fa-eye"></i> Read</button>
+          </div>
+        </div>
+      </div>`;
+    return gridCard;
+  }
+
+  function libRender(books) {
+    const grid  = document.getElementById('libGrid');
+    const empty = document.getElementById('libNoResults');
+    const count = document.getElementById('libCount');
+
+    if (!books.length) {
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      count.textContent = '0';
+      return;
+    }
+    empty.style.display = 'none';
+    grid.innerHTML = books.map(libBuildCard).join('');
+    count.textContent = books.length;
+  }
+
+  function libGetFiltered() {
+    const q = (document.getElementById('libSearch').value || '').toLowerCase().trim();
+    return LIB_BOOKS.filter(b => {
+      const catOk  = libCurrentCat === 'All' || b.category === libCurrentCat;
+      const queryOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q);
+      return catOk && queryOk;
+    });
+  }
+
+  function libFilter() {
+    const q = document.getElementById('libSearch').value;
+    document.getElementById('libClearBtn').classList.toggle('visible', q.length > 0);
+    libRender(libGetFiltered());
+  }
+
+  function libClear() {
+    document.getElementById('libSearch').value = '';
+    document.getElementById('libClearBtn').classList.remove('visible');
+    libRender(libGetFiltered());
+  }
+
+  function libSetCat(cat, btn) {
+    libCurrentCat = cat;
+    document.querySelectorAll('.lib-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('libActiveCat').textContent = 'Category: ' + cat;
+    libRender(libGetFiltered());
+  }
+
+  function libSetView(view) {
+    libCurrentView = view;
+    const grid = document.getElementById('libGrid');
+    grid.classList.toggle('list-view', view === 'list');
+    document.getElementById('libViewGrid').classList.toggle('active', view === 'grid');
+    document.getElementById('libViewList').classList.toggle('active', view === 'list');
+  }
+
+  /* Initial render */
+  libRender(LIB_BOOKS);
 </script>
 </body>
 </html>
