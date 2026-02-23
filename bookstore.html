@@ -702,6 +702,104 @@
     .lib-hero-stats { gap: 18px; }
     .lib-books-wrap { padding: 16px; }
   }
+
+  /* Section label divider */
+  .lib-section-label {
+    font-family: "Orbitron", sans-serif;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--scholar-gold);
+    border: 1px solid rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.05);
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  /* Free books table */
+  .lib-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+  }
+  .lib-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    min-width: 700px;
+  }
+  .lib-table thead tr {
+    background: linear-gradient(90deg, rgba(79,195,216,0.08), rgba(62,207,122,0.05));
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .lib-table th {
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    color: var(--text-muted);
+    padding: 12px 14px; text-align: left;
+    white-space: nowrap;
+  }
+  .lib-table th:first-child { color: var(--slate-medium); width: 36px; text-align: center; }
+  .lib-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.2s;
+  }
+  .lib-table tbody tr:last-child { border-bottom: none; }
+  .lib-table tbody tr:hover { background: rgba(79,195,216,0.04); }
+  .lib-table td {
+    padding: 11px 14px;
+    color: var(--chalk-gray);
+    vertical-align: middle;
+  }
+  .lib-table td:first-child {
+    color: var(--slate-medium);
+    font-family: "Silkscreen", sans-serif;
+    font-size: 10px; text-align: center;
+  }
+  .lib-table-title {
+    color: var(--paper-white);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .lib-table-title a {
+    color: inherit; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .lib-table-title a:hover { color: var(--code-cyan); }
+  .lib-table-featured {
+    display: inline-block;
+    font-family: "Orbitron", sans-serif; font-size: 7.5px;
+    background: rgba(201,168,76,0.15); color: var(--scholar-gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px; padding: 1px 6px; margin-left: 6px;
+    vertical-align: middle;
+  }
+  .lib-table-author { color: var(--text-muted); white-space: nowrap; }
+  .lib-table-date  { color: var(--slate-medium); white-space: nowrap; font-family: "Orbitron", sans-serif; font-size: 10px; }
+  .lib-table-pages { color: var(--slate-medium); white-space: nowrap; font-family: "Orbitron", sans-serif; font-size: 10px; text-align: center; }
+  .lib-table-type-badge {
+    display: inline-block;
+    padding: 3px 9px; border-radius: 10px;
+    font-family: "Orbitron", sans-serif; font-size: 8px; font-weight: 700;
+    border: 1px solid currentColor; white-space: nowrap;
+  }
+  .lib-table-access {
+    white-space: nowrap;
+  }
+  .lib-table-read-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px; border-radius: 14px;
+    background: rgba(62,207,122,0.1); color: #3ecf7a;
+    border: 1px solid rgba(62,207,122,0.3);
+    font-family: "Orbitron", sans-serif; font-size: 8.5px; font-weight: 700;
+    letter-spacing: 0.3px; cursor: pointer;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .lib-table-read-btn:hover { background: #3ecf7a; color: #071510; }
+  .lib-table tbody tr.lib-row-hidden { display: none; }
   </style>
 </head>
 <body>
@@ -894,10 +992,6 @@
       <input class="lib-search-input" id="libSearch" type="text" placeholder="Search books, authors, topics…" oninput="libFilter()">
       <button class="lib-search-clear" id="libClearBtn" onclick="libClear()"><i class="fas fa-times"></i></button>
     </div>
-    <div class="lib-view-toggle">
-      <button class="lib-view-btn active" id="libViewGrid" onclick="libSetView('grid')" title="Grid view"><i class="fas fa-th"></i></button>
-      <button class="lib-view-btn" id="libViewList" onclick="libSetView('list')" title="List view"><i class="fas fa-list"></i></button>
-    </div>
   </div>
 </div>
 
@@ -921,13 +1015,36 @@
 
 <!-- RESULTS BAR -->
 <div class="lib-results-bar">
-  <span>Showing <span class="lib-results-count" id="libCount">12</span> results</span>
+  <span>Showing <span class="lib-results-count" id="libCount">35</span> titles</span>
   <span id="libActiveCat">Category: All</span>
 </div>
 
-<!-- BOOKS GRID -->
-<div class="lib-books-wrap">
+<!-- PREMIUM BOOK CARDS (non-free) -->
+<div class="lib-books-wrap" id="libPremiumWrap">
+  <div class="lib-section-label"><i class="fas fa-crown"></i> Premium Titles</div>
   <div class="lib-grid" id="libGrid"></div>
+</div>
+
+<!-- FREE BOOKS TABLE -->
+<div class="lib-books-wrap" id="libFreeWrap" style="margin-top:0; border-top:none; border-radius:0 0 14px 14px;">
+  <div class="lib-section-label" style="color:var(--terminal-green); border-color:rgba(62,207,122,0.3);"><i class="fas fa-lock-open"></i> Free Access — Public Domain Library</div>
+  <div class="lib-table-wrap">
+    <table class="lib-table" id="libTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Published</th>
+          <th>Pages</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Access</th>
+        </tr>
+      </thead>
+      <tbody id="libTableBody"></tbody>
+    </table>
+  </div>
   <div class="lib-no-results" id="libNoResults">
     <i class="fas fa-search"></i>
     No books found. Try a different search or category.
@@ -1236,23 +1353,15 @@
   }
 
   function libBuildCard(book) {
-    const typeStyle = TYPE_COLORS[book.type] || 'color:#94a3b8; border-color:rgba(148,163,184,0.3); background:rgba(148,163,184,0.05)';
-    const cover    = libGetCover(book);
-    const freeTag  = book.free
-      ? `<span class="lib-card-free"><i class="fas fa-lock-open"></i> Free</span>`
-      : `<span class="lib-card-premium"><i class="fas fa-crown"></i> Premium</span>`;
+    const typeStyle   = TYPE_COLORS[book.type] || 'color:#94a3b8; border-color:rgba(148,163,184,0.3); background:rgba(148,163,184,0.05)';
+    const cover       = libGetCover(book);
     const featuredTag = book.featured ? `<span class="lib-card-featured"><i class="fas fa-star"></i> Featured</span>` : '';
-    const linkTarget  = book.link === '#order' ? '_self' : '_blank';
-    const readLabel   = book.free ? 'Read Free' : 'Order Now';
-    const readIcon    = book.free ? 'fa-external-link-alt' : 'fa-shopping-cart';
-
-    /* Grid card */
-    const gridCard = `
-      <div class="lib-book-card" data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-cat="${book.category}" data-id="${book.id}">
+    return `
+      <div class="lib-book-card" data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-cat="${book.category}">
         <div class="lib-card-cover-wrap">
           <img class="lib-card-cover" src="${cover}" alt="${book.title}" onerror="this.src='${FALLBACK_COVERS[0]}'">
           <span class="lib-card-type-badge" style="${typeStyle}">${book.type}</span>
-          ${freeTag}
+          <span class="lib-card-premium"><i class="fas fa-crown"></i> Premium</span>
           ${featuredTag}
         </div>
         <div class="lib-card-body">
@@ -1260,55 +1369,68 @@
           <p class="lib-card-author"><i class="fas fa-user-edit"></i>${book.author}</p>
           <p class="lib-card-desc">${book.desc}</p>
           <div class="lib-card-actions">
-            <a href="${book.link}" target="${linkTarget}" rel="noopener" class="lib-card-btn lib-card-btn-read"><i class="fas ${readIcon}"></i> ${readLabel}</a>
-            ${book.free && book.link !== '#order' ? `<a href="${book.link}" target="_blank" rel="noopener" class="lib-card-btn lib-card-btn-dl"><i class="fas fa-download"></i> Save</a>` : ''}
-          </div>
-        </div>
-        <!-- List view inner (hidden in grid) -->
-        <div class="lib-list-inner">
-          <img class="lib-list-thumb" src="${cover}" alt="${book.title}" onerror="this.src='${FALLBACK_COVERS[0]}'">
-          <div class="lib-list-info">
-            <p class="lib-card-title" style="-webkit-line-clamp:1">${book.title}</p>
-            <p class="lib-card-author"><i class="fas fa-user-edit"></i>${book.author}</p>
-            <p class="lib-card-desc" style="-webkit-line-clamp:1">${book.desc}</p>
-          </div>
-          <div class="lib-list-actions">
-            <span class="lib-card-type-badge" style="${typeStyle};padding:4px 10px;border-radius:12px;">${book.type}</span>
-            <a href="${book.link}" target="${linkTarget}" rel="noopener" class="lib-card-btn lib-card-btn-read" style="padding:6px 12px;border-radius:16px;text-decoration:none;"><i class="fas ${readIcon}"></i> ${readLabel}</a>
+            <a href="${book.link}" class="lib-card-btn lib-card-btn-read" style="text-decoration:none;"><i class="fas fa-shopping-cart"></i> Order Now</a>
           </div>
         </div>
       </div>`;
-    return gridCard;
   }
 
-  function libRender(books) {
-    const grid  = document.getElementById('libGrid');
-    const empty = document.getElementById('libNoResults');
-    const count = document.getElementById('libCount');
-
-    if (!books.length) {
-      grid.innerHTML = '';
-      empty.style.display = 'block';
-      count.textContent = '0';
-      return;
-    }
-    empty.style.display = 'none';
-    grid.innerHTML = books.map(libBuildCard).join('');
-    count.textContent = books.length;
+  /* ---- Build free table row ---- */
+  function libBuildRow(book, rowNum) {
+    const typeStyle     = TYPE_COLORS[book.type] || 'color:#94a3b8; border-color:rgba(148,163,184,0.3); background:rgba(148,163,184,0.05)';
+    const featuredBadge = book.featured ? `<span class="lib-table-featured">★ Featured</span>` : '';
+    return `
+      <tr data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-cat="${book.category}">
+        <td>${rowNum}</td>
+        <td class="lib-table-title">
+          <a href="${book.link}" target="_blank" rel="noopener">${book.title}</a>${featuredBadge}
+        </td>
+        <td class="lib-table-author">${book.author}</td>
+        <td class="lib-table-date">${book.year}</td>
+        <td class="lib-table-pages">${book.pages ? book.pages.toLocaleString() : '—'}</td>
+        <td><span class="lib-table-type-badge" style="${typeStyle}">${book.type}</span></td>
+        <td class="lib-table-access">
+          <a href="${book.link}" target="_blank" rel="noopener" class="lib-table-read-btn"><i class="fas fa-external-link-alt"></i> Read Free</a>
+        </td>
+      </tr>`;
   }
 
   function libGetFiltered() {
     const q = (document.getElementById('libSearch').value || '').toLowerCase().trim();
-    return LIB_BOOKS.filter(b => {
-      const catOk  = libCurrentCat === 'All' || b.category === libCurrentCat;
+    const all = LIB_BOOKS.filter(b => {
+      const catOk   = libCurrentCat === 'All' || b.category === libCurrentCat;
       const queryOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q);
       return catOk && queryOk;
     });
+    return { premium: all.filter(b => !b.free), free: all.filter(b => b.free) };
+  }
+
+  function libRender({ premium, free }) {
+    const grid      = document.getElementById('libGrid');
+    const tbody     = document.getElementById('libTableBody');
+    const noResults = document.getElementById('libNoResults');
+    const count     = document.getElementById('libCount');
+    const premWrap  = document.getElementById('libPremiumWrap');
+    const freeWrap  = document.getElementById('libFreeWrap');
+
+    count.textContent = premium.length + free.length;
+
+    premWrap.style.display = premium.length ? '' : 'none';
+    grid.innerHTML = premium.map(libBuildCard).join('');
+
+    if (free.length) {
+      freeWrap.style.display = '';
+      noResults.style.display = 'none';
+      tbody.innerHTML = free.map((b, i) => libBuildRow(b, i + 1)).join('');
+    } else {
+      tbody.innerHTML = '';
+      noResults.style.display = premium.length ? 'none' : 'block';
+      freeWrap.style.display  = premium.length ? 'none' : '';
+    }
   }
 
   function libFilter() {
-    const q = document.getElementById('libSearch').value;
-    document.getElementById('libClearBtn').classList.toggle('visible', q.length > 0);
+    document.getElementById('libClearBtn').classList.toggle('visible', document.getElementById('libSearch').value.length > 0);
     libRender(libGetFiltered());
   }
 
@@ -1326,16 +1448,8 @@
     libRender(libGetFiltered());
   }
 
-  function libSetView(view) {
-    libCurrentView = view;
-    const grid = document.getElementById('libGrid');
-    grid.classList.toggle('list-view', view === 'list');
-    document.getElementById('libViewGrid').classList.toggle('active', view === 'grid');
-    document.getElementById('libViewList').classList.toggle('active', view === 'list');
-  }
-
   /* Initial render */
-  libRender(LIB_BOOKS);
+  libRender(libGetFiltered());
 </script>
 </body>
 </html>
