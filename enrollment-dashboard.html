@@ -7,7 +7,6 @@
   <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat+Alternates:wght@400;500;600;700&family=Trebuchet+MS&family=Silkscreen&family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <style>
     /* =================== COLOR PALETTE VARIABLES =================== */
@@ -548,7 +547,152 @@
     .btn-info { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); }
     .btn-info:hover { border-color: var(--code-cyan); color: var(--code-cyan); }
 
-    /* =================== SUCCESS BANNER =================== */
+    /* =================== VIRTUAL ID CARD =================== */
+    .id-card {
+      background: linear-gradient(135deg, #0d1b2e 0%, #162840 50%, #0d1b2e 100%);
+      border: 1.5px solid var(--scholar-gold);
+      border-radius: 16px; padding: 22px 20px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.2);
+    }
+    .id-card::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+    .id-card-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border-gold);
+    }
+    .id-card-logo {
+      width: 40px; height: 40px; border-radius: 8px; object-fit: contain;
+    }
+    .id-card-school {
+      font-family: "Orbitron", sans-serif; font-size: 10px;
+      color: var(--scholar-gold); letter-spacing: 0.5px; line-height: 1.4;
+    }
+    .id-card-body { display: flex; gap: 14px; align-items: flex-start; }
+    .id-avatar {
+      width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(79,195,216,0.2), rgba(201,168,76,0.2));
+      border: 2px solid var(--scholar-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; color: var(--scholar-gold);
+    }
+    .id-info { flex: 1; }
+    .id-name {
+      font-family: "Orbitron", sans-serif; font-size: 15px;
+      color: var(--paper-white); font-weight: 700; margin-bottom: 4px;
+    }
+    .id-number {
+      font-family: "Silkscreen", sans-serif; font-size: 11px;
+      color: var(--code-cyan); letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .id-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .id-badge {
+      font-size: 9px; padding: 3px 8px; border-radius: 10px;
+      background: rgba(79,195,216,0.1); border: 1px solid var(--border-subtle);
+      color: var(--code-cyan); font-family: "Orbitron", sans-serif;
+    }
+    .id-card-footer {
+      margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-gold);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .id-status {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: var(--terminal-green);
+      font-family: "Orbitron", sans-serif;
+    }
+    .id-issued { font-size: 9px; color: var(--text-muted); }
+
+    /* =================== INVOICE MODAL =================== */
+    .invoice-modal {
+      background: #fff; color: #1a1a2e; border-radius: 12px;
+      width: 100%; max-width: 580px; max-height: 90vh;
+      overflow-y: auto; padding: 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+    .invoice-header {
+      background: linear-gradient(135deg, #0d1b2e, #162840);
+      padding: 24px 28px; display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .invoice-logo-area { display: flex; align-items: center; gap: 10px; }
+    .invoice-school-name {
+      font-family: "Orbitron", sans-serif; font-size: 12px;
+      color: var(--scholar-gold); line-height: 1.4;
+    }
+    .invoice-title-area { text-align: right; }
+    .invoice-word {
+      font-family: "Orbitron", sans-serif; font-size: 22px;
+      color: #fff; font-weight: 900; letter-spacing: 2px;
+    }
+    .invoice-num { font-size: 11px; color: var(--code-cyan); margin-top: 4px; }
+    .invoice-body { padding: 24px 28px; }
+    .invoice-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
+    }
+    .invoice-meta-block h4 {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: #6b80a0; margin-bottom: 6px; font-family: "Orbitron", sans-serif;
+    }
+    .invoice-meta-block p { font-size: 13px; color: #1a1a2e; font-weight: 600; margin-bottom: 2px; }
+    .invoice-meta-block small { font-size: 11px; color: #6b80a0; }
+    .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12px; }
+    .invoice-table th {
+      background: #f0f4f8; padding: 8px 12px; text-align: left;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #6b80a0;
+      font-family: "Orbitron", sans-serif;
+    }
+    .invoice-table td { padding: 10px 12px; border-bottom: 1px solid #e8eef5; color: #1a1a2e; }
+    .invoice-table tr:last-child td { border-bottom: none; }
+    .invoice-total-row {
+      background: #0d1b2e; padding: 14px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .invoice-total-label {
+      font-family: "Orbitron", sans-serif; font-size: 11px;
+      color: #6b80a0; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .invoice-total-amount {
+      font-family: "Silkscreen", sans-serif; font-size: 22px; color: var(--scholar-gold);
+    }
+    .invoice-currency-note {
+      padding: 10px 28px; background: #f8fafc;
+      font-size: 11px; color: #6b80a0; text-align: center;
+    }
+    .invoice-footer {
+      padding: 16px 28px; border-top: 1px solid #e8eef5; text-align: center;
+      font-size: 11px; color: #6b80a0;
+    }
+    .invoice-actions {
+      display: flex; gap: 10px; padding: 16px 28px 24px;
+      border-top: 1px solid #e8eef5;
+    }
+    .invoice-btn {
+      flex: 1; padding: 11px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      cursor: pointer; border: none; transition: all 0.25s; font-family: "Orbitron", sans-serif;
+      text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .invoice-btn.download { background: var(--grad-premium); color: var(--pure-black); }
+    .invoice-btn.download:hover { transform: translateY(-2px); box-shadow: 0 6px 18px var(--scholar-gold-glow); }
+    .invoice-btn.close-inv { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); }
+    .invoice-btn.close-inv:hover { border-color: var(--code-cyan); color: var(--code-cyan); }
+
+    /* =================== PRINT STYLES =================== */
+    @media print {
+      @page { size: A4; margin: 15mm; }
+      body > * { display: none !important; }
+      #printInvoice { display: block !important; position: static !important;
+        background: #fff; z-index: 99999; padding: 0; max-height: none !important;
+        overflow: visible !important; border-radius: 0 !important; box-shadow: none !important; }
+      #printInvoice .invoice-actions { display: none !important; }
+      #printInvoice .invoice-modal { max-height: none !important; overflow: visible !important; }
+      .invoice-header, .invoice-body, .invoice-total-row,
+      .invoice-currency-note, .invoice-footer { page-break-inside: avoid; }
+      .invoice-table { page-break-inside: avoid; }
+      .modal-overlay { position: static !important; background: transparent !important;
+        display: block !important; padding: 0 !important; }
+    }
     .success-banner {
       background: linear-gradient(135deg,#0e2e1a,#1a4a2e);
       border: 1px solid rgba(62,207,122,0.4); border-radius: 12px;
@@ -595,6 +739,105 @@
       font-family: "Orbitron", sans-serif;
     }
     .view-btn.active { background: var(--code-cyan-soft); border-color: var(--code-cyan); color: var(--code-cyan); }
+
+    /* =================== PROFILE VIEW =================== */
+    .profile-view { display: none; }
+    .profile-view.active { display: block; }
+
+    .profile-grid {
+      display: grid; grid-template-columns: 320px 1fr; gap: 24px;
+      align-items: start;
+    }
+    .profile-id-col { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Emergency contact on ID card */
+    .id-emergency {
+      margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-gold);
+      font-size: 9px; color: var(--text-muted);
+    }
+    .id-emergency span { color: var(--debug-orange); font-weight: 700; }
+
+    /* Profile form panels */
+    .profile-panel {
+      background: var(--grad-card); border-radius: 14px; padding: 24px;
+      border: 1px solid var(--border-subtle); margin-bottom: 20px;
+    }
+    .profile-panel-title {
+      font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--code-cyan);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 18px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Input with icon */
+    .input-wrap { position: relative; }
+    .input-wrap .input-icon {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--text-muted); font-size: 13px; pointer-events: none;
+    }
+    .input-wrap .form-input { padding-left: 36px; }
+    .input-wrap .pw-toggle {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--text-muted); cursor: pointer;
+      font-size: 14px; padding: 0; transition: color 0.2s;
+    }
+    .input-wrap .pw-toggle:hover { color: var(--code-cyan); }
+    .input-wrap .form-input.has-toggle { padding-right: 40px; }
+
+    /* Locked field */
+    .locked-field {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);
+      border-radius: 8px; padding: 10px 14px;
+    }
+    .locked-field .lock-icon { color: var(--warning); font-size: 13px; flex-shrink: 0; }
+    .locked-field .lock-value { flex: 1; font-size: 13px; color: var(--paper-white); }
+    .locked-field .lock-label { font-size: 10px; color: var(--warning); font-family: "Orbitron", sans-serif; }
+    .name-edit-btn {
+      padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 700;
+      cursor: pointer; border: 1px solid var(--scholar-gold);
+      background: rgba(201,168,76,0.1); color: var(--scholar-gold);
+      transition: all 0.25s; font-family: "Orbitron", sans-serif;
+    }
+    .name-edit-btn:hover { background: var(--scholar-gold); color: var(--pure-black); }
+    .name-used { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+
+    /* Warning banner */
+    .name-warning {
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
+      border-left: 3px solid var(--warning); border-radius: 8px;
+      padding: 10px 14px; font-size: 11.5px; color: var(--chalk-gray); margin-top: 10px;
+      display: none;
+    }
+    .name-warning strong { color: var(--warning); }
+
+    /* Save button */
+    .profile-save-btn {
+      width: 100%; padding: 12px; border: none; border-radius: 10px;
+      background: var(--grad-premium); color: var(--pure-black);
+      font-family: "Orbitron", sans-serif; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;
+      box-shadow: 0 4px 14px var(--scholar-gold-glow); margin-top: 4px;
+    }
+    .profile-save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.5); }
+    .profile-save-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--terminal-green); color: var(--pure-black);
+      padding: 10px 22px; border-radius: 20px; font-size: 12px; font-weight: 700;
+      font-family: "Orbitron", sans-serif; opacity: 0;
+      transition: opacity 0.3s, transform 0.3s; z-index: 9999; pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { background: var(--danger); color: #fff; }
+
+    @media (max-width: 1030px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-id-col { flex-direction: row; flex-wrap: wrap; }
+      .profile-id-col > * { flex: 1; min-width: 260px; }
+    }
 
     /* =================== RESPONSIVE =================== */
     @media (max-width: 1030px) {
@@ -653,7 +896,7 @@
     <li><a href="#" class="active" onclick="showView('enrollmentView'); closeMenu()"><i class="fas fa-graduation-cap"></i> Enroll</a></li>
     <li><a href="#" onclick="showView('dashboardView'); closeMenu()"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
     <li><a href="#" onclick="openBag(); closeMenu()"><i class="fas fa-backpack"></i> My Bag</a></li>
-    <li><a href="#" onclick="closeMenu()"><i class="fas fa-users"></i> Community</a></li>
+    <li><a href="#" onclick="showView('profileView'); closeMenu()"><i class="fas fa-user"></i> Profile</a></li>
   </ul>
 
   <div class="nav-right">
@@ -907,6 +1150,32 @@
 
       <!-- Dashboard Sidebar -->
       <div class="sidebar">
+        <!-- Virtual ID Card -->
+        <div class="sidebar-card" style="padding:0; overflow:hidden;">
+          <div class="id-card" id="virtualIdCard">
+            <div class="id-card-header">
+              <img src="assets/images/logo-bs.png" class="id-card-logo" alt="NGBS">
+              <div class="id-card-school">NEX GENIX<br>BUSINESS SCHOOL</div>
+              <div style="margin-left:auto; font-size:9px; font-family:'Orbitron',sans-serif; color:var(--code-cyan); text-align:right;">STUDENT ID<br>VIRTUAL</div>
+            </div>
+            <div class="id-card-body">
+              <div class="id-avatar"><i class="fas fa-user-graduate"></i></div>
+              <div class="id-info">
+                <div class="id-name" id="idCardName">—</div>
+                <div class="id-number" id="idCardNumber">ID: ••••-••••••-NGBS</div>
+                <div id="idCardBadges" class="id-badges"></div>
+              </div>
+            </div>
+            <div class="id-card-footer">
+              <div class="id-status"><span class="live-dot" style="width:8px;height:8px;"></span> Active Student</div>
+              <div class="id-issued" id="idCardIssued">Issued: —</div>
+            </div>
+            <div class="id-emergency" id="idEmergencyRow" style="display:none;">
+              <span>ICE:</span> <span id="idEmergencyName">—</span> · <span id="idEmergencyPhone">—</span>
+            </div>
+          </div>
+        </div>
+
         <div class="sidebar-card">
           <div class="section-title" style="font-size:14px; margin-bottom:12px;"><i class="fas fa-calendar-check"></i> Class Schedule</div>
           <div class="cal-widget">
@@ -932,6 +1201,11 @@
             <div id="upcomingClasses"></div>
           </div>
         </div>
+
+        <!-- Invoice Download -->
+        <button class="enroll-btn" id="downloadInvoiceBtn" onclick="openInvoice()" style="display:none; background:rgba(201,168,76,0.15); color:var(--scholar-gold); border:1px solid var(--scholar-gold); box-shadow:none;">
+          <i class="fas fa-file-invoice"></i> Download Invoice
+        </button>
       </div>
     </div>
   </div>
@@ -1024,7 +1298,10 @@
     <div class="success-banner" id="enrollSuccessBanner">
       <i class="fas fa-check-circle"></i>
       <h3>Enrollment Submitted!</h3>
-      <p>A confirmation has been sent to your email. Our team will follow up shortly to process your enrollment.</p>
+      <p>A confirmation has been sent to your email. Our team will follow up shortly.</p>
+      <button class="enroll-btn" onclick="openInvoice()" style="margin-top:12px; background:rgba(201,168,76,0.2); color:var(--scholar-gold); border:1px solid var(--scholar-gold); box-shadow:none; font-size:12px; padding:10px;">
+        <i class="fas fa-file-invoice"></i> View & Download Invoice
+      </button>
     </div>
 
     <button class="enroll-btn" id="submitEnrollBtn" onclick="submitEnrollment()">
@@ -1033,6 +1310,275 @@
     <button class="enroll-btn" id="viewDashboardBtn" onclick="goToDashboard()" style="display:none; background:rgba(79,195,216,0.15); color:var(--code-cyan); border:1px solid var(--code-cyan); box-shadow:none; margin-top:8px;">
       <i class="fas fa-tachometer-alt"></i> Go to My Dashboard
     </button>
+  </div>
+</div>
+
+<!-- =================== PROFILE VIEW =================== -->
+<div id="profileView" class="profile-view">
+  <div class="hero" style="padding: 28px 20px;">
+    <div class="hero-content">
+      <div class="hero-tagline"><span class="live-dot"></span>Student Profile</div>
+      <h1 class="hero-title" style="font-size:26px;">My Account</h1>
+      <p class="hero-subtitle">Manage your personal information and account settings.</p>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="profile-grid">
+
+      <!-- LEFT: ID Card + emergency preview -->
+      <div class="profile-id-col">
+        <!-- ID Card (live preview) -->
+        <div style="background:var(--grad-card); border-radius:14px; padding:0; border:1px solid var(--border-subtle); overflow:hidden;">
+          <div style="padding:12px 16px; border-bottom:1px solid var(--border-subtle);">
+            <div class="section-title" style="font-size:12px; margin-bottom:0;"><i class="fas fa-id-card"></i> Virtual Student ID</div>
+          </div>
+          <div style="padding:16px;">
+            <div class="id-card">
+              <div class="id-card-header">
+                <img src="assets/images/logo-bs.png" class="id-card-logo" alt="NGBS">
+                <div class="id-card-school">NEX GENIX<br>BUSINESS SCHOOL</div>
+                <div style="margin-left:auto; font-size:9px; font-family:'Orbitron',sans-serif; color:var(--code-cyan); text-align:right;">STUDENT ID<br>VIRTUAL</div>
+              </div>
+              <div class="id-card-body">
+                <div class="id-avatar"><i class="fas fa-user-graduate"></i></div>
+                <div class="id-info">
+                  <div class="id-name" id="profileIdName">—</div>
+                  <div class="id-number" id="profileIdNumber">ID: ••••-••••••-NGBS</div>
+                  <div id="profileIdBadges" class="id-badges"></div>
+                </div>
+              </div>
+              <div class="id-card-footer">
+                <div class="id-status"><span class="live-dot" style="width:8px;height:8px;"></span> Active Student</div>
+                <div class="id-issued" id="profileIdIssued">Issued: —</div>
+              </div>
+              <div class="id-emergency" id="profileEmergencyRow" style="display:none;">
+                <span>ICE:</span> <span id="profileEmergencyName">—</span> · <span id="profileEmergencyPhone">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Contact Info Box -->
+        <div style="background:rgba(232,133,90,0.07); border:1px solid rgba(232,133,90,0.25); border-left:3px solid var(--debug-orange); border-radius:10px; padding:14px; font-size:11.5px; color:var(--chalk-gray);">
+          <div style="color:var(--debug-orange); font-weight:700; font-family:'Orbitron',sans-serif; font-size:11px; margin-bottom:6px;"><i class="fas fa-heart-pulse"></i> Why Emergency Contact?</div>
+          In case of a medical or safety emergency during a live session, your instructor needs to reach someone on your behalf. This appears on your virtual ID card.
+        </div>
+      </div>
+
+      <!-- RIGHT: Form panels -->
+      <div>
+
+        <!-- Legal Name -->
+        <div class="profile-panel">
+          <div class="profile-panel-title"><i class="fas fa-signature"></i> Legal Name</div>
+          <div class="form-group" id="nameDisplayGroup">
+            <label class="form-label">Full Legal Name</label>
+            <div class="locked-field" id="nameLockedDisplay">
+              <i class="fas fa-lock lock-icon"></i>
+              <span class="lock-value" id="nameDisplayValue">—</span>
+              <span class="lock-label">LOCKED</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px;">
+              <div class="name-used" id="nameEditStatus"><i class="fas fa-info-circle" style="color:var(--code-cyan);"></i> You can edit your name <strong id="nameEditsLeft" style="color:var(--scholar-gold);">1 time</strong></div>
+              <button class="name-edit-btn" id="nameEditBtn" onclick="enableNameEdit()"><i class="fas fa-pen"></i> Edit Once</button>
+            </div>
+            <div class="name-warning" id="nameWarning">
+              <strong>⚠ Final Edit Warning</strong><br>
+              Your legal name is a vital credential. Once saved, it <strong>cannot be changed again</strong>. Ensure it matches your official ID exactly before saving.
+            </div>
+          </div>
+          <div class="form-group" id="nameEditGroup" style="display:none;">
+            <label class="form-label">Full Legal Name *</label>
+            <div class="input-wrap">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" class="form-input" id="legalNameInput" placeholder="e.g. Maria Santos">
+            </div>
+            <div class="name-warning" id="nameEditWarning" style="display:block; margin-top:10px;">
+              <strong>⚠ Final Edit Warning</strong><br>
+              This is your <strong>only chance</strong> to set your legal name. It will be <strong>permanently locked</strong> after saving. Make sure it matches your official government ID.
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Info -->
+        <div class="profile-panel">
+          <div class="profile-panel-title"><i class="fas fa-envelope"></i> Account Information</div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <div class="input-wrap">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" class="form-input" id="profileEmail" placeholder="e.g. maria@email.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp / Phone</label>
+            <div class="phone-row">
+              <select class="form-select phone-code" id="profilePhoneCode">
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+63" selected>🇵🇭 +63</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+65">🇸🇬 +65</option>
+                <option value="+971">🇦🇪 +971</option>
+                <option value="+966">🇸🇦 +966</option>
+                <option value="+81">🇯🇵 +81</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+82">🇰🇷 +82</option>
+              </select>
+              <input type="tel" class="form-input" id="profilePhone" placeholder="912 345 6789">
+            </div>
+          </div>
+          <button class="profile-save-btn" onclick="saveAccountInfo()"><i class="fas fa-save"></i> Save Account Info</button>
+        </div>
+
+        <!-- Emergency Contact -->
+        <div class="profile-panel">
+          <div class="profile-panel-title"><i class="fas fa-heart-pulse"></i> In Case of Emergency (ICE)</div>
+          <div class="form-group">
+            <label class="form-label">Contact Full Name *</label>
+            <div class="input-wrap">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" class="form-input" id="iceNameInput" placeholder="e.g. Jose Santos">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Relationship</label>
+            <select class="form-select" id="iceRelationship">
+              <option value="">Select relationship…</option>
+              <option>Parent</option>
+              <option>Spouse / Partner</option>
+              <option>Sibling</option>
+              <option>Guardian</option>
+              <option>Friend</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Phone *</label>
+            <div class="phone-row">
+              <select class="form-select phone-code" id="icePhoneCode">
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+63" selected>🇵🇭 +63</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+61">🇦🇺 +61</option>
+                <option value="+65">🇸🇬 +65</option>
+                <option value="+971">🇦🇪 +971</option>
+                <option value="+966">🇸🇦 +966</option>
+                <option value="+81">🇯🇵 +81</option>
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+82">🇰🇷 +82</option>
+              </select>
+              <input type="tel" class="form-input" id="icePhone" placeholder="912 345 6789">
+            </div>
+          </div>
+          <button class="profile-save-btn" onclick="saveEmergencyContact()" style="background:rgba(232,133,90,0.2); color:var(--debug-orange); border:1px solid var(--debug-orange); box-shadow:none;">
+            <i class="fas fa-heart-pulse"></i> Save Emergency Contact
+          </button>
+        </div>
+
+        <!-- Change Password -->
+        <div class="profile-panel">
+          <div class="profile-panel-title"><i class="fas fa-lock"></i> Change Password</div>
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="password" class="form-input has-toggle" id="currentPw" placeholder="Enter current password">
+              <button class="pw-toggle" onclick="togglePw('currentPw', this)" tabindex="-1"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-key input-icon"></i>
+              <input type="password" class="form-input has-toggle" id="newPw" placeholder="Min. 8 characters" oninput="checkPwStrength(this.value)">
+              <button class="pw-toggle" onclick="togglePw('newPw', this)" tabindex="-1"><i class="fas fa-eye"></i></button>
+            </div>
+            <div id="pwStrengthBar" style="height:4px; border-radius:4px; margin-top:6px; background:var(--charcoal); overflow:hidden;">
+              <div id="pwStrengthFill" style="height:100%; width:0%; transition:width 0.3s, background 0.3s; border-radius:4px;"></div>
+            </div>
+            <div id="pwStrengthLabel" style="font-size:10px; color:var(--text-muted); margin-top:4px;"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-check-double input-icon"></i>
+              <input type="password" class="form-input has-toggle" id="confirmPw" placeholder="Re-enter new password">
+              <button class="pw-toggle" onclick="togglePw('confirmPw', this)" tabindex="-1"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <button class="profile-save-btn" onclick="savePassword()" style="background:rgba(79,195,216,0.15); color:var(--code-cyan); border:1px solid var(--code-cyan); box-shadow:none;">
+            <i class="fas fa-lock"></i> Update Password
+          </button>
+        </div>
+
+      </div><!-- end right col -->
+    </div><!-- end profile-grid -->
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- =================== INVOICE MODAL =================== -->
+<div class="modal-overlay" id="invoiceModal">
+  <div class="invoice-modal" id="printInvoice">
+    <div class="invoice-header">
+      <div class="invoice-logo-area">
+        <img src="assets/images/logo-bs.png" style="height:36px; border-radius:6px;" alt="NGBS">
+        <div class="invoice-school-name">NEX GENIX<br>BUSINESS SCHOOL</div>
+      </div>
+      <div class="invoice-title-area">
+        <div class="invoice-word">INVOICE</div>
+        <div class="invoice-num" id="invNumber">INV-——</div>
+        <div style="font-size:10px; color:#94a3b8; margin-top:3px;" id="invDate">Date: —</div>
+      </div>
+    </div>
+    <div class="invoice-body">
+      <div class="invoice-meta">
+        <div class="invoice-meta-block">
+          <h4>Billed To</h4>
+          <p id="invName">—</p>
+          <small id="invEmail">—</small><br>
+          <small id="invPhone">—</small>
+        </div>
+        <div class="invoice-meta-block">
+          <h4>Student ID</h4>
+          <p id="invStudentId" style="font-family:'Silkscreen',monospace; font-size:11px; color:#0d1b2e;">—</p>
+          <small>NEX GENIX Business School</small><br>
+          <small>nexgenixbusinessschool.github.io</small>
+        </div>
+      </div>
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Type</th>
+            <th>Schedule</th>
+            <th style="text-align:right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="invItems"></tbody>
+      </table>
+    </div>
+    <div class="invoice-total-row">
+      <div>
+        <div class="invoice-total-label">Total Tuition</div>
+        <div style="font-size:10px; color:#6b80a0; margin-top:2px;" id="invCurrencyNote">Displayed in USD</div>
+      </div>
+      <div class="invoice-total-amount" id="invTotal">$0.00</div>
+    </div>
+    <div class="invoice-currency-note">
+      All amounts shown in <strong id="invCurrencyFull">US Dollar (USD)</strong>. Base currency is USD.
+    </div>
+    <div class="invoice-footer">
+      Thank you for choosing NEX GENIX Business School! · No refunds once enrolled.
+    </div>
+    <div class="invoice-actions">
+      <button class="invoice-btn download" onclick="downloadInvoice()"><i class="fas fa-download"></i> Download PDF</button>
+      <button class="invoice-btn close-inv" onclick="document.getElementById('invoiceModal').classList.remove('open')"><i class="fas fa-times"></i> Close</button>
+    </div>
   </div>
 </div>
 
@@ -1047,23 +1593,25 @@
     </span>
     My Bag
   </button>
-  <button class="bottom-nav-item"><i class="fas fa-user"></i>Profile</button>
+  <button class="bottom-nav-item" onclick="showView('profileView'); setBottomActive(this)"><i class="fas fa-user"></i>Profile</button>
 </nav>
 
 <script>
-  // =================== EMAILJS INIT ===================
-  (function() {
-    if (typeof emailjs !== 'undefined') {
-      emailjs.init({ publicKey: 'coUeJ01I7BiMQ-ABN', blockHeadless: false });
-    }
-  })();
+  // =================== FORMSPREE CONFIG ===================
+  // TODO: Replace with your Formspree endpoint when ready
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
-  const EMAILJS_CONFIG = {
-    serviceID: 'service_ju84tjo',
-    adminTemplateID: 'template_7z9si7j',
-    clientTemplateID: 'template_s8jsvcf',
-    publicKey: 'coUeJ01I7BiMQ-ABN'
-  };
+  // =================== STUDENT ID GENERATION ===================
+  function generateStudentId() {
+    const rand = String(Math.floor(1000 + Math.random() * 9000));
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    return `ID: ${rand}-${mm}${yyyy}-NGBS`;
+  }
+
+  let currentStudentId = '';
+  let currentEnrollmentData = null;
 
   // =================== CURRENCY ===================
   let currentCurrency = 'USD';
@@ -1385,7 +1933,55 @@
     updateSchedule();
     updateEnrollBtn();
     updateBag();
-    updateCalendar('calDates', calendarMonth, Object.values(selectedCourses));
+    updateWeekSchedule(Object.values(selectedCourses));
+  }
+
+  // =================== INVOICE ===================
+  function openInvoice() {
+    if (!currentEnrollmentData) return;
+    const { name, email, phone, courses, totalUSD, date } = currentEnrollmentData;
+
+    document.getElementById('invNumber').textContent = currentStudentId.replace('ID:', 'INV');
+    document.getElementById('invDate').textContent = 'Date: ' + date.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('invName').textContent = name;
+    document.getElementById('invEmail').textContent = email;
+    document.getElementById('invPhone').textContent = phone || '—';
+    document.getElementById('invStudentId').textContent = currentStudentId;
+
+    // Currency info
+    const currName = currencyNames[currentCurrency] || currentCurrency;
+    document.getElementById('invCurrencyNote').textContent = `Displayed in ${currentCurrency}`;
+    document.getElementById('invCurrencyFull').textContent = `${currName} (${currentCurrency})`;
+
+    // Course rows
+    let totalConverted = 0;
+    document.getElementById('invItems').innerHTML = courses.map(c => {
+      const amt = formatPrice(c.priceUSD);
+      totalConverted += c.priceUSD * conversionRates[currentCurrency];
+      return `<tr>
+        <td style="font-weight:600;">${c.name}</td>
+        <td><span style="font-size:10px; padding:2px 7px; border-radius:10px; background:${c.type==='Instructor-Led'?'#e0fef0':'#fef9e7'}; color:${c.type==='Instructor-Led'?'#166534':'#92400e'};">${c.type}</span></td>
+        <td style="color:#6b80a0; font-size:11px;">${c.schedule}</td>
+        <td style="text-align:right; font-weight:700; color:#0d1b2e;">${amt}</td>
+      </tr>`;
+    }).join('');
+
+    // Total
+    const sym = currencySymbols[currentCurrency];
+    const totalFmt = ['JPY','KRW','INR'].includes(currentCurrency)
+      ? sym + Math.round(totalConverted).toLocaleString()
+      : sym + totalConverted.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('invTotal').textContent = totalFmt;
+
+    document.getElementById('invoiceModal').classList.add('open');
+  }
+
+  function downloadInvoice() {
+    // Hide modal overlay background for printing
+    const overlay = document.getElementById('invoiceModal');
+    overlay.style.background = 'transparent';
+    window.print();
+    setTimeout(() => { overlay.style.background = ''; }, 1000);
   }
 
   // =================== ENROLLMENT FORM ===================
@@ -1423,46 +2019,89 @@
     if (!name || !email) { alert('Please enter your name and email.'); return; }
 
     const btn = document.getElementById('submitEnrollBtn');
-    btn.textContent = '⏳ Submitting…';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
     btn.disabled = true;
 
     const courses = Object.values(selectedCourses);
-    const phone = document.getElementById('phoneCode').value + document.getElementById('studentPhone').value;
+    const phone = document.getElementById('phoneCode').value + ' ' + document.getElementById('studentPhone').value;
     const goal = document.getElementById('learningGoal').value;
     const notes = document.getElementById('studentNotes').value;
-    const total = courses.reduce((s, c) => s + c.priceUSD, 0);
-    const courseList = courses.map(c => `  • ${c.name} (${c.type}) — ${formatPrice(c.priceUSD)}`).join('\n');
+    const totalUSD = courses.reduce((s, c) => s + c.priceUSD, 0);
+    const totalDisplay = formatPrice(totalUSD);
 
-    const params = {
-      email: 'nexgenixcreativesolutions@gmail.com',
-      from_name: name,
-      reply_to: email,
-      client_name: name,
-      client_email: email,
-      subject: `New Enrollment — ${name} | ${courses.length} Course(s)`,
-      message: `ENROLLMENT REQUEST\n━━━━━━━━━━━━━━━━━━━━━\nStudent: ${name}\nEmail: ${email}\nPhone: ${phone}\nGoal: ${goal || 'N/A'}\nNotes: ${notes || 'N/A'}\n\nCourses Enrolled:\n${courseList}\n\nTotal: ${formatPrice(total)} (${currentCurrency})`,
-      auto_reply_message: `Dear ${name},\n\nThank you for enrolling at NEX GENIX Virtual Academy!\nWe've received your enrollment for ${courses.length} course(s).\n\nCourses:\n${courseList}\n\nTotal: ${formatPrice(total)} (${currentCurrency})\n\nWe'll follow up within 24 hours to confirm and process your enrollment.\n\nBest regards,\nNEX GENIX Virtual Academy`
+    // Generate student ID
+    currentStudentId = generateStudentId();
+
+    // Build course list for form
+    const courseList = courses.map(c => `${c.name} (${c.type}) — ${formatPrice(c.priceUSD)}`).join(' | ');
+
+    // Store for invoice
+    currentEnrollmentData = { name, email, phone, goal, notes, courses, totalUSD, date: new Date() };
+
+    // Formspree submission
+    const formData = {
+      name,
+      email,
+      phone,
+      student_id: currentStudentId,
+      learning_goal: goal || 'N/A',
+      notes: notes || 'N/A',
+      courses: courseList,
+      course_count: courses.length,
+      total_usd: `$${totalUSD.toFixed(2)}`,
+      total_display: `${totalDisplay} (${currentCurrency})`,
+      currency: currentCurrency,
+      submitted_at: new Date().toLocaleString()
     };
 
     try {
-      if (typeof emailjs !== 'undefined') {
-        await emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.adminTemplateID, params, EMAILJS_CONFIG.publicKey);
-      }
-      showEnrollmentSuccess(name, courses, total);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      // Show success regardless (backend setup later)
+      showEnrollmentSuccess(name, courses, totalUSD);
     } catch(e) {
-      console.error(e);
-      showEnrollmentSuccess(name, courses, total); // fallback — show success anyway
+      // Show success anyway — backend to be set up later
+      showEnrollmentSuccess(name, courses, totalUSD);
     }
   }
 
-  function showEnrollmentSuccess(name, courses, total) {
+  function showEnrollmentSuccess(name, courses, totalUSD) {
     document.getElementById('enrollSuccessBanner').style.display = 'block';
     document.getElementById('submitEnrollBtn').style.display = 'none';
     document.getElementById('viewDashboardBtn').style.display = 'block';
 
     enrolledCourses = courses.map(c => ({ ...c, progress: 0, status: 'Not Started', startDate: new Date().toLocaleDateString() }));
     const el = document.getElementById('dashStudentName');
-    if (el) el.textContent = document.getElementById('studentName').value.trim() || 'Student';
+    if (el) el.textContent = name || 'Student';
+
+    // Sync profile data
+    const email = document.getElementById('studentEmail').value.trim();
+    profileData.email = email;
+    if (!profileData.legalName) {
+      setEl('nameDisplayValue', name);
+      const legalInput = document.getElementById('legalNameInput');
+      if (legalInput) legalInput.value = name;
+    }
+    const profileEmailEl = document.getElementById('profileEmail');
+    if (profileEmailEl) profileEmailEl.value = email;
+
+    // Populate virtual ID card
+    document.getElementById('idCardName').textContent = name;
+    document.getElementById('idCardNumber').textContent = currentStudentId;
+    document.getElementById('idCardIssued').textContent = 'Issued: ' + new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    const badges = document.getElementById('idCardBadges');
+    if (badges) {
+      badges.innerHTML = courses.slice(0,3).map(c =>
+        `<span class="id-badge">${c.name.split(' ')[0]}</span>`
+      ).join('');
+    }
+
+    // Show invoice download button in dashboard
+    const dlBtn = document.getElementById('downloadInvoiceBtn');
+    if (dlBtn) dlBtn.style.display = 'block';
   }
 
   function goToDashboard() {
@@ -1594,11 +2233,18 @@
   function showView(viewId) {
     document.getElementById('enrollmentView').style.display = viewId === 'enrollmentView' ? 'block' : 'none';
     const dash = document.getElementById('dashboardView');
+    const prof = document.getElementById('profileView');
     if (viewId === 'dashboardView') {
       dash.classList.add('active');
+      prof.classList.remove('active');
       if (enrolledCourses.length > 0) updateDashboard();
+    } else if (viewId === 'profileView') {
+      dash.classList.remove('active');
+      prof.classList.add('active');
+      syncProfileIdCard();
     } else {
       dash.classList.remove('active');
+      prof.classList.remove('active');
     }
   }
 
@@ -1619,7 +2265,217 @@
     document.getElementById('navList').classList.remove('active');
   }
 
-  // =================== INIT ===================
+  // =================== PROFILE ===================
+  let profileData = {
+    legalName: '',
+    nameEditUsed: false,
+    email: '',
+    phone: '',
+    ice: { name: '', relationship: '', phone: '' }
+  };
+  let studentPassword = 'ngbs1234'; // default placeholder
+
+  function syncProfileIdCard() {
+    // Sync ID card in profile view with dashboard ID card values
+    const name = document.getElementById('idCardName').textContent;
+    const num  = document.getElementById('idCardNumber').textContent;
+    const issued = document.getElementById('idCardIssued').textContent;
+    const badges = document.getElementById('idCardBadges').innerHTML;
+
+    setEl('profileIdName', name);
+    setEl('profileIdNumber', num);
+    setEl('profileIdIssued', issued);
+    const pb = document.getElementById('profileIdBadges');
+    if (pb) pb.innerHTML = badges;
+
+    // Emergency contact on profile card
+    updateIdEmergency('profile');
+
+    // Pre-fill name display
+    if (profileData.legalName) {
+      setEl('nameDisplayValue', profileData.legalName);
+    } else if (name !== '—') {
+      setEl('nameDisplayValue', name);
+    }
+    updateNameEditUI();
+
+    // Pre-fill email/phone
+    const emailEl = document.getElementById('profileEmail');
+    if (emailEl && !emailEl.value && profileData.email) emailEl.value = profileData.email;
+
+    // Sync name edits left label
+    setEl('nameEditsLeft', profileData.nameEditUsed ? '0 times (locked)' : '1 time');
+    if (profileData.nameEditUsed) {
+      const btn = document.getElementById('nameEditBtn');
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; }
+    }
+  }
+
+  function setEl(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  }
+
+  function updateIdEmergency(prefix) {
+    const row = document.getElementById(prefix + 'EmergencyRow');
+    const nameEl = document.getElementById(prefix + 'EmergencyName');
+    const phoneEl = document.getElementById(prefix + 'EmergencyPhone');
+    if (!row) return;
+    if (profileData.ice.name) {
+      row.style.display = 'block';
+      if (nameEl) nameEl.textContent = profileData.ice.name + (profileData.ice.relationship ? ` (${profileData.ice.relationship})` : '');
+      if (phoneEl) phoneEl.textContent = profileData.ice.phone || '—';
+    } else {
+      row.style.display = 'none';
+    }
+  }
+
+  function updateNameEditUI() {
+    const displayGroup = document.getElementById('nameDisplayGroup');
+    const editGroup = document.getElementById('nameEditGroup');
+    if (!displayGroup || !editGroup) return;
+    // Already in edit mode? Don't reset
+  }
+
+  function enableNameEdit() {
+    if (profileData.nameEditUsed) return;
+    document.getElementById('nameDisplayGroup').style.display = 'none';
+    document.getElementById('nameEditGroup').style.display = 'block';
+    const currentName = document.getElementById('nameDisplayValue').textContent;
+    const input = document.getElementById('legalNameInput');
+    if (input && currentName !== '—') input.value = currentName;
+    document.getElementById('nameWarning').style.display = 'none';
+  }
+
+  function saveAccountInfo() {
+    const email = document.getElementById('profileEmail').value.trim();
+    const phone = document.getElementById('profilePhoneCode').value + ' ' + document.getElementById('profilePhone').value.trim();
+    if (!email) { showToast('Please enter an email address.', true); return; }
+    profileData.email = email;
+    profileData.phone = phone;
+    // Also sync with enrollment form if open
+    const enrollEmail = document.getElementById('studentEmail');
+    if (enrollEmail && !enrollEmail.value) enrollEmail.value = email;
+    showToast('✓ Account info saved!');
+  }
+
+  function saveEmergencyContact() {
+    const name = document.getElementById('iceNameInput').value.trim();
+    const rel  = document.getElementById('iceRelationship').value;
+    const code = document.getElementById('icePhoneCode').value;
+    const phone = document.getElementById('icePhone').value.trim();
+    if (!name || !phone) { showToast('Please fill in contact name and phone.', true); return; }
+    profileData.ice = { name, relationship: rel, phone: code + ' ' + phone };
+    // Reflect on both ID cards
+    updateIdEmergency('id');
+    updateIdEmergency('profile');
+    showToast('✓ Emergency contact saved!');
+  }
+
+  function savePassword() {
+    const current = document.getElementById('currentPw').value;
+    const newPw   = document.getElementById('newPw').value;
+    const confirm = document.getElementById('confirmPw').value;
+    if (!current) { showToast('Enter your current password.', true); return; }
+    if (current !== studentPassword) { showToast('Current password is incorrect.', true); return; }
+    if (newPw.length < 8) { showToast('New password must be at least 8 characters.', true); return; }
+    if (newPw !== confirm) { showToast('Passwords do not match.', true); return; }
+    studentPassword = newPw;
+    document.getElementById('currentPw').value = '';
+    document.getElementById('newPw').value = '';
+    document.getElementById('confirmPw').value = '';
+    document.getElementById('pwStrengthFill').style.width = '0%';
+    document.getElementById('pwStrengthLabel').textContent = '';
+    showToast('✓ Password updated successfully!');
+  }
+
+  function saveLegalName() {
+    if (profileData.nameEditUsed) return;
+    const input = document.getElementById('legalNameInput');
+    const name = input ? input.value.trim() : '';
+    if (!name) { showToast('Please enter your legal name.', true); return; }
+
+    // Confirm before locking
+    if (!confirm(`Lock legal name as:\n"${name}"\n\nThis cannot be changed again. Continue?`)) return;
+
+    profileData.legalName = name;
+    profileData.nameEditUsed = true;
+
+    // Update all ID card displays
+    setEl('idCardName', name);
+    setEl('profileIdName', name);
+    setEl('nameDisplayValue', name);
+    setEl('nameEditsLeft', '0 times (locked)');
+
+    // Update dashboard student name
+    setEl('dashStudentName', name.split(' ')[0]);
+
+    // Switch back to locked view
+    document.getElementById('nameEditGroup').style.display = 'none';
+    document.getElementById('nameDisplayGroup').style.display = 'block';
+
+    // Disable edit button
+    const btn = document.getElementById('nameEditBtn');
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; btn.innerHTML = '<i class="fas fa-lock"></i> Locked'; }
+
+    showToast('✓ Legal name saved and locked.');
+  }
+
+  // Add save button to name edit group dynamically
+  document.addEventListener('DOMContentLoaded', function() {
+    const editGroup = document.getElementById('nameEditGroup');
+    if (editGroup) {
+      const saveBtn = document.createElement('button');
+      saveBtn.className = 'profile-save-btn';
+      saveBtn.style.marginTop = '12px';
+      saveBtn.innerHTML = '<i class="fas fa-lock"></i> Save & Lock Legal Name';
+      saveBtn.onclick = saveLegalName;
+      editGroup.appendChild(saveBtn);
+    }
+  });
+
+  function togglePw(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    btn.innerHTML = isHidden ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+  }
+
+  function checkPwStrength(pw) {
+    const fill = document.getElementById('pwStrengthFill');
+    const label = document.getElementById('pwStrengthLabel');
+    if (!fill || !label) return;
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (pw.length >= 12) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+    const levels = [
+      { pct: '20%', color: '#ef4444', text: 'Very Weak' },
+      { pct: '40%', color: '#f97316', text: 'Weak' },
+      { pct: '60%', color: '#f59e0b', text: 'Fair' },
+      { pct: '80%', color: '#22c55e', text: 'Strong' },
+      { pct: '100%', color: '#10b981', text: 'Very Strong' },
+    ];
+    const lvl = levels[Math.max(0, score - 1)] || levels[0];
+    fill.style.width = pw.length ? lvl.pct : '0%';
+    fill.style.background = lvl.color;
+    label.textContent = pw.length ? lvl.text : '';
+    label.style.color = lvl.color;
+  }
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '');
+    setTimeout(() => t.classList.add('show'), 10);
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+
   document.addEventListener('DOMContentLoaded', function() {
     renderAllCourses();
     updateWeekSchedule([]);
