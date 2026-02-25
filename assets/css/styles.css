@@ -1315,24 +1315,31 @@ footer span {
 .team-image-placeholder {
     width: 115px;
     height: 115px;
+    min-width: 115px;
+    min-height: 115px;
     border-radius: 50%;
     background: rgba(79, 195, 216, 0.06);
     border: 2px solid var(--code-cyan);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    position: relative;
     margin: 0 auto 18px auto;
     transition: all 0.3s ease;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .team-image-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     border-radius: 50%;
     display: block;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .team-card:hover .team-image-placeholder {
