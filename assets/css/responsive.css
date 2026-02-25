@@ -691,6 +691,19 @@
         padding: 22px;
     }
 
+    .team-name {
+        text-align: center;
+    }
+
+    .team-role {
+        text-align: center;
+    }
+
+    .team-description {
+        text-align: justify;
+        hyphens: auto;
+    }
+
     .cta-section {
         padding: 46px 15px;
     }
@@ -771,6 +784,16 @@
     .team-image-placeholder {
         width: 95px;
         height: 95px;
+        overflow: hidden;
+    }
+
+    .team-image-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 50%;
+        display: block;
     }
 
     .team-image-placeholder i {
@@ -779,14 +802,18 @@
 
     .team-name {
         font-size: 17px;
+        text-align: center;
     }
 
     .team-role {
         font-size: 12.5px;
+        text-align: center;
     }
 
     .team-description {
         font-size: 11.5px;
+        text-align: justify;
+        hyphens: auto;
     }
 
     .cta-section {
