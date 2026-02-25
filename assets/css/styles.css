@@ -1318,28 +1318,16 @@ footer span {
     min-width: 115px;
     min-height: 115px;
     border-radius: 50%;
-    background: rgba(79, 195, 216, 0.06);
+    background-color: rgba(79, 195, 216, 0.06);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
     border: 2px solid var(--code-cyan);
     display: block;
-    position: relative;
     margin: 0 auto 18px auto;
     transition: all 0.3s ease;
     overflow: hidden;
     flex-shrink: 0;
-}
-
-.team-image-placeholder img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: 50%;
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .team-card:hover .team-image-placeholder {
