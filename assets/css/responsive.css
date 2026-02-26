@@ -173,7 +173,7 @@
         padding: 20px 15px;
         margin-bottom: 20px;
     }
-.subtitle-tagline {
+    .subtitle-tagline {
         font-size: 12px;
         letter-spacing: 1.2px;
         margin-bottom: 12px;
@@ -232,7 +232,9 @@
         font-size: 10.5px;
         padding: 0 28px;
     }
-}@media (min-width: 836px) {
+}
+
+@media (min-width: 836px) {
     .verification-container {
         display: flex;
         flex-direction: row;
@@ -282,6 +284,16 @@
         grid-template-columns: 1fr;
         gap: 14px;
     }
+
+    /* WHAT MAKES US DIFFERENT IMAGE — stop floating on tablet, stack above text */
+    .wrapped-image {
+        float: none;
+        display: block;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto 22px auto;
+        border-radius: 12px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -295,7 +307,8 @@
         background: linear-gradient(160deg, #0f1e30 0%, #182d44 50%, #0d1b2e 100%);
         margin-bottom: 20px;
     }
-.banner {
+
+    .banner {
         margin: 10px auto;
         height: 250px;
     }
@@ -358,7 +371,19 @@
         font-size: 10px;
         padding: 0 22px;
     }
+
+    /* WHAT MAKES US DIFFERENT IMAGE — full width on mobile */
+    .wrapped-image {
+        float: none;
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto 18px auto;
+        border-radius: 10px;
+    }
 }
+
+@media (max-width: 480px) {
     body {
         padding: 70px 10px 85px 10px;
     }
@@ -380,7 +405,8 @@
     #welcome-section {
         padding: 15px 10px;
     }
-.subtitle-tagline {
+
+    .subtitle-tagline {
         font-size: 10.5px;
         letter-spacing: 0.8px;
         margin-top: 10px;
@@ -416,10 +442,13 @@
         padding: 0 18px;
     }
 }
+
+@media (max-width: 400px) {
     body {
         padding: 70px 8px 85px 8px;
     }
-.banner {
+
+    .banner {
         height: 200px;
         max-width: 95%;
         margin: 8px auto;
