@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Learning — Nex Genix Business School</title>
+<title>My Learning - Nex Genix Business School</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -59,7 +59,7 @@
     pointer-events: none; z-index: 0;
   }
 
-  /* ── NAV ── */
+  /* -- NAV -- */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(8,14,24,0.96);
@@ -152,14 +152,14 @@
   .btn-logout { background: rgba(255,61,87,0.15); border: 1px solid rgba(255,61,87,0.3); color: var(--red); }
   .btn-logout:hover { background: var(--red); color: #fff; }
 
-  /* ── LAYOUT ── */
+  /* -- LAYOUT -- */
   .layout {
     display: flex;
     min-height: calc(100vh - 58px);
     position: relative; z-index: 1;
   }
 
-  /* ── SIDEBAR ── */
+  /* -- SIDEBAR -- */
   .sidebar {
     width: 220px; flex-shrink: 0;
     background: var(--bg-nav);
@@ -197,13 +197,13 @@
   .s-item .pill.g { background: var(--green); }
   .s-item .pill.o { background: var(--gold); }
 
-  /* ── MAIN ── */
+  /* -- MAIN -- */
   .main {
     flex: 1; padding: 28px 32px;
     overflow-y: auto;
   }
 
-  /* ── WELCOME STRIP ── */
+  /* -- WELCOME STRIP -- */
   .welcome-strip {
     background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(179,136,255,0.04) 100%);
     border: 1px solid rgba(0,212,255,0.15);
@@ -270,7 +270,7 @@
     font-size: 10px; color: var(--text-2);
   }
 
-  /* ── QUICK STATS ── */
+  /* -- QUICK STATS -- */
   .quick-stats {
     display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
     margin-bottom: 28px;
@@ -306,7 +306,7 @@
     margin-top: 2px;
   }
 
-  /* ── SECTION HEADER ── */
+  /* -- SECTION HEADER -- */
   .sec-header {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 16px;
@@ -327,7 +327,7 @@
 
   .sec-link:hover { border-color: var(--cyan); }
 
-  /* ── CONTINUE LEARNING ── */
+  /* -- CONTINUE LEARNING -- */
   .continue-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
     gap: 14px; margin-bottom: 32px;
@@ -478,7 +478,7 @@
     text-transform: uppercase; letter-spacing: 0.5px;
   }
 
-  /* ── COMPLETED STRIP ── */
+  /* -- COMPLETED STRIP -- */
   .completed-strip {
     display: flex; gap: 12px;
     overflow-x: auto; padding-bottom: 8px;
@@ -550,7 +550,7 @@
     box-shadow: 0 0 16px rgba(240,165,0,0.3);
   }
 
-  /* ── LESSON VIEWER MODAL ── */
+  /* -- LESSON VIEWER MODAL -- */
   .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.85);
@@ -786,7 +786,7 @@
     margin-bottom: 6px; line-height: 1.5;
   }
 
-  .kp-item::before { content: '▸'; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+  .kp-item::before { content: '>'; color: var(--green); flex-shrink: 0; margin-top: 2px; }
 
   /* nav buttons */
   .lesson-nav {
@@ -823,7 +823,7 @@
   }
   .btn-complete:hover { background: #69f0ae; box-shadow: 0 0 20px rgba(0,230,118,0.3); }
 
-  /* ── LANGUAGE SCHEDULE MODAL ── */
+  /* -- LANGUAGE SCHEDULE MODAL -- */
   .sched-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.82);
@@ -1084,20 +1084,155 @@
     font-size: 12px; color: var(--green); opacity: 0.7;
   }
 
-  /* ── RESPONSIVE ── */
+  /* -- HAMBURGER BUTTON (hidden on desktop) -- */
+  .hamburger {
+    display: none;
+    width: 34px; height: 34px;
+    border-radius: var(--r-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    align-items: center; justify-content: center;
+    cursor: pointer; font-size: 16px;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+  .hamburger:hover { border-color: var(--cyan); }
+
+  /* -- SIDEBAR OVERLAY BACKDROP -- */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 89;
+  }
+  .sidebar-backdrop.open { display: block; }
+
+  /* -- RESPONSIVE BREAKPOINTS -- */
+
+  /* Tablet wide 1100px */
   @media (max-width: 1100px) {
     .lesson-sidebar { width: 240px; }
+    .main { padding: 24px 20px; }
   }
+
+  /* Tablet 900px */
   @media (max-width: 900px) {
-    .sidebar { display: none; }
-    .quick-stats { grid-template-columns: repeat(2,1fr); }
+    /* Sidebar becomes a slide-in drawer */
+    .sidebar {
+      position: fixed;
+      left: -240px;
+      top: 58px;
+      height: calc(100vh - 58px);
+      z-index: 90;
+      transition: left 0.28s cubic-bezier(.4,0,.2,1);
+      box-shadow: 6px 0 32px rgba(0,0,0,0.5);
+    }
+    .sidebar.open { left: 0; }
+
+    /* Show hamburger */
+    .hamburger { display: flex; }
+
+    /* Hide lesson viewer sidebar on tablet */
     .lesson-sidebar { display: none; }
+
+    /* 2-col stats */
+    .quick-stats { grid-template-columns: repeat(2, 1fr); }
+
+    /* Narrower course grid */
+    .continue-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+    /* Welcome strip stacks */
+    .welcome-strip { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .welcome-xp { width: 100%; }
+    .xp-bar-wrap { width: 100%; }
+
+    /* Lesson modal full width */
+    .lesson-modal { border-radius: 0; }
+
+    /* Schedule modal */
+    .sched-modal { max-width: 100%; border-radius: 0; height: 100vh; }
   }
-  @media (max-width: 600px) {
-    .main { padding: 16px; }
-    .continue-grid { grid-template-columns: 1fr; }
+
+  /* Mobile 640px */
+  @media (max-width: 640px) {
+    /* Nav collapses */
+    nav { padding: 0 14px; height: 54px; gap: 8px; }
+    .brand-name { display: none; }
     .nav-center { display: none; }
-    .welcome-xp { display: none; }
+    .btn-catalog { display: none; }
+    .btn-logout span { display: none; }
+
+    /* Main padding */
+    .main { padding: 16px 14px; }
+
+    /* Stats 2-col compact */
+    .quick-stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .qs-card { padding: 12px; gap: 8px; }
+    .qs-icon { width: 30px; height: 30px; font-size: 14px; }
+    .qs-val { font-size: 18px; }
+
+    /* Welcome strip */
+    .welcome-strip { padding: 16px; }
+    .welcome-text h2 { font-size: 15px; }
+    .welcome-text p { font-size: 12px; }
+
+    /* 1-col course grid */
+    .continue-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    /* Completed strip horizontal scroll */
+    .completed-strip { gap: 10px; }
+    .cert-card { min-width: 190px; padding: 12px; }
+
+    /* Section headers */
+    .sec-title { font-size: 11px; }
+
+    /* Card footer wrap */
+    .card-footer { flex-wrap: wrap; gap: 6px; }
+    .card-stats { flex-wrap: wrap; gap: 6px; }
+
+    /* Schedule modal body padding */
+    .sched-body { padding: 16px; }
+    .sched-topbar { padding: 16px; }
+    .sched-lang-title { font-size: 14px; }
+    .meeting-actions { gap: 8px; }
+
+    /* Lesson topbar */
+    .lesson-topbar { padding: 10px 14px; gap: 8px; }
+    .lesson-topbar-title { font-size: 11px; }
+    .lesson-prog-mini { display: none; }
+
+    /* Lesson content */
+    .lesson-content-area { padding: 20px 16px; }
+    .lc-title { font-size: 16px; }
+    .video-placeholder { aspect-ratio: 16/9; }
+
+    /* Lesson nav buttons */
+    .lesson-nav { gap: 8px; }
+    .btn-prev, .btn-next, .btn-complete { padding: 8px 12px; font-size: 10px; }
+
+    /* Instructor card */
+    .instructor-card { flex-wrap: wrap; }
+
+    /* Timezone row */
+    .tz-row { flex-wrap: wrap; gap: 6px; }
+    .tz-select { width: 100%; }
+
+    /* Schedule day rows */
+    .sched-day-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sched-time-local { text-align: left; }
+  }
+
+  /* Small mobile 380px */
+  @media (max-width: 380px) {
+    .quick-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .qs-val { font-size: 16px; }
+    .qs-lbl { font-size: 9px; }
+    .welcome-text h2 { font-size: 14px; }
+    .card-title { font-size: 13px; }
   }
 </style>
 </head>
@@ -1115,7 +1250,8 @@
     <button class="nav-tab" onclick="showView('certs')">🎓 Certificates</button>
   </div>
   <div class="nav-right">
-    <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+    <div class="notif-btn">&#128276;<div class="notif-dot"></div></div>
     <button class="btn-sm btn-catalog" onclick="window.location.href='ngbs-lms.html'">📚 Browse Courses</button>
     <div class="avatar" title="Juan Dela Cruz">JD</div>
     <button class="btn-sm btn-logout">⏻ Logout</button>
@@ -1127,7 +1263,7 @@
   <div class="lesson-modal">
     <!-- topbar -->
     <div class="lesson-topbar">
-      <button class="btn-sm" style="background:var(--bg-card2);border:1px solid var(--border);color:var(--text-2);" onclick="closeLesson()">← Back</button>
+      <button class="btn-sm" style="background:var(--bg-card2);border:1px solid var(--border);color:var(--text-2);" onclick="closeLesson()"><- Back</button>
       <div class="lesson-topbar-title" id="modal-course-title">Course Title</div>
       <div class="lesson-prog-mini">
         <span id="modal-prog-label" style="font-size:9px;">0%</span>
@@ -1224,6 +1360,9 @@
   </div>
 </div>
 
+<!-- SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
 <!-- MAIN LAYOUT -->
 <div class="layout">
   <!-- SIDEBAR -->
@@ -1231,7 +1370,7 @@
     <div class="sidebar-group">
       <label>Learning</label>
       <a class="s-item active" onclick="showView('dashboard')"><span class="ico">⬡</span> My Dashboard</a>
-      <a class="s-item" onclick="openCourse(ENROLLED[0])"><span class="ico">▶</span> Continue Learning</a>
+      <a class="s-item" onclick="openCourse(ENROLLED[0])"><span class="ico">></span> Continue Learning</a>
       <a class="s-item"><span class="ico">📅</span> Schedule</a>
     </div>
     <div class="sidebar-group">
@@ -1301,15 +1440,15 @@
 
     <!-- CONTINUE LEARNING -->
     <div class="sec-header">
-      <div class="sec-title" style="color:var(--cyan);">▶ Continue Learning</div>
-      <a class="sec-link">View All →</a>
+      <div class="sec-title" style="color:var(--cyan);">> Continue Learning</div>
+      <a class="sec-link">View All -></a>
     </div>
     <div class="continue-grid" id="enrolledGrid"></div>
 
     <!-- COMPLETED -->
     <div class="sec-header">
       <div class="sec-title" style="color:var(--gold);">🏆 Completed & Certified</div>
-      <a class="sec-link">View Certificates →</a>
+      <a class="sec-link">View Certificates -></a>
     </div>
     <div class="completed-strip" id="completedStrip"></div>
 
@@ -1479,7 +1618,7 @@ function renderEnrolled(filter = 'all') {
             <div class="sched-banner-sub">${schedPrev.preview} · ${schedPrev.instructor}</div>
           </div>
         </div>
-        <span class="sched-banner-arrow">→</span>
+        <span class="sched-banner-arrow">-></span>
       </div>
     ` : '';
 
@@ -1516,7 +1655,7 @@ function renderEnrolled(filter = 'all') {
           <span class="cs-item">★ ${c.rating}</span>
         </div>
         <button class="btn-continue" style="background:${c.catColor};color:#000;" onclick="event.stopPropagation();openCourse(ENROLLED.find(x=>x.id==='${c.id}'))">
-          ${c.progress >= 100 ? '📜 View Cert' : '▶ Continue'}
+          ${c.progress >= 100 ? '📜 View Cert' : '> Continue'}
         </button>
       </div>
     `;
@@ -1547,7 +1686,7 @@ function renderCompleted() {
 }
 
 
-// ── LANGUAGE SCHEDULE DATA ──
+// -- LANGUAGE SCHEDULE DATA --
 const LANG_SCHEDULES = {
   'LANG-001': {
     lang: 'English',
@@ -1577,7 +1716,7 @@ const LANG_SCHEDULES = {
     avatarBg: 'linear-gradient(135deg,#f0a500,#e65100)',
     badgeBg: 'rgba(240,165,0,0.15)', badgeColor: '#f0a500', badgeBorder: 'rgba(240,165,0,0.3)',
     accentColor: '#f0a500',
-    // Monday & Tuesday 12mn–2am PHT (00:00–02:00 next day)
+    // Monday & Tuesday 12mn-2am PHT (00:00-02:00 next day)
     sessions: [
       { day: 'Monday',    startH: 0,  startM: 0, endH: 2,  endM: 0 },
       { day: 'Tuesday',   startH: 0,  startM: 0, endH: 2,  endM: 0 },
@@ -1612,7 +1751,7 @@ const LANG_SCHEDULES = {
     avatarBg: 'linear-gradient(135deg,#ff3d57,#b71c1c)',
     badgeBg: 'rgba(255,61,87,0.15)', badgeColor: '#ff3d57', badgeBorder: 'rgba(255,61,87,0.3)',
     accentColor: '#ff3d57',
-    // Friday & Saturday 10pm–12mn PHT (22:00–24:00)
+    // Friday & Saturday 10pm-12mn PHT (22:00-24:00)
     sessions: [
       { day: 'Friday',    startH: 22, startM: 0, endH: 24, endM: 0 },
       { day: 'Saturday',  startH: 22, startM: 0, endH: 24, endM: 0 },
@@ -1665,7 +1804,7 @@ function openSchedule(courseId, event) {
   badge.style.color = data.badgeColor;
   badge.style.border = '1px solid ' + data.badgeBorder;
 
-  // meeting links — set hrefs to the actual links
+  // meeting links - set hrefs to the actual links
   document.getElementById('btn-gmeet').href = data.gmeet;
   document.getElementById('btn-webex').href  = data.webex;
 
@@ -1750,7 +1889,7 @@ function updateSchedTimes() {
         const conv = convertPHTtoTZ(s.day, s.startH, s.startM, s.endH, s.endM, tz);
         localHTML = `
           <div class="sched-time-local">
-            <div>${conv.startStr} – ${conv.endStr}</div>
+            <div>${conv.startStr} - ${conv.endStr}</div>
             <div class="local-tz-label">${conv.localDay} · ${conv.tzAbbr}</div>
           </div>
         `;
@@ -1761,7 +1900,7 @@ function updateSchedTimes() {
       <div class="sched-day-left">
         <div class="day-dot" style="background:${data.accentColor};box-shadow:0 0 6px ${data.accentColor}66;"></div>
         <div class="day-name">${s.day}</div>
-        <div class="sched-time-ph">${phStart} – ${phEnd} PHT</div>
+        <div class="sched-time-ph">${phStart} - ${phEnd} PHT</div>
       </div>
       ${localHTML}
     `;
@@ -1778,14 +1917,14 @@ function confirmJoin(link, platform) {
   return true;
 }
 
-// ── SCHEDULE BANNER HELPER ──
+// -- SCHEDULE BANNER HELPER --
 function getSchedPreview(courseId) {
   const d = LANG_SCHEDULES[courseId];
   if (!d) return null;
   const s = d.sessions[0];
   return {
     instructor: d.instructor,
-    preview: d.sessions.map(s2 => s2.day.slice(0,3)).join(' & ') + ' · ' + fmtTime(s.startH,s.startM) + '–' + fmtTime(s.endH,s.endM) + ' PHT',
+    preview: d.sessions.map(s2 => s2.day.slice(0,3)).join(' & ') + ' · ' + fmtTime(s.startH,s.startM) + '-' + fmtTime(s.endH,s.endM) + ' PHT',
     color: d.accentColor,
     flag: d.flag,
   };
@@ -1798,7 +1937,7 @@ let activeCourse = null;
 function openCourse(course) {
   if (!course || !course.modules_list) {
     if (course && course.status === 'completed') {
-      alert(`🎓 Certificate for "${course.title}" — downloading PDF...`);
+      alert(`🎓 Certificate for "${course.title}" - downloading PDF...`);
     }
     return;
   }
@@ -1850,7 +1989,7 @@ function renderLessonSidebar(course, activeIdx) {
       li.className = 'lesson-item' + (isActive ? ' active' : '') + (isDone ? ' done' : '');
       li.innerHTML = `
         <div class="li-status ${isDone ? 'done' : isActive ? 'active' : 'locked'}">
-          ${isDone ? '✓' : isActive ? '▶' : '○'}
+          ${isDone ? 'v' : isActive ? '>' : '○'}
         </div>
         <div class="li-name">${l.name}</div>
         <div class="li-dur">${l.dur}</div>
@@ -1894,7 +2033,7 @@ function renderLessonContent(course, lessonIdx) {
     </div>
 
     <div class="video-placeholder" onclick="alert('Video player would load here in production.')">
-      <div class="play-btn">▶</div>
+      <div class="play-btn">></div>
       <div class="video-label" style="position:relative;z-index:1;">Click to play lesson video</div>
       <div class="video-duration">${lesson.dur}</div>
     </div>
@@ -1908,19 +2047,19 @@ function renderLessonContent(course, lessonIdx) {
 
     <div class="lesson-text">
       <h3>Overview</h3>
-      <p>This lesson — <strong style="color:var(--text);">${lesson.name}</strong> — is part of <em>${lesson.modTitle}</em> within the <strong style="color:var(--gold);">${course.title}</strong> course. Here you'll develop a thorough, practical understanding of the subject matter through video instruction, guided exercises, and applied examples.</p>
+      <p>This lesson - <strong style="color:var(--text);">${lesson.name}</strong> - is part of <em>${lesson.modTitle}</em> within the <strong style="color:var(--gold);">${course.title}</strong> course. Here you'll develop a thorough, practical understanding of the subject matter through video instruction, guided exercises, and applied examples.</p>
       <p>Work through the material at your own pace. Once you've watched the video and reviewed the key takeaways above, mark the lesson complete to unlock the next one and track your progress.</p>
       <h3>Learning Objectives</h3>
       <p>By the end of this lesson, you'll be able to apply the core principles directly to real-world scenarios, connect this topic to the broader course framework, and prepare effectively for any assessments that follow.</p>
     </div>
 
     <div class="lesson-nav">
-      <button class="btn-prev" onclick="navigateLesson(-1)" ${isFirst ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>← Previous</button>
+      <button class="btn-prev" onclick="navigateLesson(-1)" ${isFirst ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}><- Previous</button>
       ${!lesson.done
-        ? `<button class="btn-complete" onclick="markComplete(${lessonIdx})">✓ Mark Complete</button>`
+        ? `<button class="btn-complete" onclick="markComplete(${lessonIdx})">v Mark Complete</button>`
         : `<span style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;">✅ Lesson Completed</span>`
       }
-      <button class="btn-next" onclick="navigateLesson(1)" ${isLast ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next Lesson →</button>
+      <button class="btn-next" onclick="navigateLesson(1)" ${isLast ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next Lesson -></button>
     </div>
   `;
 }
@@ -1966,6 +2105,23 @@ function closeLesson() {
 function filterEnrolled(filter) {
   renderEnrolled(filter);
 }
+
+function toggleSidebar() {
+  const sb = document.querySelector('.sidebar');
+  const bd = document.getElementById('sidebarBackdrop');
+  sb.classList.toggle('open');
+  bd.classList.toggle('open');
+}
+
+// Close sidebar on nav item click on mobile
+document.querySelectorAll('.s-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarBackdrop').classList.remove('open');
+    }
+  });
+});
 
 function showView(v) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
