@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Learning - Nex Genix Business School</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070c14;
+    --bg-card: #0c1520;
+    --bg-card2: #101d2b;
+    --bg-nav: #080e18;
+    --cyan: #00d4ff;
+    --cyan-dim: rgba(0,212,255,0.12);
+    --gold: #f0a500;
+    --gold-dim: rgba(240,165,0,0.12);
+    --green: #00e676;
+    --green-dim: rgba(0,230,118,0.12);
+    --orange: #ff6d00;
+    --red: #ff3d57;
+    --purple: #b388ff;
+    --purple-dim: rgba(179,136,255,0.12);
+    --text: #ddeeff;
+    --text-2: #6a90aa;
+    --text-3: #2d4a60;
+    --border: rgba(0,212,255,0.1);
+    --border-2: rgba(0,212,255,0.25);
+    --r: 12px;
+    --r-sm: 8px;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* dot grid */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: radial-gradient(circle, rgba(0,212,255,0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ambient glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* -- NAV -- */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,14,24,0.96);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    height: 58px;
+    display: flex; align-items: center;
+    padding: 0 28px;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .brand-logo {
+    width: 30px; height: 30px;
+    background: linear-gradient(135deg,#f03,#f80,#fd0,#0d4,#09f,#84f);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron',monospace; font-size: 12px; font-weight: 900; color: #fff;
+  }
+
+  .brand-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 3px; color: var(--text);
+    text-transform: uppercase;
+  }
+
+  .nav-center {
+    display: flex; gap: 2px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 3px;
+  }
+
+  .nav-tab {
+    padding: 5px 16px;
+    border-radius: 6px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer; border: none; background: transparent;
+    color: var(--text-2);
+    font-family: 'Exo 2', sans-serif;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { background: var(--cyan); color: #000; font-weight: 700; }
+
+  .nav-right {
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #000; cursor: pointer;
+    border: 2px solid rgba(0,212,255,0.3);
+  }
+
+  .notif-btn {
+    width: 32px; height: 32px; border-radius: var(--r-sm);
+    background: var(--bg-card); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; position: relative;
+    transition: border-color 0.2s;
+  }
+  .notif-btn:hover { border-color: var(--cyan); }
+
+  .notif-dot {
+    position: absolute; top: 5px; right: 5px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red); border: 1px solid var(--bg-card);
+  }
+
+  .btn-sm {
+    padding: 6px 14px; border-radius: 6px;
+    font-family: 'Exo 2', sans-serif; font-size: 11px; font-weight: 700;
+    cursor: pointer; border: none;
+    display: flex; align-items: center; gap: 5px;
+    transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .btn-catalog { background: transparent; border: 1px solid var(--border); color: var(--text-2); }
+  .btn-catalog:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn-logout { background: rgba(255,61,87,0.15); border: 1px solid rgba(255,61,87,0.3); color: var(--red); }
+  .btn-logout:hover { background: var(--red); color: #fff; }
+
+  /* -- LAYOUT -- */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 58px);
+    position: relative; z-index: 1;
+  }
+
+  /* -- SIDEBAR -- */
+  .sidebar {
+    width: 220px; flex-shrink: 0;
+    background: var(--bg-nav);
+    border-right: 1px solid var(--border);
+    padding: 20px 12px;
+    position: sticky; top: 58px;
+    height: calc(100vh - 58px);
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 24px;
+  }
+
+  .sidebar-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; font-weight: 600; letter-spacing: 2px;
+    color: var(--text-3); text-transform: uppercase;
+    padding: 0 8px; display: block; margin-bottom: 6px;
+  }
+
+  .s-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border-radius: var(--r-sm);
+    cursor: pointer; font-size: 12px; font-weight: 500;
+    color: var(--text-2); border: 1px solid transparent;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .s-item:hover { color: var(--cyan); background: var(--cyan-dim); border-color: var(--border); }
+  .s-item.active { color: var(--cyan); background: var(--cyan-dim); border-color: rgba(0,212,255,0.2); }
+  .s-item .ico { font-size: 14px; }
+  .s-item .pill {
+    margin-left: auto;
+    background: var(--cyan); color: #000;
+    font-size: 8px; font-weight: 700; padding: 1px 5px;
+    border-radius: 8px; font-family: 'JetBrains Mono', monospace;
+  }
+  .s-item .pill.g { background: var(--green); }
+  .s-item .pill.o { background: var(--gold); }
+
+  /* -- MAIN -- */
+  .main {
+    flex: 1; padding: 28px 32px;
+    overflow-y: auto;
+  }
+
+  /* -- WELCOME STRIP -- */
+  .welcome-strip {
+    background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(179,136,255,0.04) 100%);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+    position: relative; overflow: hidden;
+  }
+
+  .welcome-strip::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan));
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .welcome-text h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px; font-weight: 700; color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .welcome-text p { font-size: 13px; color: var(--text-2); }
+  .welcome-text p span { color: var(--cyan); font-weight: 600; }
+
+  .welcome-xp {
+    text-align: right;
+  }
+
+  .xp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-3); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+
+  .xp-bar-wrap {
+    width: 180px; height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px; overflow: hidden; margin-bottom: 4px;
+  }
+
+  .xp-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    border-radius: 3px;
+    width: 62%;
+    animation: growBar 1.2s ease-out;
+  }
+
+  @keyframes growBar {
+    from { width: 0; }
+    to { width: 62%; }
+  }
+
+  .xp-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-2);
+  }
+
+  /* -- QUICK STATS -- */
+  .quick-stats {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .qs-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .qs-card:hover { border-color: var(--border-2); transform: translateY(-1px); }
+
+  .qs-icon {
+    width: 38px; height: 38px; border-radius: var(--r-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .qs-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px; font-weight: 700;
+    line-height: 1;
+  }
+
+  .qs-lbl {
+    font-size: 10px; color: var(--text-2);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-top: 2px;
+  }
+
+  /* -- SECTION HEADER -- */
+  .sec-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .sec-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .sec-link {
+    font-size: 11px; color: var(--cyan); cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    text-decoration: none; border-bottom: 1px solid rgba(0,212,255,0.3);
+    transition: border-color 0.2s;
+  }
+
+  .sec-link:hover { border-color: var(--cyan); }
+
+  /* -- CONTINUE LEARNING -- */
+  .continue-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 14px; margin-bottom: 32px;
+  }
+
+  .course-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    transition: all 0.25s;
+    cursor: pointer;
+    position: relative;
+    animation: fadeSlideUp 0.4s ease both;
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .course-card:nth-child(1) { animation-delay: 0.05s; }
+  .course-card:nth-child(2) { animation-delay: 0.1s; }
+  .course-card:nth-child(3) { animation-delay: 0.15s; }
+  .course-card:nth-child(4) { animation-delay: 0.2s; }
+  .course-card:nth-child(5) { animation-delay: 0.25s; }
+
+  .course-card:hover {
+    border-color: var(--border-2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,212,255,0.12);
+  }
+
+  .card-color-bar {
+    height: 3px; width: 100%;
+  }
+
+  .card-body { padding: 14px 16px 12px; }
+
+  .card-meta-top {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+
+  .course-id-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text-3);
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    padding: 2px 6px; border-radius: 4px;
+  }
+
+  .cat-tag {
+    font-size: 9px; font-weight: 700; padding: 2px 7px;
+    border-radius: 4px; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card-title {
+    font-weight: 700; font-size: 14px; color: var(--gold);
+    line-height: 1.35; margin-bottom: 10px;
+  }
+
+  /* progress */
+  .prog-wrap {
+    margin-bottom: 10px;
+  }
+
+  .prog-info {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .prog-label {
+    font-size: 10px; color: var(--text-2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .prog-pct {
+    font-size: 11px; font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .prog-bar {
+    height: 5px; background: rgba(255,255,255,0.06);
+    border-radius: 3px; overflow: hidden;
+  }
+
+  .prog-fill {
+    height: 100%; border-radius: 3px;
+    transition: width 1s ease;
+  }
+
+  /* current lesson */
+  .cur-lesson {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .lesson-icon {
+    width: 26px; height: 26px; border-radius: 5px;
+    background: var(--cyan-dim);
+    border: 1px solid rgba(0,212,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; flex-shrink: 0;
+  }
+
+  .lesson-info { flex: 1; min-width: 0; }
+
+  .lesson-subtitle {
+    font-size: 9px; color: var(--text-3); letter-spacing: 1px;
+    text-transform: uppercase; font-family: 'JetBrains Mono', monospace;
+  }
+
+  .lesson-name {
+    font-size: 11px; font-weight: 600; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .card-footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+
+  .card-stats {
+    display: flex; gap: 10px;
+  }
+
+  .cs-item {
+    font-size: 9px; color: var(--text-3);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; gap: 3px;
+  }
+
+  .btn-continue {
+    padding: 7px 14px;
+    border-radius: var(--r-sm);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 11px; font-weight: 700;
+    cursor: pointer; border: none;
+    display: flex; align-items: center; gap: 5px;
+    transition: all 0.2s;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* -- COMPLETED STRIP -- */
+  .completed-strip {
+    display: flex; gap: 12px;
+    overflow-x: auto; padding-bottom: 8px;
+    margin-bottom: 32px;
+    scrollbar-width: none;
+  }
+
+  .completed-strip::-webkit-scrollbar { display: none; }
+
+  .cert-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-radius: var(--r);
+    padding: 16px;
+    min-width: 220px;
+    flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: all 0.2s;
+    cursor: pointer;
+    animation: fadeSlideUp 0.4s ease both;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(240,165,0,0.45);
+    box-shadow: 0 8px 30px rgba(240,165,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .cert-top {
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: var(--r-sm);
+    background: var(--gold-dim); border: 1px solid rgba(240,165,0,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+
+  .cert-name {
+    font-size: 12px; font-weight: 700; color: var(--gold); line-height: 1.3;
+  }
+
+  .cert-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; color: var(--text-3);
+  }
+
+  .cert-date {
+    font-size: 10px; color: var(--text-2);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .cert-btn {
+    padding: 6px 12px;
+    background: var(--gold-dim);
+    border: 1px solid rgba(240,165,0,0.3);
+    border-radius: 6px;
+    color: var(--gold);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 10px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
+    width: 100%;
+  }
+
+  .cert-btn:hover {
+    background: var(--gold); color: #000;
+    box-shadow: 0 0 16px rgba(240,165,0,0.3);
+  }
+
+  /* -- LESSON VIEWER MODAL -- */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    display: flex; align-items: flex-start;
+    padding: 0;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .lesson-modal {
+    width: 100%; max-width: 100%; height: 100vh;
+    display: flex; flex-direction: column;
+    background: var(--bg);
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+
+  .modal-overlay.open .lesson-modal { transform: translateY(0); }
+
+  .lesson-topbar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 20px;
+    background: var(--bg-nav);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .lesson-topbar-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 12px; font-weight: 700; color: var(--text);
+    flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .lesson-prog-mini {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-2);
+  }
+
+  .mini-bar {
+    width: 100px; height: 4px;
+    background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;
+  }
+
+  .mini-fill {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+  }
+
+  .btn-close-lesson {
+    padding: 6px 14px; background: rgba(255,61,87,0.15);
+    border: 1px solid rgba(255,61,87,0.3); color: var(--red);
+    border-radius: 6px; font-family: 'Exo 2', sans-serif;
+    font-size: 11px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; text-transform: uppercase;
+  }
+
+  .btn-close-lesson:hover { background: var(--red); color: #fff; }
+
+  .lesson-layout {
+    display: flex; flex: 1; overflow: hidden;
+  }
+
+  /* lesson sidebar */
+  .lesson-sidebar {
+    width: 280px; flex-shrink: 0;
+    background: var(--bg-nav);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px 0;
+  }
+
+  .ls-header {
+    padding: 0 16px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  .ls-course-title {
+    font-size: 12px; font-weight: 700; color: var(--gold);
+    line-height: 1.4; margin-bottom: 4px;
+  }
+
+  .ls-stats {
+    display: flex; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-3);
+  }
+
+  .module-group { margin-bottom: 4px; }
+
+  .module-title {
+    padding: 6px 16px;
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--text-3); text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .lesson-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    cursor: pointer; transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .lesson-item:hover { background: var(--cyan-dim); border-left-color: rgba(0,212,255,0.3); }
+  .lesson-item.active { background: var(--cyan-dim); border-left-color: var(--cyan); }
+  .lesson-item.done { opacity: 0.6; }
+
+  .li-status {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; flex-shrink: 0;
+    border: 1px solid;
+  }
+
+  .li-status.done { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+  .li-status.active { background: var(--cyan-dim); border-color: var(--cyan); color: var(--cyan); }
+  .li-status.locked { background: rgba(255,255,255,0.03); border-color: var(--text-3); color: var(--text-3); }
+
+  .li-name { font-size: 11px; color: var(--text-2); line-height: 1.3; flex: 1; }
+  .lesson-item.active .li-name { color: var(--text); font-weight: 600; }
+
+  .li-dur { font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+  /* lesson content area */
+  .lesson-content-area {
+    flex: 1; overflow-y: auto; padding: 32px;
+    display: flex; flex-direction: column;
+  }
+
+  .lc-header { margin-bottom: 24px; }
+
+  .lc-breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--text-3); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .lc-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px; font-weight: 700; color: var(--text);
+    margin-bottom: 8px; line-height: 1.3;
+  }
+
+  .lc-meta {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 11px; color: var(--text-2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* "video" placeholder */
+  .video-placeholder {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    aspect-ratio: 16/9; max-width: 720px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    margin-bottom: 24px; position: relative; overflow: hidden;
+    cursor: pointer; transition: border-color 0.2s;
+  }
+
+  .video-placeholder:hover { border-color: var(--cyan); }
+
+  .video-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.03), rgba(179,136,255,0.02));
+  }
+
+  .play-btn {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #000; margin-bottom: 12px;
+    box-shadow: 0 0 30px rgba(0,212,255,0.4);
+    transition: transform 0.2s;
+  }
+
+  .video-placeholder:hover .play-btn { transform: scale(1.08); }
+
+  .video-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-2); position: relative; z-index: 1;
+  }
+
+  .video-duration {
+    position: absolute; bottom: 10px; right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; background: rgba(0,0,0,0.7);
+    color: var(--text); padding: 2px 6px; border-radius: 4px;
+  }
+
+  /* lesson text content */
+  .lesson-text {
+    max-width: 720px;
+    font-size: 13px; line-height: 1.8; color: var(--text-2);
+    margin-bottom: 24px;
+  }
+
+  .lesson-text h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; color: var(--cyan); margin: 20px 0 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .lesson-text p { margin-bottom: 12px; }
+
+  .key-points {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--cyan);
+    border-radius: var(--r-sm);
+    padding: 14px 16px; max-width: 720px;
+    margin-bottom: 24px;
+  }
+
+  .kp-title {
+    font-size: 10px; font-weight: 700; color: var(--cyan);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .kp-item {
+    font-size: 12px; color: var(--text-2);
+    display: flex; align-items: flex-start; gap: 8px;
+    margin-bottom: 6px; line-height: 1.5;
+  }
+
+  .kp-item::before { content: '>'; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+  /* nav buttons */
+  .lesson-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 720px; padding-top: 20px;
+    border-top: 1px solid var(--border); margin-top: auto;
+  }
+
+  .btn-prev, .btn-next {
+    padding: 10px 20px; border-radius: var(--r-sm);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .btn-prev {
+    background: transparent; border: 1px solid var(--border); color: var(--text-2);
+  }
+  .btn-prev:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .btn-next {
+    background: var(--cyan); border: none; color: #000;
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  }
+  .btn-next:hover { background: #00eeff; box-shadow: 0 0 28px rgba(0,212,255,0.4); }
+
+  .btn-complete {
+    padding: 10px 20px; border-radius: var(--r-sm);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
+    background: var(--green); border: none; color: #000;
+  }
+  .btn-complete:hover { background: #69f0ae; box-shadow: 0 0 20px rgba(0,230,118,0.3); }
+
+  /* -- LANGUAGE SCHEDULE MODAL -- */
+  .sched-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(10px);
+    z-index: 600;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .sched-overlay.open { opacity: 1; pointer-events: all; }
+
+  .sched-modal {
+    background: var(--bg-card);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 16px;
+    width: 100%; max-width: 600px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,212,255,0.1), 0 0 60px rgba(0,212,255,0.05);
+    overflow: hidden;
+    transform: translateY(24px) scale(0.98);
+    transition: transform 0.3s;
+    max-height: 90vh;
+    display: flex; flex-direction: column;
+  }
+  .sched-overlay.open .sched-modal { transform: translateY(0) scale(1); }
+
+  .sched-topbar {
+    background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(179,136,255,0.05));
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px 16px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .sched-topbar::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--green), var(--cyan), var(--purple));
+  }
+
+  .sched-lang-flag {
+    font-size: 32px; margin-bottom: 6px;
+    display: block;
+  }
+
+  .sched-lang-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 17px; font-weight: 700; color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .sched-lang-sub {
+    font-size: 12px; color: var(--text-2);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .sched-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 30px; height: 30px; border-radius: 7px;
+    background: var(--bg-card2); border: 1px solid var(--border);
+    color: var(--text-2); font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .sched-close:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+  .sched-body { padding: 20px 24px; overflow-y: auto; flex: 1; }
+
+  /* instructor card */
+  .instructor-card {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .instr-avatar {
+    width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 17px; color: #000;
+    border: 2px solid;
+  }
+
+  .instr-info { flex: 1; }
+
+  .instr-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; letter-spacing: 1.5px; color: var(--text-3);
+    text-transform: uppercase; margin-bottom: 3px;
+  }
+
+  .instr-name {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .instr-role {
+    font-size: 11px; color: var(--text-2);
+  }
+
+  .instr-badge {
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 9px; font-weight: 700; letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase; flex-shrink: 0;
+  }
+
+  /* timezone row */
+  .tz-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 14px;
+  }
+
+  .tz-icon { font-size: 16px; flex-shrink: 0; }
+
+  .tz-label {
+    font-size: 11px; color: var(--text-2); white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tz-select {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12px; font-weight: 600;
+    padding: 6px 10px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .tz-select:focus { border-color: var(--cyan); }
+
+  /* schedule blocks */
+  .sched-section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    color: var(--text-3); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .sched-days { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+  .sched-day-row {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 12px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .sched-day-row:hover { border-color: rgba(0,212,255,0.2); }
+
+  .sched-day-left { display: flex; align-items: center; gap: 10px; }
+
+  .day-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  .day-name {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    min-width: 90px;
+  }
+
+  .sched-time-ph {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--cyan); font-weight: 600;
+  }
+
+  .sched-time-local {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-2);
+    text-align: right;
+  }
+
+  .local-tz-label {
+    font-size: 8px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* meeting buttons */
+  .meeting-actions {
+    display: flex; gap: 8px; flex-direction: column;
+  }
+
+  .btn-meet {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 16px;
+    border-radius: var(--r-sm);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12px; font-weight: 700;
+    cursor: pointer; border: none;
+    transition: all 0.2s;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    text-decoration: none; color: #000;
+  }
+
+  .btn-gmeet {
+    background: linear-gradient(135deg, #00c853, #00bfa5);
+    box-shadow: 0 4px 16px rgba(0,200,83,0.25);
+  }
+  .btn-gmeet:hover { box-shadow: 0 6px 24px rgba(0,200,83,0.45); transform: translateY(-1px); }
+
+  .btn-webex {
+    background: linear-gradient(135deg, #1e88e5, #0d47a1);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(30,136,229,0.25);
+  }
+  .btn-webex:hover { box-shadow: 0 6px 24px rgba(30,136,229,0.45); transform: translateY(-1px); }
+
+  .btn-meet-icon { font-size: 16px; }
+
+  .note-box {
+    background: rgba(240,165,0,0.06);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-radius: var(--r-sm);
+    padding: 10px 14px;
+    font-size: 11px; color: var(--text-2); line-height: 1.6;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+
+  .note-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+  /* schedule banner on course cards */
+  .sched-banner {
+    margin: 0 16px 12px;
+    background: linear-gradient(135deg, rgba(0,230,118,0.07), rgba(0,212,255,0.05));
+    border: 1px solid rgba(0,230,118,0.2);
+    border-radius: var(--r-sm);
+    padding: 9px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .sched-banner:hover {
+    border-color: rgba(0,230,118,0.45);
+    background: linear-gradient(135deg, rgba(0,230,118,0.12), rgba(0,212,255,0.08));
+  }
+
+  .sched-banner-left { display: flex; align-items: center; gap: 8px; }
+  .sched-banner-icon { font-size: 15px; }
+
+  .sched-banner-text { font-size: 11px; font-weight: 600; color: var(--green); }
+  .sched-banner-sub { font-size: 9px; color: var(--text-2); font-family: 'JetBrains Mono', monospace; }
+
+  .sched-banner-arrow {
+    font-size: 12px; color: var(--green); opacity: 0.7;
+  }
+
+  /* -- HAMBURGER BUTTON (hidden on desktop) -- */
+  .hamburger {
+    display: none;
+    width: 34px; height: 34px;
+    border-radius: var(--r-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    align-items: center; justify-content: center;
+    cursor: pointer; font-size: 16px;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+  .hamburger:hover { border-color: var(--cyan); }
+
+  /* -- SIDEBAR OVERLAY BACKDROP -- */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 89;
+  }
+  .sidebar-backdrop.open { display: block; }
+
+  /* -- RESPONSIVE BREAKPOINTS -- */
+
+  /* Tablet wide 1100px */
+  @media (max-width: 1100px) {
+    .lesson-sidebar { width: 240px; }
+    .main { padding: 24px 20px; }
+  }
+
+  /* Tablet 900px */
+  @media (max-width: 900px) {
+    /* Sidebar becomes a slide-in drawer */
+    .sidebar {
+      position: fixed;
+      left: -240px;
+      top: 58px;
+      height: calc(100vh - 58px);
+      z-index: 90;
+      transition: left 0.28s cubic-bezier(.4,0,.2,1);
+      box-shadow: 6px 0 32px rgba(0,0,0,0.5);
+    }
+    .sidebar.open { left: 0; }
+
+    /* Show hamburger */
+    .hamburger { display: flex; }
+
+    /* Hide lesson viewer sidebar on tablet */
+    .lesson-sidebar { display: none; }
+
+    /* 2-col stats */
+    .quick-stats { grid-template-columns: repeat(2, 1fr); }
+
+    /* Narrower course grid */
+    .continue-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+    /* Welcome strip stacks */
+    .welcome-strip { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .welcome-xp { width: 100%; }
+    .xp-bar-wrap { width: 100%; }
+
+    /* Lesson modal full width */
+    .lesson-modal { border-radius: 0; }
+
+    /* Schedule modal */
+    .sched-modal { max-width: 100%; border-radius: 0; height: 100vh; }
+  }
+
+  /* Mobile 640px */
+  @media (max-width: 640px) {
+    /* Nav collapses */
+    nav { padding: 0 14px; height: 54px; gap: 8px; }
+    .brand-name { display: none; }
+    .nav-center { display: none; }
+    .btn-catalog { display: none; }
+    .btn-logout span { display: none; }
+
+    /* Main padding */
+    .main { padding: 16px 14px; }
+
+    /* Stats 2-col compact */
+    .quick-stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .qs-card { padding: 12px; gap: 8px; }
+    .qs-icon { width: 30px; height: 30px; font-size: 14px; }
+    .qs-val { font-size: 18px; }
+
+    /* Welcome strip */
+    .welcome-strip { padding: 16px; }
+    .welcome-text h2 { font-size: 15px; }
+    .welcome-text p { font-size: 12px; }
+
+    /* 1-col course grid */
+    .continue-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    /* Completed strip horizontal scroll */
+    .completed-strip { gap: 10px; }
+    .cert-card { min-width: 190px; padding: 12px; }
+
+    /* Section headers */
+    .sec-title { font-size: 11px; }
+
+    /* Card footer wrap */
+    .card-footer { flex-wrap: wrap; gap: 6px; }
+    .card-stats { flex-wrap: wrap; gap: 6px; }
+
+    /* Schedule modal body padding */
+    .sched-body { padding: 16px; }
+    .sched-topbar { padding: 16px; }
+    .sched-lang-title { font-size: 14px; }
+    .meeting-actions { gap: 8px; }
+
+    /* Lesson topbar */
+    .lesson-topbar { padding: 10px 14px; gap: 8px; }
+    .lesson-topbar-title { font-size: 11px; }
+    .lesson-prog-mini { display: none; }
+
+    /* Lesson content */
+    .lesson-content-area { padding: 20px 16px; }
+    .lc-title { font-size: 16px; }
+    .video-placeholder { aspect-ratio: 16/9; }
+
+    /* Lesson nav buttons */
+    .lesson-nav { gap: 8px; }
+    .btn-prev, .btn-next, .btn-complete { padding: 8px 12px; font-size: 10px; }
+
+    /* Instructor card */
+    .instructor-card { flex-wrap: wrap; }
+
+    /* Timezone row */
+    .tz-row { flex-wrap: wrap; gap: 6px; }
+    .tz-select { width: 100%; }
+
+    /* Schedule day rows */
+    .sched-day-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sched-time-local { text-align: left; }
+  }
+
+  /* Small mobile 380px */
+  @media (max-width: 380px) {
+    .quick-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .qs-val { font-size: 16px; }
+    .qs-lbl { font-size: 9px; }
+    .welcome-text h2 { font-size: 14px; }
+    .card-title { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">
+    <div class="brand-logo">NG</div>
+    <div class="brand-name">Nex Genix Business School</div>
+  </div>
+  <div class="nav-center">
+    <button class="nav-tab active" onclick="showView('dashboard')">⬡ Dashboard</button>
+    <button class="nav-tab" onclick="showView('catalog')">📚 Catalog</button>
+    <button class="nav-tab" onclick="showView('certs')">🎓 Certificates</button>
+  </div>
+  <div class="nav-right">
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+    <div class="notif-btn">&#128276;<div class="notif-dot"></div></div>
+    <button class="btn-sm btn-catalog" onclick="window.location.href='ngbs-lms.html'">📚 Browse Courses</button>
+    <div class="avatar" title="Juan Dela Cruz">JD</div>
+    <button class="btn-sm btn-logout">⏻ Logout</button>
+  </div>
+</nav>
+
+<!-- LESSON MODAL -->
+<div class="modal-overlay" id="lessonModal">
+  <div class="lesson-modal">
+    <!-- topbar -->
+    <div class="lesson-topbar">
+      <button class="btn-sm" style="background:var(--bg-card2);border:1px solid var(--border);color:var(--text-2);" onclick="closeLesson()"><- Back</button>
+      <div class="lesson-topbar-title" id="modal-course-title">Course Title</div>
+      <div class="lesson-prog-mini">
+        <span id="modal-prog-label" style="font-size:9px;">0%</span>
+        <div class="mini-bar"><div class="mini-fill" id="modal-mini-fill" style="width:0%"></div></div>
+      </div>
+      <button class="btn-close-lesson" onclick="closeLesson()">✕ Close</button>
+    </div>
+    <!-- layout -->
+    <div class="lesson-layout">
+      <!-- lesson list sidebar -->
+      <div class="lesson-sidebar" id="lessonSidebar"></div>
+      <!-- lesson content -->
+      <div class="lesson-content-area" id="lessonContentArea"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LANGUAGE SCHEDULE MODAL -->
+<div class="sched-overlay" id="schedModal">
+  <div class="sched-modal">
+    <div class="sched-topbar">
+      <span class="sched-lang-flag" id="sched-flag">🇬🇧</span>
+      <div class="sched-lang-title" id="sched-title">English Language Mastery</div>
+      <div class="sched-lang-sub">
+        <span id="sched-id-tag" style="font-family:'JetBrains Mono',monospace;font-size:9px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);padding:2px 7px;border-radius:4px;">LANG-001</span>
+        <span id="sched-cat-tag">Language Mastery · Premium</span>
+      </div>
+      <button class="sched-close" onclick="closeSched()">✕</button>
+    </div>
+    <div class="sched-body">
+
+      <!-- Instructor -->
+      <div class="instructor-card">
+        <div class="instr-avatar" id="sched-avatar">NO</div>
+        <div class="instr-info">
+          <div class="instr-label">Your Instructor</div>
+          <div class="instr-name" id="sched-instr-name">Noe Luis Lacastesantos</div>
+          <div class="instr-role" id="sched-instr-role">English Language Specialist</div>
+        </div>
+        <div class="instr-badge" id="sched-instr-badge">Live Sessions</div>
+      </div>
+
+      <!-- Timezone Picker -->
+      <div class="tz-row">
+        <span class="tz-icon">🌏</span>
+        <span class="tz-label">View in:</span>
+        <select class="tz-select" id="tzSelect" onchange="updateSchedTimes()">
+          <option value="Asia/Manila">🇵🇭 Philippine Time (PHT, UTC+8)</option>
+          <option value="America/New_York">🇺🇸 Eastern Time (ET)</option>
+          <option value="America/Chicago">🇺🇸 Central Time (CT)</option>
+          <option value="America/Los_Angeles">🇺🇸 Pacific Time (PT)</option>
+          <option value="America/Toronto">🇨🇦 Toronto (ET)</option>
+          <option value="Europe/London">🇬🇧 London (GMT/BST)</option>
+          <option value="Europe/Paris">🇫🇷 Paris (CET)</option>
+          <option value="Europe/Warsaw">🇵🇱 Warsaw (CET)</option>
+          <option value="Europe/Rome">🇮🇹 Rome (CET)</option>
+          <option value="Asia/Shanghai">🇨🇳 China Standard Time (CST)</option>
+          <option value="Asia/Tokyo">🇯🇵 Japan Standard Time (JST)</option>
+          <option value="Asia/Singapore">🇸🇬 Singapore Time (SGT)</option>
+          <option value="Asia/Dubai">🇦🇪 Gulf Standard Time (GST)</option>
+          <option value="Australia/Sydney">🇦🇺 Sydney (AEDT)</option>
+          <option value="Pacific/Auckland">🇳🇿 New Zealand (NZST)</option>
+        </select>
+      </div>
+
+      <!-- Schedule Days -->
+      <div class="sched-section-title">📅 Weekly Class Schedule</div>
+      <div class="sched-days" id="schedDays"></div>
+
+      <!-- Meeting Links -->
+      <div class="sched-section-title">🔗 Join Your Class</div>
+      <div class="meeting-actions">
+        <a class="btn-meet btn-gmeet" id="btn-gmeet" href="#" target="_blank" onclick="return confirmJoin(this, 'Google Meet')">
+          <span class="btn-meet-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="white" fill-opacity="0.15"/><path d="M21 8.5L17 12l4 3.5V8.5z" fill="#00c853"/><path d="M3 8a1 1 0 011-1h10a1 1 0 011 1v8a1 1 0 01-1 1H4a1 1 0 01-1-1V8z" fill="white" fill-opacity="0.9"/><path d="M7 10h6M7 14h4" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          Join via Google Meet
+        </a>
+        <a class="btn-meet btn-webex" id="btn-webex" href="#" target="_blank" onclick="return confirmJoin(this, 'Webex')">
+          <span class="btn-meet-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="white" fill-opacity="0.1"/><circle cx="12" cy="12" r="8" stroke="white" stroke-width="1.5"/><path d="M9 10l3 2-3 2V10zm3 0l3 2-3 2V10z" fill="white"/></svg>
+          </span>
+          Join via Webex
+        </a>
+      </div>
+
+      <div style="height:14px;"></div>
+      <div class="note-box">
+        <span class="note-icon">💡</span>
+        <span>Links above are provided by your instructor and activate <strong style="color:var(--gold);">15 minutes before</strong> the scheduled session. Contact your instructor if links are unavailable.</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-group">
+      <label>Learning</label>
+      <a class="s-item active" onclick="showView('dashboard')"><span class="ico">⬡</span> My Dashboard</a>
+      <a class="s-item" onclick="openCourse(ENROLLED[0])"><span class="ico">></span> Continue Learning</a>
+      <a class="s-item"><span class="ico">📅</span> Schedule</a>
+    </div>
+    <div class="sidebar-group">
+      <label>Courses</label>
+      <a class="s-item" onclick="filterEnrolled('all')"><span class="ico">📚</span> All Enrolled <span class="pill">5</span></a>
+      <a class="s-item" onclick="filterEnrolled('in-progress')"><span class="ico">🔄</span> In Progress <span class="pill">3</span></a>
+      <a class="s-item" onclick="filterEnrolled('completed')"><span class="ico">✅</span> Completed <span class="pill g">2</span></a>
+    </div>
+    <div class="sidebar-group">
+      <label>Achievements</label>
+      <a class="s-item"><span class="ico">🏆</span> Certificates <span class="pill o">2</span></a>
+      <a class="s-item"><span class="ico">⭐</span> Progress</a>
+    </div>
+    <div class="sidebar-group">
+      <label>Account</label>
+      <a class="s-item"><span class="ico">👤</span> Profile</a>
+      <a class="s-item"><span class="ico">⚙</span> Settings</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="mainView">
+    <!-- WELCOME -->
+    <div class="welcome-strip">
+      <div class="welcome-text">
+        <h2>Welcome back, Juan! 👋</h2>
+        <p>You have <span>3 courses in progress</span> · Keep up the great work!</p>
+      </div>
+      <div class="welcome-xp">
+        <div class="xp-label">Level 4 · XP Progress</div>
+        <div class="xp-bar-wrap"><div class="xp-bar"></div></div>
+        <div class="xp-text">620 / 1000 XP to Level 5</div>
+      </div>
+    </div>
+
+    <!-- QUICK STATS -->
+    <div class="quick-stats">
+      <div class="qs-card">
+        <div class="qs-icon" style="background:var(--cyan-dim);border:1px solid rgba(0,212,255,0.2);">📚</div>
+        <div>
+          <div class="qs-val" style="color:var(--cyan);">5</div>
+          <div class="qs-lbl">Enrolled Courses</div>
+        </div>
+      </div>
+      <div class="qs-card">
+        <div class="qs-icon" style="background:var(--green-dim);border:1px solid rgba(0,230,118,0.2);">✅</div>
+        <div>
+          <div class="qs-val" style="color:var(--green);">2</div>
+          <div class="qs-lbl">Completed</div>
+        </div>
+      </div>
+      <div class="qs-card">
+        <div class="qs-icon" style="background:var(--gold-dim);border:1px solid rgba(240,165,0,0.2);">🎓</div>
+        <div>
+          <div class="qs-val" style="color:var(--gold);">2</div>
+          <div class="qs-lbl">Certificates</div>
+        </div>
+      </div>
+      <div class="qs-card">
+        <div class="qs-icon" style="background:var(--purple-dim);border:1px solid rgba(179,136,255,0.2);">⏱</div>
+        <div>
+          <div class="qs-val" style="color:var(--purple);">34h</div>
+          <div class="qs-lbl">Hours Learned</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTINUE LEARNING -->
+    <div class="sec-header">
+      <div class="sec-title" style="color:var(--cyan);">> Continue Learning</div>
+      <a class="sec-link">View All -></a>
+    </div>
+    <div class="continue-grid" id="enrolledGrid"></div>
+
+    <!-- COMPLETED -->
+    <div class="sec-header">
+      <div class="sec-title" style="color:var(--gold);">🏆 Completed & Certified</div>
+      <a class="sec-link">View Certificates -></a>
+    </div>
+    <div class="completed-strip" id="completedStrip"></div>
+
+  </main>
+</div>
+
+<script>
+const ENROLLED = [
+  {
+    id: "NGBS-001",
+    title: "Business Excellence: From Branding to Sales Mastery",
+    category: "Business", catColor: "#f0a500", catBg: "rgba(240,165,0,0.12)",
+    progress: 65, modules: 12, hours: 8, students: "450+", rating: "4.9",
+    barColor: "linear-gradient(90deg,#f0a500,#ff6d00)",
+    currentLesson: "Module 5 · Product Positioning Deep Dive",
+    lessonIcon: "📊",
+    status: "in-progress",
+    modules_list: [
+      { title: "Module 1: Foundations", lessons: [
+        { name:"What is Business Excellence?", dur:"12m", done:true },
+        { name:"Core Success Principles", dur:"18m", done:true },
+        { name:"Quiz: Foundations", dur:"5m", done:true }
+      ]},
+      { title: "Module 2: Brand Identity", lessons: [
+        { name:"Building Your Brand Story", dur:"22m", done:true },
+        { name:"Visual Identity Systems", dur:"19m", done:true },
+        { name:"Brand Voice & Messaging", dur:"15m", done:true }
+      ]},
+      { title: "Module 3: Product Development", lessons: [
+        { name:"Product-Market Fit", dur:"20m", done:true },
+        { name:"Development Lifecycle", dur:"17m", done:true }
+      ]},
+      { title: "Module 4: Sales Fundamentals", lessons: [
+        { name:"Psychology of Sales", dur:"25m", done:true },
+        { name:"The Sales Funnel", dur:"20m", done:true }
+      ]},
+      { title: "Module 5: Product Positioning", lessons: [
+        { name:"Positioning Frameworks", dur:"22m", done:false, active:true },
+        { name:"Competitive Differentiation", dur:"18m", done:false },
+        { name:"Pricing Strategy", dur:"20m", done:false }
+      ]},
+      { title: "Module 6: Persuasion & Closing", lessons: [
+        { name:"Persuasion Techniques", dur:"24m", done:false },
+        { name:"Handling Objections", dur:"16m", done:false },
+        { name:"Closing the Deal", dur:"18m", done:false }
+      ]}
+    ]
+  },
+  {
+    id: "NGBS-009",
+    title: "Principles of Marketing",
+    category: "Business", catColor: "#f0a500", catBg: "rgba(240,165,0,0.12)",
+    progress: 100,
+    barColor: "linear-gradient(90deg,#00e676,#00bcd4)",
+    currentLesson: "Course Completed! 🎉",
+    lessonIcon: "✅",
+    status: "completed",
+    modules: 9, hours: 6, students: "720+", rating: "4.9"
+  },
+  {
+    id: "NGBS-F03",
+    title: "Personal Finance & Budgeting Basics",
+    category: "Free", catColor: "#00d4ff", catBg: "rgba(0,212,255,0.12)",
+    progress: 80,
+    barColor: "linear-gradient(90deg,#00d4ff,#b388ff)",
+    currentLesson: "Module 5 · Building an Emergency Fund",
+    lessonIcon: "💰",
+    status: "in-progress",
+    modules: 6, hours: 3.5, students: "1.5K+", rating: "4.9",
+    modules_list: [
+      { title: "Module 1: Money Mindset", lessons: [
+        { name:"Understanding Your Relationship with Money", dur:"14m", done:true },
+        { name:"Common Money Myths Debunked", dur:"10m", done:true }
+      ]},
+      { title: "Module 2: Budgeting Methods", lessons: [
+        { name:"The 50/30/20 Rule", dur:"16m", done:true },
+        { name:"Zero-Based Budgeting", dur:"14m", done:true },
+        { name:"Envelope Method", dur:"12m", done:true }
+      ]},
+      { title: "Module 3: Savings Strategies", lessons: [
+        { name:"Pay Yourself First", dur:"11m", done:true },
+        { name:"Automating Your Savings", dur:"9m", done:true }
+      ]},
+      { title: "Module 4: Understanding Credit", lessons: [
+        { name:"How Credit Scores Work", dur:"18m", done:true },
+        { name:"Managing Debt Wisely", dur:"15m", done:true }
+      ]},
+      { title: "Module 5: Emergency Fund", lessons: [
+        { name:"Building an Emergency Fund", dur:"13m", done:false, active:true },
+        { name:"Investment Basics", dur:"20m", done:false }
+      ]}
+    ]
+  },
+  {
+    id: "LANG-001",
+    title: "English Language Mastery",
+    category: "Language", catColor: "#00e676", catBg: "rgba(0,230,118,0.12)",
+    progress: 30,
+    barColor: "linear-gradient(90deg,#00e676,#00d4ff)",
+    currentLesson: "Module 3 · Advanced Grammar Structures",
+    lessonIcon: "🔤",
+    status: "in-progress",
+    modules: 18, hours: 14, students: "1.1K+", rating: "4.9",
+    modules_list: [
+      { title: "Module 1: Foundations", lessons: [
+        { name:"English Alphabet & Phonics", dur:"20m", done:true },
+        { name:"Basic Sentence Structure", dur:"18m", done:true },
+        { name:"Common Vocabulary Set 1", dur:"25m", done:true }
+      ]},
+      { title: "Module 2: Essential Grammar", lessons: [
+        { name:"Parts of Speech", dur:"22m", done:true },
+        { name:"Tenses Overview", dur:"24m", done:true },
+        { name:"Subject-Verb Agreement", dur:"16m", done:true }
+      ]},
+      { title: "Module 3: Advanced Grammar", lessons: [
+        { name:"Complex Sentence Structures", dur:"26m", done:false, active:true },
+        { name:"Conditional Sentences", dur:"22m", done:false },
+        { name:"Reported Speech", dur:"18m", done:false }
+      ]},
+      { title: "Module 4: Business Writing", lessons: [
+        { name:"Professional Email Writing", dur:"28m", done:false },
+        { name:"Reports and Proposals", dur:"32m", done:false }
+      ]}
+    ]
+  },
+  {
+    id: "K12-007",
+    title: "Introduction to Computer Science",
+    category: "K-12", catColor: "#b388ff", catBg: "rgba(179,136,255,0.12)",
+    progress: 100,
+    barColor: "linear-gradient(90deg,#b388ff,#00d4ff)",
+    currentLesson: "Course Completed! 🎉",
+    lessonIcon: "✅",
+    status: "completed",
+    modules: 11, hours: 9, students: "390+", rating: "5.0"
+  }
+];
+
+const COMPLETED_CERTS = ENROLLED.filter(c => c.status === 'completed');
+
+function renderEnrolled(filter = 'all') {
+  const grid = document.getElementById('enrolledGrid');
+  grid.innerHTML = '';
+  const inProgress = ENROLLED.filter(c => c.status !== 'completed');
+  const list = filter === 'completed'
+    ? COMPLETED_CERTS
+    : filter === 'in-progress'
+    ? inProgress
+    : ENROLLED.filter(c => c.status !== 'completed'); // dashboard shows in-progress only
+
+  list.forEach((c, i) => {
+    const card = document.createElement('div');
+    card.className = 'course-card';
+    card.style.animationDelay = (i * 0.07) + 's';
+    card.onclick = () => openCourse(c);
+
+    const pctColor = c.progress >= 100 ? '#00e676' : c.progress >= 60 ? '#f0a500' : '#00d4ff';
+
+    // Schedule banner for language courses
+    const schedPrev = getSchedPreview(c.id);
+    const schedBanner = schedPrev ? `
+      <div class="sched-banner" onclick="openSchedule('${c.id}', event)" title="View class schedule & join meeting">
+        <div class="sched-banner-left">
+          <span class="sched-banner-icon">📅</span>
+          <div>
+            <div class="sched-banner-text">${schedPrev.flag} View Class Schedule & Meeting Link</div>
+            <div class="sched-banner-sub">${schedPrev.preview} · ${schedPrev.instructor}</div>
+          </div>
+        </div>
+        <span class="sched-banner-arrow">-></span>
+      </div>
+    ` : '';
+
+    card.innerHTML = `
+      <div class="card-color-bar" style="background:${c.barColor}"></div>
+      <div class="card-body">
+        <div class="card-meta-top">
+          <span class="course-id-tag">${c.id}</span>
+          <span class="cat-tag" style="background:${c.catBg};color:${c.catColor};border:1px solid ${c.catColor}44;">${c.category}</span>
+        </div>
+        <div class="card-title">${c.title}</div>
+        <div class="prog-wrap">
+          <div class="prog-info">
+            <span class="prog-label">PROGRESS</span>
+            <span class="prog-pct" style="color:${pctColor};">${c.progress}%</span>
+          </div>
+          <div class="prog-bar">
+            <div class="prog-fill" style="width:${c.progress}%;background:${c.barColor};"></div>
+          </div>
+        </div>
+        <div class="cur-lesson">
+          <div class="lesson-icon">${c.lessonIcon}</div>
+          <div class="lesson-info">
+            <div class="lesson-subtitle">Currently On</div>
+            <div class="lesson-name">${c.currentLesson}</div>
+          </div>
+        </div>
+      </div>
+      ${schedBanner}
+      <div class="card-footer">
+        <div class="card-stats">
+          <span class="cs-item">📋 ${c.modules} Mod</span>
+          <span class="cs-item">⏱ ${c.hours}h</span>
+          <span class="cs-item">★ ${c.rating}</span>
+        </div>
+        <button class="btn-continue" style="background:${c.catColor};color:#000;" onclick="event.stopPropagation();openCourse(ENROLLED.find(x=>x.id==='${c.id}'))">
+          ${c.progress >= 100 ? '📜 View Cert' : '> Continue'}
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderCompleted() {
+  const strip = document.getElementById('completedStrip');
+  strip.innerHTML = '';
+  const dateMap = { 'NGBS-009': 'Feb 12, 2025', 'K12-007': 'Jan 28, 2025' };
+  COMPLETED_CERTS.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'cert-card';
+    card.innerHTML = `
+      <div class="cert-top">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-name">${c.title}</div>
+          <div class="cert-id">${c.id}</div>
+        </div>
+      </div>
+      <div class="cert-date">📅 Completed ${dateMap[c.id] || 'Jan 2025'}</div>
+      <button class="cert-btn" onclick="alert('Opening certificate PDF for: ${c.title}')">📄 View Certificate</button>
+    `;
+    strip.appendChild(card);
+  });
+}
+
+
+// -- LANGUAGE SCHEDULE DATA --
+const LANG_SCHEDULES = {
+  'LANG-001': {
+    lang: 'English',
+    flag: '🇬🇧',
+    courseId: 'LANG-001',
+    instructor: 'Noe Luis Lacastesantos',
+    initials: 'NL',
+    role: 'English Language Specialist',
+    avatarBg: 'linear-gradient(135deg,#00d4ff,#0099bb)',
+    badgeBg: 'rgba(0,212,255,0.15)', badgeColor: '#00d4ff', badgeBorder: 'rgba(0,212,255,0.3)',
+    accentColor: '#00d4ff',
+    // PHT sessions: [day, startHour, startMin, endHour, endMin]
+    sessions: [
+      { day: 'Saturday',  startH: 8,  startM: 0, endH: 10, endM: 0 },
+      { day: 'Sunday',    startH: 8,  startM: 0, endH: 10, endM: 0 },
+    ],
+    gmeet: 'https://meet.google.com/placeholder-eng',
+    webex:  'https://webex.com/meet/placeholder-eng',
+  },
+  'LANG-002': {
+    lang: 'Spanish',
+    flag: '🇪🇸',
+    courseId: 'LANG-002',
+    instructor: 'Gina Ancheta',
+    initials: 'GA',
+    role: 'Spanish Language Instructor',
+    avatarBg: 'linear-gradient(135deg,#f0a500,#e65100)',
+    badgeBg: 'rgba(240,165,0,0.15)', badgeColor: '#f0a500', badgeBorder: 'rgba(240,165,0,0.3)',
+    accentColor: '#f0a500',
+    // Monday & Tuesday 12mn-2am PHT (00:00-02:00 next day)
+    sessions: [
+      { day: 'Monday',    startH: 0,  startM: 0, endH: 2,  endM: 0 },
+      { day: 'Tuesday',   startH: 0,  startM: 0, endH: 2,  endM: 0 },
+    ],
+    gmeet: 'https://meet.google.com/placeholder-esp',
+    webex:  'https://webex.com/meet/placeholder-esp',
+  },
+  'LANG-003': {
+    lang: 'Italian',
+    flag: '🇮🇹',
+    courseId: 'LANG-003',
+    instructor: 'Gioia Pavan',
+    initials: 'GP',
+    role: 'Italian Language Instructor',
+    avatarBg: 'linear-gradient(135deg,#00e676,#00796b)',
+    badgeBg: 'rgba(0,230,118,0.15)', badgeColor: '#00e676', badgeBorder: 'rgba(0,230,118,0.3)',
+    accentColor: '#00e676',
+    sessions: [
+      { day: 'Saturday',  startH: 8,  startM: 0, endH: 10, endM: 0 },
+      { day: 'Sunday',    startH: 8,  startM: 0, endH: 10, endM: 0 },
+    ],
+    gmeet: 'https://meet.google.com/placeholder-ita',
+    webex:  'https://webex.com/meet/placeholder-ita',
+  },
+  'LANG-004': {
+    lang: 'Polish',
+    flag: '🇵🇱',
+    courseId: 'LANG-004',
+    instructor: 'Irene Clemenz',
+    initials: 'IC',
+    role: 'Polish Language Instructor',
+    avatarBg: 'linear-gradient(135deg,#ff3d57,#b71c1c)',
+    badgeBg: 'rgba(255,61,87,0.15)', badgeColor: '#ff3d57', badgeBorder: 'rgba(255,61,87,0.3)',
+    accentColor: '#ff3d57',
+    // Friday & Saturday 10pm-12mn PHT (22:00-24:00)
+    sessions: [
+      { day: 'Friday',    startH: 22, startM: 0, endH: 24, endM: 0 },
+      { day: 'Saturday',  startH: 22, startM: 0, endH: 24, endM: 0 },
+    ],
+    gmeet: 'https://meet.google.com/placeholder-pol',
+    webex:  'https://webex.com/meet/placeholder-pol',
+  },
+  'LANG-005': {
+    lang: 'Mandarin',
+    flag: '🇨🇳',
+    courseId: 'LANG-005',
+    instructor: 'Fergie Tan',
+    initials: 'FT',
+    role: 'Mandarin Language Instructor',
+    avatarBg: 'linear-gradient(135deg,#ff6d00,#bf360c)',
+    badgeBg: 'rgba(255,109,0,0.15)', badgeColor: '#ff6d00', badgeBorder: 'rgba(255,109,0,0.3)',
+    accentColor: '#ff6d00',
+    sessions: [
+      { day: 'Saturday',  startH: 8,  startM: 0, endH: 10, endM: 0 },
+      { day: 'Sunday',    startH: 8,  startM: 0, endH: 10, endM: 0 },
+    ],
+    gmeet: 'https://meet.google.com/placeholder-mand',
+    webex:  'https://webex.com/meet/placeholder-mand',
+  },
+};
+
+let currentSchedData = null;
+
+function openSchedule(courseId, event) {
+  if (event) event.stopPropagation();
+  const data = LANG_SCHEDULES[courseId];
+  if (!data) return;
+  currentSchedData = data;
+
+  // populate header
+  document.getElementById('sched-flag').textContent = data.flag;
+  document.getElementById('sched-title').textContent = data.lang + ' Language Mastery';
+  document.getElementById('sched-id-tag').textContent = data.courseId;
+
+  // instructor
+  const av = document.getElementById('sched-avatar');
+  av.textContent = data.initials;
+  av.style.background = data.avatarBg;
+  av.style.border = '2px solid ' + data.accentColor + '55';
+  document.getElementById('sched-instr-name').textContent = data.instructor;
+  document.getElementById('sched-instr-role').textContent = data.role;
+  const badge = document.getElementById('sched-instr-badge');
+  badge.textContent = 'Live Sessions';
+  badge.style.background = data.badgeBg;
+  badge.style.color = data.badgeColor;
+  badge.style.border = '1px solid ' + data.badgeBorder;
+
+  // meeting links - set hrefs to the actual links
+  document.getElementById('btn-gmeet').href = data.gmeet;
+  document.getElementById('btn-webex').href  = data.webex;
+
+  // reset TZ to PHT
+  document.getElementById('tzSelect').value = 'Asia/Manila';
+
+  updateSchedTimes();
+  document.getElementById('schedModal').classList.add('open');
+}
+
+function closeSched() {
+  document.getElementById('schedModal').classList.remove('open');
+}
+
+document.getElementById('schedModal').addEventListener('click', function(e) {
+  if (e.target === this) closeSched();
+});
+
+function fmtTime(h, m) {
+  const period = h < 12 || h === 24 ? 'AM' : 'PM';
+  let displayH = h % 24;
+  if (displayH === 0) displayH = 12;
+  else if (displayH > 12) displayH -= 12;
+  return displayH + (m ? ':' + String(m).padStart(2,'0') : '') + ' ' + period;
+}
+
+function convertPHTtoTZ(dayName, startH, startM, endH, endM, targetTZ) {
+  // PHT = UTC+8. Build a reference date using a known day mapping.
+  const dayMap = { Sunday:0, Monday:1, Tuesday:2, Wednesday:3, Thursday:4, Friday:5, Saturday:6 };
+  const dayIdx = dayMap[dayName];
+  // Use 2025-01-05 as a Sunday anchor (Jan 5 2025 = Sunday)
+  const baseDate = new Date(2025, 0, 5 + dayIdx); // local date object for day calculation
+
+  // Create UTC times: PHT = UTC+8, so UTC = PHT - 8
+  const startUTCH = startH - 8;
+  const endUTCH   = endH   - 8;
+
+  // Build Date objects at exact UTC moments
+  const startUTC = new Date(Date.UTC(2025, 0, 5 + dayIdx, startUTCH, startM, 0));
+  const endUTC   = new Date(Date.UTC(2025, 0, 5 + dayIdx, endUTCH,   endM,   0));
+
+  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  // Format in target timezone
+  const opts = { timeZone: targetTZ, weekday:'long', hour:'numeric', minute:'2-digit', hour12: true };
+  const startLocal = new Intl.DateTimeFormat('en-US', opts).format(startUTC);
+  const endLocal   = new Intl.DateTimeFormat('en-US', { timeZone: targetTZ, hour:'numeric', minute:'2-digit', hour12: true }).format(endUTC);
+
+  // Get local day name
+  const localDayFmt = new Intl.DateTimeFormat('en-US', { timeZone: targetTZ, weekday:'long' });
+  const localDay = localDayFmt.format(startUTC);
+
+  // Get TZ abbreviation
+  try {
+    const tzAbbrStr = new Intl.DateTimeFormat('en-US', { timeZone: targetTZ, timeZoneName: 'short' }).format(startUTC);
+    const tzAbbr = tzAbbrStr.split(',').pop().trim().split(' ').pop();
+    return { localDay, startStr: startLocal.split(',').pop().trim(), endStr: endLocal, tzAbbr };
+  } catch(e) {
+    return { localDay, startStr: startLocal, endStr: endLocal, tzAbbr: '' };
+  }
+}
+
+function updateSchedTimes() {
+  const data = currentSchedData;
+  if (!data) return;
+  const tz = document.getElementById('tzSelect').value;
+  const isPHT = tz === 'Asia/Manila';
+
+  const container = document.getElementById('schedDays');
+  container.innerHTML = '';
+
+  data.sessions.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'sched-day-row';
+
+    const phStart = fmtTime(s.startH, s.startM);
+    const phEnd   = fmtTime(s.endH,   s.endM);
+
+    let localHTML = '';
+    if (!isPHT) {
+      try {
+        const conv = convertPHTtoTZ(s.day, s.startH, s.startM, s.endH, s.endM, tz);
+        localHTML = `
+          <div class="sched-time-local">
+            <div>${conv.startStr} - ${conv.endStr}</div>
+            <div class="local-tz-label">${conv.localDay} · ${conv.tzAbbr}</div>
+          </div>
+        `;
+      } catch(e) { localHTML = ''; }
+    }
+
+    row.innerHTML = `
+      <div class="sched-day-left">
+        <div class="day-dot" style="background:${data.accentColor};box-shadow:0 0 6px ${data.accentColor}66;"></div>
+        <div class="day-name">${s.day}</div>
+        <div class="sched-time-ph">${phStart} - ${phEnd} PHT</div>
+      </div>
+      ${localHTML}
+    `;
+    container.appendChild(row);
+  });
+}
+
+function confirmJoin(link, platform) {
+  // If href is a placeholder, show info; otherwise open normally
+  if (link.href.includes('placeholder')) {
+    alert('📎 ' + platform + ' link will be provided by your instructor before the session.\n\nPlease check your email or contact ' + (currentSchedData?.instructor || 'your instructor') + ' directly.');
+    return false;
+  }
+  return true;
+}
+
+// -- SCHEDULE BANNER HELPER --
+function getSchedPreview(courseId) {
+  const d = LANG_SCHEDULES[courseId];
+  if (!d) return null;
+  const s = d.sessions[0];
+  return {
+    instructor: d.instructor,
+    preview: d.sessions.map(s2 => s2.day.slice(0,3)).join(' & ') + ' · ' + fmtTime(s.startH,s.startM) + '-' + fmtTime(s.endH,s.endM) + ' PHT',
+    color: d.accentColor,
+    flag: d.flag,
+  };
+}
+
+
+let activeLessonIdx = 0;
+let activeCourse = null;
+
+function openCourse(course) {
+  if (!course || !course.modules_list) {
+    if (course && course.status === 'completed') {
+      alert(`🎓 Certificate for "${course.title}" - downloading PDF...`);
+    }
+    return;
+  }
+  activeCourse = course;
+
+  // find active lesson
+  let idx = 0;
+  let flatLessons = [];
+  course.modules_list.forEach(mod => {
+    mod.lessons.forEach(l => {
+      flatLessons.push({ ...l, modTitle: mod.title });
+    });
+  });
+  activeLessonIdx = flatLessons.findIndex(l => l.active);
+  if (activeLessonIdx < 0) activeLessonIdx = flatLessons.filter(l => l.done).length;
+
+  document.getElementById('modal-course-title').textContent = course.title;
+  document.getElementById('modal-prog-label').textContent = course.progress + '%';
+  document.getElementById('modal-mini-fill').style.width = course.progress + '%';
+
+  renderLessonSidebar(course, activeLessonIdx);
+  renderLessonContent(course, activeLessonIdx);
+  document.getElementById('lessonModal').classList.add('open');
+}
+
+function renderLessonSidebar(course, activeIdx) {
+  const sb = document.getElementById('lessonSidebar');
+  sb.innerHTML = `
+    <div class="ls-header">
+      <div class="ls-course-title">${course.title}</div>
+      <div class="ls-stats">
+        <span>📋 ${course.modules} modules</span>
+        <span>⏱ ${course.hours}h total</span>
+      </div>
+    </div>
+  `;
+
+  let flatIdx = 0;
+  course.modules_list.forEach(mod => {
+    const grp = document.createElement('div');
+    grp.className = 'module-group';
+    grp.innerHTML = `<div class="module-title">${mod.title}</div>`;
+
+    mod.lessons.forEach(l => {
+      const currIdx = flatIdx;
+      const isDone = l.done;
+      const isActive = currIdx === activeIdx;
+      const li = document.createElement('div');
+      li.className = 'lesson-item' + (isActive ? ' active' : '') + (isDone ? ' done' : '');
+      li.innerHTML = `
+        <div class="li-status ${isDone ? 'done' : isActive ? 'active' : 'locked'}">
+          ${isDone ? 'v' : isActive ? '>' : '○'}
+        </div>
+        <div class="li-name">${l.name}</div>
+        <div class="li-dur">${l.dur}</div>
+      `;
+      li.onclick = () => {
+        activeLessonIdx = currIdx;
+        renderLessonSidebar(course, currIdx);
+        renderLessonContent(course, currIdx);
+      };
+      grp.appendChild(li);
+      flatIdx++;
+    });
+    sb.appendChild(grp);
+  });
+}
+
+function renderLessonContent(course, lessonIdx) {
+  const area = document.getElementById('lessonContentArea');
+  let flatLessons = [];
+  course.modules_list.forEach(mod => {
+    mod.lessons.forEach(l => flatLessons.push({ ...l, modTitle: mod.title }));
+  });
+  const lesson = flatLessons[lessonIdx];
+  if (!lesson) return;
+
+  const total = flatLessons.length;
+  const isLast = lessonIdx >= total - 1;
+  const isFirst = lessonIdx === 0;
+
+  area.innerHTML = `
+    <div class="lc-header">
+      <div class="lc-breadcrumb">
+        <span>${course.id}</span> › <span>${lesson.modTitle}</span>
+      </div>
+      <div class="lc-title">${lesson.name}</div>
+      <div class="lc-meta">
+        <span>⏱ ${lesson.dur}</span>
+        <span>📋 Lesson ${lessonIdx + 1} of ${total}</span>
+        <span style="color:${lesson.done ? 'var(--green)' : 'var(--text-2)'};">${lesson.done ? '✅ Completed' : '🔄 In Progress'}</span>
+      </div>
+    </div>
+
+    <div class="video-placeholder" onclick="alert('Video player would load here in production.')">
+      <div class="play-btn">></div>
+      <div class="video-label" style="position:relative;z-index:1;">Click to play lesson video</div>
+      <div class="video-duration">${lesson.dur}</div>
+    </div>
+
+    <div class="key-points">
+      <div class="kp-title">📌 Key Takeaways</div>
+      <div class="kp-item">Core concepts covered in this lesson build on previous modules</div>
+      <div class="kp-item">Practical exercises are included at the end of this session</div>
+      <div class="kp-item">Review the supplementary reading materials for deeper understanding</div>
+    </div>
+
+    <div class="lesson-text">
+      <h3>Overview</h3>
+      <p>This lesson - <strong style="color:var(--text);">${lesson.name}</strong> - is part of <em>${lesson.modTitle}</em> within the <strong style="color:var(--gold);">${course.title}</strong> course. Here you'll develop a thorough, practical understanding of the subject matter through video instruction, guided exercises, and applied examples.</p>
+      <p>Work through the material at your own pace. Once you've watched the video and reviewed the key takeaways above, mark the lesson complete to unlock the next one and track your progress.</p>
+      <h3>Learning Objectives</h3>
+      <p>By the end of this lesson, you'll be able to apply the core principles directly to real-world scenarios, connect this topic to the broader course framework, and prepare effectively for any assessments that follow.</p>
+    </div>
+
+    <div class="lesson-nav">
+      <button class="btn-prev" onclick="navigateLesson(-1)" ${isFirst ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}><- Previous</button>
+      ${!lesson.done
+        ? `<button class="btn-complete" onclick="markComplete(${lessonIdx})">v Mark Complete</button>`
+        : `<span style="font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;">✅ Lesson Completed</span>`
+      }
+      <button class="btn-next" onclick="navigateLesson(1)" ${isLast ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next Lesson -></button>
+    </div>
+  `;
+}
+
+function navigateLesson(dir) {
+  let flatLessons = [];
+  activeCourse.modules_list.forEach(mod => {
+    mod.lessons.forEach(l => flatLessons.push(l));
+  });
+  const next = activeLessonIdx + dir;
+  if (next >= 0 && next < flatLessons.length) {
+    activeLessonIdx = next;
+    renderLessonSidebar(activeCourse, activeLessonIdx);
+    renderLessonContent(activeCourse, activeLessonIdx);
+    document.getElementById('lessonContentArea').scrollTop = 0;
+  }
+}
+
+function markComplete(idx) {
+  let flatLessons = [];
+  activeCourse.modules_list.forEach(mod => {
+    mod.lessons.forEach(l => flatLessons.push(l));
+  });
+  if (flatLessons[idx]) {
+    flatLessons[idx].done = true;
+    flatLessons[idx].active = false;
+    // update progress
+    const doneCount = flatLessons.filter(l => l.done).length;
+    activeCourse.progress = Math.round((doneCount / flatLessons.length) * 100);
+    document.getElementById('modal-prog-label').textContent = activeCourse.progress + '%';
+    document.getElementById('modal-mini-fill').style.width = activeCourse.progress + '%';
+    renderLessonSidebar(activeCourse, idx);
+    renderLessonContent(activeCourse, idx);
+    renderEnrolled();
+  }
+}
+
+function closeLesson() {
+  document.getElementById('lessonModal').classList.remove('open');
+  renderEnrolled();
+}
+
+function filterEnrolled(filter) {
+  renderEnrolled(filter);
+}
+
+function toggleSidebar() {
+  const sb = document.querySelector('.sidebar');
+  const bd = document.getElementById('sidebarBackdrop');
+  sb.classList.toggle('open');
+  bd.classList.toggle('open');
+}
+
+// Close sidebar on nav item click on mobile
+document.querySelectorAll('.s-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      document.querySelector('.sidebar').classList.remove('open');
+      document.getElementById('sidebarBackdrop').classList.remove('open');
+    }
+  });
+});
+
+function showView(v) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// init
+renderEnrolled();
+renderCompleted();
+</script>
+</body>
+</html>
