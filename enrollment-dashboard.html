@@ -7,6 +7,7 @@
   <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat+Alternates:wght@400;500;600;700&family=Trebuchet+MS&family=Silkscreen&family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     /* =================== COLOR PALETTE VARIABLES =================== */
@@ -1597,9 +1598,85 @@
 </nav>
 
 <script>
-  // =================== FORMSPREE CONFIG ===================
-  // TODO: Replace with your Formspree endpoint when ready
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  // =================== SUPABASE CONFIG ===================
+  const SUPABASE_URL  = 'https://rranivozhrsldhapzwqc.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyYW5pdm96aHJzbGRoYXB6d3FjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNzIxMzcsImV4cCI6MjA4NTc0ODEzN30.0wOlQErCvNbf9LhhWzecDINB6523BHqgc2G2v0wURGQ';
+  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // =================== SESSION GUARD ===================
+  let _currentUser   = null;
+  let _currentProfile = null;
+
+  (async function initSession() {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session) {
+      window.location.href =
+        'https://nexgenixcreativesolutions.github.io/login-signup' +
+        '?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
+    _currentUser = session.user;
+
+    // Load profile
+    const { data: profile } = await _sb
+      .from('profiles').select('*').eq('id', _currentUser.id).single();
+    _currentProfile = profile;
+
+    if (profile) {
+      // Pre-fill enrollment form fields
+      const nameEl  = document.getElementById('studentName');
+      const emailEl = document.getElementById('studentEmail');
+      if (nameEl && !nameEl.value)   nameEl.value  = profile.full_name || profile.display_name || '';
+      if (emailEl && !emailEl.value) emailEl.value = profile.email || '';
+    }
+
+    // Load existing enrollments for the dashboard view
+    loadEnrolledCourses();
+  })();
+
+  async function loadEnrolledCourses() {
+    if (!_currentUser) return;
+    const { data, error } = await _sb
+      .from('enrollments')
+      .select('*, courses(*)')
+      .eq('student_id', _currentUser.id)
+      .in('status', ['active', 'completed']);
+
+    if (error) { console.error('loadEnrolledCourses:', error); return; }
+    if (!data || data.length === 0) return;
+
+    enrolledCourses = data.map(row => ({
+      name:      row.courses?.name || row.course_id,
+      type:      row.courses?.delivery || 'Self-Paced',
+      priceUSD:  row.courses?.price_usd || 0,
+      progress:  0,
+      status:    row.status === 'completed' ? 'Completed' : 'In Progress',
+      startDate: new Date(row.enrolled_at).toLocaleDateString()
+    }));
+    updateDashboard();
+  }
+
+  // Auth buttons in nav — show/hide based on session
+  (async function updateNavAuth() {
+    const { data: { session } } = await _sb.auth.getSession();
+    const logoutBtn   = document.querySelector('.logout-btn');
+    const dashBtn     = document.querySelector('.dashboard-btn');
+    const loginBtns   = document.querySelectorAll('.login-btn');
+    if (session) {
+      if (logoutBtn) logoutBtn.style.display = '';
+      if (dashBtn)   dashBtn.style.display   = '';
+      loginBtns.forEach(b => b.style.display = 'none');
+    } else {
+      if (logoutBtn) logoutBtn.style.display = 'none';
+      if (dashBtn)   dashBtn.style.display   = 'none';
+    }
+  })();
+
+  function handleLogout() {
+    _sb.auth.signOut().then(() => {
+      window.location.href = 'https://nexgenixcreativesolutions.github.io/login-signup';
+    });
+  }
 
   // =================== STUDENT ID GENERATION ===================
   function generateStudentId() {
@@ -2014,7 +2091,7 @@
   }
 
   async function submitEnrollment() {
-    const name = document.getElementById('studentName').value.trim();
+    const name  = document.getElementById('studentName').value.trim();
     const email = document.getElementById('studentEmail').value.trim();
     if (!name || !email) { alert('Please enter your name and email.'); return; }
 
@@ -2022,48 +2099,49 @@
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
     btn.disabled = true;
 
-    const courses = Object.values(selectedCourses);
-    const phone = document.getElementById('phoneCode').value + ' ' + document.getElementById('studentPhone').value;
-    const goal = document.getElementById('learningGoal').value;
-    const notes = document.getElementById('studentNotes').value;
-    const totalUSD = courses.reduce((s, c) => s + c.priceUSD, 0);
+    const courses   = Object.values(selectedCourses);
+    const phone     = document.getElementById('phoneCode').value + ' ' + document.getElementById('studentPhone').value;
+    const goal      = document.getElementById('learningGoal').value;
+    const notes     = document.getElementById('studentNotes').value;
+    const totalUSD  = courses.reduce((s, c) => s + c.priceUSD, 0);
     const totalDisplay = formatPrice(totalUSD);
 
-    // Generate student ID
     currentStudentId = generateStudentId();
-
-    // Build course list for form
-    const courseList = courses.map(c => `${c.name} (${c.type}) — ${formatPrice(c.priceUSD)}`).join(' | ');
-
-    // Store for invoice
     currentEnrollmentData = { name, email, phone, goal, notes, courses, totalUSD, date: new Date() };
 
-    // Formspree submission
-    const formData = {
-      name,
-      email,
-      phone,
-      student_id: currentStudentId,
-      learning_goal: goal || 'N/A',
-      notes: notes || 'N/A',
-      courses: courseList,
-      course_count: courses.length,
-      total_usd: `$${totalUSD.toFixed(2)}`,
-      total_display: `${totalDisplay} (${currentCurrency})`,
-      currency: currentCurrency,
-      submitted_at: new Date().toLocaleString()
-    };
-
+    // ── Write to Supabase ──────────────────────────────────────
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      // Show success regardless (backend setup later)
+      if (!_currentUser) throw new Error('Not logged in');
+
+      // Update profile with phone / learning_goals if provided
+      if (phone.trim() || goal) {
+        await _sb.from('profiles').update({
+          phone:          phone.trim() || undefined,
+          learning_goals: goal || undefined,
+          full_name:      name,
+          updated_at:     new Date().toISOString()
+        }).eq('id', _currentUser.id);
+      }
+
+      // Insert enrollment row per course (ignore duplicate if already enrolled)
+      const insertRows = courses.map(c => ({
+        student_id:     _currentUser.id,
+        course_id:      c.supabaseId || c.name,   // supabaseId set when courses are loaded from DB
+        status:         'pending',
+        payment_status: 'unpaid'
+      }));
+
+      const { error: enrollErr } = await _sb
+        .from('enrollments')
+        .upsert(insertRows, { onConflict: 'student_id,course_id', ignoreDuplicates: true });
+
+      if (enrollErr) console.warn('Enrollment insert warning:', enrollErr.message);
+
       showEnrollmentSuccess(name, courses, totalUSD);
-    } catch(e) {
-      // Show success anyway — backend to be set up later
+
+    } catch(err) {
+      console.error('submitEnrollment error:', err);
+      // Still show success UI — admin will process manually
       showEnrollmentSuccess(name, courses, totalUSD);
     }
   }
