@@ -1607,8 +1607,13 @@
   let _currentUser   = null;
   let _currentProfile = null;
 
-  (async function initSession() {
-    const { data: { session } } = await _sb.auth.getSession();
+  // Session guard using onAuthStateChange to avoid redirect loop on page load
+  let _sessionResolved = false;
+
+  _sb.auth.onAuthStateChange(async (event, session) => {
+    if (_sessionResolved) return;
+    _sessionResolved = true;
+
     if (!session) {
       window.location.href =
         'https://nexgenixcreativesolutions.github.io/login-signup' +
@@ -1623,16 +1628,14 @@
     _currentProfile = profile;
 
     if (profile) {
-      // Pre-fill enrollment form fields
       const nameEl  = document.getElementById('studentName');
       const emailEl = document.getElementById('studentEmail');
       if (nameEl && !nameEl.value)   nameEl.value  = profile.full_name || profile.display_name || '';
       if (emailEl && !emailEl.value) emailEl.value = profile.email || '';
     }
 
-    // Load existing enrollments for the dashboard view
     loadEnrolledCourses();
-  })();
+  });
 
   async function loadEnrolledCourses() {
     if (!_currentUser) return;
