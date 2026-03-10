@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Learning - Nex Genix Business School</title>
@@ -1254,7 +1255,7 @@
     <div class="notif-btn">&#128276;<div class="notif-dot"></div></div>
     <button class="btn-sm btn-catalog" onclick="window.location.href='ngbs-lms.html'">📚 Browse Courses</button>
     <div class="avatar" title="Juan Dela Cruz">JD</div>
-    <button class="btn-sm btn-logout">⏻ Logout</button>
+    <button class="btn-sm btn-logout" onclick="handleLogout()">⏻ Logout</button>
   </div>
 </nav>
 
@@ -1456,6 +1457,107 @@
 </div>
 
 <script>
+
+// =================== SUPABASE CONFIG ===================
+const SUPABASE_URL  = 'https://rranivozhrsldhapzwqc.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyYW5pdm96aHJzbGRoYXB6d3FjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNzIxMzcsImV4cCI6MjA4NTc0ODEzN30.0wOlQErCvNbf9LhhWzecDINB6523BHqgc2G2v0wURGQ';
+const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+let _currentUser    = null;
+let _currentProfile = null;
+
+// Course color lookup by category
+function getCatColor(cat) {
+  if (!cat) return '#f0a500';
+  const c = cat.toLowerCase();
+  if (c === 'language') return '#00e676';
+  if (c === 'business') return '#f0a500';
+  if (c === 'k12' || c === 'k-12') return '#b388ff';
+  if (c === 'free') return '#00d4ff';
+  return '#f0a500';
+}
+function getCatBg(cat) {
+  const color = getCatColor(cat);
+  return color.replace('#','rgba(').replace(/(..)(..)(..)/, (_,r,g,b)=>
+    `${parseInt(r,16)},${parseInt(g,16)},${parseInt(b,16)},0.12)`);
+}
+
+// Map Supabase enrollment row → ENROLLED-style object
+function mapEnrollmentRow(row) {
+  const course = row.courses || {};
+  const cat = course.category || 'business';
+  const catColor = getCatColor(cat);
+  return {
+    id:             course.id || row.course_id,
+    title:          course.name || row.course_id,
+    category:       cat.charAt(0).toUpperCase() + cat.slice(1),
+    catColor,
+    catBg:          getCatBg(cat),
+    progress:       row.progress_pct || 0,
+    modules:        course.modules || 0,
+    hours:          course.hours || 0,
+    rating:         '4.9',
+    barColor:       `linear-gradient(90deg,${catColor},#00d4ff)`,
+    currentLesson:  row.status === 'completed' ? 'Course Completed! 🎉' : 'Continue where you left off',
+    lessonIcon:     row.status === 'completed' ? '✅' : '▶',
+    status:         row.status === 'completed' ? 'completed' : 'in-progress',
+    modules_list:   []
+  };
+}
+
+// Load real enrollments from Supabase, fall back to demo data
+async function loadEnrollmentsFromSupabase() {
+  if (!_currentUser) return false;
+  const { data, error } = await _sb
+    .from('enrollments')
+    .select('*, courses(*)')
+    .eq('student_id', _currentUser.id)
+    .in('status', ['active','completed']);
+
+  if (error || !data || data.length === 0) return false;
+
+  // Replace ENROLLED with real data
+  ENROLLED.length = 0;
+  data.forEach(row => ENROLLED.push(mapEnrollmentRow(row)));
+  return true;
+}
+
+// Auth guard + profile load
+(async function initDashboard() {
+  const { data: { session } } = await _sb.auth.getSession();
+  if (!session) {
+    window.location.href =
+      'https://nexgenixcreativesolutions.github.io/login-signup' +
+      '?redirect=' + encodeURIComponent(window.location.href);
+    return;
+  }
+  _currentUser = session.user;
+
+  // Load profile
+  const { data: profile } = await _sb
+    .from('profiles').select('*').eq('id', _currentUser.id).single();
+  _currentProfile = profile;
+
+  if (profile) {
+    // Update avatar initials
+    const name = profile.display_name || profile.full_name || 'Student';
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+    const avatarEl = document.querySelector('.avatar');
+    if (avatarEl) { avatarEl.textContent = initials; avatarEl.title = name; }
+
+    // Update any name display elements
+    document.querySelectorAll('.student-name,.dash-name,[data-student-name]')
+      .forEach(el => { el.textContent = name; });
+  }
+
+  // Try to load real enrollments; if none, keep demo data
+  const hasRealData = await loadEnrollmentsFromSupabase();
+
+  // Re-render with fresh data
+  if (typeof renderEnrolled === 'function') renderEnrolled('all');
+  if (typeof renderCerts === 'function') renderCerts();
+})();
+
 const ENROLLED = [
   {
     id: "NGBS-001",
@@ -2104,6 +2206,11 @@ function closeLesson() {
 
 function filterEnrolled(filter) {
   renderEnrolled(filter);
+}
+
+async function handleLogout() {
+  await _sb.auth.signOut();
+  window.location.href = 'https://nexgenixcreativesolutions.github.io/login-signup';
 }
 
 function toggleSidebar() {
