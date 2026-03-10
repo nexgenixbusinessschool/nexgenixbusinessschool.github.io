@@ -1522,9 +1522,13 @@ async function loadEnrollmentsFromSupabase() {
   return true;
 }
 
-// Auth guard + profile load
-(async function initDashboard() {
-  const { data: { session } } = await _sb.auth.getSession();
+// Session guard using onAuthStateChange to avoid redirect loop on page load
+let _sessionResolved = false;
+
+_sb.auth.onAuthStateChange(async (event, session) => {
+  if (_sessionResolved) return;
+  _sessionResolved = true;
+
   if (!session) {
     window.location.href =
       'https://nexgenixcreativesolutions.github.io/login-signup' +
@@ -1539,24 +1543,21 @@ async function loadEnrollmentsFromSupabase() {
   _currentProfile = profile;
 
   if (profile) {
-    // Update avatar initials
     const name = profile.display_name || profile.full_name || 'Student';
     const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
     const avatarEl = document.querySelector('.avatar');
     if (avatarEl) { avatarEl.textContent = initials; avatarEl.title = name; }
 
-    // Update any name display elements
     document.querySelectorAll('.student-name,.dash-name,[data-student-name]')
       .forEach(el => { el.textContent = name; });
   }
 
   // Try to load real enrollments; if none, keep demo data
-  const hasRealData = await loadEnrollmentsFromSupabase();
+  await loadEnrollmentsFromSupabase();
 
-  // Re-render with fresh data
   if (typeof renderEnrolled === 'function') renderEnrolled('all');
   if (typeof renderCerts === 'function') renderCerts();
-})();
+});
 
 const ENROLLED = [
   {
