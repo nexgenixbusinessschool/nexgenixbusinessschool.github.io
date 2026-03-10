@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="assets/css/styles.css"/>
   <link rel="stylesheet" href="assets/css/responsive.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,400&family=Silkscreen:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -561,10 +562,7 @@
     <li><a href="https://nexgenixbusinessschool.github.io/premium-courses"><i class="fas fa-crown"></i> Premium</a></li>
     <li><a href="https://nexgenixbusinessschool.github.io/#contact"><i class="fas fa-envelope"></i> Contact</a></li>
   </ul>
-  <div class="auth-buttons" id="auth-buttons">
-    <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-  </div>
+
 </nav>
 
 <div class="verify-wrap">
@@ -662,6 +660,18 @@
         <span id="displayDate" class="detail-value"></span>
       </div>
       <div class="detail-row">
+        <span class="detail-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+        <span class="detail-label">Instructor</span>
+        <span class="detail-divider"></span>
+        <span id="displayInstructor" class="detail-value">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-icon"><i class="fas fa-signature"></i></span>
+        <span class="detail-label">Authorized By</span>
+        <span class="detail-divider"></span>
+        <span id="displayIssuer" class="detail-value">Arriane Doris Nuevo, Founder &amp; Creative Director, NexGenix Business School</span>
+      </div>
+      <div class="detail-row">
         <span class="detail-icon"><i class="fas fa-building-columns"></i></span>
         <span class="detail-label">Issued By</span>
         <span class="detail-divider"></span>
@@ -745,11 +755,13 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
-   CERTIFICATE DATABASE
-   Add new certificate objects here as they are issued.
-   Each object produces a unique public URL automatically.
+   CERTIFICATE DATABASE — powered by Supabase
+   Certificates are looked up live from the database.
+   The 3 legacy certificates below are kept as fallback only.
 ═══════════════════════════════════════════════════════════════════════════ */
-const CERTIFICATES = [
+
+// Legacy fallback certificates (pre-Supabase era — kept for continuity)
+const LEGACY_CERTIFICATES = [
   {
     id:       "DEMO-0000",
     owner:    "Elmer Reed",
@@ -775,6 +787,48 @@ const CERTIFICATES = [
     image:    "assets/images/jayvee-certificate.png"
   }
 ];
+
+/* ── SUPABASE CERTIFICATE LOOKUP ─────────────────────────────────────────
+   Looks up a certificate by its human-readable certificate_id.
+   Falls back to LEGACY_CERTIFICATES if not found in DB.
+──────────────────────────────────────────────────────────────────────── */
+async function fetchCertFromSupabase(certId) {
+  try {
+    const { data, error } = await _sb
+      .from('certificates')
+      .select('*')
+      .eq('certificate_id', certId)
+      .eq('is_valid', true)
+      .single();
+
+    if (error || !data) return null;
+
+    // Map Supabase row → cert object used by displayCertificate()
+    return {
+      id:       data.certificate_id,
+      owner:    data.student_name,
+      course:   data.course_name,
+      score:    null,   // score not stored — omit gracefully
+      issuedOn: new Date(data.issued_at).toLocaleDateString('en-US', {
+                  year: 'numeric', month: 'long', day: 'numeric' }),
+      image:    data.image_url || null,
+      instructor: data.instructor_name,
+      issuedBy: data.issued_by,
+      issuerTitle: data.issuer_title
+    };
+  } catch(e) {
+    console.error('Supabase lookup error:', e);
+    return null;
+  }
+}
+
+// Main lookup: tries Supabase first, then legacy fallback
+async function lookupCertificate(certId) {
+  const fromDB = await fetchCertFromSupabase(certId);
+  if (fromDB) return fromDB;
+  // Fallback to legacy hardcoded list
+  return LEGACY_CERTIFICATES.find(c => c.id === certId) || null;
+}
 
 /* ── CONSTANTS ──────────────────────────────────────────────────────────── */
 const BASE_URL     = "https://nexgenixbusinessschool.github.io/verify-certificate";
@@ -868,6 +922,14 @@ function displayCertificate(cert) {
   document.getElementById("displayID").textContent     = cert.id;
   document.getElementById("displayCourse").textContent = cert.course;
   document.getElementById("displayScore").textContent  = cert.score || "N/A";
+
+  // Instructor & issuer (Supabase certs only)
+  const instrEl = document.getElementById("displayInstructor");
+  const issuerEl = document.getElementById("displayIssuer");
+  if (instrEl) instrEl.textContent = cert.instructor || "—";
+  if (issuerEl) issuerEl.textContent = cert.issuedBy
+    ? `${cert.issuedBy}${cert.issuerTitle ? ', ' + cert.issuerTitle : ''}`
+    : "Arriane Doris Nuevo, Founder & Creative Director, NexGenix Business School";
   document.getElementById("displayDate").textContent   = cert.issuedOn;
 
   // Unique URL display
@@ -935,7 +997,7 @@ function copyUniqueURL() {
 }
 
 /* ── AUTO-VERIFY FROM URL QUERY PARAM ──────────────────────────────────── */
-(function autoVerifyFromURL() {
+(async function autoVerifyFromURL() {
   const params  = new URLSearchParams(window.location.search);
   const urlID   = params.get("id");
   if (!urlID) return;
@@ -944,19 +1006,18 @@ function copyUniqueURL() {
   const input = document.getElementById("certificateID");
   input.value = urlID;
 
-  const cert = CERTIFICATES.find(c => c.id === urlID);
-
   // Show the auto-load banner
   const banner     = document.getElementById("autoloadBanner");
   const bannerText = document.getElementById("autoloadBannerText");
   banner.classList.add("visible");
+  bannerText.textContent = "Looking up certificate…";
+
+  const cert = await lookupCertificate(urlID);
 
   if (cert) {
     bannerText.textContent = `Opening shared certificate link for: ${cert.owner}`;
-    // Short delay so the banner is readable before the card animates in
     setTimeout(() => {
       displayCertificate(cert);
-      // Scroll to the result
       const resultEl = document.getElementById("verificationResult");
       setTimeout(() => resultEl.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
     }, 400);
@@ -967,9 +1028,9 @@ function copyUniqueURL() {
 })();
 
 /* ── FORM SUBMIT ────────────────────────────────────────────────────────── */
-document.getElementById("verifyForm").addEventListener("submit", function(e) {
+document.getElementById("verifyForm").addEventListener("submit", async function(e) {
   e.preventDefault();
-  const input  = document.getElementById("certificateID");
+  const input   = document.getElementById("certificateID");
   const inputID = input.value.trim();
 
   if (!inputID) {
@@ -979,7 +1040,15 @@ document.getElementById("verifyForm").addEventListener("submit", function(e) {
   }
   input.classList.remove("error");
 
-  const cert = CERTIFICATES.find(c => c.id === inputID);
+  // Show loading state
+  const btn = this.querySelector("button[type=submit]");
+  const origText = btn ? btn.innerHTML : null;
+  if (btn) btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying…';
+
+  const cert = await lookupCertificate(inputID);
+
+  if (btn && origText) btn.innerHTML = origText;
+
   if (cert) {
     displayCertificate(cert);
     setTimeout(() => {
