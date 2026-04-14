@@ -41,22 +41,20 @@
       --grad-card: linear-gradient(145deg,#1c2d42 0%,#131f2e 100%);
       --danger: #ef4444;
       --warning: #f59e0b;
+      /* K-12 accent */
+      --k12-teal: #38bdf8;
+      --k12-teal-soft: rgba(56,189,248,0.12);
+      --k12-teal-glow: rgba(56,189,248,0.3);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html, body { max-width: 100%; overflow-x: hidden; }
-
     body {
       font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
-      font-size: 15px;
-      color: var(--paper-white);
-      background-color: var(--pure-black);
-      line-height: 1.6;
-      padding-top: 50px;
-      padding-bottom: 80px;
+      font-size: 15px; color: var(--paper-white);
+      background-color: var(--pure-black); line-height: 1.6;
+      padding-top: 50px; padding-bottom: 80px;
     }
-
     h2, h3 { font-family: "Montserrat Alternates", sans-serif; font-weight: 600; letter-spacing: 0.3px; }
 
     /* =================== NAVBAR =================== */
@@ -69,7 +67,6 @@
       display: flex; align-items: center; justify-content: space-between;
       z-index: 1001;
     }
-
     #navbar .logo { display: flex; align-items: center; gap: 10px; }
     #navbar .logo a {
       color: var(--scholar-gold);
@@ -77,34 +74,17 @@
       font-size: 13.5px; font-weight: bold; text-decoration: none;
       font-family: 'Courier New', monospace; letter-spacing: 0.5px;
     }
-    .logo-icon {
-      width: 28px; height: 28px; border-radius: 6px;
-      background: var(--grad-premium);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 900; color: var(--pure-black);
-      font-family: 'Courier New', monospace;
-    }
-
     .nav-list { list-style: none; display: flex; gap: 4px; }
     .nav-list li a {
       color: var(--chalk-gray); text-decoration: none; font-size: 12px;
       font-weight: 500; display: flex; align-items: center; gap: 5px;
       transition: all 0.25s ease; padding: 5px 10px; border-radius: 6px;
     }
-    .nav-list li a:hover, .nav-list li a.active {
-      color: var(--code-cyan); background: var(--code-cyan-soft);
-    }
+    .nav-list li a:hover, .nav-list li a.active { color: var(--code-cyan); background: var(--code-cyan-soft); }
     .nav-list li a i { font-size: 13px; opacity: 0.8; }
-
     .hamburger-menu { display: none; flex-direction: column; cursor: pointer; }
-    .hamburger-menu .bar {
-      background: var(--paper-white); height: 2px; width: 20px;
-      margin: 3px 0; transition: 0.3s;
-    }
-
+    .hamburger-menu .bar { background: var(--paper-white); height: 2px; width: 20px; margin: 3px 0; transition: 0.3s; }
     .nav-right { display: flex; align-items: center; gap: 10px; }
-
-    /* Cart/Bag Button */
     .bag-btn {
       position: relative; cursor: pointer;
       background: var(--grad-premium); border: none; border-radius: 8px;
@@ -117,17 +97,13 @@
       position: absolute; top: -7px; right: -7px;
       background: var(--danger); color: white; border-radius: 50%;
       width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 700;
-      box-shadow: 0 2px 6px rgba(239,68,68,0.5);
+      font-size: 10px; font-weight: 700; box-shadow: 0 2px 6px rgba(239,68,68,0.5);
     }
-
-    /* Currency Selector */
     .currency-select {
       background: var(--academic-surface); color: var(--code-cyan);
       border: 1px solid var(--border-subtle); padding: 4px 8px;
       border-radius: 6px; font-size: 11px; cursor: pointer;
     }
-
     .auth-btns { display: flex; gap: 6px; }
     .nav-btn {
       padding: 4px 12px; border-radius: 5px; font-size: 11px; font-weight: 600;
@@ -146,17 +122,9 @@
       border-bottom: 1px solid var(--border-subtle);
       overflow: hidden; display: flex; align-items: center;
     }
-    .announcement-track {
-      display: flex; white-space: nowrap;
-      animation: scroll-announce 50s linear infinite;
-    }
+    .announcement-track { display: flex; white-space: nowrap; animation: scroll-announce 50s linear infinite; }
     .announcement-track:hover { animation-play-state: paused; }
-    .announce-item {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 0 40px; font-size: 11px;
-      font-family: "Orbitron", sans-serif; letter-spacing: 0.5px;
-      color: var(--chalk-gray);
-    }
+    .announce-item { display: inline-flex; align-items: center; gap: 7px; padding: 0 40px; font-size: 11px; font-family: "Orbitron", sans-serif; letter-spacing: 0.5px; color: var(--chalk-gray); }
     .announce-item.gold { color: var(--scholar-gold-light); }
     .announce-item.gold i { color: var(--scholar-gold); }
     .announce-item.green { color: var(--terminal-green); }
@@ -170,39 +138,23 @@
     .hero {
       background: linear-gradient(160deg,#0f1e30 0%,#162840 50%,#0d1b2e 100%);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 40px 20px 35px;
-      text-align: center; position: relative; overflow: hidden;
+      padding: 40px 20px 35px; text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background:
         radial-gradient(ellipse at 30% 40%, rgba(79,195,216,0.06) 0%, transparent 60%),
         radial-gradient(ellipse at 70% 60%, rgba(201,168,76,0.05) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
-    .hero-tagline {
-      font-family: "Orbitron", sans-serif; font-size: 12px;
-      color: var(--code-cyan); letter-spacing: 2px; margin-bottom: 12px; opacity: 0.85;
-    }
-    .hero-title {
-      font-family: "Orbitron", sans-serif; font-size: 36px; font-weight: 800;
-      color: var(--scholar-gold);
-      text-shadow: 0 0 20px var(--scholar-gold-glow);
-      margin-bottom: 10px;
-    }
+    .hero-tagline { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--code-cyan); letter-spacing: 2px; margin-bottom: 12px; opacity: 0.85; }
+    .hero-title { font-family: "Orbitron", sans-serif; font-size: 36px; font-weight: 800; color: var(--scholar-gold); text-shadow: 0 0 20px var(--scholar-gold-glow); margin-bottom: 10px; }
     .hero-subtitle { color: var(--chalk-gray); font-size: 14px; margin-bottom: 20px; }
-    .hero-stats {
-      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
-    }
+    .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
     .stat-item { text-align: center; }
-    .stat-number {
-      font-family: "Silkscreen", sans-serif; font-size: 28px;
-      color: var(--code-cyan); text-shadow: 0 0 10px var(--code-cyan-glow);
-    }
+    .stat-number { font-family: "Silkscreen", sans-serif; font-size: 28px; color: var(--code-cyan); text-shadow: 0 0 10px var(--code-cyan-glow); }
     .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
     .live-dot {
       display: inline-block; width: 10px; height: 10px; border-radius: 50%;
       background: var(--terminal-green); margin-right: 6px;
@@ -215,38 +167,24 @@
     }
 
     /* =================== MAIN LAYOUT =================== */
-    .main-container {
-      width: 90%; max-width: 1200px; margin: 0 auto;
-      padding: 30px 0;
-    }
-    .layout-grid {
-      display: grid; grid-template-columns: 2fr 1fr; gap: 28px;
-    }
-
-    /* =================== SECTION TITLES =================== */
+    .main-container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 30px 0; }
+    .layout-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 28px; }
     .section-title {
       font-family: "Orbitron", sans-serif; font-size: 18px;
       color: var(--code-cyan); text-shadow: 0 0 12px var(--code-cyan-glow);
       display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
     }
-    .section-intro { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; font-style: italic; }
 
     /* =================== FILTER TABS =================== */
-    .filter-bar {
-      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px;
-    }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
     .filter-tab {
       padding: 6px 14px; border-radius: 20px;
       background: var(--academic-surface); border: 1px solid var(--border-subtle);
       color: var(--text-muted); font-size: 12px; cursor: pointer;
-      transition: all 0.25s ease; font-family: "Orbitron", sans-serif;
-      letter-spacing: 0.5px;
+      transition: all 0.25s ease; font-family: "Orbitron", sans-serif; letter-spacing: 0.5px;
     }
     .filter-tab:hover { border-color: var(--code-cyan); color: var(--code-cyan); }
-    .filter-tab.active {
-      background: rgba(79,195,216,0.15); border-color: var(--code-cyan);
-      color: var(--code-cyan);
-    }
+    .filter-tab.active { background: rgba(79,195,216,0.15); border-color: var(--code-cyan); color: var(--code-cyan); }
 
     /* =================== COURSE CATEGORY =================== */
     .course-category { margin-bottom: 36px; }
@@ -256,17 +194,11 @@
       border-bottom: 1px solid var(--border-gold);
     }
     .category-icon { font-size: 22px; }
-    .category-title {
-      font-family: "Orbitron", sans-serif; font-size: 15px;
-      color: var(--scholar-gold); text-shadow: 0 0 8px var(--scholar-gold-glow);
-    }
+    .category-title { font-family: "Orbitron", sans-serif; font-size: 15px; color: var(--scholar-gold); text-shadow: 0 0 8px var(--scholar-gold-glow); }
     .category-count { font-size: 11px; color: var(--text-muted); margin-left: auto; }
 
     /* =================== COURSE CARDS =================== */
-    .course-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px; padding-top: 14px;
-    }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; padding-top: 14px; }
     .course-card {
       background: var(--grad-card); padding: 18px; border-radius: 12px;
       border: 1px solid var(--border-subtle); cursor: pointer;
@@ -284,16 +216,13 @@
       box-shadow: 0 6px 22px var(--scholar-gold-glow);
     }
     .course-card.selected::before { opacity: 1; background: linear-gradient(90deg, var(--scholar-gold), var(--code-cyan)); }
-
     .check-badge {
       display: none; position: absolute; top: 10px; right: 10px;
       width: 22px; height: 22px; border-radius: 50%;
       background: var(--scholar-gold); color: var(--pure-black);
-      font-size: 11px; font-weight: 900;
-      align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900; align-items: center; justify-content: center;
     }
     .course-card.selected .check-badge { display: flex; }
-
     .course-badge {
       position: absolute; top: -10px; right: 16px;
       padding: 3px 10px; border-radius: 20px; font-size: 9px;
@@ -302,30 +231,110 @@
     .badge-instructor { background: linear-gradient(135deg,#1a4535,#3ecf7a); color: #071510; }
     .badge-self-paced { background: linear-gradient(135deg,#3a1a08,#c9a84c); color: #1a0d03; }
     .badge-new { background: linear-gradient(135deg, var(--syntax-purple), var(--code-cyan)); color: #fff; }
-
-    .course-name {
-      font-family: "Orbitron", sans-serif; font-size: 12px;
-      color: var(--scholar-gold); margin-top: 8px; margin-bottom: 8px;
-      line-height: 1.4;
-    }
+    .badge-k12 { background: linear-gradient(135deg,#0e3052,#38bdf8); color: #fff; }
+    .course-name { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--scholar-gold); margin-top: 8px; margin-bottom: 8px; line-height: 1.4; }
     .course-meta { display: flex; flex-direction: column; gap: 4px; }
     .course-meta-item { font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
     .course-meta-item i { color: var(--code-cyan); font-size: 10px; width: 12px; }
-
-    .course-price {
-      font-family: "Silkscreen", sans-serif; font-size: 13px;
-      color: var(--terminal-green); margin-top: 10px;
-    }
+    .course-price { font-family: "Silkscreen", sans-serif; font-size: 13px; color: var(--terminal-green); margin-top: 10px; }
     .course-price.free { color: var(--terminal-green); }
     .course-price.paid { color: var(--scholar-gold); }
 
+    /* =================== K-12 SECTION =================== */
+    .k12-teacher-banner {
+      background: linear-gradient(135deg, rgba(56,189,248,0.08) 0%, rgba(14,30,52,0.6) 100%);
+      border: 1px solid rgba(56,189,248,0.3);
+      border-left: 4px solid var(--k12-teal);
+      border-radius: 12px; padding: 14px 18px;
+      margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+    }
+    .k12-teacher-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(56,189,248,0.25), rgba(62,207,122,0.2));
+      border: 2px solid var(--k12-teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--k12-teal);
+    }
+    .k12-teacher-info { flex: 1; }
+    .k12-teacher-name { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--k12-teal); font-weight: 700; margin-bottom: 2px; }
+    .k12-teacher-role { font-size: 11px; color: var(--text-muted); }
+    .k12-teacher-badge {
+      font-family: "Orbitron", sans-serif; font-size: 9px; padding: 3px 9px;
+      border-radius: 20px; background: var(--k12-teal-soft); border: 1px solid rgba(56,189,248,0.4);
+      color: var(--k12-teal); white-space: nowrap;
+    }
+
+    /* K-12 subject card — wider layout */
+    .k12-subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; padding-top: 14px; }
+    .k12-subject-card {
+      background: var(--grad-card); padding: 20px; border-radius: 14px;
+      border: 1px solid rgba(56,189,248,0.15); cursor: pointer;
+      transition: all 0.3s ease; position: relative; overflow: visible;
+    }
+    .k12-subject-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--k12-teal), var(--terminal-green));
+      opacity: 0; transition: opacity 0.3s; border-radius: 14px 14px 0 0;
+    }
+    .k12-subject-card:hover { border-color: var(--k12-teal); transform: translateY(-4px); box-shadow: 0 8px 28px var(--k12-teal-glow); }
+    .k12-subject-card:hover::before { opacity: 1; }
+    .k12-subject-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .k12-subject-name { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--k12-teal); margin-bottom: 6px; line-height: 1.3; }
+    .k12-subject-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+
+    /* Package selector inside K-12 card */
+    .k12-package-label { font-family: "Orbitron", sans-serif; font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .k12-packages { display: flex; flex-direction: column; gap: 5px; }
+    .k12-pkg {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 10px; border-radius: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid transparent;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .k12-pkg:hover { background: rgba(56,189,248,0.08); border-color: rgba(56,189,248,0.3); }
+    .k12-pkg.selected-pkg { background: rgba(56,189,248,0.12); border-color: var(--k12-teal); }
+    .k12-pkg-info { display: flex; flex-direction: column; gap: 1px; }
+    .k12-pkg-name { font-size: 11px; font-weight: 700; color: var(--paper-white); }
+    .k12-pkg-detail { font-size: 10px; color: var(--text-muted); }
+    .k12-pkg-price { font-family: "Silkscreen", sans-serif; font-size: 12px; color: var(--scholar-gold); flex-shrink: 0; margin-left: 8px; }
+    .k12-pkg-renewable { font-size: 9px; color: var(--terminal-green); display: flex; align-items: center; gap: 3px; margin-top: 1px; }
+    .k12-pkg-select-dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+      border: 2px solid var(--border-subtle); margin-left: 6px;
+      transition: all 0.2s;
+    }
+    .k12-pkg.selected-pkg .k12-pkg-select-dot { background: var(--k12-teal); border-color: var(--k12-teal); }
+
+    /* Foreign lang specify input */
+    .k12-foreign-input {
+      margin-top: 10px; display: none;
+    }
+    .k12-foreign-input.visible { display: block; }
+    .k12-foreign-input input {
+      width: 100%; padding: 8px 12px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(56,189,248,0.3);
+      border-radius: 8px; color: var(--paper-white); font-size: 12px;
+      transition: border-color 0.25s; font-family: inherit;
+    }
+    .k12-foreign-input input:focus { outline: none; border-color: var(--k12-teal); box-shadow: 0 0 8px var(--k12-teal-glow); }
+    .k12-foreign-input input::placeholder { color: var(--slate-medium); }
+    .k12-foreign-input label { font-size: 10px; color: var(--k12-teal); margin-bottom: 5px; display: block; font-family: "Orbitron", sans-serif; letter-spacing: 0.5px; }
+
+    /* Add to bag CTA inside k12 card */
+    .k12-add-btn {
+      width: 100%; margin-top: 12px; padding: 9px; border-radius: 8px;
+      background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.4);
+      color: var(--k12-teal); font-family: "Orbitron", sans-serif; font-size: 10px;
+      font-weight: 700; cursor: pointer; transition: all 0.25s; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .k12-add-btn:hover { background: var(--k12-teal); color: var(--pure-black); }
+    .k12-add-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .k12-add-btn.added { background: rgba(62,207,122,0.15); border-color: var(--terminal-green); color: var(--terminal-green); }
+
     /* =================== SIDEBAR =================== */
     .sidebar { display: flex; flex-direction: column; gap: 20px; }
-
-    .sidebar-card {
-      background: var(--grad-card); border-radius: 12px;
-      padding: 22px; border: 1px solid var(--border-subtle);
-    }
+    .sidebar-card { background: var(--grad-card); border-radius: 12px; padding: 22px; border: 1px solid var(--border-subtle); }
 
     /* =================== CALENDAR / WEEKLY SCHEDULE =================== */
     .cal-widget { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
@@ -337,42 +346,22 @@
     }
     .cal-nav-btn:hover { background: var(--code-cyan); color: var(--pure-black); }
     .cal-month { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--scholar-gold); font-weight: 700; }
-
-    /* Week row */
-    .week-schedule {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
-    }
-    .week-day-col {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-    }
-    .week-day-label {
-      font-family: "Orbitron", sans-serif; font-size: 9px; color: var(--code-cyan);
-      font-weight: 700; padding: 4px 0; text-transform: uppercase;
-    }
+    .week-schedule { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .week-day-col { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .week-day-label { font-family: "Orbitron", sans-serif; font-size: 9px; color: var(--code-cyan); font-weight: 700; padding: 4px 0; text-transform: uppercase; }
     .week-day-cell {
       width: 100%; min-height: 36px; border-radius: 8px;
       background: rgba(255,255,255,0.03); border: 1px solid transparent;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 2px; padding: 4px 2px; transition: all 0.2s;
     }
-    .week-day-cell.today {
-      border-color: var(--code-cyan); background: rgba(79,195,216,0.08);
-    }
-    .week-day-cell.has-class {
-      background: rgba(201,168,76,0.12); border-color: var(--scholar-gold);
-    }
-    .week-day-date {
-      font-size: 11px; font-weight: 700; color: var(--text-muted);
-    }
+    .week-day-cell.today { border-color: var(--code-cyan); background: rgba(79,195,216,0.08); }
+    .week-day-cell.has-class { background: rgba(201,168,76,0.12); border-color: var(--scholar-gold); }
+    .week-day-date { font-size: 11px; font-weight: 700; color: var(--text-muted); }
     .week-day-cell.today .week-day-date { color: var(--code-cyan); }
     .week-day-cell.has-class .week-day-date { color: var(--scholar-gold); }
-    .week-class-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--scholar-gold); flex-shrink: 0;
-    }
+    .week-class-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--scholar-gold); flex-shrink: 0; }
     .week-class-dot.live { background: var(--danger); }
-
-    /* Class day details list */
     .class-day-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
     .class-day-entry {
       background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 10px;
@@ -381,17 +370,11 @@
     .class-day-entry .cde-day { font-weight: 700; color: var(--scholar-gold); margin-bottom: 2px; font-family: "Orbitron", sans-serif; font-size: 10px; }
     .class-day-entry .cde-name { color: var(--paper-white); margin-bottom: 1px; }
     .class-day-entry .cde-time { color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
-
-    /* Legend */
-    .cal-legend {
-      display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap;
-      padding: 8px 0; border-top: 1px solid var(--border-subtle);
-    }
+    .cal-legend { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--border-subtle); }
     .cal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text-muted); }
     .cal-legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
     .cal-legend-dot.today { background: transparent; border: 2px solid var(--code-cyan); }
     .cal-legend-dot.class-day { background: var(--scholar-gold); }
-    .cal-legend-dot.no-class { background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); }
 
     /* =================== SCHEDULE LIST =================== */
     .schedule-list { max-height: 200px; overflow-y: auto; padding-right: 4px; }
@@ -400,26 +383,20 @@
     .schedule-list::-webkit-scrollbar-thumb { background: var(--scholar-gold); border-radius: 10px; }
     .schedule-item {
       background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;
-      margin-bottom: 10px; border-left: 3px solid var(--code-cyan);
-      transition: all 0.25s;
+      margin-bottom: 10px; border-left: 3px solid var(--code-cyan); transition: all 0.25s;
     }
     .schedule-item:hover { background: rgba(79,195,216,0.06); transform: translateX(3px); }
     .schedule-course { font-size: 12px; font-weight: 600; color: var(--paper-white); margin-bottom: 4px; }
     .schedule-time { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
-
     .empty-state { text-align: center; padding: 28px 10px; color: var(--text-muted); font-size: 13px; }
     .empty-state i { font-size: 28px; color: var(--border-subtle); display: block; margin-bottom: 8px; }
 
-    /* =================== ENROLLMENT ADVISORY =================== */
+    /* =================== ADVISORY =================== */
     .advisory {
       background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.25);
-      border-left: 3px solid var(--warning); border-radius: 10px; padding: 14px;
-      margin-top: 14px;
+      border-left: 3px solid var(--warning); border-radius: 10px; padding: 14px; margin-top: 14px;
     }
-    .advisory-title {
-      color: var(--warning); font-size: 12px; font-weight: 700;
-      display: flex; align-items: center; gap: 6px; margin-bottom: 6px;
-    }
+    .advisory-title { color: var(--warning); font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
     .advisory p { font-size: 11.5px; color: var(--text-muted); line-height: 1.7; text-align: left; }
 
     /* =================== ENROLLMENT BUTTON =================== */
@@ -428,19 +405,15 @@
       background: var(--grad-premium); color: var(--pure-black);
       font-family: "Orbitron", sans-serif; font-size: 13px; font-weight: 700;
       cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;
-      letter-spacing: 1px; box-shadow: 0 4px 18px var(--scholar-gold-glow);
-      margin-top: 16px;
+      letter-spacing: 1px; box-shadow: 0 4px 18px var(--scholar-gold-glow); margin-top: 16px;
     }
-    .enroll-btn:hover:not(:disabled) {
-      transform: translateY(-2px); box-shadow: 0 6px 22px rgba(201,168,76,0.5);
-    }
+    .enroll-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(201,168,76,0.5); }
     .enroll-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
-    /* =================== BAG/CART MODAL =================== */
+    /* =================== MODALS =================== */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-      z-index: 2000; display: none; align-items: center; justify-content: center;
-      padding: 20px;
+      z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.open { display: flex; }
     .modal {
@@ -450,41 +423,23 @@
       overflow-y: auto; padding: 28px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.8);
     }
-    .modal-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px;
-    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; }
     .modal-title { font-family: "Orbitron", sans-serif; font-size: 16px; color: var(--scholar-gold); }
-    .modal-close {
-      background: none; border: none; color: var(--text-muted); cursor: pointer;
-      font-size: 18px; transition: color 0.2s;
-    }
+    .modal-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 18px; transition: color 0.2s; }
     .modal-close:hover { color: var(--danger); }
 
-    .bag-course-item {
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;
-      margin-bottom: 10px; border: 1px solid var(--border-subtle);
-    }
+    .bag-course-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border-subtle); }
     .bag-course-info { flex: 1; }
     .bag-course-name { font-size: 13px; font-weight: 600; color: var(--paper-white); margin-bottom: 3px; }
     .bag-course-type { font-size: 11px; color: var(--text-muted); }
     .bag-course-price { font-family: "Silkscreen", sans-serif; font-size: 12px; color: var(--scholar-gold); margin: 0 14px; }
-    .remove-btn {
-      background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
-      color: var(--danger); border-radius: 6px; width: 28px; height: 28px;
-      cursor: pointer; font-size: 11px; transition: all 0.2s;
-    }
+    .remove-btn { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); border-radius: 6px; width: 28px; height: 28px; cursor: pointer; font-size: 11px; transition: all 0.2s; }
     .remove-btn:hover { background: rgba(239,68,68,0.3); }
-
-    .bag-total {
-      border-top: 1px solid var(--border-gold); margin-top: 14px; padding-top: 14px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
+    .bag-total { border-top: 1px solid var(--border-gold); margin-top: 14px; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; }
     .bag-total-label { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--text-muted); }
     .bag-total-amount { font-family: "Silkscreen", sans-serif; font-size: 20px; color: var(--scholar-gold); }
 
-    /* =================== ENROLLMENT FORM MODAL =================== */
+    /* =================== ENROLLMENT FORM =================== */
     .form-group { margin-bottom: 14px; }
     .form-label { font-size: 12px; color: var(--code-cyan); font-weight: 600; display: block; margin-bottom: 6px; }
     .form-input, .form-select {
@@ -497,52 +452,40 @@
     .form-select option { background: var(--academic-deep); }
     .phone-row { display: flex; gap: 8px; }
     .phone-code { width: 130px; flex-shrink: 0; }
+    .separator { width: 100%; height: 1px; background: var(--border-subtle); margin: 8px 0; }
+    .success-banner {
+      background: linear-gradient(135deg,#0e2e1a,#1a4a2e);
+      border: 1px solid rgba(62,207,122,0.4); border-radius: 12px;
+      padding: 20px; margin-top: 16px; display: none; text-align: center;
+    }
+    .success-banner i { font-size: 28px; color: var(--terminal-green); display: block; margin-bottom: 8px; }
+    .success-banner h3 { color: var(--terminal-green); font-size: 16px; margin-bottom: 6px; }
+    .success-banner p { font-size: 13px; color: var(--chalk-gray); }
 
     /* =================== DASHBOARD =================== */
     .dashboard-view { display: none; }
     .dashboard-view.active { display: block; }
-
-    .dashboard-stats-grid {
-      display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 16px; margin-bottom: 28px;
-    }
-    .stat-card {
-      background: var(--grad-card); padding: 20px; border-radius: 12px;
-      border: 1px solid var(--border-subtle); text-align: center;
-      transition: all 0.3s ease;
-    }
+    .dashboard-stats-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: var(--grad-card); padding: 20px; border-radius: 12px; border: 1px solid var(--border-subtle); text-align: center; transition: all 0.3s ease; }
     .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px var(--code-cyan-glow); border-color: var(--code-cyan); }
     .stat-card-icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .stat-card-value {
-      font-family: "Silkscreen", sans-serif; font-size: 30px;
-      color: var(--scholar-gold); text-shadow: 0 0 10px var(--scholar-gold-glow);
-    }
+    .stat-card-value { font-family: "Silkscreen", sans-serif; font-size: 30px; color: var(--scholar-gold); text-shadow: 0 0 10px var(--scholar-gold-glow); }
     .stat-card-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 4px; }
-
     .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
     .my-courses-panel { background: var(--grad-card); padding: 24px; border-radius: 14px; border: 1px solid var(--border-subtle); }
-
     .enrolled-course-card {
       background: rgba(255,255,255,0.03); padding: 20px; border-radius: 10px;
       margin-bottom: 16px; border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--code-cyan); transition: all 0.3s;
-      position: relative; overflow: hidden;
+      border-left: 3px solid var(--code-cyan); transition: all 0.3s; position: relative; overflow: hidden;
     }
     .enrolled-course-card:hover { border-color: var(--code-cyan); box-shadow: 0 6px 22px var(--code-cyan-glow); }
     .enrolled-course-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
     .enrolled-course-name { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--scholar-gold); }
     .enrolled-course-type { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
-
-    .progress-bar-wrap {
-      background: var(--charcoal); height: 6px; border-radius: 10px; overflow: hidden; margin: 10px 0;
-    }
+    .progress-bar-wrap { background: var(--charcoal); height: 6px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
     .progress-bar { height: 100%; background: linear-gradient(90deg, var(--code-cyan), var(--terminal-green)); transition: width 0.5s; }
-
     .course-actions { display: flex; gap: 8px; margin-top: 12px; }
-    .course-action-btn {
-      flex: 1; padding: 9px; border: none; border-radius: 7px;
-      font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s;
-    }
+    .course-action-btn { flex: 1; padding: 9px; border: none; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.25s; }
     .btn-start { background: rgba(79,195,216,0.15); color: var(--code-cyan); border: 1px solid var(--code-cyan); }
     .btn-start:hover { background: var(--code-cyan); color: var(--pure-black); }
     .btn-info { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); }
@@ -551,27 +494,17 @@
     /* =================== VIRTUAL ID CARD =================== */
     .id-card {
       background: linear-gradient(135deg, #0d1b2e 0%, #162840 50%, #0d1b2e 100%);
-      border: 1.5px solid var(--scholar-gold);
-      border-radius: 16px; padding: 22px 20px;
-      position: relative; overflow: hidden;
-      box-shadow: 0 8px 32px rgba(201,168,76,0.2);
+      border: 1.5px solid var(--scholar-gold); border-radius: 16px; padding: 22px 20px;
+      position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(201,168,76,0.2);
     }
     .id-card::before {
       content: ''; position: absolute; top: -40px; right: -40px;
       width: 130px; height: 130px; border-radius: 50%;
       background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
     }
-    .id-card-header {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-      padding-bottom: 12px; border-bottom: 1px solid var(--border-gold);
-    }
-    .id-card-logo {
-      width: 40px; height: 40px; border-radius: 8px; object-fit: contain;
-    }
-    .id-card-school {
-      font-family: "Orbitron", sans-serif; font-size: 10px;
-      color: var(--scholar-gold); letter-spacing: 0.5px; line-height: 1.4;
-    }
+    .id-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-gold); }
+    .id-card-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; }
+    .id-card-school { font-family: "Orbitron", sans-serif; font-size: 10px; color: var(--scholar-gold); letter-spacing: 0.5px; line-height: 1.4; }
     .id-card-body { display: flex; gap: 14px; align-items: flex-start; }
     .id-avatar {
       width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0;
@@ -581,99 +514,44 @@
       font-size: 26px; color: var(--scholar-gold);
     }
     .id-info { flex: 1; }
-    .id-name {
-      font-family: "Orbitron", sans-serif; font-size: 15px;
-      color: var(--paper-white); font-weight: 700; margin-bottom: 4px;
-    }
-    .id-number {
-      font-family: "Silkscreen", sans-serif; font-size: 11px;
-      color: var(--code-cyan); letter-spacing: 1px; margin-bottom: 6px;
-    }
+    .id-name { font-family: "Orbitron", sans-serif; font-size: 15px; color: var(--paper-white); font-weight: 700; margin-bottom: 4px; }
+    .id-number { font-family: "Silkscreen", sans-serif; font-size: 11px; color: var(--code-cyan); letter-spacing: 1px; margin-bottom: 6px; }
     .id-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .id-badge {
-      font-size: 9px; padding: 3px 8px; border-radius: 10px;
-      background: rgba(79,195,216,0.1); border: 1px solid var(--border-subtle);
-      color: var(--code-cyan); font-family: "Orbitron", sans-serif;
-    }
-    .id-card-footer {
-      margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-gold);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .id-status {
-      display: flex; align-items: center; gap: 5px;
-      font-size: 10px; color: var(--terminal-green);
-      font-family: "Orbitron", sans-serif;
-    }
+    .id-badge { font-size: 9px; padding: 3px 8px; border-radius: 10px; background: rgba(79,195,216,0.1); border: 1px solid var(--border-subtle); color: var(--code-cyan); font-family: "Orbitron", sans-serif; }
+    .id-card-footer { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-gold); display: flex; justify-content: space-between; align-items: center; }
+    .id-status { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--terminal-green); font-family: "Orbitron", sans-serif; }
     .id-issued { font-size: 9px; color: var(--text-muted); }
+    .id-emergency { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-gold); font-size: 9px; color: var(--text-muted); }
+    .id-emergency span { color: var(--debug-orange); font-weight: 700; }
 
     /* =================== INVOICE MODAL =================== */
     .invoice-modal {
       background: #fff; color: #1a1a2e; border-radius: 12px;
       width: 100%; max-width: 580px; max-height: 90vh;
-      overflow-y: auto; padding: 0;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      overflow-y: auto; padding: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
     }
-    .invoice-header {
-      background: linear-gradient(135deg, #0d1b2e, #162840);
-      padding: 24px 28px; display: flex; justify-content: space-between; align-items: flex-start;
-    }
+    .invoice-header { background: linear-gradient(135deg, #0d1b2e, #162840); padding: 24px 28px; display: flex; justify-content: space-between; align-items: flex-start; }
     .invoice-logo-area { display: flex; align-items: center; gap: 10px; }
-    .invoice-school-name {
-      font-family: "Orbitron", sans-serif; font-size: 12px;
-      color: var(--scholar-gold); line-height: 1.4;
-    }
+    .invoice-school-name { font-family: "Orbitron", sans-serif; font-size: 12px; color: var(--scholar-gold); line-height: 1.4; }
     .invoice-title-area { text-align: right; }
-    .invoice-word {
-      font-family: "Orbitron", sans-serif; font-size: 22px;
-      color: #fff; font-weight: 900; letter-spacing: 2px;
-    }
+    .invoice-word { font-family: "Orbitron", sans-serif; font-size: 22px; color: #fff; font-weight: 900; letter-spacing: 2px; }
     .invoice-num { font-size: 11px; color: var(--code-cyan); margin-top: 4px; }
     .invoice-body { padding: 24px 28px; }
-    .invoice-meta {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
-    }
-    .invoice-meta-block h4 {
-      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
-      color: #6b80a0; margin-bottom: 6px; font-family: "Orbitron", sans-serif;
-    }
+    .invoice-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .invoice-meta-block h4 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6b80a0; margin-bottom: 6px; font-family: "Orbitron", sans-serif; }
     .invoice-meta-block p { font-size: 13px; color: #1a1a2e; font-weight: 600; margin-bottom: 2px; }
     .invoice-meta-block small { font-size: 11px; color: #6b80a0; }
     .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12px; }
-    .invoice-table th {
-      background: #f0f4f8; padding: 8px 12px; text-align: left;
-      font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #6b80a0;
-      font-family: "Orbitron", sans-serif;
-    }
+    .invoice-table th { background: #f0f4f8; padding: 8px 12px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: #6b80a0; font-family: "Orbitron", sans-serif; }
     .invoice-table td { padding: 10px 12px; border-bottom: 1px solid #e8eef5; color: #1a1a2e; }
     .invoice-table tr:last-child td { border-bottom: none; }
-    .invoice-total-row {
-      background: #0d1b2e; padding: 14px 28px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .invoice-total-label {
-      font-family: "Orbitron", sans-serif; font-size: 11px;
-      color: #6b80a0; text-transform: uppercase; letter-spacing: 1px;
-    }
-    .invoice-total-amount {
-      font-family: "Silkscreen", sans-serif; font-size: 22px; color: var(--scholar-gold);
-    }
-    .invoice-currency-note {
-      padding: 10px 28px; background: #f8fafc;
-      font-size: 11px; color: #6b80a0; text-align: center;
-    }
-    .invoice-footer {
-      padding: 16px 28px; border-top: 1px solid #e8eef5; text-align: center;
-      font-size: 11px; color: #6b80a0;
-    }
-    .invoice-actions {
-      display: flex; gap: 10px; padding: 16px 28px 24px;
-      border-top: 1px solid #e8eef5;
-    }
-    .invoice-btn {
-      flex: 1; padding: 11px; border-radius: 8px; font-size: 12px; font-weight: 700;
-      cursor: pointer; border: none; transition: all 0.25s; font-family: "Orbitron", sans-serif;
-      text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
+    .invoice-total-row { background: #0d1b2e; padding: 14px 28px; display: flex; justify-content: space-between; align-items: center; }
+    .invoice-total-label { font-family: "Orbitron", sans-serif; font-size: 11px; color: #6b80a0; text-transform: uppercase; letter-spacing: 1px; }
+    .invoice-total-amount { font-family: "Silkscreen", sans-serif; font-size: 22px; color: var(--scholar-gold); }
+    .invoice-currency-note { padding: 10px 28px; background: #f8fafc; font-size: 11px; color: #6b80a0; text-align: center; }
+    .invoice-footer { padding: 16px 28px; border-top: 1px solid #e8eef5; text-align: center; font-size: 11px; color: #6b80a0; }
+    .invoice-actions { display: flex; gap: 10px; padding: 16px 28px 24px; border-top: 1px solid #e8eef5; }
+    .invoice-btn { flex: 1; padding: 11px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; transition: all 0.25s; font-family: "Orbitron", sans-serif; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .invoice-btn.download { background: var(--grad-premium); color: var(--pure-black); }
     .invoice-btn.download:hover { transform: translateY(-2px); box-shadow: 0 6px 18px var(--scholar-gold-glow); }
     .invoice-btn.close-inv { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border-subtle); }
@@ -683,162 +561,60 @@
     @media print {
       @page { size: A4; margin: 15mm; }
       body > * { display: none !important; }
-      #printInvoice { display: block !important; position: static !important;
-        background: #fff; z-index: 99999; padding: 0; max-height: none !important;
-        overflow: visible !important; border-radius: 0 !important; box-shadow: none !important; }
+      #printInvoice { display: block !important; position: static !important; background: #fff; z-index: 99999; padding: 0; max-height: none !important; overflow: visible !important; border-radius: 0 !important; box-shadow: none !important; }
       #printInvoice .invoice-actions { display: none !important; }
       #printInvoice .invoice-modal { max-height: none !important; overflow: visible !important; }
-      .invoice-header, .invoice-body, .invoice-total-row,
-      .invoice-currency-note, .invoice-footer { page-break-inside: avoid; }
-      .invoice-table { page-break-inside: avoid; }
-      .modal-overlay { position: static !important; background: transparent !important;
-        display: block !important; padding: 0 !important; }
+      .modal-overlay { position: static !important; background: transparent !important; display: block !important; padding: 0 !important; }
     }
-    .success-banner {
-      background: linear-gradient(135deg,#0e2e1a,#1a4a2e);
-      border: 1px solid rgba(62,207,122,0.4); border-radius: 12px;
-      padding: 20px; margin-top: 16px; display: none;
-      text-align: center;
-    }
-    .success-banner i { font-size: 28px; color: var(--terminal-green); display: block; margin-bottom: 8px; }
-    .success-banner h3 { color: var(--terminal-green); font-size: 16px; margin-bottom: 6px; }
-    .success-banner p { font-size: 13px; color: var(--chalk-gray); }
-
-    /* =================== BOTTOM NAV (mobile) =================== */
-    .bottom-nav {
-      display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 58px;
-      background: linear-gradient(90deg,#080f1a,#0d1b2e,#080f1a);
-      border-top: 1px solid var(--border-subtle);
-      z-index: 1001; align-items: stretch;
-    }
-    .bottom-nav-item {
-      flex: 1; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; gap: 3px; background: none; border: none;
-      color: var(--text-muted); font-size: 10px; cursor: pointer; transition: all 0.2s;
-    }
-    .bottom-nav-item i { font-size: 17px; }
-    .bottom-nav-item.active, .bottom-nav-item:hover { color: var(--code-cyan); }
-
-    /* =================== SEARCH BAR =================== */
-    .search-wrap { position: relative; margin-bottom: 18px; }
-    .search-input {
-      width: 100%; padding: 10px 16px 10px 38px;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
-      border-radius: 8px; color: var(--paper-white); font-size: 13px;
-      transition: all 0.25s;
-    }
-    .search-input:focus { outline: none; border-color: var(--code-cyan); box-shadow: 0 0 12px var(--code-cyan-glow); }
-    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; }
-
-    /* =================== MISC =================== */
-    .separator { width: 100%; height: 1px; background: var(--border-subtle); margin: 8px 0; }
-    .view-toggle { display: flex; gap: 6px; margin-bottom: 18px; }
-    .view-btn {
-      padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer;
-      border: 1px solid var(--border-subtle); background: transparent;
-      color: var(--text-muted); transition: all 0.25s;
-      font-family: "Orbitron", sans-serif;
-    }
-    .view-btn.active { background: var(--code-cyan-soft); border-color: var(--code-cyan); color: var(--code-cyan); }
 
     /* =================== PROFILE VIEW =================== */
     .profile-view { display: none; }
     .profile-view.active { display: block; }
-
-    .profile-grid {
-      display: grid; grid-template-columns: 320px 1fr; gap: 24px;
-      align-items: start;
-    }
+    .profile-grid { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start; }
     .profile-id-col { display: flex; flex-direction: column; gap: 16px; }
-
-    /* Emergency contact on ID card */
-    .id-emergency {
-      margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-gold);
-      font-size: 9px; color: var(--text-muted);
-    }
-    .id-emergency span { color: var(--debug-orange); font-weight: 700; }
-
-    /* Profile form panels */
-    .profile-panel {
-      background: var(--grad-card); border-radius: 14px; padding: 24px;
-      border: 1px solid var(--border-subtle); margin-bottom: 20px;
-    }
-    .profile-panel-title {
-      font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--code-cyan);
-      display: flex; align-items: center; gap: 8px; margin-bottom: 18px;
-      padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);
-    }
-
-    /* Input with icon */
+    .profile-panel { background: var(--grad-card); border-radius: 14px; padding: 24px; border: 1px solid var(--border-subtle); margin-bottom: 20px; }
+    .profile-panel-title { font-family: "Orbitron", sans-serif; font-size: 13px; color: var(--code-cyan); display: flex; align-items: center; gap: 8px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); }
     .input-wrap { position: relative; }
-    .input-wrap .input-icon {
-      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-      color: var(--text-muted); font-size: 13px; pointer-events: none;
-    }
+    .input-wrap .input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; pointer-events: none; }
     .input-wrap .form-input { padding-left: 36px; }
-    .input-wrap .pw-toggle {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: var(--text-muted); cursor: pointer;
-      font-size: 14px; padding: 0; transition: color 0.2s;
-    }
+    .input-wrap .pw-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 14px; padding: 0; transition: color 0.2s; }
     .input-wrap .pw-toggle:hover { color: var(--code-cyan); }
     .input-wrap .form-input.has-toggle { padding-right: 40px; }
-
-    /* Locked field */
-    .locked-field {
-      display: flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle);
-      border-radius: 8px; padding: 10px 14px;
-    }
+    .locked-field { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 10px 14px; }
     .locked-field .lock-icon { color: var(--warning); font-size: 13px; flex-shrink: 0; }
     .locked-field .lock-value { flex: 1; font-size: 13px; color: var(--paper-white); }
     .locked-field .lock-label { font-size: 10px; color: var(--warning); font-family: "Orbitron", sans-serif; }
-    .name-edit-btn {
-      padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 700;
-      cursor: pointer; border: 1px solid var(--scholar-gold);
-      background: rgba(201,168,76,0.1); color: var(--scholar-gold);
-      transition: all 0.25s; font-family: "Orbitron", sans-serif;
-    }
+    .name-edit-btn { padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid var(--scholar-gold); background: rgba(201,168,76,0.1); color: var(--scholar-gold); transition: all 0.25s; font-family: "Orbitron", sans-serif; }
     .name-edit-btn:hover { background: var(--scholar-gold); color: var(--pure-black); }
     .name-used { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
-
-    /* Warning banner */
-    .name-warning {
-      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3);
-      border-left: 3px solid var(--warning); border-radius: 8px;
-      padding: 10px 14px; font-size: 11.5px; color: var(--chalk-gray); margin-top: 10px;
-      display: none;
-    }
+    .name-warning { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-left: 3px solid var(--warning); border-radius: 8px; padding: 10px 14px; font-size: 11.5px; color: var(--chalk-gray); margin-top: 10px; display: none; }
     .name-warning strong { color: var(--warning); }
-
-    /* Save button */
-    .profile-save-btn {
-      width: 100%; padding: 12px; border: none; border-radius: 10px;
-      background: var(--grad-premium); color: var(--pure-black);
-      font-family: "Orbitron", sans-serif; font-size: 12px; font-weight: 700;
-      cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px;
-      box-shadow: 0 4px 14px var(--scholar-gold-glow); margin-top: 4px;
-    }
+    .profile-save-btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: var(--grad-premium); color: var(--pure-black); font-family: "Orbitron", sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 14px var(--scholar-gold-glow); margin-top: 4px; }
     .profile-save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.5); }
     .profile-save-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    /* Toast notification */
+    /* Toast */
     .toast {
       position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: var(--terminal-green); color: var(--pure-black);
       padding: 10px 22px; border-radius: 20px; font-size: 12px; font-weight: 700;
       font-family: "Orbitron", sans-serif; opacity: 0;
-      transition: opacity 0.3s, transform 0.3s; z-index: 9999; pointer-events: none;
-      white-space: nowrap;
+      transition: opacity 0.3s, transform 0.3s; z-index: 9999; pointer-events: none; white-space: nowrap;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast.error { background: var(--danger); color: #fff; }
 
-    @media (max-width: 1030px) {
-      .profile-grid { grid-template-columns: 1fr; }
-      .profile-id-col { flex-direction: row; flex-wrap: wrap; }
-      .profile-id-col > * { flex: 1; min-width: 260px; }
-    }
+    /* Bottom nav */
+    .bottom-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; height: 58px; background: linear-gradient(90deg,#080f1a,#0d1b2e,#080f1a); border-top: 1px solid var(--border-subtle); z-index: 1001; align-items: stretch; }
+    .bottom-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: none; border: none; color: var(--text-muted); font-size: 10px; cursor: pointer; transition: all 0.2s; }
+    .bottom-nav-item i { font-size: 17px; }
+    .bottom-nav-item.active, .bottom-nav-item:hover { color: var(--code-cyan); }
+
+    /* Search */
+    .search-wrap { position: relative; margin-bottom: 18px; }
+    .search-input { width: 100%; padding: 10px 16px 10px 38px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle); border-radius: 8px; color: var(--paper-white); font-size: 13px; transition: all 0.25s; }
+    .search-input:focus { outline: none; border-color: var(--code-cyan); box-shadow: 0 0 12px var(--code-cyan-glow); }
+    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; }
 
     /* =================== RESPONSIVE =================== */
     @media (max-width: 1030px) {
@@ -847,15 +623,7 @@
       .hamburger-menu.open .bar:nth-child(1){ transform:rotate(-45deg) translate(-4px,5px); }
       .hamburger-menu.open .bar:nth-child(2){ opacity:0; }
       .hamburger-menu.open .bar:nth-child(3){ transform:rotate(45deg) translate(-4px,-5px); }
-      .nav-list {
-        display: flex; flex-direction: column;
-        background: linear-gradient(180deg,#0d1b2e,#080f1a);
-        width: 100%; position: absolute; top: 50px; left: 0;
-        text-align: center; padding: 10px 0;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        z-index: 999; opacity: 0; transform: translateY(-10px);
-        visibility: hidden; border-bottom: 1px solid var(--border-subtle);
-      }
+      .nav-list { display: flex; flex-direction: column; background: linear-gradient(180deg,#0d1b2e,#080f1a); width: 100%; position: absolute; top: 50px; left: 0; text-align: center; padding: 10px 0; transition: opacity 0.3s ease, transform 0.3s ease; z-index: 999; opacity: 0; transform: translateY(-10px); visibility: hidden; border-bottom: 1px solid var(--border-subtle); }
       .nav-list.active { opacity:1; transform:translateY(0); visibility:visible; }
       .nav-list li { margin: 8px 0; }
       .auth-btns { display: none; }
@@ -866,20 +634,23 @@
       .bottom-nav { display: flex; }
       body { padding-bottom: 70px; }
     }
-
+    @media (max-width: 1030px) {
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-id-col { flex-direction: row; flex-wrap: wrap; }
+      .profile-id-col > * { flex: 1; min-width: 260px; }
+    }
     @media (max-width: 700px) {
       .main-container { width: 95%; }
       .hero-title { font-size: 26px; }
       .hero-stats { gap: 22px; }
       .stat-number { font-size: 22px; }
       .course-grid { grid-template-columns: 1fr; }
+      .k12-subject-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 480px) {
       body { padding-top: 48px; }
       .hero { padding: 24px 16px 20px; }
       .hero-title { font-size: 22px; }
-      .hero-subtitle { font-size: 12px; }
       .main-container { padding: 18px 0; }
     }
   </style>
@@ -892,14 +663,12 @@
     <img src="assets/images/logo-bs.png" alt="NEX GENIX Business School" style="height:32px; width:auto; border-radius:6px; object-fit:contain;">
     <a href="#" class="logo-title">NEX GENIX · BUSINESS SCHOOL</a>
   </div>
-
   <ul class="nav-list" id="navList">
     <li><a href="#" class="active" onclick="showView('enrollmentView'); closeMenu()"><i class="fas fa-graduation-cap"></i> Enroll</a></li>
     <li><a href="#" onclick="showView('dashboardView'); closeMenu()"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
     <li><a href="#" onclick="openBag(); closeMenu()"><i class="fas fa-backpack"></i> My Bag</a></li>
     <li><a href="#" onclick="showView('profileView'); closeMenu()"><i class="fas fa-user"></i> Profile</a></li>
   </ul>
-
   <div class="nav-right">
     <select class="currency-select" id="currencyDropdown" onchange="changeCurrency(this.value)">
       <option value="USD">💵 USD</option>
@@ -942,7 +711,7 @@
     <span class="announce-divider">◆</span>
     <span class="announce-item green"><i class="fas fa-check-circle"></i>500+ active students this semester</span>
     <span class="announce-divider">◆</span>
-    <span class="announce-item cyan"><i class="fas fa-info-circle"></i>Japanese Language — special early-bird rate available</span>
+    <span class="announce-item cyan"><i class="fas fa-chalkboard-teacher"></i>K-12 tutoring now with Teacher Cheska Bucoy — enroll today!</span>
     <span class="announce-divider">◆</span>
     <!-- duplicate for seamless loop -->
     <span class="announce-item gold"><i class="fas fa-star"></i>New cohort starting March 2026!</span>
@@ -955,14 +724,13 @@
     <span class="announce-divider">◆</span>
     <span class="announce-item green"><i class="fas fa-check-circle"></i>500+ active students this semester</span>
     <span class="announce-divider">◆</span>
-    <span class="announce-item cyan"><i class="fas fa-info-circle"></i>Japanese Language — special early-bird rate available</span>
+    <span class="announce-item cyan"><i class="fas fa-chalkboard-teacher"></i>K-12 tutoring now with Teacher Cheska Bucoy — enroll today!</span>
     <span class="announce-divider">◆</span>
   </div>
 </div>
 
 <!-- =================== ENROLLMENT VIEW =================== -->
 <div id="enrollmentView">
-  <!-- Hero -->
   <div class="hero">
     <div class="hero-content">
       <div class="hero-tagline"><span class="live-dot"></span>Virtual School · Enroll Anytime · Learn Forever</div>
@@ -979,10 +747,9 @@
 
   <div class="main-container">
     <div class="layout-grid">
-
       <!-- LEFT: Course Listings -->
       <div>
-        <!-- Currency Selector (above course listings) -->
+        <!-- Currency Bar -->
         <div style="background:rgba(79,195,216,0.04); border:1px solid var(--border-subtle); border-radius:10px; padding:12px 16px; margin-bottom:18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
           <div style="display:flex; align-items:center; gap:7px; font-family:'Orbitron',sans-serif; font-size:11px; color:var(--code-cyan);"><i class="fas fa-globe"></i> Tuition Currency</div>
           <div style="font-size:12px; color:var(--text-muted);">All fees in: <strong style="color:var(--scholar-gold)" id="currentCurrencyLabel">USD — US Dollar</strong></div>
@@ -1039,17 +806,44 @@
           <div class="course-grid" id="businessCourses"></div>
         </div>
 
-        <!-- K-12 -->
+        <!-- =================== K-12 SECTION =================== -->
         <div class="course-category" data-cat="k12" id="cat-k12">
           <div class="category-header">
             <span class="category-icon">🎓</span>
             <h3 class="category-title">K-12 Learning Series</h3>
-            <span class="category-count">3 courses</span>
+            <span class="category-count" id="k12CourseCount">3 subjects</span>
           </div>
-          <div class="course-grid" id="k12Courses"></div>
+
+          <!-- Teacher Banner -->
+          <div class="k12-teacher-banner">
+            <div class="k12-teacher-avatar"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="k12-teacher-info">
+              <div class="k12-teacher-name">Teacher Cheska Bucoy</div>
+              <div class="k12-teacher-role">K-12 Subject Specialist · All K-12 enrollments are handled by Teacher Cheska</div>
+            </div>
+            <div class="k12-teacher-badge"><i class="fas fa-star" style="margin-right:4px;"></i>Exclusive Tutor</div>
+          </div>
+
+          <!-- Package Legend -->
+          <div style="background:rgba(56,189,248,0.05); border:1px solid rgba(56,189,248,0.2); border-radius:10px; padding:12px 16px; margin-bottom:16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+            <div style="font-family:'Orbitron',sans-serif; font-size:10px; color:var(--k12-teal); letter-spacing:0.5px;"><i class="fas fa-tags"></i> SESSION PACKAGES</div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; flex:1;">
+              <div style="font-size:11px; color:var(--text-muted); display:flex; align-items:center; gap:5px;">
+                <span style="background:rgba(62,207,122,0.15); border:1px solid var(--terminal-green); color:var(--terminal-green); padding:2px 8px; border-radius:10px; font-size:9px; font-family:'Orbitron',sans-serif;">ONE-TIME</span>Single session · Best for try-outs
+              </div>
+              <div style="font-size:11px; color:var(--text-muted); display:flex; align-items:center; gap:5px;">
+                <span style="background:rgba(201,168,76,0.15); border:1px solid var(--scholar-gold); color:var(--scholar-gold); padding:2px 8px; border-radius:10px; font-size:9px; font-family:'Orbitron',sans-serif;">WEEKLY</span>5 sessions / week · Consistent pace
+              </div>
+              <div style="font-size:11px; color:var(--text-muted); display:flex; align-items:center; gap:5px;">
+                <span style="background:rgba(155,121,212,0.15); border:1px solid var(--syntax-purple); color:var(--syntax-purple); padding:2px 8px; border-radius:10px; font-size:9px; font-family:'Orbitron',sans-serif;">MONTHLY ↻</span>~20 sessions · Renewable
+              </div>
+            </div>
+          </div>
+
+          <div class="k12-subject-grid" id="k12Subjects"></div>
         </div>
 
-        <!-- Tech -->
+        <!-- Technology -->
         <div class="course-category" data-cat="tech" id="cat-tech">
           <div class="category-header">
             <span class="category-icon">💻</span>
@@ -1066,8 +860,6 @@
           <div class="section-title" style="font-size:15px; margin-bottom:14px;">
             <i class="fas fa-calendar-alt"></i> Your Schedule
           </div>
-
-          <!-- Weekly Schedule View -->
           <div class="cal-widget">
             <div class="cal-nav">
               <button class="cal-nav-btn" onclick="prevWeek()"><i class="fas fa-chevron-left"></i></button>
@@ -1086,27 +878,20 @@
               <div class="cal-legend-item"><div class="cal-legend-dot class-day"></div> Class day</div>
             </div>
           </div>
-
-          <!-- Schedule Items -->
           <div class="schedule-list" id="scheduleList">
             <div class="empty-state">
               <i class="fas fa-backpack"></i>
               Select courses to build your schedule
             </div>
           </div>
-
-          <!-- Advisory -->
           <div class="advisory">
             <div class="advisory-title"><i class="fas fa-exclamation-triangle"></i> Enrollment Advisory</div>
-            <p>Students may enroll in multiple courses. However, avoid over-commitment — each course demands focus. <strong>No refunds</strong> once enrolled. Choose wisely.</p>
+            <p>Students may enroll in multiple courses. However, avoid over-commitment — each course demands focus. <strong>No refunds</strong> once enrolled. K-12 monthly packages are <strong>renewable</strong> at the end of each cycle.</p>
           </div>
-
-          <!-- Enroll Button -->
           <button class="enroll-btn" id="enrollBtn" onclick="openEnrollForm()" disabled>
             <i class="fas fa-graduation-cap"></i> Proceed to Enrollment (<span id="enrollCount">0</span> courses)
           </button>
         </div>
-
       </div>
     </div>
   </div>
@@ -1121,18 +906,14 @@
       <p class="hero-subtitle">Track your progress, view schedules, and continue your learning journey.</p>
     </div>
   </div>
-
   <div class="main-container">
-    <!-- Stats -->
     <div class="dashboard-stats-grid">
       <div class="stat-card"><span class="stat-card-icon">📚</span><div class="stat-card-value" id="statTotal">0</div><div class="stat-card-label">Total Courses</div></div>
       <div class="stat-card"><span class="stat-card-icon">⏳</span><div class="stat-card-value" id="statInProgress">0</div><div class="stat-card-label">In Progress</div></div>
       <div class="stat-card"><span class="stat-card-icon">✅</span><div class="stat-card-value" id="statCompleted">0</div><div class="stat-card-label">Completed</div></div>
       <div class="stat-card"><span class="stat-card-icon">🏆</span><div class="stat-card-value" id="statCerts">0</div><div class="stat-card-label">Certificates</div></div>
     </div>
-
     <div class="dashboard-grid">
-      <!-- My Courses -->
       <div class="my-courses-panel">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
           <div class="section-title" style="margin-bottom:0; font-size:15px;"><i class="fas fa-book-open"></i> My Enrolled Courses</div>
@@ -1148,10 +929,7 @@
           <i class="fas fa-plus"></i> Enroll in More Courses
         </button>
       </div>
-
-      <!-- Dashboard Sidebar -->
       <div class="sidebar">
-        <!-- Virtual ID Card -->
         <div class="sidebar-card" style="padding:0; overflow:hidden;">
           <div class="id-card" id="virtualIdCard">
             <div class="id-card-header">
@@ -1176,7 +954,6 @@
             </div>
           </div>
         </div>
-
         <div class="sidebar-card">
           <div class="section-title" style="font-size:14px; margin-bottom:12px;"><i class="fas fa-calendar-check"></i> Class Schedule</div>
           <div class="cal-widget">
@@ -1187,10 +964,7 @@
             </div>
             <div class="week-schedule" id="dashWeekSchedule"></div>
             <div class="class-day-list" id="dashClassDayList">
-              <div class="empty-state" style="padding:14px 0; font-size:12px;">
-                <i class="fas fa-calendar-times" style="font-size:20px;"></i>
-                No classes scheduled yet
-              </div>
+              <div class="empty-state" style="padding:14px 0; font-size:12px;"><i class="fas fa-calendar-times" style="font-size:20px;"></i>No classes scheduled yet</div>
             </div>
             <div class="cal-legend">
               <div class="cal-legend-item"><div class="cal-legend-dot today"></div> Today</div>
@@ -1202,8 +976,6 @@
             <div id="upcomingClasses"></div>
           </div>
         </div>
-
-        <!-- Invoice Download -->
         <button class="enroll-btn" id="downloadInvoiceBtn" onclick="openInvoice()" style="display:none; background:rgba(201,168,76,0.15); color:var(--scholar-gold); border:1px solid var(--scholar-gold); box-shadow:none;">
           <i class="fas fa-file-invoice"></i> Download Invoice
         </button>
@@ -1237,12 +1009,9 @@
       <div class="modal-title"><i class="fas fa-file-alt"></i> Enrollment Form</div>
       <button class="modal-close" onclick="document.getElementById('enrollFormModal').classList.remove('open')"><i class="fas fa-times"></i></button>
     </div>
-
     <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">
       You're enrolling in <strong style="color:var(--scholar-gold)" id="formCourseCount">0</strong> course(s).
-      Fill in your details below and we'll send a confirmation.
     </p>
-
     <div class="form-group">
       <label class="form-label">Full Name *</label>
       <input type="text" class="form-input" id="studentName" placeholder="e.g. Maria Santos">
@@ -1284,8 +1053,6 @@
       <label class="form-label">Additional Notes</label>
       <textarea class="form-input" id="studentNotes" rows="3" placeholder="Any questions or special requirements…" style="resize:vertical;"></textarea>
     </div>
-
-    <!-- Enrollment Summary -->
     <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-gold); border-radius:10px; padding:14px; margin-bottom:14px;">
       <div class="section-title" style="font-size:13px; margin-bottom:10px;"><i class="fas fa-receipt"></i> Enrollment Summary</div>
       <div id="formSummaryItems" style="font-size:12px; color:var(--chalk-gray);"></div>
@@ -1295,7 +1062,6 @@
         <span style="font-family:'Silkscreen',sans-serif; font-size:18px; color:var(--scholar-gold);" id="formTotal">$0.00</span>
       </div>
     </div>
-
     <div class="success-banner" id="enrollSuccessBanner">
       <i class="fas fa-check-circle"></i>
       <h3>Enrollment Submitted!</h3>
@@ -1304,7 +1070,6 @@
         <i class="fas fa-file-invoice"></i> View & Download Invoice
       </button>
     </div>
-
     <button class="enroll-btn" id="submitEnrollBtn" onclick="submitEnrollment()">
       <i class="fas fa-paper-plane"></i> Submit Enrollment
     </button>
@@ -1323,13 +1088,9 @@
       <p class="hero-subtitle">Manage your personal information and account settings.</p>
     </div>
   </div>
-
   <div class="main-container">
     <div class="profile-grid">
-
-      <!-- LEFT: ID Card + emergency preview -->
       <div class="profile-id-col">
-        <!-- ID Card (live preview) -->
         <div style="background:var(--grad-card); border-radius:14px; padding:0; border:1px solid var(--border-subtle); overflow:hidden;">
           <div style="padding:12px 16px; border-bottom:1px solid var(--border-subtle);">
             <div class="section-title" style="font-size:12px; margin-bottom:0;"><i class="fas fa-id-card"></i> Virtual Student ID</div>
@@ -1359,18 +1120,12 @@
             </div>
           </div>
         </div>
-
-        <!-- Emergency Contact Info Box -->
         <div style="background:rgba(232,133,90,0.07); border:1px solid rgba(232,133,90,0.25); border-left:3px solid var(--debug-orange); border-radius:10px; padding:14px; font-size:11.5px; color:var(--chalk-gray);">
           <div style="color:var(--debug-orange); font-weight:700; font-family:'Orbitron',sans-serif; font-size:11px; margin-bottom:6px;"><i class="fas fa-heart-pulse"></i> Why Emergency Contact?</div>
-          In case of a medical or safety emergency during a live session, your instructor needs to reach someone on your behalf. This appears on your virtual ID card.
+          In case of a medical or safety emergency during a live session, your instructor needs to reach someone on your behalf.
         </div>
       </div>
-
-      <!-- RIGHT: Form panels -->
       <div>
-
-        <!-- Legal Name -->
         <div class="profile-panel">
           <div class="profile-panel-title"><i class="fas fa-signature"></i> Legal Name</div>
           <div class="form-group" id="nameDisplayGroup">
@@ -1384,10 +1139,6 @@
               <div class="name-used" id="nameEditStatus"><i class="fas fa-info-circle" style="color:var(--code-cyan);"></i> You can edit your name <strong id="nameEditsLeft" style="color:var(--scholar-gold);">1 time</strong></div>
               <button class="name-edit-btn" id="nameEditBtn" onclick="enableNameEdit()"><i class="fas fa-pen"></i> Edit Once</button>
             </div>
-            <div class="name-warning" id="nameWarning">
-              <strong>⚠ Final Edit Warning</strong><br>
-              Your legal name is a vital credential. Once saved, it <strong>cannot be changed again</strong>. Ensure it matches your official ID exactly before saving.
-            </div>
           </div>
           <div class="form-group" id="nameEditGroup" style="display:none;">
             <label class="form-label">Full Legal Name *</label>
@@ -1395,14 +1146,12 @@
               <i class="fas fa-user input-icon"></i>
               <input type="text" class="form-input" id="legalNameInput" placeholder="e.g. Maria Santos">
             </div>
-            <div class="name-warning" id="nameEditWarning" style="display:block; margin-top:10px;">
+            <div class="name-warning" style="display:block; margin-top:10px;">
               <strong>⚠ Final Edit Warning</strong><br>
-              This is your <strong>only chance</strong> to set your legal name. It will be <strong>permanently locked</strong> after saving. Make sure it matches your official government ID.
+              This is your <strong>only chance</strong> to set your legal name. It will be <strong>permanently locked</strong> after saving.
             </div>
           </div>
         </div>
-
-        <!-- Account Info -->
         <div class="profile-panel">
           <div class="profile-panel-title"><i class="fas fa-envelope"></i> Account Information</div>
           <div class="form-group">
@@ -1421,19 +1170,12 @@
                 <option value="+44">🇬🇧 +44</option>
                 <option value="+61">🇦🇺 +61</option>
                 <option value="+65">🇸🇬 +65</option>
-                <option value="+971">🇦🇪 +971</option>
-                <option value="+966">🇸🇦 +966</option>
-                <option value="+81">🇯🇵 +81</option>
-                <option value="+91">🇮🇳 +91</option>
-                <option value="+82">🇰🇷 +82</option>
               </select>
               <input type="tel" class="form-input" id="profilePhone" placeholder="912 345 6789">
             </div>
           </div>
           <button class="profile-save-btn" onclick="saveAccountInfo()"><i class="fas fa-save"></i> Save Account Info</button>
         </div>
-
-        <!-- Emergency Contact -->
         <div class="profile-panel">
           <div class="profile-panel-title"><i class="fas fa-heart-pulse"></i> In Case of Emergency (ICE)</div>
           <div class="form-group">
@@ -1447,12 +1189,9 @@
             <label class="form-label">Relationship</label>
             <select class="form-select" id="iceRelationship">
               <option value="">Select relationship…</option>
-              <option>Parent</option>
-              <option>Spouse / Partner</option>
-              <option>Sibling</option>
-              <option>Guardian</option>
-              <option>Friend</option>
-              <option>Other</option>
+              <option>Parent</option><option>Spouse / Partner</option>
+              <option>Sibling</option><option>Guardian</option>
+              <option>Friend</option><option>Other</option>
             </select>
           </div>
           <div class="form-group">
@@ -1462,13 +1201,6 @@
                 <option value="+1">🇺🇸 +1</option>
                 <option value="+63" selected>🇵🇭 +63</option>
                 <option value="+44">🇬🇧 +44</option>
-                <option value="+61">🇦🇺 +61</option>
-                <option value="+65">🇸🇬 +65</option>
-                <option value="+971">🇦🇪 +971</option>
-                <option value="+966">🇸🇦 +966</option>
-                <option value="+81">🇯🇵 +81</option>
-                <option value="+91">🇮🇳 +91</option>
-                <option value="+82">🇰🇷 +82</option>
               </select>
               <input type="tel" class="form-input" id="icePhone" placeholder="912 345 6789">
             </div>
@@ -1477,8 +1209,6 @@
             <i class="fas fa-heart-pulse"></i> Save Emergency Contact
           </button>
         </div>
-
-        <!-- Change Password -->
         <div class="profile-panel">
           <div class="profile-panel-title"><i class="fas fa-lock"></i> Change Password</div>
           <div class="form-group">
@@ -1513,13 +1243,12 @@
             <i class="fas fa-lock"></i> Update Password
           </button>
         </div>
-
-      </div><!-- end right col -->
-    </div><!-- end profile-grid -->
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Toast notification -->
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <!-- =================== INVOICE MODAL =================== -->
@@ -1547,16 +1276,15 @@
         <div class="invoice-meta-block">
           <h4>Student ID</h4>
           <p id="invStudentId" style="font-family:'Silkscreen',monospace; font-size:11px; color:#0d1b2e;">—</p>
-          <small>NEX GENIX Business School</small><br>
-          <small>nexgenixbusinessschool.github.io</small>
+          <small>NEX GENIX Business School</small>
         </div>
       </div>
       <table class="invoice-table">
         <thead>
           <tr>
-            <th>Course</th>
+            <th>Course / Package</th>
             <th>Type</th>
-            <th>Schedule</th>
+            <th>Schedule / Package</th>
             <th style="text-align:right;">Amount</th>
           </tr>
         </thead>
@@ -1574,7 +1302,7 @@
       All amounts shown in <strong id="invCurrencyFull">US Dollar (USD)</strong>. Base currency is USD.
     </div>
     <div class="invoice-footer">
-      Thank you for choosing NEX GENIX Business School! · No refunds once enrolled.
+      Thank you for choosing NEX GENIX Business School! · No refunds once enrolled. · K-12 monthly packages are renewable.
     </div>
     <div class="invoice-actions">
       <button class="invoice-btn download" onclick="downloadInvoice()"><i class="fas fa-download"></i> Download PDF</button>
@@ -1591,141 +1319,79 @@
     <span style="position:relative; display:inline-block;">
       <i class="fas fa-backpack"></i>
       <span id="bottomBagBadge" style="position:absolute;top:-6px;right:-8px;background:var(--danger);color:#fff;border-radius:50%;width:14px;height:14px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;">0</span>
-    </span>
-    My Bag
+    </span>My Bag
   </button>
   <button class="bottom-nav-item" onclick="showView('profileView'); setBottomActive(this)"><i class="fas fa-user"></i>Profile</button>
 </nav>
 
 <script>
-  // =================== SUPABASE CONFIG ===================
+  // =================== SUPABASE ===================
   const SUPABASE_URL  = 'https://rranivozhrsldhapzwqc.supabase.co';
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJyYW5pdm96aHJzbGRoYXB6d3FjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNzIxMzcsImV4cCI6MjA4NTc0ODEzN30.0wOlQErCvNbf9LhhWzecDINB6523BHqgc2G2v0wURGQ';
   const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // =================== SESSION GUARD ===================
-  let _currentUser   = null;
+  let _currentUser = null;
   let _currentProfile = null;
-
-  // Session guard using onAuthStateChange to avoid redirect loop on page load
   let _sessionResolved = false;
 
   _sb.auth.onAuthStateChange(async (event, session) => {
     if (_sessionResolved) return;
     _sessionResolved = true;
-
     if (!session) {
-      window.location.href =
-        'https://nexgenixcreativesolutions.github.io/login-signup' +
-        '?redirect=' + encodeURIComponent(window.location.href);
+      window.location.href = 'https://nexgenixcreativesolutions.github.io/login-signup?redirect=' + encodeURIComponent(window.location.href);
       return;
     }
     _currentUser = session.user;
-
-    // Load profile
-    const { data: profile } = await _sb
-      .from('profiles').select('*').eq('id', _currentUser.id).single();
+    const { data: profile } = await _sb.from('profiles').select('*').eq('id', _currentUser.id).single();
     _currentProfile = profile;
-
     if (profile) {
-      const nameEl  = document.getElementById('studentName');
+      const nameEl = document.getElementById('studentName');
       const emailEl = document.getElementById('studentEmail');
-      if (nameEl && !nameEl.value)   nameEl.value  = profile.full_name || profile.display_name || '';
+      if (nameEl && !nameEl.value) nameEl.value = profile.full_name || profile.display_name || '';
       if (emailEl && !emailEl.value) emailEl.value = profile.email || '';
     }
-
     loadEnrolledCourses();
   });
 
   async function loadEnrolledCourses() {
     if (!_currentUser) return;
-    const { data, error } = await _sb
-      .from('enrollments')
-      .select('*, courses(*)')
-      .eq('student_id', _currentUser.id)
-      .in('status', ['active', 'completed']);
-
-    if (error) { console.error('loadEnrolledCourses:', error); return; }
-    if (!data || data.length === 0) return;
-
+    const { data, error } = await _sb.from('enrollments').select('*, courses(*)').eq('student_id', _currentUser.id).in('status', ['active', 'completed']);
+    if (error) { console.error(error); return; }
+    if (!data || !data.length) return;
     enrolledCourses = data.map(row => ({
-      name:      row.courses?.name || row.course_id,
-      type:      row.courses?.delivery || 'Self-Paced',
-      priceUSD:  row.courses?.price_usd || 0,
-      progress:  0,
-      status:    row.status === 'completed' ? 'Completed' : 'In Progress',
+      name: row.courses?.name || row.course_id,
+      type: row.courses?.delivery || 'Self-Paced',
+      priceUSD: row.courses?.price_usd || 0,
+      progress: 0,
+      status: row.status === 'completed' ? 'Completed' : 'In Progress',
       startDate: new Date(row.enrolled_at).toLocaleDateString()
     }));
     updateDashboard();
   }
 
-  // Auth buttons in nav — show/hide based on session
-  (async function updateNavAuth() {
-    const { data: { session } } = await _sb.auth.getSession();
-    const logoutBtn   = document.querySelector('.logout-btn');
-    const dashBtn     = document.querySelector('.dashboard-btn');
-    const loginBtns   = document.querySelectorAll('.login-btn');
-    if (session) {
-      if (logoutBtn) logoutBtn.style.display = '';
-      if (dashBtn)   dashBtn.style.display   = '';
-      loginBtns.forEach(b => b.style.display = 'none');
-    } else {
-      if (logoutBtn) logoutBtn.style.display = 'none';
-      if (dashBtn)   dashBtn.style.display   = 'none';
-    }
-  })();
-
   function handleLogout() {
-    _sb.auth.signOut().then(() => {
-      window.location.href = 'https://nexgenixcreativesolutions.github.io/login-signup';
-    });
+    _sb.auth.signOut().then(() => { window.location.href = 'https://nexgenixcreativesolutions.github.io/login-signup'; });
   }
-
-  // =================== STUDENT ID GENERATION ===================
-  function generateStudentId() {
-    const rand = String(Math.floor(1000 + Math.random() * 9000));
-    const now = new Date();
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const yyyy = now.getFullYear();
-    return `ID: ${rand}-${mm}${yyyy}-NGBS`;
-  }
-
-  let currentStudentId = '';
-  let currentEnrollmentData = null;
 
   // =================== CURRENCY ===================
   let currentCurrency = 'USD';
-  const conversionRates = {
-    'USD':1,'PHP':56.50,'EUR':0.92,'GBP':0.79,'JPY':149.50,
-    'AUD':1.52,'CAD':1.39,'SGD':1.34,'INR':83.20,'CNY':7.24,
-    'PLN':3.98,'MXN':17.15,'BRL':4.97,'KRW':1325,'CHF':0.89,
-    'AED':3.67,'SAR':3.75
-  };
-  const currencySymbols = {
-    'USD':'$','PHP':'₱','EUR':'€','GBP':'£','JPY':'¥','AUD':'A$',
-    'CAD':'C$','SGD':'S$','INR':'₹','CNY':'¥','PLN':'zł','MXN':'MX$',
-    'BRL':'R$','KRW':'₩','CHF':'Fr','AED':'د.إ','SAR':'﷼'
-  };
-  const currencyNames = {
-    'USD':'US Dollar','PHP':'Philippine Peso','EUR':'Euro','GBP':'British Pound',
-    'JPY':'Japanese Yen','AUD':'Australian Dollar','CAD':'Canadian Dollar',
-    'SGD':'Singapore Dollar','INR':'Indian Rupee','KRW':'Korean Won',
-    'AED':'UAE Dirham','SAR':'Saudi Riyal'
-  };
+  const conversionRates = { 'USD':1,'PHP':56.50,'EUR':0.92,'GBP':0.79,'JPY':149.50,'AUD':1.52,'CAD':1.39,'SGD':1.34,'INR':83.20,'CNY':7.24,'KRW':1325,'CHF':0.89,'AED':3.67,'SAR':3.75 };
+  const currencySymbols = { 'USD':'$','PHP':'₱','EUR':'€','GBP':'£','JPY':'¥','AUD':'A$','CAD':'C$','SGD':'S$','INR':'₹','CNY':'¥','KRW':'₩','CHF':'Fr','AED':'د.إ','SAR':'﷼' };
+  const currencyNames = { 'USD':'US Dollar','PHP':'Philippine Peso','EUR':'Euro','GBP':'British Pound','JPY':'Japanese Yen','AUD':'Australian Dollar','CAD':'Canadian Dollar','SGD':'Singapore Dollar','INR':'Indian Rupee','KRW':'Korean Won','AED':'UAE Dirham','SAR':'Saudi Riyal' };
 
   function formatPrice(usdAmount) {
     const converted = usdAmount * conversionRates[currentCurrency];
     const sym = currencySymbols[currentCurrency];
     if (['JPY','KRW','INR'].includes(currentCurrency)) return sym + Math.round(converted).toLocaleString();
-    return sym + converted.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    return sym + converted.toLocaleString(undefined, { minimumFractionDigits:2, maximumFractionDigits:2 });
   }
 
   function changeCurrency(currency) {
     currentCurrency = currency;
-    const label = currencyNames[currency] || currency;
     const el = document.getElementById('currentCurrencyLabel');
-    if (el) el.textContent = currency + ' — ' + label;
+    if (el) el.textContent = currency + ' — ' + (currencyNames[currency] || currency);
     renderAllCourses();
+    renderK12Subjects();
     updateBag();
     updateFormSummary();
   }
@@ -1752,11 +1418,6 @@
       { name:'HR Management', type:'Self-Paced', duration:'10 weeks', schedule:'Flexible', lessons:40, students:234, priceUSD:239, isNew:false },
       { name:'Operations & Supply Chain', type:'Instructor-Led', duration:'10 weeks', schedule:'Mon 7:00 PM', lessons:40, students:178, priceUSD:279, isNew:false },
     ],
-    k12: [
-      { name:'Mathematics Tutoring', type:'Instructor-Led', duration:'Ongoing', schedule:'Mon/Wed/Fri 4:00 PM', lessons:120, students:89, priceUSD:99, isNew:false },
-      { name:'Science Exploration', type:'Instructor-Led', duration:'Ongoing', schedule:'Tue/Thu 4:00 PM', lessons:80, students:76, priceUSD:99, isNew:false },
-      { name:'Social Studies', type:'Instructor-Led', duration:'Ongoing', schedule:'Wed/Fri 5:00 PM', lessons:60, students:54, priceUSD:79, isNew:false },
-    ],
     tech: [
       { name:'Web Development Basics', type:'Self-Paced', duration:'10 weeks', schedule:'Flexible', lessons:60, students:412, priceUSD:279, isNew:true },
       { name:'Python Programming', type:'Self-Paced', duration:'12 weeks', schedule:'Flexible', lessons:72, students:534, priceUSD:299, isNew:false },
@@ -1766,16 +1427,196 @@
     ]
   };
 
-  // Selected courses bag
+  // =================== K-12 DATA ===================
+  // Packages: priceUSD is for the base USD price
+  const k12Subjects = [
+    {
+      id: 'math',
+      icon: '📐',
+      name: 'Mathematics',
+      desc: 'Arithmetic, algebra, geometry, and advanced math concepts tailored to your grade level.',
+      hasSpecify: false,
+      schedule: 'Mon/Wed/Fri — schedule TBD with Teacher Cheska',
+      packages: [
+        { id: 'one-time', label: 'One-Time Session', detail: '1 session · ~60 mins', priceUSD: 15, renewable: false, badge: 'ONE-TIME' },
+        { id: 'weekly',   label: 'Weekly Package',   detail: '5 sessions / week · ~60 mins each', priceUSD: 60, renewable: false, badge: 'WEEKLY' },
+        { id: 'monthly',  label: 'Monthly Package',  detail: '~20 sessions / month · ~60 mins each', priceUSD: 200, renewable: true, badge: 'MONTHLY ↻' },
+      ]
+    },
+    {
+      id: 'science',
+      icon: '🔬',
+      name: 'Science',
+      desc: 'Biology, chemistry, physics, and earth science — hands-on conceptual learning with real examples.',
+      hasSpecify: false,
+      schedule: 'Tue/Thu — schedule TBD with Teacher Cheska',
+      packages: [
+        { id: 'one-time', label: 'One-Time Session', detail: '1 session · ~60 mins', priceUSD: 15, renewable: false, badge: 'ONE-TIME' },
+        { id: 'weekly',   label: 'Weekly Package',   detail: '5 sessions / week · ~60 mins each', priceUSD: 60, renewable: false, badge: 'WEEKLY' },
+        { id: 'monthly',  label: 'Monthly Package',  detail: '~20 sessions / month · ~60 mins each', priceUSD: 200, renewable: true, badge: 'MONTHLY ↻' },
+      ]
+    },
+    {
+      id: 'english',
+      icon: '📖',
+      name: 'English',
+      desc: 'Reading comprehension, grammar, essay writing, and communication skills for K-12 students.',
+      hasSpecify: false,
+      schedule: 'Mon/Wed — schedule TBD with Teacher Cheska',
+      packages: [
+        { id: 'one-time', label: 'One-Time Session', detail: '1 session · ~60 mins', priceUSD: 15, renewable: false, badge: 'ONE-TIME' },
+        { id: 'weekly',   label: 'Weekly Package',   detail: '5 sessions / week · ~60 mins each', priceUSD: 60, renewable: false, badge: 'WEEKLY' },
+        { id: 'monthly',  label: 'Monthly Package',  detail: '~20 sessions / month · ~60 mins each', priceUSD: 200, renewable: true, badge: 'MONTHLY ↻' },
+      ]
+    },
+    {
+      id: 'foreign',
+      icon: '🌐',
+      name: 'Other Foreign Language',
+      desc: 'Specify the language you want to learn. Teacher Cheska will tailor sessions to your chosen language and grade level.',
+      hasSpecify: true,
+      specifyPlaceholder: 'e.g. French, Korean, Arabic, German…',
+      schedule: 'Flexible — schedule TBD with Teacher Cheska',
+      packages: [
+        { id: 'one-time', label: 'One-Time Session', detail: '1 session · ~60 mins', priceUSD: 18, renewable: false, badge: 'ONE-TIME' },
+        { id: 'weekly',   label: 'Weekly Package',   detail: '5 sessions / week · ~60 mins each', priceUSD: 70, renewable: false, badge: 'WEEKLY' },
+        { id: 'monthly',  label: 'Monthly Package',  detail: '~20 sessions / month · ~60 mins each', priceUSD: 230, renewable: true, badge: 'MONTHLY ↻' },
+      ]
+    }
+  ];
+
+  // State: per subject, which package is selected and what's specified
+  const k12State = {}; // { subjectId: { pkgId, specified } }
+
+  function renderK12Subjects() {
+    const container = document.getElementById('k12Subjects');
+    if (!container) return;
+    container.innerHTML = k12Subjects.map(subj => {
+      const state = k12State[subj.id] || {};
+      const selectedPkg = state.pkgId || null;
+      const specified = state.specified || '';
+
+      const pkgRows = subj.packages.map(pkg => {
+        const isSelected = selectedPkg === pkg.id;
+        const badgeColor = pkg.id === 'one-time' ? 'var(--terminal-green)' : pkg.id === 'weekly' ? 'var(--scholar-gold)' : 'var(--syntax-purple)';
+        return `<div class="k12-pkg ${isSelected ? 'selected-pkg' : ''}" onclick="selectK12Pkg('${subj.id}', '${pkg.id}')">
+          <div class="k12-pkg-info">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="font-size:9px; padding:2px 7px; border-radius:10px; background:rgba(255,255,255,0.05); border:1px solid ${badgeColor}; color:${badgeColor}; font-family:'Orbitron',sans-serif; white-space:nowrap;">${pkg.badge}</span>
+              <span class="k12-pkg-name">${pkg.label}</span>
+            </div>
+            <div class="k12-pkg-detail">${pkg.detail}</div>
+            ${pkg.renewable ? '<div class="k12-pkg-renewable"><i class="fas fa-rotate"></i> Renewable monthly</div>' : ''}
+          </div>
+          <div style="display:flex; align-items:center; gap:4px; flex-shrink:0; margin-left:8px;">
+            <span class="k12-pkg-price">${formatPrice(pkg.priceUSD)}</span>
+            <div class="k12-pkg-select-dot"></div>
+          </div>
+        </div>`;
+      }).join('');
+
+      const inBag = isK12InBag(subj.id);
+
+      return `<div class="k12-subject-card" data-subject="${subj.id}" data-type="Instructor-Led" data-cat="k12">
+        <span class="k12-subject-icon">${subj.icon}</span>
+        <div class="k12-subject-name">${subj.name}</div>
+        <div class="k12-subject-desc">${subj.desc}</div>
+        <div class="k12-package-label">Choose a session package</div>
+        <div class="k12-packages">${pkgRows}</div>
+        ${subj.hasSpecify ? `
+          <div class="k12-foreign-input ${specified || selectedPkg ? 'visible' : ''}" id="specifyWrap-${subj.id}">
+            <label>Specify the foreign language *</label>
+            <input type="text" id="specifyInput-${subj.id}" placeholder="${subj.specifyPlaceholder}" value="${specified}" oninput="updateK12Specify('${subj.id}', this.value)" onclick="event.stopPropagation()">
+          </div>` : ''}
+        <button class="k12-add-btn ${inBag ? 'added' : ''}" id="k12AddBtn-${subj.id}" onclick="addK12ToBag('${subj.id}')" ${!selectedPkg ? 'disabled' : ''}>
+          ${inBag ? '<i class="fas fa-check"></i> Added to Bag' : '<i class="fas fa-plus"></i> Add to Bag'}
+        </button>
+      </div>`;
+    }).join('');
+  }
+
+  function selectK12Pkg(subjectId, pkgId) {
+    if (!k12State[subjectId]) k12State[subjectId] = {};
+    // Toggle: clicking same pkg deselects
+    if (k12State[subjectId].pkgId === pkgId) {
+      k12State[subjectId].pkgId = null;
+    } else {
+      k12State[subjectId].pkgId = pkgId;
+    }
+    // Show specify input if it's the foreign subject
+    const subj = k12Subjects.find(s => s.id === subjectId);
+    if (subj && subj.hasSpecify) {
+      const wrap = document.getElementById(`specifyWrap-${subjectId}`);
+      if (wrap) wrap.classList.add('visible');
+    }
+    renderK12Subjects();
+  }
+
+  function updateK12Specify(subjectId, value) {
+    if (!k12State[subjectId]) k12State[subjectId] = {};
+    k12State[subjectId].specified = value;
+  }
+
+  function isK12InBag(subjectId) {
+    return Object.keys(selectedCourses).some(k => k.startsWith('k12-' + subjectId));
+  }
+
+  function addK12ToBag(subjectId) {
+    const state = k12State[subjectId];
+    if (!state || !state.pkgId) { showToast('Please select a session package first.', true); return; }
+
+    const subj = k12Subjects.find(s => s.id === subjectId);
+    const pkg = subj.packages.find(p => p.id === state.pkgId);
+
+    // Validate foreign language specification
+    if (subj.hasSpecify && (!state.specified || !state.specified.trim())) {
+      showToast('Please specify the foreign language.', true);
+      const inp = document.getElementById(`specifyInput-${subjectId}`);
+      if (inp) inp.focus();
+      return;
+    }
+
+    // Remove any previous entry for this subject (re-add with new package)
+    Object.keys(selectedCourses).forEach(k => { if (k.startsWith('k12-' + subjectId + '-')) delete selectedCourses[k]; });
+
+    const key = `k12-${subjectId}-${state.pkgId}`;
+    const langNote = subj.hasSpecify && state.specified ? ` (${state.specified.trim()})` : '';
+    selectedCourses[key] = {
+      key,
+      name: `K-12 · ${subj.name}${langNote}`,
+      displayName: `${subj.name}${langNote}`,
+      packageLabel: pkg.label,
+      type: 'Instructor-Led',
+      schedule: subj.schedule,
+      duration: pkg.id === 'monthly' ? 'Monthly (renewable)' : pkg.id === 'weekly' ? '1 week' : '1 session',
+      lessons: pkg.id === 'monthly' ? 20 : pkg.id === 'weekly' ? 5 : 1,
+      students: 0,
+      priceUSD: pkg.priceUSD,
+      isK12: true,
+      renewable: pkg.renewable,
+      teacher: 'Teacher Cheska Bucoy',
+      category: 'k12',
+      index: subjectId
+    };
+
+    updateBadge();
+    updateSchedule();
+    updateEnrollBtn();
+    updateWeekSchedule(Object.values(selectedCourses));
+    updateFormSummary();
+    renderK12Subjects();
+    showToast(`✓ ${subj.name}${langNote} (${pkg.label}) added to bag!`);
+  }
+
+  // =================== SELECTED COURSES ===================
   let selectedCourses = {};
   let enrolledCourses = [];
 
-  // =================== COURSE RENDERING ===================
   function renderAllCourses() {
     renderCourses('languageCourses', coursesData.language, 'language');
     renderCourses('businessCourses', coursesData.business, 'business');
-    renderCourses('k12Courses', coursesData.k12, 'k12');
     renderCourses('techCourses', coursesData.tech, 'tech');
+    renderK12Subjects();
   }
 
   function renderCourses(containerId, courses, category) {
@@ -1784,65 +1625,57 @@
     container.innerHTML = courses.map((course, i) => {
       const key = `${category}-${i}`;
       const isSelected = !!selectedCourses[key];
-      return `
-        <div class="course-card ${isSelected ? 'selected' : ''}" data-key="${key}" data-type="${course.type}" data-cat="${category}" onclick="toggleCourse('${key}', '${category}', ${i})">
-          <div class="check-badge">✓</div>
-          ${course.isNew ? '<span class="course-badge badge-new">NEW</span>' : `<span class="course-badge ${course.type === 'Instructor-Led' ? 'badge-instructor' : 'badge-self-paced'}">${course.type === 'Instructor-Led' ? '🔴 Live' : '🎯 Self'}</span>`}
-          <div class="course-name">${course.name}</div>
-          <div class="course-meta">
-            <div class="course-meta-item"><i class="fas fa-book"></i>${course.lessons} lessons</div>
-            <div class="course-meta-item"><i class="fas fa-clock"></i>${course.duration}</div>
-            <div class="course-meta-item"><i class="fas fa-users"></i>${course.students.toLocaleString()} students</div>
-            <div class="course-meta-item"><i class="fas fa-calendar"></i>${course.schedule}</div>
-          </div>
-          <div class="course-price ${course.priceUSD === 0 ? 'free' : 'paid'}">
-            ${course.priceUSD === 0 ? '✦ FREE' : formatPrice(course.priceUSD)}
-          </div>
+      return `<div class="course-card ${isSelected ? 'selected' : ''}" data-key="${key}" data-type="${course.type}" data-cat="${category}" onclick="toggleCourse('${key}', '${category}', ${i})">
+        <div class="check-badge">✓</div>
+        ${course.isNew ? '<span class="course-badge badge-new">NEW</span>' : `<span class="course-badge ${course.type==='Instructor-Led'?'badge-instructor':'badge-self-paced'}">${course.type==='Instructor-Led'?'🔴 Live':'🎯 Self'}</span>`}
+        <div class="course-name">${course.name}</div>
+        <div class="course-meta">
+          <div class="course-meta-item"><i class="fas fa-book"></i>${course.lessons} lessons</div>
+          <div class="course-meta-item"><i class="fas fa-clock"></i>${course.duration}</div>
+          <div class="course-meta-item"><i class="fas fa-users"></i>${course.students.toLocaleString()} students</div>
+          <div class="course-meta-item"><i class="fas fa-calendar"></i>${course.schedule}</div>
         </div>
-      `;
+        <div class="course-price ${course.priceUSD===0?'free':'paid'}">${course.priceUSD===0?'✦ FREE':formatPrice(course.priceUSD)}</div>
+      </div>`;
     }).join('');
   }
 
   function toggleCourse(key, category, index) {
     const course = coursesData[category][index];
-    if (selectedCourses[key]) {
-      delete selectedCourses[key];
-    } else {
-      selectedCourses[key] = { ...course, key, category, index };
-    }
+    if (selectedCourses[key]) delete selectedCourses[key];
+    else selectedCourses[key] = { ...course, key, category, index };
     renderAllCourses();
     updateBadge();
     updateSchedule();
     updateEnrollBtn();
     updateWeekSchedule(Object.values(selectedCourses));
-    updateFormSummary(); // real-time update in enrollment form
+    updateFormSummary();
   }
 
   function updateBadge() {
     const count = Object.keys(selectedCourses).length;
     document.getElementById('bagBadge').textContent = count;
     document.getElementById('enrollCount').textContent = count;
-    const bottomBadge = document.getElementById('bottomBagBadge');
-    if (bottomBadge) bottomBadge.textContent = count;
+    const b = document.getElementById('bottomBagBadge');
+    if (b) b.textContent = count;
   }
 
   function updateEnrollBtn() {
-    const count = Object.keys(selectedCourses).length;
-    document.getElementById('enrollBtn').disabled = count === 0;
+    document.getElementById('enrollBtn').disabled = Object.keys(selectedCourses).length === 0;
   }
 
   function updateSchedule() {
     const list = document.getElementById('scheduleList');
     const courses = Object.values(selectedCourses);
-    if (courses.length === 0) {
+    if (!courses.length) {
       list.innerHTML = '<div class="empty-state"><i class="fas fa-backpack"></i>Select courses to build your schedule</div>';
       return;
     }
     list.innerHTML = courses.map(c => `
       <div class="schedule-item">
         <div class="schedule-course">${c.name}</div>
-        <div class="schedule-time">${c.type === 'Instructor-Led' ? '🔴' : '🟢'} ${c.type} · ${c.schedule}</div>
-        <div class="schedule-time"><i class="fas fa-flag" style="color:var(--code-cyan);width:12px;"></i>${calcEnd(c.duration)}</div>
+        <div class="schedule-time">${c.type==='Instructor-Led'?'🔴':'🟢'} ${c.type} · ${c.schedule}</div>
+        ${c.isK12 ? `<div class="schedule-time" style="color:var(--k12-teal);"><i class="fas fa-chalkboard-teacher" style="width:12px;"></i> ${c.teacher} · ${c.packageLabel}</div>` : ''}
         <div class="schedule-time"><i class="fas fa-tag" style="color:var(--scholar-gold);width:12px;"></i>${formatPrice(c.priceUSD)}</div>
       </div>
     `).join('');
@@ -1851,126 +1684,68 @@
   function calcEnd(duration) {
     const weeks = parseInt(duration);
     if (isNaN(weeks)) return 'Ongoing';
-    const d = new Date();
-    d.setDate(d.getDate() + weeks * 7);
+    const d = new Date(); d.setDate(d.getDate() + weeks * 7);
     return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
   }
 
   // =================== WEEK SCHEDULE ===================
   const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const DAY_FULL  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-  let weekOffset = 0;      // enrollment view week offset
-  let dashWeekOffset = 0;  // dashboard week offset
+  let weekOffset = 0, dashWeekOffset = 0;
 
   function getWeekStart(offset) {
-    const d = new Date();
-    d.setHours(0,0,0,0);
-    const day = d.getDay();
-    d.setDate(d.getDate() - day + (offset * 7)); // start of week (Sunday)
+    const d = new Date(); d.setHours(0,0,0,0);
+    d.setDate(d.getDate() - d.getDay() + (offset * 7));
     return d;
   }
 
   function renderWeekSchedule(scheduleId, listId, labelId, offset, courses) {
     const weekStart = getWeekStart(offset);
     const today = new Date(); today.setHours(0,0,0,0);
-
-    // Week label
     const weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate() + 6);
     const fmt = d => d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
     const labelEl = document.getElementById(labelId);
     if (labelEl) labelEl.textContent = fmt(weekStart) + ' — ' + fmt(weekEnd);
-
-    // Build 7 columns
     const grid = document.getElementById(scheduleId);
     if (!grid) return;
-
-    // For each day of the week, find which courses meet that day
-    let gridHTML = '';
-    const classDays = []; // { dow, date, courses[] }
-
+    let gridHTML = ''; const classDays = [];
     for (let dow = 0; dow < 7; dow++) {
-      const cellDate = new Date(weekStart);
-      cellDate.setDate(weekStart.getDate() + dow);
+      const cellDate = new Date(weekStart); cellDate.setDate(weekStart.getDate() + dow);
       const isToday = cellDate.getTime() === today.getTime();
-      const dateNum = cellDate.getDate();
-
-      // Which instructor-led courses meet on this day?
       const meetingCourses = courses.filter(c => {
         if (c.type !== 'Instructor-Led') return false;
         const s = c.schedule.toLowerCase();
-        return (dow===0&&s.includes('sun'))||(dow===1&&s.includes('mon'))||
-               (dow===2&&s.includes('tue'))||(dow===3&&s.includes('wed'))||
-               (dow===4&&s.includes('thu'))||(dow===5&&s.includes('fri'))||
-               (dow===6&&s.includes('sat'));
+        return (dow===0&&s.includes('sun'))||(dow===1&&s.includes('mon'))||(dow===2&&s.includes('tue'))||(dow===3&&s.includes('wed'))||(dow===4&&s.includes('thu'))||(dow===5&&s.includes('fri'))||(dow===6&&s.includes('sat'));
       });
-
       const hasClass = meetingCourses.length > 0;
       if (hasClass) classDays.push({ dow, date: cellDate, courses: meetingCourses });
-
       const dots = meetingCourses.map(() => `<div class="week-class-dot live"></div>`).join('');
-
-      gridHTML += `
-        <div class="week-day-col">
-          <div class="week-day-label">${DAY_NAMES[dow]}</div>
-          <div class="week-day-cell ${isToday ? 'today' : ''} ${hasClass ? 'has-class' : ''}">
-            <div class="week-day-date">${dateNum}</div>
-            ${dots}
-          </div>
-        </div>`;
+      gridHTML += `<div class="week-day-col"><div class="week-day-label">${DAY_NAMES[dow]}</div><div class="week-day-cell ${isToday?'today':''} ${hasClass?'has-class':''}"><div class="week-day-date">${cellDate.getDate()}</div>${dots}</div></div>`;
     }
     grid.innerHTML = gridHTML;
-
-    // Build class day detail list
     const list = document.getElementById(listId);
     if (!list) return;
-    if (classDays.length === 0) {
-      const isEmpty = courses.filter(c => c.type === 'Instructor-Led').length === 0;
-      list.innerHTML = `<div class="empty-state" style="padding:14px 0; font-size:12px;">
-        <i class="fas fa-${isEmpty ? 'calendar-plus' : 'calendar-check'}" style="font-size:20px;"></i>
-        ${isEmpty ? 'Add courses to see your class schedule' : 'No live classes this week — navigate to find your class days'}
-      </div>`;
+    if (!classDays.length) {
+      list.innerHTML = `<div class="empty-state" style="padding:14px 0; font-size:12px;"><i class="fas fa-calendar-plus" style="font-size:20px;"></i>Add courses to see class schedule</div>`;
       return;
     }
-
-    list.innerHTML = classDays.map(({ dow, date, courses: dayCourses }) => {
+    list.innerHTML = classDays.map(({ dow, date, courses: dc }) => {
       const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
-      const courseLines = dayCourses.map(c => {
-        // extract time from schedule e.g. "Mon/Wed 6:00 PM" → "6:00 PM"
+      const lines = dc.map(c => {
         const timePart = c.schedule.replace(/[a-zA-Z\/]+/g, '').trim() || c.schedule;
-        return `<div class="cde-name">🔴 ${c.name}</div>
-                <div class="cde-time"><i class="fas fa-clock"></i>${timePart}</div>`;
+        return `<div class="cde-name">${c.isK12 ? '🎓' : '🔴'} ${c.name}</div><div class="cde-time"><i class="fas fa-clock"></i>${timePart}</div>`;
       }).join('');
-      return `<div class="class-day-entry">
-        <div class="cde-day">${DAY_FULL[dow]}, ${dateStr}</div>
-        ${courseLines}
-      </div>`;
+      return `<div class="class-day-entry"><div class="cde-day">${DAY_FULL[dow]}, ${dateStr}</div>${lines}</div>`;
     }).join('');
   }
 
-  function updateWeekSchedule(courses) {
-    renderWeekSchedule('weekSchedule', 'classDayList', 'calWeekLabel', weekOffset, courses);
-  }
-
-  function updateDashWeekSchedule(courses) {
-    renderWeekSchedule('dashWeekSchedule', 'dashClassDayList', 'dashCalWeekLabel', dashWeekOffset, courses);
-  }
-
-  function prevWeek(isDash) {
-    if (isDash) { dashWeekOffset--; updateDashWeekSchedule(enrolledCourses); }
-    else { weekOffset--; updateWeekSchedule(Object.values(selectedCourses)); }
-  }
-
-  function nextWeek(isDash) {
-    if (isDash) { dashWeekOffset++; updateDashWeekSchedule(enrolledCourses); }
-    else { weekOffset++; updateWeekSchedule(Object.values(selectedCourses)); }
-  }
+  function updateWeekSchedule(courses) { renderWeekSchedule('weekSchedule','classDayList','calWeekLabel',weekOffset,courses); }
+  function updateDashWeekSchedule(courses) { renderWeekSchedule('dashWeekSchedule','dashClassDayList','dashCalWeekLabel',dashWeekOffset,courses); }
+  function prevWeek(isDash) { if(isDash){dashWeekOffset--;updateDashWeekSchedule(enrolledCourses);}else{weekOffset--;updateWeekSchedule(Object.values(selectedCourses));} }
+  function nextWeek(isDash) { if(isDash){dashWeekOffset++;updateDashWeekSchedule(enrolledCourses);}else{weekOffset++;updateWeekSchedule(Object.values(selectedCourses));} }
 
   // =================== BAG MODAL ===================
-  function openBag() {
-    document.getElementById('bagModal').classList.add('open');
-    updateBag();
-  }
+  function openBag() { document.getElementById('bagModal').classList.add('open'); updateBag(); }
   function closeBag() { document.getElementById('bagModal').classList.remove('open'); }
 
   function updateBag() {
@@ -1978,29 +1753,23 @@
     const contents = document.getElementById('bagContents');
     const totalRow = document.getElementById('bagTotalRow');
     const enrollBtn = document.getElementById('bagEnrollBtn');
-
-    if (courses.length === 0) {
+    if (!courses.length) {
       contents.innerHTML = '<div class="empty-state"><i class="fas fa-backpack"></i>Your bag is empty.<br>Browse courses and add them!</div>';
-      totalRow.style.display = 'none';
-      enrollBtn.disabled = true;
-      return;
+      totalRow.style.display = 'none'; enrollBtn.disabled = true; return;
     }
-
     let total = 0;
     contents.innerHTML = courses.map(c => {
       total += c.priceUSD;
-      return `
-        <div class="bag-course-item">
-          <div class="bag-course-info">
-            <div class="bag-course-name">${c.name}</div>
-            <div class="bag-course-type">${c.type} · ${c.schedule}</div>
-          </div>
-          <div class="bag-course-price">${formatPrice(c.priceUSD)}</div>
-          <button class="remove-btn" onclick="removeCourse('${c.key}')"><i class="fas fa-times"></i></button>
+      const subtitle = c.isK12 ? `${c.packageLabel} · ${c.teacher}` : `${c.type} · ${c.schedule}`;
+      return `<div class="bag-course-item">
+        <div class="bag-course-info">
+          <div class="bag-course-name">${c.name}</div>
+          <div class="bag-course-type">${subtitle}</div>
         </div>
-      `;
+        <div class="bag-course-price">${formatPrice(c.priceUSD)}</div>
+        <button class="remove-btn" onclick="removeCourse('${c.key}')"><i class="fas fa-times"></i></button>
+      </div>`;
     }).join('');
-
     totalRow.style.display = 'flex';
     document.getElementById('bagTotalAmount').textContent = formatPrice(total);
     enrollBtn.disabled = false;
@@ -2016,65 +1785,26 @@
     updateWeekSchedule(Object.values(selectedCourses));
   }
 
-  // =================== INVOICE ===================
-  function openInvoice() {
-    if (!currentEnrollmentData) return;
-    const { name, email, phone, courses, totalUSD, date } = currentEnrollmentData;
-
-    document.getElementById('invNumber').textContent = currentStudentId.replace('ID:', 'INV');
-    document.getElementById('invDate').textContent = 'Date: ' + date.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
-    document.getElementById('invName').textContent = name;
-    document.getElementById('invEmail').textContent = email;
-    document.getElementById('invPhone').textContent = phone || '—';
-    document.getElementById('invStudentId').textContent = currentStudentId;
-
-    // Currency info
-    const currName = currencyNames[currentCurrency] || currentCurrency;
-    document.getElementById('invCurrencyNote').textContent = `Displayed in ${currentCurrency}`;
-    document.getElementById('invCurrencyFull').textContent = `${currName} (${currentCurrency})`;
-
-    // Course rows
-    let totalConverted = 0;
-    document.getElementById('invItems').innerHTML = courses.map(c => {
-      const amt = formatPrice(c.priceUSD);
-      totalConverted += c.priceUSD * conversionRates[currentCurrency];
-      return `<tr>
-        <td style="font-weight:600;">${c.name}</td>
-        <td><span style="font-size:10px; padding:2px 7px; border-radius:10px; background:${c.type==='Instructor-Led'?'#e0fef0':'#fef9e7'}; color:${c.type==='Instructor-Led'?'#166534':'#92400e'};">${c.type}</span></td>
-        <td style="color:#6b80a0; font-size:11px;">${c.schedule}</td>
-        <td style="text-align:right; font-weight:700; color:#0d1b2e;">${amt}</td>
-      </tr>`;
-    }).join('');
-
-    // Total
-    const sym = currencySymbols[currentCurrency];
-    const totalFmt = ['JPY','KRW','INR'].includes(currentCurrency)
-      ? sym + Math.round(totalConverted).toLocaleString()
-      : sym + totalConverted.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-    document.getElementById('invTotal').textContent = totalFmt;
-
-    document.getElementById('invoiceModal').classList.add('open');
-  }
-
-  function downloadInvoice() {
-    // Hide modal overlay background for printing
-    const overlay = document.getElementById('invoiceModal');
-    overlay.style.background = 'transparent';
-    window.print();
-    setTimeout(() => { overlay.style.background = ''; }, 1000);
-  }
-
   // =================== ENROLLMENT FORM ===================
+  let currentStudentId = '';
+  let currentEnrollmentData = null;
+
+  function generateStudentId() {
+    const rand = String(Math.floor(1000 + Math.random() * 9000));
+    const now = new Date();
+    return `ID: ${rand}-${String(now.getMonth()+1).padStart(2,'0')}${now.getFullYear()}-NGBS`;
+  }
+
   function openEnrollForm() {
     const courses = Object.values(selectedCourses);
-    if (courses.length === 0) return;
+    if (!courses.length) return;
     document.getElementById('formCourseCount').textContent = courses.length;
     updateFormSummary();
     document.getElementById('enrollSuccessBanner').style.display = 'none';
     document.getElementById('submitEnrollBtn').style.display = 'block';
     document.getElementById('viewDashboardBtn').style.display = 'none';
     document.getElementById('submitEnrollBtn').disabled = false;
-    document.getElementById('submitEnrollBtn').textContent = '✉ Submit Enrollment';
+    document.getElementById('submitEnrollBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Submit Enrollment';
     document.getElementById('enrollFormModal').classList.add('open');
   }
 
@@ -2085,66 +1815,41 @@
     if (!items) return;
     items.innerHTML = courses.map(c => {
       total += c.priceUSD;
-      return `<div style="display:flex;justify-content:space-between;margin-bottom:6px;">
-        <span>${c.name}</span><span style="color:var(--scholar-gold)">${formatPrice(c.priceUSD)}</span>
+      const sub = c.isK12 ? `<span style="font-size:10px; color:var(--k12-teal);">${c.packageLabel} · ${c.teacher}</span>` : '';
+      return `<div style="margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;">
+          <span>${c.name}</span><span style="color:var(--scholar-gold)">${formatPrice(c.priceUSD)}</span>
+        </div>${sub}
       </div>`;
     }).join('');
-    const totalEl = document.getElementById('formTotal');
-    if (totalEl) totalEl.textContent = formatPrice(total);
+    const el = document.getElementById('formTotal');
+    if (el) el.textContent = formatPrice(total);
   }
 
   async function submitEnrollment() {
     const name  = document.getElementById('studentName').value.trim();
     const email = document.getElementById('studentEmail').value.trim();
     if (!name || !email) { alert('Please enter your name and email.'); return; }
-
     const btn = document.getElementById('submitEnrollBtn');
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
     btn.disabled = true;
-
-    const courses   = Object.values(selectedCourses);
-    const phone     = document.getElementById('phoneCode').value + ' ' + document.getElementById('studentPhone').value;
-    const goal      = document.getElementById('learningGoal').value;
-    const notes     = document.getElementById('studentNotes').value;
-    const totalUSD  = courses.reduce((s, c) => s + c.priceUSD, 0);
-    const totalDisplay = formatPrice(totalUSD);
-
+    const courses  = Object.values(selectedCourses);
+    const phone    = document.getElementById('phoneCode').value + ' ' + document.getElementById('studentPhone').value;
+    const goal     = document.getElementById('learningGoal').value;
+    const notes    = document.getElementById('studentNotes').value;
+    const totalUSD = courses.reduce((s,c) => s + c.priceUSD, 0);
     currentStudentId = generateStudentId();
     currentEnrollmentData = { name, email, phone, goal, notes, courses, totalUSD, date: new Date() };
-
-    // ── Write to Supabase ──────────────────────────────────────
     try {
       if (!_currentUser) throw new Error('Not logged in');
-
-      // Update profile with phone / learning_goals if provided
       if (phone.trim() || goal) {
-        await _sb.from('profiles').update({
-          phone:          phone.trim() || undefined,
-          learning_goals: goal || undefined,
-          full_name:      name,
-          updated_at:     new Date().toISOString()
-        }).eq('id', _currentUser.id);
+        await _sb.from('profiles').update({ phone: phone.trim()||undefined, learning_goals:goal||undefined, full_name:name, updated_at:new Date().toISOString() }).eq('id', _currentUser.id);
       }
-
-      // Insert enrollment row per course (ignore duplicate if already enrolled)
-      const insertRows = courses.map(c => ({
-        student_id:     _currentUser.id,
-        course_id:      c.supabaseId || c.name,   // supabaseId set when courses are loaded from DB
-        status:         'pending',
-        payment_status: 'unpaid'
-      }));
-
-      const { error: enrollErr } = await _sb
-        .from('enrollments')
-        .upsert(insertRows, { onConflict: 'student_id,course_id', ignoreDuplicates: true });
-
-      if (enrollErr) console.warn('Enrollment insert warning:', enrollErr.message);
-
+      const insertRows = courses.map(c => ({ student_id:_currentUser.id, course_id:c.supabaseId||c.name, status:'pending', payment_status:'unpaid' }));
+      await _sb.from('enrollments').upsert(insertRows, { onConflict:'student_id,course_id', ignoreDuplicates:true });
       showEnrollmentSuccess(name, courses, totalUSD);
-
     } catch(err) {
-      console.error('submitEnrollment error:', err);
-      // Still show success UI — admin will process manually
+      console.error(err);
       showEnrollmentSuccess(name, courses, totalUSD);
     }
   }
@@ -2153,34 +1858,18 @@
     document.getElementById('enrollSuccessBanner').style.display = 'block';
     document.getElementById('submitEnrollBtn').style.display = 'none';
     document.getElementById('viewDashboardBtn').style.display = 'block';
-
-    enrolledCourses = courses.map(c => ({ ...c, progress: 0, status: 'Not Started', startDate: new Date().toLocaleDateString() }));
-    const el = document.getElementById('dashStudentName');
-    if (el) el.textContent = name || 'Student';
-
-    // Sync profile data
+    enrolledCourses = courses.map(c => ({ ...c, progress:0, status:'Not Started', startDate:new Date().toLocaleDateString() }));
+    setEl('dashStudentName', name || 'Student');
     const email = document.getElementById('studentEmail').value.trim();
     profileData.email = email;
-    if (!profileData.legalName) {
-      setEl('nameDisplayValue', name);
-      const legalInput = document.getElementById('legalNameInput');
-      if (legalInput) legalInput.value = name;
-    }
-    const profileEmailEl = document.getElementById('profileEmail');
-    if (profileEmailEl) profileEmailEl.value = email;
-
-    // Populate virtual ID card
-    document.getElementById('idCardName').textContent = name;
-    document.getElementById('idCardNumber').textContent = currentStudentId;
-    document.getElementById('idCardIssued').textContent = 'Issued: ' + new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    if (!profileData.legalName) setEl('nameDisplayValue', name);
+    const pe = document.getElementById('profileEmail');
+    if (pe) pe.value = email;
+    setEl('idCardName', name);
+    setEl('idCardNumber', currentStudentId);
+    setEl('idCardIssued', 'Issued: ' + new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}));
     const badges = document.getElementById('idCardBadges');
-    if (badges) {
-      badges.innerHTML = courses.slice(0,3).map(c =>
-        `<span class="id-badge">${c.name.split(' ')[0]}</span>`
-      ).join('');
-    }
-
-    // Show invoice download button in dashboard
+    if (badges) badges.innerHTML = courses.slice(0,3).map(c => `<span class="id-badge">${c.name.split(' ')[0]}</span>`).join('');
     const dlBtn = document.getElementById('downloadInvoiceBtn');
     if (dlBtn) dlBtn.style.display = 'block';
   }
@@ -2191,384 +1880,292 @@
     updateDashboard();
   }
 
+  // =================== INVOICE ===================
+  function openInvoice() {
+    if (!currentEnrollmentData) return;
+    const { name, email, phone, courses, totalUSD, date } = currentEnrollmentData;
+    document.getElementById('invNumber').textContent = currentStudentId.replace('ID:','INV');
+    document.getElementById('invDate').textContent = 'Date: ' + date.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('invName').textContent = name;
+    document.getElementById('invEmail').textContent = email;
+    document.getElementById('invPhone').textContent = phone || '—';
+    document.getElementById('invStudentId').textContent = currentStudentId;
+    document.getElementById('invCurrencyNote').textContent = `Displayed in ${currentCurrency}`;
+    document.getElementById('invCurrencyFull').textContent = `${currencyNames[currentCurrency]||currentCurrency} (${currentCurrency})`;
+    let totalConverted = 0;
+    document.getElementById('invItems').innerHTML = courses.map(c => {
+      const amt = formatPrice(c.priceUSD);
+      totalConverted += c.priceUSD * conversionRates[currentCurrency];
+      const pkgNote = c.isK12 ? `${c.packageLabel}${c.renewable?' · Renewable':''}` : c.schedule;
+      const typeLabel = c.isK12 ? 'K-12 Tutoring' : c.type;
+      return `<tr>
+        <td style="font-weight:600;">${c.name}<br><span style="font-size:10px; color:#6b80a0;">${c.isK12?'Teacher: '+c.teacher:''}</span></td>
+        <td><span style="font-size:10px;padding:2px 7px;border-radius:10px;background:#e0fef0;color:#166534;">${typeLabel}</span></td>
+        <td style="color:#6b80a0;font-size:11px;">${pkgNote}</td>
+        <td style="text-align:right;font-weight:700;color:#0d1b2e;">${amt}</td>
+      </tr>`;
+    }).join('');
+    const sym = currencySymbols[currentCurrency];
+    document.getElementById('invTotal').textContent = ['JPY','KRW','INR'].includes(currentCurrency)
+      ? sym + Math.round(totalConverted).toLocaleString()
+      : sym + totalConverted.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+    document.getElementById('invoiceModal').classList.add('open');
+  }
+
+  function downloadInvoice() {
+    const overlay = document.getElementById('invoiceModal');
+    overlay.style.background = 'transparent';
+    window.print();
+    setTimeout(() => { overlay.style.background = ''; }, 1000);
+  }
+
   // =================== DASHBOARD ===================
   function updateDashboard() {
-    document.getElementById('statTotal').textContent = enrolledCourses.length;
-    document.getElementById('statInProgress').textContent = enrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length;
-    document.getElementById('statCompleted').textContent = enrolledCourses.filter(c => c.progress === 100).length;
-    document.getElementById('statCerts').textContent = enrolledCourses.filter(c => c.progress === 100).length;
+    setEl('statTotal', enrolledCourses.length);
+    setEl('statInProgress', enrolledCourses.filter(c=>c.progress>0&&c.progress<100).length);
+    setEl('statCompleted', enrolledCourses.filter(c=>c.progress===100).length);
+    setEl('statCerts', enrolledCourses.filter(c=>c.progress===100).length);
     renderEnrolledCourses(enrolledCourses);
     updateDashWeekSchedule(enrolledCourses);
     renderUpcoming();
   }
 
   function renderEnrolledCourses(list) {
-    const container = document.getElementById('enrolledCoursesList');
-    if (!container) return;
-    if (list.length === 0) {
-      container.innerHTML = '<div class="empty-state"><i class="fas fa-graduation-cap"></i>No courses enrolled yet.</div>';
-      return;
-    }
-    container.innerHTML = list.map((c, i) => `
+    const c = document.getElementById('enrolledCoursesList');
+    if (!c) return;
+    if (!list.length) { c.innerHTML = '<div class="empty-state"><i class="fas fa-graduation-cap"></i>No courses enrolled yet.</div>'; return; }
+    c.innerHTML = list.map((course, i) => `
       <div class="enrolled-course-card">
         <div class="enrolled-course-header">
           <div>
-            <div class="enrolled-course-name">${c.name}</div>
-            <div class="enrolled-course-type">${c.type} · ${c.schedule}</div>
+            <div class="enrolled-course-name">${course.name}</div>
+            <div class="enrolled-course-type">${course.type} · ${course.schedule}${course.isK12?' · '+course.teacher:''}</div>
           </div>
-          <span style="font-family:'Silkscreen',sans-serif;font-size:12px;color:var(--scholar-gold)">${formatPrice(c.priceUSD)}</span>
+          <span style="font-family:'Silkscreen',sans-serif;font-size:12px;color:var(--scholar-gold)">${formatPrice(course.priceUSD)}</span>
         </div>
-        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${c.progress}%"></div></div>
-        <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Progress: ${c.progress}% · ${c.status}</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">
-          <span><i class="fas fa-book" style="color:var(--code-cyan)"></i> ${c.lessons} lessons</span>
-          <span><i class="fas fa-clock" style="color:var(--code-cyan)"></i> ${c.duration}</span>
-          <span><i class="fas fa-calendar" style="color:var(--code-cyan)"></i> ${c.schedule}</span>
-          <span><i class="fas fa-flag" style="color:var(--code-cyan)"></i> ${calcEnd(c.duration)}</span>
-        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:${course.progress}%"></div></div>
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">Progress: ${course.progress}% · ${course.status}</div>
         <div class="course-actions">
-          <button class="course-action-btn btn-start" onclick="startCourse(${i})">${c.type === 'Self-Paced' ? (c.progress===0?'▶ Start':'▶ Continue') : '📅 View Schedule'}</button>
+          <button class="course-action-btn btn-start" onclick="startCourse(${i})">${course.type==='Self-Paced'?(course.progress===0?'▶ Start':'▶ Continue'):'📅 View Schedule'}</button>
           <button class="course-action-btn btn-info" onclick="courseDetails(${i})"><i class="fas fa-info-circle"></i> Details</button>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
   function filterEnrolled(status) {
-    const list = status === 'all' ? enrolledCourses : enrolledCourses.filter(c => c.status === status);
-    renderEnrolledCourses(list);
+    renderEnrolledCourses(status==='all' ? enrolledCourses : enrolledCourses.filter(c=>c.status===status));
   }
 
-  function startCourse(index) {
-    const c = enrolledCourses[index];
-    if (c.type === 'Self-Paced' && c.progress === 0) {
-      enrolledCourses[index].progress = 5;
-      enrolledCourses[index].status = 'In Progress';
-    }
+  function startCourse(i) {
+    const c = enrolledCourses[i];
+    if (c.type==='Self-Paced'&&c.progress===0) { enrolledCourses[i].progress=5; enrolledCourses[i].status='In Progress'; }
     updateDashboard();
-    alert(`${c.type === 'Self-Paced' ? '▶ Starting: ' : '📅 Scheduled: '}${c.name}\n\n${c.type === 'Self-Paced' ? `✅ ${c.lessons} lessons available\n💾 Progress auto-saved` : `🔴 Live classes: ${c.schedule}\n🔔 Reminders sent before each session`}`);
+    alert(`${c.type==='Self-Paced'?'▶ Starting: ':'📅 Scheduled: '}${c.name}\n\n${c.type==='Self-Paced'?`✅ ${c.lessons} lessons available`:`🔴 Live classes: ${c.schedule}`}`);
   }
 
-  function courseDetails(index) {
-    const c = enrolledCourses[index];
-    alert(`📋 ${c.name}\n\nType: ${c.type}\nSchedule: ${c.schedule}\nDuration: ${c.duration}\nLessons: ${c.lessons}\nStudents: ${c.students?.toLocaleString() || 'N/A'}\nPrice: ${formatPrice(c.priceUSD)}\nProgress: ${c.progress}%\nEnd date: ${calcEnd(c.duration)}`);
+  function courseDetails(i) {
+    const c = enrolledCourses[i];
+    alert(`📋 ${c.name}\n\nType: ${c.type}\n${c.isK12?`Teacher: ${c.teacher}\nPackage: ${c.packageLabel}\n`:''}Schedule: ${c.schedule}\nDuration: ${c.duration}\nPrice: ${formatPrice(c.priceUSD)}\nProgress: ${c.progress}%`);
   }
 
   function renderUpcoming() {
     const container = document.getElementById('upcomingClasses');
     if (!container) return;
-    const live = enrolledCourses.filter(c => c.type === 'Instructor-Led');
-    if (live.length === 0) {
-      container.innerHTML = '<div class="empty-state" style="padding:14px 0;"><i class="fas fa-calendar-times"></i>No live classes scheduled</div>';
-      return;
-    }
-    container.innerHTML = live.map(c => `
-      <div class="schedule-item">
-        <div class="schedule-course">${c.name}</div>
-        <div class="schedule-time">🔴 Live · ${c.schedule}</div>
-      </div>
-    `).join('');
+    const live = enrolledCourses.filter(c=>c.type==='Instructor-Led');
+    if (!live.length) { container.innerHTML = '<div class="empty-state" style="padding:14px 0;"><i class="fas fa-calendar-times"></i>No live classes scheduled</div>'; return; }
+    container.innerHTML = live.map(c => `<div class="schedule-item"><div class="schedule-course">${c.name}</div><div class="schedule-time">🔴 Live · ${c.schedule}</div></div>`).join('');
   }
 
   // =================== FILTERING ===================
   function filterAll(el) {
-    document.querySelectorAll('.course-card').forEach(c => c.style.display = 'block');
-    document.querySelectorAll('.course-category').forEach(cat => cat.style.display = 'block');
+    document.querySelectorAll('.course-card, .k12-subject-card').forEach(c => c.style.display='block');
+    document.querySelectorAll('.course-category').forEach(c => c.style.display='block');
     setActiveTab(el);
   }
 
   function filterType(type, el) {
-    document.querySelectorAll('.course-card').forEach(c => {
-      c.style.display = c.dataset.type === type ? 'block' : 'none';
-    });
-    document.querySelectorAll('.course-category').forEach(cat => cat.style.display = 'block');
+    document.querySelectorAll('.course-card').forEach(c => { c.style.display = c.dataset.type===type?'block':'none'; });
+    document.querySelectorAll('.k12-subject-card').forEach(c => { c.style.display = type==='Instructor-Led'?'block':'none'; });
+    document.querySelectorAll('.course-category').forEach(c => c.style.display='block');
     setActiveTab(el);
   }
 
   function filterCategory(cat, el) {
-    document.querySelectorAll('.course-category').forEach(c => {
-      c.style.display = c.dataset.cat === cat ? 'block' : 'none';
-    });
-    document.querySelectorAll('.course-card').forEach(c => c.style.display = 'block');
+    document.querySelectorAll('.course-category').forEach(c => { c.style.display = c.dataset.cat===cat?'block':'none'; });
+    document.querySelectorAll('.course-card, .k12-subject-card').forEach(c => c.style.display='block');
     setActiveTab(el);
   }
 
   function filterSearch(query) {
     const q = query.toLowerCase();
-    document.querySelectorAll('.course-card').forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.style.display = text.includes(q) ? 'block' : 'none';
-    });
+    document.querySelectorAll('.course-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q)?'block':'none'; });
+    document.querySelectorAll('.k12-subject-card').forEach(card => { card.style.display = card.textContent.toLowerCase().includes(q)?'block':'none'; });
     document.querySelectorAll('.course-category').forEach(cat => {
-      const visible = [...cat.querySelectorAll('.course-card')].some(c => c.style.display !== 'none');
-      cat.style.display = visible ? 'block' : 'none';
+      const hasVisible = [...cat.querySelectorAll('.course-card,.k12-subject-card')].some(c=>c.style.display!=='none');
+      cat.style.display = hasVisible?'block':'none';
     });
   }
 
   function setActiveTab(el) {
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
     if (el) el.classList.add('active');
   }
 
   // =================== VIEW SWITCHER ===================
   function showView(viewId) {
-    document.getElementById('enrollmentView').style.display = viewId === 'enrollmentView' ? 'block' : 'none';
+    document.getElementById('enrollmentView').style.display = viewId==='enrollmentView'?'block':'none';
     const dash = document.getElementById('dashboardView');
     const prof = document.getElementById('profileView');
-    if (viewId === 'dashboardView') {
-      dash.classList.add('active');
-      prof.classList.remove('active');
-      if (enrolledCourses.length > 0) updateDashboard();
-    } else if (viewId === 'profileView') {
-      dash.classList.remove('active');
-      prof.classList.add('active');
-      syncProfileIdCard();
-    } else {
-      dash.classList.remove('active');
-      prof.classList.remove('active');
-    }
+    if (viewId==='dashboardView') { dash.classList.add('active'); prof.classList.remove('active'); if(enrolledCourses.length)updateDashboard(); }
+    else if (viewId==='profileView') { dash.classList.remove('active'); prof.classList.add('active'); syncProfileIdCard(); }
+    else { dash.classList.remove('active'); prof.classList.remove('active'); }
   }
 
   function setBottomActive(el) {
-    document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.bottom-nav-item').forEach(b=>b.classList.remove('active'));
     el.classList.add('active');
   }
 
-  // =================== NAV MENU =================== 
-  function toggleMenu() {
-    const btn = document.getElementById('hamburgerBtn');
-    const list = document.getElementById('navList');
-    btn.classList.toggle('open');
-    list.classList.toggle('active');
-  }
-  function closeMenu() {
-    document.getElementById('hamburgerBtn').classList.remove('open');
-    document.getElementById('navList').classList.remove('active');
-  }
+  // =================== NAV ===================
+  function toggleMenu() { document.getElementById('hamburgerBtn').classList.toggle('open'); document.getElementById('navList').classList.toggle('active'); }
+  function closeMenu() { document.getElementById('hamburgerBtn').classList.remove('open'); document.getElementById('navList').classList.remove('active'); }
 
   // =================== PROFILE ===================
-  let profileData = {
-    legalName: '',
-    nameEditUsed: false,
-    email: '',
-    phone: '',
-    ice: { name: '', relationship: '', phone: '' }
-  };
-  let studentPassword = 'ngbs1234'; // default placeholder
+  let profileData = { legalName:'', nameEditUsed:false, email:'', phone:'', ice:{name:'',relationship:'',phone:''} };
+  let studentPassword = 'ngbs1234';
 
   function syncProfileIdCard() {
-    // Sync ID card in profile view with dashboard ID card values
     const name = document.getElementById('idCardName').textContent;
     const num  = document.getElementById('idCardNumber').textContent;
     const issued = document.getElementById('idCardIssued').textContent;
     const badges = document.getElementById('idCardBadges').innerHTML;
-
-    setEl('profileIdName', name);
-    setEl('profileIdNumber', num);
-    setEl('profileIdIssued', issued);
-    const pb = document.getElementById('profileIdBadges');
-    if (pb) pb.innerHTML = badges;
-
-    // Emergency contact on profile card
+    setEl('profileIdName', name); setEl('profileIdNumber', num); setEl('profileIdIssued', issued);
+    const pb = document.getElementById('profileIdBadges'); if(pb) pb.innerHTML = badges;
     updateIdEmergency('profile');
-
-    // Pre-fill name display
-    if (profileData.legalName) {
-      setEl('nameDisplayValue', profileData.legalName);
-    } else if (name !== '—') {
-      setEl('nameDisplayValue', name);
-    }
-    updateNameEditUI();
-
-    // Pre-fill email/phone
-    const emailEl = document.getElementById('profileEmail');
-    if (emailEl && !emailEl.value && profileData.email) emailEl.value = profileData.email;
-
-    // Sync name edits left label
-    setEl('nameEditsLeft', profileData.nameEditUsed ? '0 times (locked)' : '1 time');
-    if (profileData.nameEditUsed) {
-      const btn = document.getElementById('nameEditBtn');
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; }
-    }
+    if (profileData.legalName) setEl('nameDisplayValue', profileData.legalName);
+    else if (name!=='—') setEl('nameDisplayValue', name);
+    setEl('nameEditsLeft', profileData.nameEditUsed?'0 times (locked)':'1 time');
+    if (profileData.nameEditUsed) { const btn=document.getElementById('nameEditBtn'); if(btn){btn.disabled=true;btn.style.opacity='0.4';btn.style.cursor='not-allowed';} }
+    const emailEl=document.getElementById('profileEmail'); if(emailEl&&!emailEl.value&&profileData.email) emailEl.value=profileData.email;
   }
 
-  function setEl(id, val) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val;
-  }
+  function setEl(id, val) { const el=document.getElementById(id); if(el) el.textContent=val; }
 
   function updateIdEmergency(prefix) {
-    const row = document.getElementById(prefix + 'EmergencyRow');
-    const nameEl = document.getElementById(prefix + 'EmergencyName');
-    const phoneEl = document.getElementById(prefix + 'EmergencyPhone');
+    const row=document.getElementById(prefix+'EmergencyRow');
+    const nameEl=document.getElementById(prefix+'EmergencyName');
+    const phoneEl=document.getElementById(prefix+'EmergencyPhone');
     if (!row) return;
     if (profileData.ice.name) {
-      row.style.display = 'block';
-      if (nameEl) nameEl.textContent = profileData.ice.name + (profileData.ice.relationship ? ` (${profileData.ice.relationship})` : '');
-      if (phoneEl) phoneEl.textContent = profileData.ice.phone || '—';
-    } else {
-      row.style.display = 'none';
-    }
-  }
-
-  function updateNameEditUI() {
-    const displayGroup = document.getElementById('nameDisplayGroup');
-    const editGroup = document.getElementById('nameEditGroup');
-    if (!displayGroup || !editGroup) return;
-    // Already in edit mode? Don't reset
+      row.style.display='block';
+      if(nameEl) nameEl.textContent=profileData.ice.name+(profileData.ice.relationship?` (${profileData.ice.relationship})`:'');
+      if(phoneEl) phoneEl.textContent=profileData.ice.phone||'—';
+    } else { row.style.display='none'; }
   }
 
   function enableNameEdit() {
     if (profileData.nameEditUsed) return;
-    document.getElementById('nameDisplayGroup').style.display = 'none';
-    document.getElementById('nameEditGroup').style.display = 'block';
-    const currentName = document.getElementById('nameDisplayValue').textContent;
-    const input = document.getElementById('legalNameInput');
-    if (input && currentName !== '—') input.value = currentName;
-    document.getElementById('nameWarning').style.display = 'none';
-  }
-
-  function saveAccountInfo() {
-    const email = document.getElementById('profileEmail').value.trim();
-    const phone = document.getElementById('profilePhoneCode').value + ' ' + document.getElementById('profilePhone').value.trim();
-    if (!email) { showToast('Please enter an email address.', true); return; }
-    profileData.email = email;
-    profileData.phone = phone;
-    // Also sync with enrollment form if open
-    const enrollEmail = document.getElementById('studentEmail');
-    if (enrollEmail && !enrollEmail.value) enrollEmail.value = email;
-    showToast('✓ Account info saved!');
-  }
-
-  function saveEmergencyContact() {
-    const name = document.getElementById('iceNameInput').value.trim();
-    const rel  = document.getElementById('iceRelationship').value;
-    const code = document.getElementById('icePhoneCode').value;
-    const phone = document.getElementById('icePhone').value.trim();
-    if (!name || !phone) { showToast('Please fill in contact name and phone.', true); return; }
-    profileData.ice = { name, relationship: rel, phone: code + ' ' + phone };
-    // Reflect on both ID cards
-    updateIdEmergency('id');
-    updateIdEmergency('profile');
-    showToast('✓ Emergency contact saved!');
-  }
-
-  function savePassword() {
-    const current = document.getElementById('currentPw').value;
-    const newPw   = document.getElementById('newPw').value;
-    const confirm = document.getElementById('confirmPw').value;
-    if (!current) { showToast('Enter your current password.', true); return; }
-    if (current !== studentPassword) { showToast('Current password is incorrect.', true); return; }
-    if (newPw.length < 8) { showToast('New password must be at least 8 characters.', true); return; }
-    if (newPw !== confirm) { showToast('Passwords do not match.', true); return; }
-    studentPassword = newPw;
-    document.getElementById('currentPw').value = '';
-    document.getElementById('newPw').value = '';
-    document.getElementById('confirmPw').value = '';
-    document.getElementById('pwStrengthFill').style.width = '0%';
-    document.getElementById('pwStrengthLabel').textContent = '';
-    showToast('✓ Password updated successfully!');
+    document.getElementById('nameDisplayGroup').style.display='none';
+    document.getElementById('nameEditGroup').style.display='block';
+    const v=document.getElementById('nameDisplayValue').textContent;
+    const inp=document.getElementById('legalNameInput');
+    if(inp&&v!=='—') inp.value=v;
   }
 
   function saveLegalName() {
     if (profileData.nameEditUsed) return;
-    const input = document.getElementById('legalNameInput');
-    const name = input ? input.value.trim() : '';
+    const input=document.getElementById('legalNameInput');
+    const name=input?input.value.trim():'';
     if (!name) { showToast('Please enter your legal name.', true); return; }
-
-    // Confirm before locking
     if (!confirm(`Lock legal name as:\n"${name}"\n\nThis cannot be changed again. Continue?`)) return;
-
-    profileData.legalName = name;
-    profileData.nameEditUsed = true;
-
-    // Update all ID card displays
-    setEl('idCardName', name);
-    setEl('profileIdName', name);
-    setEl('nameDisplayValue', name);
-    setEl('nameEditsLeft', '0 times (locked)');
-
-    // Update dashboard student name
-    setEl('dashStudentName', name.split(' ')[0]);
-
-    // Switch back to locked view
-    document.getElementById('nameEditGroup').style.display = 'none';
-    document.getElementById('nameDisplayGroup').style.display = 'block';
-
-    // Disable edit button
-    const btn = document.getElementById('nameEditBtn');
-    if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; btn.innerHTML = '<i class="fas fa-lock"></i> Locked'; }
-
+    profileData.legalName=name; profileData.nameEditUsed=true;
+    setEl('idCardName',name); setEl('profileIdName',name); setEl('nameDisplayValue',name);
+    setEl('nameEditsLeft','0 times (locked)'); setEl('dashStudentName',name.split(' ')[0]);
+    document.getElementById('nameEditGroup').style.display='none';
+    document.getElementById('nameDisplayGroup').style.display='block';
+    const btn=document.getElementById('nameEditBtn');
+    if(btn){btn.disabled=true;btn.style.opacity='0.4';btn.style.cursor='not-allowed';btn.innerHTML='<i class="fas fa-lock"></i> Locked';}
     showToast('✓ Legal name saved and locked.');
   }
 
-  // Add save button to name edit group dynamically
   document.addEventListener('DOMContentLoaded', function() {
     const editGroup = document.getElementById('nameEditGroup');
     if (editGroup) {
       const saveBtn = document.createElement('button');
-      saveBtn.className = 'profile-save-btn';
-      saveBtn.style.marginTop = '12px';
+      saveBtn.className = 'profile-save-btn'; saveBtn.style.marginTop = '12px';
       saveBtn.innerHTML = '<i class="fas fa-lock"></i> Save & Lock Legal Name';
       saveBtn.onclick = saveLegalName;
       editGroup.appendChild(saveBtn);
     }
-  });
-
-  function togglePw(inputId, btn) {
-    const input = document.getElementById(inputId);
-    if (!input) return;
-    const isHidden = input.type === 'password';
-    input.type = isHidden ? 'text' : 'password';
-    btn.innerHTML = isHidden ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
-  }
-
-  function checkPwStrength(pw) {
-    const fill = document.getElementById('pwStrengthFill');
-    const label = document.getElementById('pwStrengthLabel');
-    if (!fill || !label) return;
-    let score = 0;
-    if (pw.length >= 8) score++;
-    if (pw.length >= 12) score++;
-    if (/[A-Z]/.test(pw)) score++;
-    if (/[0-9]/.test(pw)) score++;
-    if (/[^A-Za-z0-9]/.test(pw)) score++;
-    const levels = [
-      { pct: '20%', color: '#ef4444', text: 'Very Weak' },
-      { pct: '40%', color: '#f97316', text: 'Weak' },
-      { pct: '60%', color: '#f59e0b', text: 'Fair' },
-      { pct: '80%', color: '#22c55e', text: 'Strong' },
-      { pct: '100%', color: '#10b981', text: 'Very Strong' },
-    ];
-    const lvl = levels[Math.max(0, score - 1)] || levels[0];
-    fill.style.width = pw.length ? lvl.pct : '0%';
-    fill.style.background = lvl.color;
-    label.textContent = pw.length ? lvl.text : '';
-    label.style.color = lvl.color;
-  }
-
-  function showToast(msg, isError = false) {
-    const t = document.getElementById('toast');
-    if (!t) return;
-    t.textContent = msg;
-    t.className = 'toast' + (isError ? ' error' : '');
-    setTimeout(() => t.classList.add('show'), 10);
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-
-
-  document.addEventListener('DOMContentLoaded', function() {
     renderAllCourses();
     updateWeekSchedule([]);
     updateDashWeekSchedule([]);
-
-    // Close modals on overlay click
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', function(e) {
-        if (e.target === this) this.classList.remove('open');
-      });
+      overlay.addEventListener('click', function(e) { if(e.target===this) this.classList.remove('open'); });
     });
   });
+
+  function saveAccountInfo() {
+    const email=document.getElementById('profileEmail').value.trim();
+    if (!email) { showToast('Please enter an email address.', true); return; }
+    profileData.email=email;
+    const enrollEmail=document.getElementById('studentEmail');
+    if(enrollEmail&&!enrollEmail.value) enrollEmail.value=email;
+    showToast('✓ Account info saved!');
+  }
+
+  function saveEmergencyContact() {
+    const name=document.getElementById('iceNameInput').value.trim();
+    const rel=document.getElementById('iceRelationship').value;
+    const code=document.getElementById('icePhoneCode').value;
+    const phone=document.getElementById('icePhone').value.trim();
+    if (!name||!phone) { showToast('Please fill in contact name and phone.', true); return; }
+    profileData.ice={name,relationship:rel,phone:code+' '+phone};
+    updateIdEmergency('id'); updateIdEmergency('profile');
+    showToast('✓ Emergency contact saved!');
+  }
+
+  function savePassword() {
+    const cur=document.getElementById('currentPw').value;
+    const nw=document.getElementById('newPw').value;
+    const conf=document.getElementById('confirmPw').value;
+    if (!cur){showToast('Enter your current password.',true);return;}
+    if (cur!==studentPassword){showToast('Current password is incorrect.',true);return;}
+    if (nw.length<8){showToast('New password must be at least 8 characters.',true);return;}
+    if (nw!==conf){showToast('Passwords do not match.',true);return;}
+    studentPassword=nw;
+    ['currentPw','newPw','confirmPw'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    document.getElementById('pwStrengthFill').style.width='0%';
+    document.getElementById('pwStrengthLabel').textContent='';
+    showToast('✓ Password updated successfully!');
+  }
+
+  function togglePw(inputId, btn) {
+    const input=document.getElementById(inputId); if(!input)return;
+    const isHidden=input.type==='password';
+    input.type=isHidden?'text':'password';
+    btn.innerHTML=isHidden?'<i class="fas fa-eye-slash"></i>':'<i class="fas fa-eye"></i>';
+  }
+
+  function checkPwStrength(pw) {
+    const fill=document.getElementById('pwStrengthFill');
+    const label=document.getElementById('pwStrengthLabel');
+    if(!fill||!label)return;
+    let score=0;
+    if(pw.length>=8)score++;if(pw.length>=12)score++;
+    if(/[A-Z]/.test(pw))score++;if(/[0-9]/.test(pw))score++;if(/[^A-Za-z0-9]/.test(pw))score++;
+    const levels=[{pct:'20%',color:'#ef4444',text:'Very Weak'},{pct:'40%',color:'#f97316',text:'Weak'},{pct:'60%',color:'#f59e0b',text:'Fair'},{pct:'80%',color:'#22c55e',text:'Strong'},{pct:'100%',color:'#10b981',text:'Very Strong'}];
+    const lvl=levels[Math.max(0,score-1)]||levels[0];
+    fill.style.width=pw.length?lvl.pct:'0%';fill.style.background=lvl.color;
+    label.textContent=pw.length?lvl.text:'';label.style.color=lvl.color;
+  }
+
+  function showToast(msg, isError=false) {
+    const t=document.getElementById('toast'); if(!t)return;
+    t.textContent=msg; t.className='toast'+(isError?' error':'');
+    setTimeout(()=>t.classList.add('show'),10);
+    setTimeout(()=>t.classList.remove('show'),3000);
+  }
 </script>
 </body>
 </html>
