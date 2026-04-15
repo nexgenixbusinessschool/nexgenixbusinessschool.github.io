@@ -6,14 +6,309 @@
     <title>Nex Genix Business School - Virtual Learning Excellence</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/responsive.css" />    
+    <link rel="stylesheet" href="assets/css/responsive.css" />
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Silkscreen:wght@400;700&family=Yellowtail&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2619727838493895"
-     crossorigin="anonymous"></script>
+
+    <style>
+      /* =====================================================
+         NGBS PAGE-LEVEL ENHANCEMENTS
+         School-feel + Techy Vibe layer on top of base styles
+         ===================================================== */
+
+      :root {
+        --neon: #39FF14;
+        --neon-dim: rgba(57, 255, 20, 0.12);
+        --neon-glow: 0 0 8px #39FF14, 0 0 20px rgba(57,255,20,0.4);
+        --yellow: #e8d44d;
+        --bg: #060609;
+        --glass: rgba(255,255,255,0.04);
+        --glass-border: rgba(57,255,20,0.18);
+        --text-muted: rgba(255,255,255,0.55);
+      }
+
+      /* ── ACADEMIC SEMESTER BADGE ── */
+      .semester-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(90deg, rgba(57,255,20,0.08), rgba(57,255,20,0.03));
+        border-top: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 10px 20px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.15em;
+        color: var(--neon);
+        text-transform: uppercase;
+      }
+      .semester-badge .dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--neon);
+        box-shadow: var(--neon-glow);
+        animation: pulse-dot 2s ease-in-out infinite;
+      }
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.7); }
+      }
+
+      /* ── SECTION TITLE ENHANCEMENTS ── */
+      .section-title {
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 0.08em;
+        position: relative;
+        display: inline-block;
+      }
+      .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: var(--neon);
+        box-shadow: var(--neon-glow);
+        margin: 8px auto 0;
+        border-radius: 2px;
+      }
+
+      /* ── LEARNING PATH ENHANCEMENTS ── */
+      .learning-path-section {
+        position: relative;
+        overflow: hidden;
+      }
+      .learning-path-section::before {
+        content: 'CURRICULUM';
+        position: absolute;
+        top: 12px; right: 20px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.3em;
+        color: rgba(57,255,20,0.15);
+        pointer-events: none;
+      }
+      .path-step {
+        position: relative;
+        transition: transform 0.2s ease;
+      }
+      .path-step:hover { transform: translateY(-4px); }
+      .step-icon {
+        position: relative;
+        overflow: visible;
+      }
+      .step-icon::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px dashed rgba(57,255,20,0.3);
+        animation: spin-slow 12s linear infinite;
+      }
+      @keyframes spin-slow {
+        to { transform: rotate(360deg); }
+      }
+
+      /* ── BENEFIT CARDS ENHANCEMENTS ── */
+      .benefit-card {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .benefit-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--neon), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .benefit-card:hover::before { opacity: 1; }
+      .benefit-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 32px rgba(57,255,20,0.15);
+      }
+
+      /* ── ACADEMIC NOTICE BOARD ── */
+      .notice-board {
+        margin: 0 auto 32px;
+        max-width: 900px;
+        padding: 0 20px;
+      }
+      .notice-board-inner {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-left: 4px solid var(--neon);
+        border-radius: 6px;
+        padding: 16px 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        backdrop-filter: blur(8px);
+      }
+      .notice-icon {
+        flex-shrink: 0;
+        width: 36px; height: 36px;
+        border-radius: 6px;
+        background: var(--neon-dim);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--neon);
+        font-size: 1rem;
+      }
+      .notice-content {
+        flex: 1;
+      }
+      .notice-label {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--neon);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .notice-text {
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.5;
+        margin: 0;
+      }
+      .notice-text strong { color: var(--yellow); }
+
+      /* ── COURSE CARDS ENHANCEMENTS ── */
+      .course-card {
+        position: relative;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(57,255,20,0.12);
+      }
+      /* Course unit tag */
+      .course-units {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-top: 8px;
+        padding: 4px 10px;
+        background: rgba(255,255,255,0.04);
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      .course-units i { font-size: 0.6rem; }
+
+      /* ── TESTIMONIAL ENHANCEMENTS ── */
+      .testimonial {
+        position: relative;
+        transition: box-shadow 0.25s ease;
+      }
+      .testimonial:hover {
+        box-shadow: 0 4px 24px rgba(57,255,20,0.1);
+      }
+      .testimonial::before {
+        content: '\201C';
+        position: absolute;
+        top: -8px; left: 16px;
+        font-size: 5rem;
+        line-height: 1;
+        color: rgba(57,255,20,0.12);
+        font-family: Georgia, serif;
+        pointer-events: none;
+      }
+
+      /* ── STATS SECTION ENHANCEMENTS ── */
+      .counter-item {
+        position: relative;
+        transition: transform 0.2s ease;
+      }
+      .counter-item:hover { transform: scale(1.04); }
+      .counter-item::after {
+        content: attr(data-label-small);
+        position: absolute;
+        bottom: -6px; right: 10px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.5rem;
+        letter-spacing: 0.15em;
+        color: rgba(57,255,20,0.2);
+        text-transform: uppercase;
+      }
+
+      /* ── ACADEMIC QUICK LINKS STRIP ── */
+      .quick-links-strip {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 20px 20px 28px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .quick-link-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        font-family: 'Montserrat Alternates', sans-serif;
+        font-size: 0.78rem;
+        color: rgba(255,255,255,0.75);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(6px);
+      }
+      .quick-link-pill i { color: var(--neon); font-size: 0.75rem; }
+      .quick-link-pill:hover {
+        border-color: var(--neon);
+        color: #fff;
+        box-shadow: 0 0 12px rgba(57,255,20,0.2);
+        transform: translateY(-2px);
+      }
+
+      /* ── CONTACT SECTION LABEL ── */
+      .contact-section-label {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.25em;
+        color: rgba(57,255,20,0.4);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      /* ── FOOTER ENHANCEMENTS ── */
+      footer {
+        position: relative;
+        overflow: hidden;
+      }
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--neon), transparent);
+        opacity: 0.4;
+      }
+      .footer-school-id {
+        display: block;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        color: rgba(57,255,20,0.3);
+        margin-top: 6px;
+        text-transform: uppercase;
+      }
+    </style>
   </head>
   <body style="padding-bottom: 60px;">
 
@@ -47,26 +342,59 @@
     </div>
 </nav>
 
+<!-- Academic Semester Badge -->
+<div class="semester-badge">
+    <span class="dot"></span>
+    <span>Academic Year 2025–2026</span>
+    <span style="opacity:0.35">◆</span>
+    <span>Enrollments Now Open</span>
+    <span style="opacity:0.35">◆</span>
+    <span>Virtual Campus — Global Access</span>
+    <span class="dot"></span>
+</div>
+
 <!-- Welcome Section -->
 <section id="welcome-section">
     <span class="live-dot"></span>
-
     <img src="assets/images/banner-bs.png" alt="banner" class="banner">
     <div class="subtitle-tagline">Learn Anywhere &bull; Anytime &bull; At Your Own Pace</div>
 </section>
 
-<!-- NGBS Homepage Banner -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2619727838493895"
-     data-ad-slot="2094361312"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+<!-- Academic Quick Links -->
+<div class="quick-links-strip">
+    <a href="https://nexgenixbusinessschool.github.io/complimentary-courses" class="quick-link-pill">
+        <i class="fas fa-gift"></i> Free Courses
+    </a>
+    <a href="https://nexgenixbusinessschool.github.io/premium-courses" class="quick-link-pill">
+        <i class="fas fa-crown"></i> Premium Courses
+    </a>
+    <a href="https://nexgenixbusinessschool.github.io/bookstore" class="quick-link-pill">
+        <i class="fas fa-book-open"></i> Bookstore
+    </a>
+    <a href="https://nexgenixbusinessschool.github.io/enrollment-dashboard" class="quick-link-pill">
+        <i class="fas fa-tachometer-alt"></i> My Dashboard
+    </a>
+    <a href="https://nexgenixbusinessschool.github.io/careers" class="quick-link-pill">
+        <i class="fas fa-briefcase"></i> Careers
+    </a>
+</div>
 
-<!-- Announcement Strip (between welcome and learning journey) -->
+<!-- Academic Notice Board -->
+<div class="notice-board">
+    <div class="notice-board-inner">
+        <div class="notice-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="notice-content">
+            <div class="notice-label"><i class="fas fa-circle" style="font-size:0.5rem; margin-right:5px;"></i> School Notice</div>
+            <p class="notice-text">
+                <strong>New Course Alert:</strong> Advanced Business Analytics is now available for enrollment. 
+                Free courses have also been updated — <strong>start learning at no cost today.</strong> 
+                Over <strong>22,500+ certificates</strong> granted to date.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Announcement Strip -->
 <div class="announcement-strip">
     <div class="announcement-track">
         <span class="announce-item congrats"><i class="fas fa-star"></i> Congratulations to Maria Santos — International Business Graduate!</span>
@@ -178,6 +506,8 @@
             <li><i class="fas fa-check-circle"></i> Self-Paced &amp; Flexible Modules</li>
             <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
         </ol>
+        <span class="course-units"><i class="fas fa-clock"></i> Self-Paced &nbsp;|&nbsp; <i class="fas fa-signal"></i> Beginner</span>
+        <br><br>
         <a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><button class="btn">Start Learning Free <i class="fas fa-arrow-right"></i></button></a>
     </div>
 
@@ -190,6 +520,8 @@
             <li><i class="fas fa-check-circle"></i> Practical and Actionable</li>
             <li><i class="fas fa-check-circle"></i> Certificate Included with QR Code Verification</li>
         </ol>
+        <span class="course-units"><i class="fas fa-clock"></i> Self-Paced &nbsp;|&nbsp; <i class="fas fa-signal"></i> All Levels</span>
+        <br><br>
         <a href="https://nexgenixbusinessschool.github.io/premium-courses"><button class="btn">Explore Premium <i class="fas fa-arrow-right"></i></button></a>
     </div>
 
@@ -202,6 +534,8 @@
             <li><i class="fas fa-check-circle"></i> Flexible Reading</li>
             <li><i class="fas fa-check-circle"></i> Durable and Collectible</li>
         </ol>
+        <span class="course-units"><i class="fas fa-book-reader"></i> Print &amp; Digital &nbsp;|&nbsp; <i class="fas fa-globe"></i> Worldwide</span>
+        <br><br>
         <a href="https://nexgenixbusinessschool.github.io/bookstore"><button class="btn">Browse Books <i class="fas fa-arrow-right"></i></button></a>
     </div>
 </article>
@@ -283,25 +617,25 @@
 <section class="counter-section">
     <h3 class="stats-title"><i class="fas fa-chart-line"></i> Our Impact in Numbers</h3>
     <div class="counter-container">
-        <div class="counter-item">
+        <div class="counter-item" data-label-small="COMPLETED">
             <i class="fas fa-project-diagram counter-icon"></i>
             <div class="counter" data-target="48200">0</div>
             <div class="label">Projects Completed</div>
         </div>
 
-        <div class="counter-item">
+        <div class="counter-item" data-label-small="SERVED">
             <i class="fas fa-users counter-icon"></i>
             <div class="counter" data-target="13800">0</div>
             <div class="label">Clients Served</div>
         </div>
 
-        <div class="counter-item">
+        <div class="counter-item" data-label-small="GRANTED">
             <i class="fas fa-certificate counter-icon"></i>
             <div class="counter" data-target="22500">0</div>
             <div class="label">Certificates Granted</div>
         </div>
 
-        <div class="counter-item">
+        <div class="counter-item" data-label-small="SOLD">
             <i class="fas fa-book counter-icon"></i>
             <div class="counter" data-target="9100">0</div>
             <div class="label">Books Sold</div>
@@ -309,6 +643,7 @@
     </div>
 </section>
 
+<!-- Typeform Embed -->
 <div data-tf-live="01JJ9DB004BWA8C98Q5JX89BA0"></div>
 <script src="https://embed.typeform.com/next/embed.js"></script>
 
@@ -317,6 +652,7 @@
 <!-- Contact Section -->
 <section class="main-section" id="contact">
     <article>
+        <span class="contact-section-label"><i class="fas fa-satellite-dish" style="margin-right:6px;"></i>Virtual Campus — Connect With Us</span>
         <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
         <p class="section-intro">Connect with us on your preferred platform</p>
         <div class="contact-buttons">
@@ -350,16 +686,11 @@
     </article>
 </section>
 
-<div data-tf-live="01JJ9DB004BWA8C98Q5JX89BA0"></div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="https://embed.typeform.com/next/embed.js"></script>
-
-<script src="script.js"></script>
-
 <!-- Footer Section -->
 <footer>
     <i class="fas fa-graduation-cap"></i> &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
     <span class="footer-tagline">Transforming Education Through Technology</span>
+    <span class="footer-school-id">NGBS · Virtual Campus · Est. 2024 · nexgenixbusinessschool.github.io</span>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
