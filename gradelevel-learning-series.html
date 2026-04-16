@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>K-12 Series — Nex Genix Business School</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon-bs.ico">
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,400;0,600;0,700;1,400&family=Silkscreen:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+  /* PAGE-SPECIFIC — variables inherited from styles.css */
+
+  /* Announcement bar */
+  .page-announce {
+    background: rgba(79,195,216,0.07);
+    border: 1px solid rgba(79,195,216,0.28);
+    border-left: 3px solid var(--code-cyan);
+    border-radius: 10px;
+    padding: 13px 20px;
+    color: var(--code-cyan);
+    font-size: 12.5px;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.4px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+    animation: fadeSlideDown 0.5s ease-out;
+  }
+  .page-announce strong { color: var(--paper-white); }
+  @keyframes fadeSlideDown {
+    from { opacity:0; transform:translateY(-10px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* Stats */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 16px;
+    margin: 0 0 36px;
+  }
+  .stat-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 22px 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .stat-card:hover {
+    border-color: var(--scholar-gold);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--scholar-gold-glow);
+  }
+  .stat-number {
+    font-family: "Silkscreen", sans-serif;
+    font-size: 26px;
+    color: var(--scholar-gold);
+    text-shadow: 0 0 10px var(--scholar-gold-glow);
+    margin-bottom: 7px;
+  }
+  .stat-label {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-family: "Orbitron", sans-serif;
+  }
+
+  /* Page hero */
+  .page-hero {
+    background: linear-gradient(160deg,#0d1b2e 0%,#0d2a22 40%,#102240 75%,#0d1b2e 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 36px 28px 30px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .page-hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 25% 35%, rgba(79,195,216,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 75% 65%, rgba(201,168,76,0.04) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .page-hero h1 {
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(18px,5vw,28px);
+    color: var(--code-cyan);
+    text-shadow: 0 0 14px var(--code-cyan-glow);
+    margin: 0 0 18px;
+    display: flex; align-items:center; justify-content:center; gap:12px;
+    position: relative;
+  }
+  .page-hero h1 i { color: var(--scholar-gold); }
+  .page-hero-img {
+    width:100%; max-width:400px; height:auto;
+    border-radius:10px; margin:0 auto 22px;
+    display:block; border:1px solid var(--border-gold); object-fit:cover;
+  }
+  .page-hero-desc {
+    font-size: clamp(12.5px,2.8vw,14.5px);
+    color: var(--chalk-gray);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 14px;
+    text-align: justify;
+    position: relative;
+  }
+  .page-hero-desc a {
+    color: var(--code-cyan); text-decoration:none; font-weight:600;
+    border-bottom:1px solid rgba(79,195,216,0.35);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .page-hero-desc a:hover { color:var(--scholar-gold); border-color:var(--border-subtle); }
+
+  /* K-12 Subject Cards */
+  .k12-subject-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin: 0 auto 22px;
+    width: 100%; max-width: 760px;
+    position: relative;
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+  .k12-subject-card:hover {
+    border-color: var(--code-cyan);
+    box-shadow: 0 8px 30px var(--code-cyan-glow);
+    transform: translateY(-3px);
+  }
+
+  /* Ribbon tags */
+  .ribbon-tag {
+    position: absolute;
+    top: -12px; right: 20px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    font-family: "Orbitron", sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    z-index: 10;
+  }
+  .ribbon-popular  { background:linear-gradient(135deg,#3a1a08,#c9a84c); color:#1a0d03; }
+  .ribbon-featured { background:linear-gradient(135deg,#1a4535,#3ecf7a); color:#071510; }
+  .ribbon-new      { background:linear-gradient(135deg,#0d2a40,#4fc3d8); color:#051520; }
+  .ribbon-summer   { background:linear-gradient(135deg,#3a1a40,#c94ca8); color:#1a0320; }
+
+  .k12-card-inner { display:flex; gap:20px; align-items:flex-start; }
+  .k12-thumb {
+    width:100px; height:100px; object-fit:cover;
+    border-radius:10px; border:1px solid var(--border-gold);
+    flex-shrink:0; background:var(--charcoal);
+  }
+  .k12-body { flex:1; min-width:0; }
+  .k12-subject-title {
+    font-family:"Orbitron",sans-serif;
+    font-size: clamp(14px,3.8vw,18px);
+    font-weight:700; color:var(--code-cyan);
+    margin-bottom:8px; text-shadow:0 0 8px var(--code-cyan-glow); line-height:1.3;
+  }
+  .k12-badge {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:4px 12px; border-radius:20px; font-size:10px; font-weight:700;
+    font-family:"Orbitron",sans-serif; letter-spacing:0.5px;
+    background: rgba(79,195,216,0.10);
+    border: 1px solid rgba(79,195,216,0.35);
+    color: var(--code-cyan);
+    margin-bottom: 10px;
+  }
+  .k12-desc {
+    font-size:13px; color:var(--chalk-gray);
+    line-height:1.7; margin:0 0 12px; text-align:left;
+  }
+
+  /* Highlight tags */
+  .highlight-tags {
+    display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 14px;
+  }
+  .highlight-tag {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:4px 12px;
+    background: rgba(201,168,76,0.06);
+    border:1px solid var(--border-subtle);
+    border-radius:15px; font-size:11px; color:var(--chalk-gray);
+    transition: all 0.2s ease;
+  }
+  .highlight-tag i { color:var(--scholar-gold); font-size:10px; }
+  .highlight-tag:hover { background:rgba(201,168,76,0.12); border-color:var(--scholar-gold); }
+
+  /* Course meta row */
+  .course-meta-row {
+    display:flex; flex-wrap:wrap; gap:14px;
+    padding:10px 0; border-top:1px solid var(--border-gold);
+    margin: 4px 0 0; font-size:12px; color:var(--slate-medium);
+  }
+  .meta-item { display:flex; align-items:center; gap:6px; }
+  .meta-item i { color:var(--scholar-gold); font-size:11px; }
+
+  /* CTA button */
+  .cta-button {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 24px;
+    background:linear-gradient(135deg,#051520,#0d2a40);
+    color:var(--code-cyan); border:1px solid var(--code-cyan);
+    border-radius:25px; cursor:pointer; font-size:12px; font-weight:bold;
+    font-family:"Orbitron",sans-serif; text-transform:uppercase;
+    letter-spacing:0.5px; transition:all 0.3s ease;
+    text-decoration:none; margin-top:14px;
+  }
+  .cta-button:hover {
+    background:var(--code-cyan); color:var(--pure-black);
+    transform:translateY(-2px);
+    box-shadow:0 6px 22px var(--code-cyan-glow);
+  }
+  .cta-button i { transition:transform 0.3s ease; }
+  .cta-button:hover i { transform:translateX(3px); }
+
+  /* Enroll CTA button — gold */
+  .cta-button-gold {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 24px;
+    background:linear-gradient(135deg,#2a1a06,#3d2808);
+    color:var(--scholar-gold); border:1px solid var(--scholar-gold);
+    border-radius:25px; cursor:pointer; font-size:12px; font-weight:bold;
+    font-family:"Orbitron",sans-serif; text-transform:uppercase;
+    letter-spacing:0.5px; transition:all 0.3s ease;
+    text-decoration:none; margin-top:14px;
+  }
+  .cta-button-gold:hover {
+    background:var(--scholar-gold); color:var(--pure-black);
+    transform:translateY(-2px);
+    box-shadow:0 6px 22px var(--scholar-gold-glow);
+  }
+  .cta-button-gold i { transition:transform 0.3s ease; }
+  .cta-button-gold:hover i { transform:translateX(3px); }
+
+  /* Cyan section */
+  .cyan-section {
+    background: linear-gradient(145deg,#051520 0%,#0d2a40 100%);
+    border: 1px solid rgba(79,195,216,0.25);
+    border-radius: 14px;
+    padding: 34px 26px;
+    margin: 36px 0;
+  }
+
+  /* Gold section */
+  .gold-section {
+    background: linear-gradient(145deg,#1a1208 0%,#0d1b2e 100%);
+    border: 1px solid var(--border-gold);
+    border-radius: 14px;
+    padding: 34px 26px;
+    margin: 36px 0;
+  }
+
+  /* Features grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 22px 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .feature-card:hover {
+    border-color: var(--code-cyan);
+    background: rgba(79,195,216,0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--code-cyan-glow);
+  }
+  .feature-card i { font-size:30px; color:var(--code-cyan); margin-bottom:12px; display:block; opacity:0.9; }
+  .feature-card h3 {
+    font-family:"Orbitron",sans-serif; font-size:12.5px;
+    color:var(--scholar-gold); margin:0 0 9px; letter-spacing:0.3px;
+  }
+  .feature-card p { font-size:12px; color:var(--text-muted); line-height:1.6; text-align:center; margin:0; }
+
+  /* Package tiers */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .package-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px;
+    padding: 26px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .package-card.highlighted {
+    border-color: var(--code-cyan);
+    box-shadow: 0 0 20px var(--code-cyan-glow);
+  }
+  .package-card:hover {
+    border-color: var(--scholar-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 28px var(--scholar-gold-glow);
+  }
+  .package-name {
+    font-family:"Orbitron",sans-serif; font-size:13px;
+    color:var(--code-cyan); margin:0 0 6px; letter-spacing:0.5px;
+  }
+  .package-sessions {
+    font-family:"Silkscreen",sans-serif; font-size:28px;
+    color:var(--scholar-gold); text-shadow:0 0 10px var(--scholar-gold-glow);
+    margin:10px 0 4px;
+  }
+  .package-sessions span { font-size:13px; color:var(--text-muted); font-family:"Orbitron",sans-serif; }
+  .package-desc { font-size:12px; color:var(--text-muted); margin:8px 0 14px; line-height:1.6; }
+  .package-perks { list-style:none; padding:0; margin:0 0 16px; text-align:left; }
+  .package-perks li {
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:var(--chalk-gray); padding:5px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .package-perks li:last-child { border-bottom:none; }
+  .package-perks li i { color:var(--terminal-green); font-size:11px; flex-shrink:0; }
+  .best-value-tag {
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(135deg,#0d2a40,#4fc3d8);
+    color:#051520; font-family:"Orbitron",sans-serif;
+    font-size:9px; font-weight:700; letter-spacing:0.8px;
+    padding:3px 14px; border-radius:20px; text-transform:uppercase;
+    white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  /* Subjects offered grid */
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .subject-pill {
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    padding:18px 10px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    text-align:center; transition:all 0.3s ease;
+  }
+  .subject-pill:hover {
+    border-color:var(--code-cyan);
+    background:rgba(79,195,216,0.06);
+    transform:translateY(-3px);
+  }
+  .subject-pill i { font-size:24px; color:var(--code-cyan); }
+  .subject-pill span {
+    font-family:"Orbitron",sans-serif; font-size:10.5px;
+    color:var(--chalk-gray); letter-spacing:0.3px; line-height:1.4;
+  }
+
+  /* Cert features */
+  .cert-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 14px;
+    margin-top: 22px;
+  }
+  .cert-feature-box {
+    background: rgba(79,195,216,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .cert-feature-box:hover {
+    border-color: var(--code-cyan);
+    background: rgba(79,195,216,0.08);
+    transform: translateY(-3px);
+  }
+  .cert-feature-box i { font-size:26px; color:var(--code-cyan); margin-bottom:10px; display:block; }
+  .cert-feature-box h3 {
+    font-family:"Orbitron",sans-serif; font-size:11.5px;
+    color:var(--paper-white); margin:0 0 7px;
+  }
+  .cert-feature-box p { font-size:11.5px; color:var(--text-muted); margin:0; text-align:center; }
+
+  /* Enrollment steps */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .step-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 24px 18px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .step-card:hover {
+    border-color: var(--code-cyan);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px var(--code-cyan-glow);
+  }
+  .step-number {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg,#1a2d46,#243d5c);
+    border: 1.5px solid var(--code-cyan);
+    color: var(--code-cyan);
+    display: flex; align-items:center; justify-content:center;
+    font-family:"Silkscreen",sans-serif; font-size:18px; font-weight:700;
+    margin: 0 auto 14px;
+    box-shadow: 0 0 10px var(--code-cyan-glow);
+  }
+  .step-card h3 {
+    font-family:"Orbitron",sans-serif; font-size:12px;
+    color:var(--scholar-gold); margin:0 0 9px;
+  }
+  .step-card p { font-size:12px; color:var(--text-muted); margin:0; text-align:center; }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 18px;
+    margin-top: 20px;
+  }
+  .testimonial-card {
+    background: var(--grad-card);
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--code-cyan);
+    border-radius: 12px;
+    padding: 22px;
+    transition: all 0.3s ease;
+    text-align: left;
+  }
+  .testimonial-card:hover {
+    border-left-color: var(--scholar-gold);
+    transform: translateX(4px);
+    box-shadow: 0 5px 22px rgba(0,0,0,0.3);
+  }
+  .tc-header { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+  .tc-avatar {
+    width:46px; height:46px; border-radius:50%;
+    background:linear-gradient(135deg,rgba(79,195,216,0.3),rgba(201,168,76,0.2));
+    border:1px solid var(--code-cyan);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Orbitron",sans-serif; font-weight:700; font-size:14px;
+    color:var(--code-cyan); flex-shrink:0;
+  }
+  .tc-info h4 {
+    font-family:"Montserrat Alternates",sans-serif; font-size:15px;
+    color:var(--scholar-gold-light); margin:0 0 4px;
+  }
+  .tc-info span { font-size:11px; color:var(--slate-medium); font-style:italic; }
+  .tc-text {
+    font-size:13px; color:var(--chalk-gray); line-height:1.75;
+    margin:0 0 12px; text-align:justify; font-style:italic;
+  }
+  .star-row { display:flex; gap:3px; }
+  .star-row i { color:var(--scholar-gold); font-size:13px; }
+
+  /* FAQ */
+  .faq-list { margin-top:20px; }
+  .faq-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .faq-item:hover { border-color: var(--code-cyan); }
+  .faq-question {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; cursor: pointer;
+    font-family:"Orbitron",sans-serif; font-size:12px;
+    color:var(--scholar-gold); letter-spacing:0.3px;
+    user-select:none;
+  }
+  .faq-question i { color:var(--code-cyan); transition:transform 0.3s; font-size:13px; }
+  .faq-answer {
+    padding: 0 20px;
+    font-size: 13px; color: var(--chalk-gray); line-height: 1.7;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s ease;
+  }
+  .faq-item.open .faq-answer { max-height: 200px; padding: 0 20px 16px; }
+  .faq-item.open .faq-question i { transform: rotate(180deg); }
+
+  /* Responsive */
+  @media (max-width:768px) {
+    .stat-grid { grid-template-columns:repeat(2,1fr); }
+    .k12-subject-card { padding:18px 16px; }
+    .k12-thumb { width:75px; height:75px; }
+    .page-hero { padding:28px 18px 24px; }
+    .features-grid, .steps-grid { grid-template-columns:repeat(2,1fr); }
+    .packages-grid { grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:500px) {
+    .stat-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+    .stat-number { font-size:22px; }
+    .k12-card-inner { flex-direction:column; }
+    .k12-thumb { width:100%; height:160px; object-fit:cover; }
+    .course-meta-row { flex-direction:column; gap:8px; }
+    .features-grid, .steps-grid, .cert-features { grid-template-columns:1fr; }
+    .subjects-grid { grid-template-columns:repeat(2,1fr); }
+    .packages-grid { grid-template-columns:1fr; }
+    .testimonials-grid { grid-template-columns:1fr; }
+    .cta-button, .cta-button-gold { font-size:11px; padding:9px 18px; }
+    .page-announce { font-size:11px; }
+  }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="logo">
+    <img src="assets/images/logo-bs.png" alt="NGBS Logo" class="logo">
+    <p class="logo-title"><a href="https://nexgenixbusinessschool.github.io">NEX GENIX BUSINESS SCHOOL</a></p>
+    <p class="short-title"><a href="https://nexgenixbusinessschool.github.io">NGBS</a></p>
+  </div>
+  <div class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+  </div>
+  <ul class="nav-list">
+    <li><a href="https://nexgenixbusinessschool.github.io"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#about_us"><i class="fas fa-info-circle"></i> About Us</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/complimentary-courses"><i class="fas fa-gift"></i> Free Courses</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/bookstore.html"><i class="fas fa-book-open"></i> Bookstore</a></li>
+    <li><a href="https://nexgenixbusinessschool.github.io/#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="auth-buttons" id="auth-buttons">
+    <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <a href="https://nexgenixcreativesolutions.github.io/dashboard" class="dashboard-btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </div>
+</nav>
+
+<!-- ANNOUNCEMENT -->
+<div class="page-announce">
+  <i class="fas fa-sun"></i>
+  <span><strong>Summer Classes Now Open!</strong> Enroll your child in our K-12 Series — fun, flexible, and certified. Limited slots available!</span>
+</div>
+
+<!-- STATS -->
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-number">650+</div><div class="stat-label">K-12 Students</div></div>
+  <div class="stat-card"><div class="stat-number">8</div><div class="stat-label">Core Subjects</div></div>
+  <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Licensed Tutors</div></div>
+  <div class="stat-card"><div class="stat-number">4.8/5</div><div class="stat-label">Parent Rating</div></div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1><i class="fas fa-graduation-cap"></i> K-12 Learning Series</h1>
+  <img src="assets/images/k12-banner.png" alt="K-12 Learning Series" class="page-hero-img">
+  <p class="page-hero-desc">Nex Genix Business School's K-12 Learning Series is a structured, one-on-one tutoring program designed to help students from Kindergarten through Grade 12 excel in their core subjects. Our licensed tutors deliver engaging, personalized sessions aligned with the DepEd K-12 curriculum, ensuring every student gets the attention and guidance they deserve. Upon completing the program, students receive an authenticated certificate with a verification code that can be validated through our <a href="https://nexgenixbusinessschool.github.io/verify-certificate">Certificate Verification Page</a>.</p>
+  <p class="page-hero-desc" style="margin-top:10px;">Whether your child needs academic support during the school year or wants to make the most of summer break, our flexible packages and expert tutors are ready to help them level up.</p>
+</div>
+
+<!-- SUBJECT CARDS -->
+<h2 class="section-title"><i class="fas fa-book-open"></i> Subjects Offered</h2>
+<p class="section-intro">Core curriculum tracks available for K-12 students</p>
+
+<!-- Mathematics -->
+<div class="k12-subject-card">
+  <div class="ribbon-tag ribbon-popular"><i class="fas fa-star"></i> Popular</div>
+  <div class="k12-card-inner">
+    <img src="assets/images/math.png" alt="Mathematics" class="k12-thumb">
+    <div class="k12-body">
+      <div class="k12-subject-title">Mathematics</div>
+      <span class="k12-badge"><i class="fas fa-calculator"></i> K-12 Aligned</span>
+      <p class="k12-desc">From basic arithmetic and fractions to algebra, geometry, and pre-calculus — our Math tutors break down complex problems into clear, manageable steps. Each session is tailored to the student's current grade level and learning pace.</p>
+      <div class="highlight-tags">
+        <span class="highlight-tag"><i class="fas fa-square-root-alt"></i> Problem Solving</span>
+        <span class="highlight-tag"><i class="fas fa-chart-line"></i> Progress Tracking</span>
+        <span class="highlight-tag"><i class="fas fa-chalkboard-teacher"></i> 1-on-1 Sessions</span>
+      </div>
+      <div class="course-meta-row">
+        <span class="meta-item"><i class="fas fa-users"></i> 200+ Enrolled</span>
+        <span class="meta-item"><i class="fas fa-clock"></i> Flexible Hours</span>
+        <span class="meta-item"><i class="fas fa-star"></i> 4.9/5 Rating</span>
+      </div>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button"><i class="fas fa-arrow-right"></i> Enroll Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- Science -->
+<div class="k12-subject-card">
+  <div class="ribbon-tag ribbon-featured"><i class="fas fa-flask"></i> Featured</div>
+  <div class="k12-card-inner">
+    <img src="assets/images/science.png" alt="Science" class="k12-thumb">
+    <div class="k12-body">
+      <div class="k12-subject-title">Science</div>
+      <span class="k12-badge"><i class="fas fa-atom"></i> K-12 Aligned</span>
+      <p class="k12-desc">Covering Earth Science, Biology, Chemistry, and Physics — our Science sessions spark curiosity and build deep understanding. Tutors use real-world examples and visual aids to make abstract concepts click for every learner.</p>
+      <div class="highlight-tags">
+        <span class="highlight-tag"><i class="fas fa-microscope"></i> Hands-On Concepts</span>
+        <span class="highlight-tag"><i class="fas fa-atom"></i> Grade-Specific</span>
+        <span class="highlight-tag"><i class="fas fa-certificate"></i> Certified</span>
+      </div>
+      <div class="course-meta-row">
+        <span class="meta-item"><i class="fas fa-users"></i> 175+ Enrolled</span>
+        <span class="meta-item"><i class="fas fa-clock"></i> Flexible Hours</span>
+        <span class="meta-item"><i class="fas fa-star"></i> 4.8/5 Rating</span>
+      </div>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button"><i class="fas fa-arrow-right"></i> Enroll Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- English -->
+<div class="k12-subject-card">
+  <div class="ribbon-tag ribbon-new"><i class="fas fa-pen-nib"></i> New</div>
+  <div class="k12-card-inner">
+    <img src="assets/images/english.png" alt="English" class="k12-thumb">
+    <div class="k12-body">
+      <div class="k12-subject-title">English Language Arts</div>
+      <span class="k12-badge"><i class="fas fa-book"></i> K-12 Aligned</span>
+      <p class="k12-desc">Build reading comprehension, grammar mastery, essay writing, and oral communication skills. Our English tutors guide students from foundational literacy through advanced critical reading and academic writing techniques.</p>
+      <div class="highlight-tags">
+        <span class="highlight-tag"><i class="fas fa-pencil-alt"></i> Writing Skills</span>
+        <span class="highlight-tag"><i class="fas fa-book-reader"></i> Reading Comprehension</span>
+        <span class="highlight-tag"><i class="fas fa-comments"></i> Oral Practice</span>
+      </div>
+      <div class="course-meta-row">
+        <span class="meta-item"><i class="fas fa-users"></i> 155+ Enrolled</span>
+        <span class="meta-item"><i class="fas fa-clock"></i> Flexible Hours</span>
+        <span class="meta-item"><i class="fas fa-star"></i> 4.8/5 Rating</span>
+      </div>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button"><i class="fas fa-arrow-right"></i> Enroll Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- Filipino -->
+<div class="k12-subject-card">
+  <div class="ribbon-tag ribbon-summer"><i class="fas fa-sun"></i> Summer Pick</div>
+  <div class="k12-card-inner">
+    <img src="assets/images/filipino.png" alt="Filipino" class="k12-thumb">
+    <div class="k12-body">
+      <div class="k12-subject-title">Filipino</div>
+      <span class="k12-badge"><i class="fas fa-language"></i> K-12 Aligned</span>
+      <p class="k12-desc">Strengthen your child's Filipino language skills — from grammar and reading to literature appreciation and written expression. Sessions align with DepEd standards and help students confidently navigate Filipino subjects at every grade level.</p>
+      <div class="highlight-tags">
+        <span class="highlight-tag"><i class="fas fa-flag"></i> DepEd Aligned</span>
+        <span class="highlight-tag"><i class="fas fa-book"></i> Literature</span>
+        <span class="highlight-tag"><i class="fas fa-pen"></i> Written Expression</span>
+      </div>
+      <div class="course-meta-row">
+        <span class="meta-item"><i class="fas fa-users"></i> 120+ Enrolled</span>
+        <span class="meta-item"><i class="fas fa-clock"></i> Flexible Hours</span>
+        <span class="meta-item"><i class="fas fa-star"></i> 4.7/5 Rating</span>
+      </div>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button"><i class="fas fa-arrow-right"></i> Enroll Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- All subjects overview -->
+<div class="cyan-section" style="margin-top:10px;">
+  <h2 class="section-title"><i class="fas fa-th"></i> More Subjects Available</h2>
+  <p class="section-intro">Our K-12 Series covers all major curriculum areas</p>
+  <div class="subjects-grid">
+    <div class="subject-pill"><i class="fas fa-calculator"></i><span>Mathematics</span></div>
+    <div class="subject-pill"><i class="fas fa-flask"></i><span>Science</span></div>
+    <div class="subject-pill"><i class="fas fa-book-open"></i><span>English</span></div>
+    <div class="subject-pill"><i class="fas fa-flag"></i><span>Filipino</span></div>
+    <div class="subject-pill"><i class="fas fa-landmark"></i><span>Araling Panlipunan</span></div>
+    <div class="subject-pill"><i class="fas fa-heartbeat"></i><span>MAPEH</span></div>
+    <div class="subject-pill"><i class="fas fa-laptop-code"></i><span>Technology &amp; Livelihood</span></div>
+    <div class="subject-pill"><i class="fas fa-cross"></i><span>Values Education</span></div>
+  </div>
+</div>
+
+<!-- SESSION PACKAGES -->
+<section class="gold-section">
+  <h2 class="section-title"><i class="fas fa-boxes"></i> Session Packages</h2>
+  <p class="section-intro">Flexible options designed to fit your schedule and budget</p>
+  <div class="packages-grid">
+
+    <div class="package-card">
+      <div class="package-name">Starter</div>
+      <div class="package-sessions">8 <span>sessions</span></div>
+      <p class="package-desc">A great way to try the program and address immediate academic needs.</p>
+      <ul class="package-perks">
+        <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
+        <li><i class="fas fa-check"></i> 1 subject</li>
+        <li><i class="fas fa-check"></i> Flexible scheduling</li>
+        <li><i class="fas fa-check"></i> Progress report</li>
+      </ul>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button-gold"><i class="fas fa-arrow-right"></i> Choose Plan</a>
+    </div>
+
+    <div class="package-card highlighted">
+      <div class="best-value-tag"><i class="fas fa-bolt"></i> Best Value</div>
+      <div class="package-name">Standard</div>
+      <div class="package-sessions">16 <span>sessions</span></div>
+      <p class="package-desc">Perfect for consistent weekly learning and measurable improvement.</p>
+      <ul class="package-perks">
+        <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
+        <li><i class="fas fa-check"></i> Up to 2 subjects</li>
+        <li><i class="fas fa-check"></i> Flexible scheduling</li>
+        <li><i class="fas fa-check"></i> Weekly progress reports</li>
+        <li><i class="fas fa-check"></i> Certificate upon completion</li>
+      </ul>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button-gold"><i class="fas fa-arrow-right"></i> Choose Plan</a>
+    </div>
+
+    <div class="package-card">
+      <div class="package-name">Intensive</div>
+      <div class="package-sessions">24 <span>sessions</span></div>
+      <p class="package-desc">Ideal for summer programs or students who need an academic boost fast.</p>
+      <ul class="package-perks">
+        <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
+        <li><i class="fas fa-check"></i> Up to 3 subjects</li>
+        <li><i class="fas fa-check"></i> Priority scheduling</li>
+        <li><i class="fas fa-check"></i> Detailed progress reports</li>
+        <li><i class="fas fa-check"></i> Certificate upon completion</li>
+        <li><i class="fas fa-check"></i> Parent consultation included</li>
+      </ul>
+      <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button-gold"><i class="fas fa-arrow-right"></i> Choose Plan</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="cyan-section">
+  <h2 class="section-title"><i class="fas fa-medal"></i> Why Choose NGBS K-12 Series?</h2>
+  <p class="section-intro">What makes our program stand out</p>
+  <div class="features-grid">
+    <div class="feature-card"><i class="fas fa-user-tie"></i><h3>Licensed Tutors</h3><p>All tutors are certified professionals with experience in K-12 curriculum delivery</p></div>
+    <div class="feature-card"><i class="fas fa-calendar-alt"></i><h3>Flexible Scheduling</h3><p>Choose session times that work for your child's school and home routine</p></div>
+    <div class="feature-card"><i class="fas fa-certificate"></i><h3>Certified Completion</h3><p>Receive an authenticated, verifiable certificate upon finishing the program</p></div>
+    <div class="feature-card"><i class="fas fa-smile"></i><h3>Fun Learning</h3><p>Engaging sessions that make studying enjoyable and effective for every student</p></div>
+    <div class="feature-card"><i class="fas fa-chart-bar"></i><h3>Progress Reports</h3><p>Parents receive regular updates on their child's academic performance</p></div>
+    <div class="feature-card"><i class="fas fa-mobile-alt"></i><h3>Online Access</h3><p>Attend sessions from the comfort of home — no commute required</p></div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="academic-calendar-section" style="border-color:var(--border-gold);">
+  <h2 class="section-title"><i class="fas fa-certificate"></i> Certified Achievement</h2>
+  <p class="section-intro">Every completed program earns a recognized, verifiable certificate</p>
+  <div class="cert-features">
+    <div class="cert-feature-box"><i class="fas fa-shield-alt"></i><h3>Verified &amp; Secure</h3><p>Each certificate includes a unique verification code</p></div>
+    <div class="cert-feature-box"><i class="fas fa-qrcode"></i><h3>QR Code Access</h3><p>Instant verification via QR scanning by schools or employers</p></div>
+    <div class="cert-feature-box"><i class="fas fa-award"></i><h3>Achievement Record</h3><p>Demonstrates academic dedication and program completion</p></div>
+    <div class="cert-feature-box"><i class="fas fa-share-alt"></i><h3>Shareable Digital Copy</h3><p>Download and share your certificate anytime</p></div>
+  </div>
+</section>
+
+<!-- ENROLLMENT STEPS -->
+<section class="student-resources-section" style="border-color:var(--border-subtle);">
+  <h2 class="section-title"><i class="fas fa-clipboard-list"></i> How to Enroll</h2>
+  <p class="section-intro">Four simple steps to get your child started</p>
+  <div class="steps-grid">
+    <div class="step-card"><div class="step-number">1</div><h3>Pick a Subject</h3><p>Choose the subject or subjects your child needs help with</p></div>
+    <div class="step-card"><div class="step-number">2</div><h3>Select a Package</h3><p>Pick the session package that fits your schedule and budget</p></div>
+    <div class="step-card"><div class="step-number">3</div><h3>Complete Enrollment</h3><p>Fill out the enrollment form and secure your slot</p></div>
+    <div class="step-card"><div class="step-number">4</div><h3>Start Learning!</h3><p>Meet your tutor and begin your first session — it's that easy!</p></div>
+  </div>
+  <div style="text-align:center; margin-top:28px;">
+    <a href="https://nexgenixbusinessschool.github.io/k12-enroll" class="cta-button-gold" style="font-size:13px; padding:13px 32px;">
+      <i class="fas fa-graduation-cap"></i> Enroll My Child Now
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="main-section">
+  <h2 class="section-title"><i class="fas fa-comments"></i> What Parents &amp; Students Say</h2>
+  <p class="section-intro">Real results from real families</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="tc-header">
+        <div class="tc-avatar">MC</div>
+        <div class="tc-info">
+          <h4>Maria Cruz</h4>
+          <span>Parent — Grade 5 Math Student</span>
+        </div>
+      </div>
+      <p class="tc-text">"My son struggled with fractions for months. After just 8 sessions with his NGBS tutor, he's now one of the top students in his class. The personalized approach made all the difference!"</p>
+      <div class="star-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="tc-header">
+        <div class="tc-avatar">JR</div>
+        <div class="tc-info">
+          <h4>Juan Reyes</h4>
+          <span>Grade 8 Science Student</span>
+        </div>
+      </div>
+      <p class="tc-text">"I used to hate Science but my tutor made it so fun and easy to understand. I passed my quarterly exam with flying colors and I even got a certificate at the end of the program!"</p>
+      <div class="star-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="tc-header">
+        <div class="tc-avatar">AL</div>
+        <div class="tc-info">
+          <h4>Ana Lim</h4>
+          <span>Parent — Grade 10 English Student</span>
+        </div>
+      </div>
+      <p class="tc-text">"The flexibility of the schedule was a lifesaver for our family. My daughter could attend sessions even during busy school weeks. Her essay writing has improved tremendously!"</p>
+      <div class="star-row"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="gold-section">
+  <h2 class="section-title"><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+  <p class="section-intro">Everything you need to know before enrolling</p>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What grade levels does the K-12 Series cover?
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">Our K-12 Series covers all grade levels from Kindergarten through Grade 12, with sessions tailored to each student's specific curriculum and learning needs.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Are the tutors licensed?
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">Yes — all NGBS tutors are licensed professionals with verified teaching credentials and experience in K-12 subject areas.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How are sessions conducted?
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">All sessions are conducted online via video call, making it convenient for students anywhere in the Philippines or abroad. You only need a stable internet connection and a device.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I enroll in more than one subject?
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">Absolutely! Our Standard and Intensive packages allow enrollment in 2 to 3 subjects. You can also coordinate a custom multi-subject plan with our enrollment team.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Will my child receive a certificate?
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="faq-answer">Yes! Upon completing the program, students receive an authenticated digital certificate with a unique verification code that can be verified through our Certificate Verification Page.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="about-intro-box" style="margin:30px auto;">
+  <i class="fas fa-quote-left quote-icon"></i>
+  <p class="intro-text">Every child learns differently — and that's exactly why we built the K-12 Series. With dedicated tutors, flexible schedules, and a curriculum that adapts to your child, we make academic excellence achievable for every student. Enroll today and watch your child thrive!</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <i class="fas fa-graduation-cap"></i>
+  &copy; 2025 <span>Nex Genix Business School</span> All rights reserved.
+  <span class="footer-tagline">Where Young Minds Grow into Future Leaders</span>
+  <span class="footer-tagline" style="margin-top:4px;">
+    <a href="https://nexgenixbusinessschool.github.io/verify-certificate" style="color:var(--code-cyan);text-decoration:none;">
+      <i class="fas fa-certificate" style="color:var(--scholar-gold);"></i> Verify Certificate
+    </a>
+  </span>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.querySelector('.nav-list').classList.toggle('active');
+    document.querySelector('.hamburger-menu').classList.toggle('open');
+  }
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
