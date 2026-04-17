@@ -507,6 +507,131 @@
   .faq-item.open .faq-answer { max-height: 200px; padding: 0 20px 16px; }
   .faq-item.open .faq-question i { transform: rotate(180deg); }
 
+  /* ===== TUTOR SPOTLIGHT CARD ===== */
+  .tutor-spotlight {
+    background: linear-gradient(145deg, #071a2e 0%, #0d2a22 50%, #0d1b2e 100%);
+    border: 1px solid var(--border-gold);
+    border-left: 4px solid var(--scholar-gold);
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin: 36px 0;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+  .tutor-spotlight::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 30%, rgba(56,189,248,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .tutor-photo-wrap {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .tutor-photo {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--scholar-gold);
+    box-shadow: 0 0 20px var(--scholar-gold-glow), 0 0 40px rgba(201,168,76,0.12);
+    object-fit: cover;
+    background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(62,207,122,0.15));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+  .tutor-photo img {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  }
+  .tutor-rating {
+    display: flex; align-items: center; gap: 4px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 12px; color: var(--scholar-gold);
+    font-weight: 700;
+  }
+  .tutor-rating i { color: var(--scholar-gold); font-size: 11px; }
+  .tutor-info {
+    flex: 1;
+    position: relative; z-index: 1;
+  }
+  .tutor-dept-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    color: var(--code-cyan);
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px; letter-spacing: 0.8px; font-weight: 700;
+    padding: 3px 10px; border-radius: 12px;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .tutor-name {
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    color: var(--paper-white);
+    margin: 0 0 4px;
+    line-height: 1.2;
+  }
+  .tutor-position {
+    font-family: "Orbitron", sans-serif;
+    font-size: 11px; color: var(--scholar-gold);
+    letter-spacing: 0.5px; margin-bottom: 14px;
+  }
+  .tutor-badges {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+  }
+  .tutor-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 12px; border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+    font-family: "Orbitron", sans-serif; letter-spacing: 0.3px;
+  }
+  .badge-licensed {
+    background: linear-gradient(135deg, #1a4535, #3ecf7a);
+    color: #071510;
+  }
+  .badge-k12-dept {
+    background: linear-gradient(135deg, #0e3052, #38bdf8);
+    color: #fff;
+  }
+  .badge-head {
+    background: linear-gradient(135deg, #3a1a08, #c9a84c);
+    color: #1a0d03;
+  }
+  .tutor-bio {
+    font-size: 13px; color: var(--chalk-gray);
+    line-height: 1.75; margin-bottom: 14px;
+  }
+  .tutor-stats-row {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-gold);
+    font-size: 12px; color: var(--text-muted);
+  }
+  .tutor-stat-item {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tutor-stat-item i { color: var(--k12-teal); font-size: 12px; }
+  @media (max-width: 600px) {
+    .tutor-spotlight {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 24px 18px;
+    }
+    .tutor-badges { justify-content: center; }
+    .tutor-stats-row { justify-content: center; }
+    .tutor-dept-tag { margin: 0 auto 10px; }
+  }
+
   /* Responsive */
   @media (max-width:768px) {
     .stat-grid { grid-template-columns:repeat(2,1fr); }
@@ -577,6 +702,43 @@
   <p class="page-hero-desc">Nex Genix Business School's K-12 Learning Series is a structured, one-on-one tutoring program designed to help students from Kindergarten through Grade 12 excel in their core subjects. Our licensed tutors deliver engaging, personalized sessions aligned with the DepEd K-12 curriculum, ensuring every student gets the attention and guidance they deserve. Upon completing the program, students receive an authenticated certificate with a verification code that can be validated through our <a href="https://nexgenixbusinessschool.github.io/verify-certificate">Certificate Verification Page</a>.</p>
   <p class="page-hero-desc" style="margin-top:10px;">Whether your child needs academic support during the school year or wants to make the most of summer break, our flexible packages and expert tutors are ready to help them level up.</p>
 </div>
+
+<!-- TUTOR SPOTLIGHT -->
+<section class="tutor-spotlight" aria-label="Featured Tutor">
+  <div class="tutor-photo-wrap">
+    <div class="tutor-photo">
+      <img src="assets/images/tutorcheska.png" alt="Teacher Francheska Merill Bucoy"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:48px;\'>👩‍🏫</span>'">
+    </div>
+    <div class="tutor-rating">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      4.9
+    </div>
+  </div>
+  <div class="tutor-info">
+    <div class="tutor-dept-tag"><i class="fas fa-chalkboard-teacher"></i> K-12 Series Department</div>
+    <div class="tutor-name">Francheska Merill Bucoy</div>
+    <div class="tutor-position"><i class="fas fa-crown" style="color:var(--scholar-gold); margin-right:5px;"></i>Head Teacher · NEX GENIX Digital Academy</div>
+    <div class="tutor-badges">
+      <span class="tutor-badge badge-licensed"><i class="fas fa-id-card"></i> Licensed Teacher</span>
+      <span class="tutor-badge badge-head"><i class="fas fa-star"></i> Head Teacher</span>
+      <span class="tutor-badge badge-k12-dept"><i class="fas fa-graduation-cap"></i> K-12 Specialist</span>
+    </div>
+    <p class="tutor-bio">
+      Teacher Cheska leads the K-12 Series at NEX GENIX Digital Academy, bringing professional teaching credentials and a passion for helping every student reach their full potential. With a structured yet engaging approach, she tailors each session to the student's grade level, learning pace, and curriculum — ensuring measurable progress in every subject she handles.
+    </p>
+    <div class="tutor-stats-row">
+      <span class="tutor-stat-item"><i class="fas fa-users"></i> 650+ Students Tutored</span>
+      <span class="tutor-stat-item"><i class="fas fa-certificate"></i> Licensed Professional</span>
+      <span class="tutor-stat-item"><i class="fas fa-calendar-check"></i> Flexible Scheduling</span>
+      <span class="tutor-stat-item"><i class="fas fa-video"></i> Online · 1-on-1 Sessions</span>
+    </div>
+  </div>
+</section>
 
 <!-- SUBJECT CARDS -->
 <h2 class="section-title"><i class="fas fa-book-open"></i> Subjects Offered</h2>
@@ -703,6 +865,8 @@
     <div class="package-card">
       <div class="package-name">Starter</div>
       <div class="package-sessions">8 <span>sessions</span></div>
+      <div style="font-family:'Silkscreen',sans-serif; font-size:26px; color:var(--terminal-green); text-shadow:0 0 10px rgba(62,207,122,0.4); margin:6px 0 2px;">$120</div>
+      <div style="font-size:10px; color:var(--text-muted); font-family:'Orbitron',sans-serif; margin-bottom:10px; letter-spacing:0.5px;">$15 / session · 1 subject</div>
       <p class="package-desc">A great way to try the program and address immediate academic needs.</p>
       <ul class="package-perks">
         <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
@@ -717,6 +881,8 @@
       <div class="best-value-tag"><i class="fas fa-bolt"></i> Best Value</div>
       <div class="package-name">Standard</div>
       <div class="package-sessions">16 <span>sessions</span></div>
+      <div style="font-family:'Silkscreen',sans-serif; font-size:26px; color:var(--scholar-gold); text-shadow:0 0 10px var(--scholar-gold-glow); margin:6px 0 2px;">$240</div>
+      <div style="font-size:10px; color:var(--text-muted); font-family:'Orbitron',sans-serif; margin-bottom:10px; letter-spacing:0.5px;">$15 / session · up to 2 subjects</div>
       <p class="package-desc">Perfect for consistent weekly learning and measurable improvement.</p>
       <ul class="package-perks">
         <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
@@ -731,6 +897,8 @@
     <div class="package-card">
       <div class="package-name">Intensive</div>
       <div class="package-sessions">24 <span>sessions</span></div>
+      <div style="font-family:'Silkscreen',sans-serif; font-size:26px; color:var(--code-cyan); text-shadow:0 0 10px var(--code-cyan-glow); margin:6px 0 2px;">$360</div>
+      <div style="font-size:10px; color:var(--text-muted); font-family:'Orbitron',sans-serif; margin-bottom:10px; letter-spacing:0.5px;">$15 / session · up to 3 subjects</div>
       <p class="package-desc">Ideal for summer programs or students who need an academic boost fast.</p>
       <ul class="package-perks">
         <li><i class="fas fa-check"></i> 1-on-1 sessions</li>
@@ -744,9 +912,18 @@
     </div>
 
   </div>
-</section>
 
-<!-- WHY CHOOSE US -->
+  <!-- Pricing note -->
+  <div style="margin-top:22px; background:rgba(79,195,216,0.05); border:1px solid rgba(79,195,216,0.2); border-radius:10px; padding:14px 18px; font-size:11.5px; color:var(--chalk-gray); text-align:center; line-height:1.7;">
+    <i class="fas fa-info-circle" style="color:var(--code-cyan); margin-right:6px;"></i>
+    Prices above are based on <strong style="color:var(--scholar-gold);">$15 USD per session</strong> for core subjects (Math, Science, English, Filipino).
+    Foreign language sessions are priced at <strong style="color:var(--scholar-gold);">$18 USD per session</strong>.
+    All packages are <strong style="color:var(--paper-white);">instructor-led, 1-on-1</strong> sessions with Teacher Cheska.
+    Monthly packages (~20 sessions) and weekly packages (5 sessions/week) are also available — see the
+    <a href="https://nexgenixbusinessschool.github.io/enrollment-dashboard" style="color:var(--code-cyan); text-decoration:none; border-bottom:1px solid rgba(79,195,216,0.3);">Enrollment Dashboard</a> for full session package rates.
+  </div>
+
+</section>
 <section class="cyan-section">
   <h2 class="section-title"><i class="fas fa-medal"></i> Why Choose NGBS K-12 Series?</h2>
   <p class="section-intro">What makes our program stand out</p>
