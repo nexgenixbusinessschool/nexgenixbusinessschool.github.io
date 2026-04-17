@@ -336,6 +336,40 @@
             margin-bottom: 5px;
         }
 
+        .course-price-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 14px 0 4px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(79,195,216,0.06));
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 10px;
+        }
+        .course-price-amount {
+            font-family: 'Silkscreen', monospace;
+            font-size: 26px;
+            color: #d4af37;
+            text-shadow: 0 0 10px rgba(212,175,55,0.4);
+        }
+        .course-price-detail {
+            text-align: left;
+        }
+        .course-price-label {
+            font-size: 10px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-family: 'Orbitron', monospace;
+        }
+        .course-price-type {
+            font-size: 11px;
+            color: #00d4ff;
+            font-family: 'Orbitron', monospace;
+            margin-top: 2px;
+        }
+
         .instructor-spotlight {
             background: linear-gradient(135deg, #1a2332 0%, #8b2635 100%);
             padding: 40px 20px;
@@ -482,7 +516,7 @@
 <!-- Announcement Banner -->
 <div class="announcement-banner">
     <i class="fas fa-graduation-cap"></i>
-    <strong>Premium Language Programs Now Available!</strong> Learn from native speakers with live interactive sessions. Early enrollment discount: 20% off!
+    <strong>All Language Mastery Courses are Instructor-Led!</strong> Live sessions with expert teachers. Consistent tuition rates across all languages — no confusion, no discrimination.
 </div>
 
 <!-- Program Stats -->
@@ -546,6 +580,14 @@
                 </div>
             </div>
 
+            <div class="course-price-tag">
+                <div class="course-price-amount">$149</div>
+                <div class="course-price-detail">
+                    <div class="course-price-label">Course Tuition</div>
+                    <div class="course-price-type"><i class="fas fa-circle" style="color:#3ecf7a; font-size:7px; margin-right:4px;"></i>Instructor-Led · 10 Weeks</div>
+                </div>
+            </div>
+
             <button class="cta-button"><i class="fas fa-user-plus"></i> Enroll Now</button>
         </div>
 
@@ -576,6 +618,14 @@
                 <div class="course-stat-item">
                     <i class="fas fa-star"></i>
                     <div>4.9/5 Rating</div>
+                </div>
+            </div>
+
+            <div class="course-price-tag">
+                <div class="course-price-amount">$199</div>
+                <div class="course-price-detail">
+                    <div class="course-price-label">Course Tuition</div>
+                    <div class="course-price-type"><i class="fas fa-circle" style="color:#3ecf7a; font-size:7px; margin-right:4px;"></i>Instructor-Led · 12 Weeks</div>
                 </div>
             </div>
 
@@ -612,12 +662,28 @@
                 </div>
             </div>
 
+            <div class="course-price-tag">
+                <div class="course-price-amount">$199</div>
+                <div class="course-price-detail">
+                    <div class="course-price-label">Course Tuition</div>
+                    <div class="course-price-type"><i class="fas fa-circle" style="color:#3ecf7a; font-size:7px; margin-right:4px;"></i>Instructor-Led · 12 Weeks</div>
+                </div>
+            </div>
+
             <button class="cta-button"><i class="fas fa-user-plus"></i> Enroll Now</button>
         </div>
 
     </div>
 
-<!-- LEARNING BENEFITS -->
+    <!-- Unified Pricing Notice -->
+    <div style="margin: 28px 20px 0; padding: 18px 22px; background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(79,195,216,0.05)); border: 1px solid rgba(201,168,76,0.3); border-left: 4px solid #d4af37; border-radius: 12px;">
+        <div style="font-family:'Orbitron',monospace; font-size:11px; color:#d4af37; letter-spacing:0.8px; margin-bottom:8px; text-transform:uppercase;">
+            <i class="fas fa-tags" style="margin-right:6px;"></i> Unified Instructor-Led Rate
+        </div>
+        <div style="font-size:13px; color:#c8d4e3; line-height:1.7;">
+            All Language Mastery courses are <strong style="color:#fff;">instructor-led</strong> and priced at a consistent rate to ensure fairness across all languages offered. Tuition is set uniformly — <strong style="color:#d4af37;">no discrimination by language, level, or background</strong>. The rate displayed on each course card reflects the standard tuition for that program's duration.
+        </div>
+    </div>
 <div class="learning-benefits">
     <h2 class="benefits-title"><i class="fas fa-lightbulb"></i> Why Learn with Native Speakers?</h2>
     <div class="benefits-grid">
