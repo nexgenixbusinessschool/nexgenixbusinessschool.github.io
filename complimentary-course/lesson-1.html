@@ -3,935 +3,1169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 1 — Business Course: The Basics</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Lesson 1 — Business Course: The Basics | Nex Genix LMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0f0e0c;
-    --paper: #f5f0e8;
-    --cream: #ede7d5;
-    --gold: #c8922a;
-    --gold-light: #e8b84b;
-    --rust: #b84c2a;
-    --teal: #1a5f6a;
-    --teal-light: #2a8a9a;
-    --rule: #c8b896;
-    --muted: #7a6f5e;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.75;
-    overflow-x: hidden;
-  }
-
-  /* ─── NOISE TEXTURE OVERLAY ─── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.5;
-  }
-
-  /* ─── HEADER ─── */
-  header {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .header-rule {
-    height: 5px;
-    background: linear-gradient(90deg, var(--rust), var(--gold), var(--gold-light));
-  }
-
-  .header-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 3.5rem 2rem 3rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2rem;
-    align-items: end;
-  }
-
-  .header-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .header-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 2rem;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--paper);
-  }
-
-  h1 em {
-    color: var(--gold-light);
-    font-style: italic;
-  }
-
-  .header-meta {
-    text-align: right;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
-
-  .header-meta span {
-    display: block;
-    line-height: 1.8;
-  }
-
-  .header-tagline {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 2rem 2.5rem;
-    font-size: 1.05rem;
-    color: #a09585;
-    font-style: italic;
-    border-bottom: 1px solid #2a2620;
-  }
-
-  /* ─── PROGRESS NAV ─── */
-  .toc-bar {
-    background: var(--ink);
-    padding: 0.85rem 2rem;
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .toc-bar::-webkit-scrollbar { display: none; }
-
-  .toc-bar a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #6a5f50;
-    text-decoration: none;
-    padding: 0.4rem 1rem;
-    white-space: nowrap;
-    border-right: 1px solid #2a2620;
-    transition: color 0.2s;
-  }
-
-  .toc-bar a:first-child { padding-left: 0; }
-  .toc-bar a:hover { color: var(--gold); }
-
-  /* ─── MAIN LAYOUT ─── */
-  main {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 4rem 2rem 6rem;
-  }
-
-  /* ─── SECTION STYLES ─── */
-  .section {
-    margin-bottom: 5rem;
-    animation: fadeUp 0.6s both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .section:nth-child(1) { animation-delay: 0.05s; }
-  .section:nth-child(2) { animation-delay: 0.12s; }
-  .section:nth-child(3) { animation-delay: 0.19s; }
-  .section:nth-child(4) { animation-delay: 0.26s; }
-  .section:nth-child(5) { animation-delay: 0.33s; }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--rust);
-    margin-bottom: 0.5rem;
-  }
-
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 3vw, 2.3rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid var(--rule);
-    position: relative;
-  }
-
-  h2::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 3rem;
-    height: 2px;
-    background: var(--gold);
-  }
-
-  h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--teal);
-    margin: 2rem 0 0.75rem;
-  }
-
-  p {
-    margin-bottom: 1.1rem;
-    color: #3a3228;
-    font-size: 0.975rem;
-  }
-
-  /* ─── INTRO CARD ─── */
-  .intro-card {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 2.5rem 3rem;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-
-  .intro-card::before {
-    content: '❝';
-    position: absolute;
-    top: -0.5rem;
-    left: 1.5rem;
-    font-size: 8rem;
-    color: rgba(200,146,42,0.12);
-    font-family: 'Playfair Display', serif;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .intro-card p {
-    color: #c8b896;
-    font-size: 1rem;
-    line-height: 1.8;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ─── NUMBERED CARDS ─── */
-  .fundamentals-grid {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .fund-card {
-    display: grid;
-    grid-template-columns: 4rem 1fr;
-    gap: 0;
-    border: 1px solid var(--rule);
-    overflow: hidden;
-    transition: box-shadow 0.25s;
-  }
-
-  .fund-card:hover {
-    box-shadow: 6px 6px 0 var(--gold);
-  }
-
-  .fund-number {
-    background: var(--teal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--cream);
-  }
-
-  .fund-body {
-    padding: 1.5rem 1.75rem;
-    background: white;
-  }
-
-  .fund-body h3 {
-    margin-top: 0;
-    font-size: 1.05rem;
-    color: var(--teal);
-  }
-
-  .fund-body p {
-    font-size: 0.92rem;
-    margin-bottom: 0.5rem;
-  }
-
-  /* ─── SUB-ITEMS ─── */
-  .sub-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 0.75rem;
-  }
-
-  .sub-list li {
-    display: flex;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px dashed var(--rule);
-    font-size: 0.92rem;
-    color: #3a3228;
-  }
-
-  .sub-list li:last-child { border-bottom: none; }
-
-  .sub-list li::before {
-    content: attr(data-alpha);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    background: var(--gold);
-    color: var(--ink);
-    min-width: 1.5rem;
-    height: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    flex-shrink: 0;
-    margin-top: 0.1rem;
-  }
-
-  /* ─── LOB SECTION ─── */
-  .lob-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1rem;
-  }
-
-  .lob-card {
-    background: white;
-    border: 1px solid var(--rule);
-    padding: 1.5rem;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .lob-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(15,14,12,0.1);
-  }
-
-  .lob-icon {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  .lob-card h3 {
-    margin-top: 0;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: var(--ink);
-  }
-
-  .lob-card p {
-    font-size: 0.87rem;
-    color: var(--muted);
-    margin-bottom: 0;
-  }
-
-  .lob-tag {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    background: var(--cream);
-    color: var(--muted);
-    padding: 0.2rem 0.5rem;
-  }
-
-  /* ─── COMPARISON TABLES ─── */
-  .table-section {
-    margin-bottom: 3rem;
-  }
-
-  .table-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .table-title::before {
-    content: '';
-    width: 0.4rem;
-    height: 1.2rem;
-    background: var(--rust);
-    display: inline-block;
-    flex-shrink: 0;
-  }
-
-  .adv-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.88rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .adv-table thead tr {
-    background: var(--ink);
-    color: var(--cream);
-  }
-
-  .adv-table thead th {
-    padding: 0.65rem 1rem;
-    text-align: left;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .adv-table thead th:first-child {
-    border-left: 4px solid var(--teal);
-  }
-
-  .adv-table thead th:last-child {
-    border-left: 4px solid var(--rust);
-  }
-
-  .adv-table tbody tr {
-    border-bottom: 1px solid var(--rule);
-    transition: background 0.15s;
-  }
-
-  .adv-table tbody tr:hover { background: var(--cream); }
-
-  .adv-table tbody td {
-    padding: 0.7rem 1rem;
-    vertical-align: top;
-  }
-
-  .adv-table tbody td:first-child {
-    color: var(--teal);
-    font-weight: 500;
-    border-left: 4px solid rgba(26,95,106,0.2);
-  }
-
-  .adv-table tbody td:last-child {
-    color: var(--rust);
-    border-left: 4px solid rgba(184,76,42,0.15);
-  }
-
-  .adv-table tbody tr:nth-child(even) { background: #faf7f0; }
-  .adv-table tbody tr:nth-child(even):hover { background: var(--cream); }
-
-  /* ─── PERMITS SECTION ─── */
-  .permits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .permit-card {
-    background: white;
-    border: 1px solid var(--rule);
-    border-top: 3px solid var(--gold);
-    padding: 1rem 1.1rem;
-    transition: border-top-color 0.2s;
-  }
-
-  .permit-card:hover { border-top-color: var(--teal); }
-
-  .permit-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--muted);
-    margin-bottom: 0.35rem;
-    letter-spacing: 0.1em;
-  }
-
-  .permit-card h4 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.4rem;
-    line-height: 1.3;
-  }
-
-  .permit-card p {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 0;
-    line-height: 1.5;
-  }
-
-  /* ─── DIVIDER ─── */
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 3.5rem 0;
-    color: var(--rule);
-  }
-
-  .section-divider::before,
-  .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
-
-  .section-divider span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* ─── CALLOUT ─── */
-  .callout {
-    border-left: 4px solid var(--gold);
-    background: linear-gradient(to right, rgba(200,146,42,0.06), transparent);
-    padding: 1.1rem 1.5rem;
-    margin: 1.5rem 0;
-    font-size: 0.9rem;
-    color: #4a3f2e;
-    font-style: italic;
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--ink);
-    color: #6a5f50;
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-
-  .footer-inner {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--cream);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.05em;
-  }
-
-  footer p {
-    font-size: 0.8rem;
-    color: #6a5f50;
-    margin-bottom: 0.25rem;
-  }
-
-  .footer-rule {
-    height: 3px;
-    background: linear-gradient(90deg, var(--teal), var(--gold), var(--rust));
-    margin-bottom: 0;
-  }
-
-  /* ─── SCROLLBAR ─── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--paper); }
-  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 640px) {
-    .header-inner { grid-template-columns: 1fr; }
-    .header-meta { text-align: left; }
-    .fund-card { grid-template-columns: 3rem 1fr; }
-    .fund-number { font-size: 1.5rem; }
-    .lob-grid { grid-template-columns: 1fr; }
-    .permits-grid { grid-template-columns: 1fr 1fr; }
-    .intro-card { padding: 1.75rem; }
-  }
+:root {
+  --bg: #0b0f14;
+  --surface: #111720;
+  --surface2: #16202e;
+  --border: #1e2d40;
+  --accent: #00c2ff;
+  --accent2: #f59e0b;
+  --accent3: #10b981;
+  --danger: #ef4444;
+  --text: #e2eaf4;
+  --muted: #5a7a99;
+  --card: #0f1923;
+  --pass: #10b981;
+  --fail: #ef4444;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Lora',serif;line-height:1.75;overflow-x:hidden}
+
+/* ── STICKY PROGRESS HUD ── */
+#hud {
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(11,15,20,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0;
+}
+.hud-inner{
+  display:flex;align-items:center;gap:1rem;
+  padding:0.6rem 1.5rem;max-width:1100px;margin:0 auto;
+}
+.hud-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;
+  color:var(--accent);letter-spacing:0.05em;white-space:nowrap;
+}
+.hud-lesson{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--muted);letter-spacing:0.1em;white-space:nowrap;
+}
+.hud-progress-wrap{
+  flex:1;display:flex;flex-direction:column;gap:0.25rem;
+}
+.hud-progress-labels{
+  display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--muted);
+}
+.hud-bar{
+  height:4px;background:var(--border);border-radius:2px;overflow:hidden;
+}
+.hud-bar-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:2px;transition:width 0.3s ease;
+}
+.hud-score{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--accent2);white-space:nowrap;text-align:right;min-width:80px;
+}
+.hud-checkpoints{
+  display:flex;gap:0.4rem;align-items:center;
+}
+.checkpoint{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);border:1px solid var(--muted);
+  transition:all 0.3s;
+}
+.checkpoint.done{background:var(--accent3);border-color:var(--accent3);box-shadow:0 0 6px var(--accent3);}
+.checkpoint.quiz{background:var(--border);border-color:var(--accent2);}
+.checkpoint.quiz.done{background:var(--accent2);border-color:var(--accent2);box-shadow:0 0 6px var(--accent2);}
+
+/* ── HERO ── */
+.hero{
+  padding:7rem 2rem 4rem;max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.25em;color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--accent);}
+.hero h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;
+  color:#fff;letter-spacing:-0.03em;
+}
+.hero h1 span{color:var(--accent);}
+.hero-sub{
+  margin-top:1rem;font-size:1.05rem;color:var(--muted);
+  font-style:italic;max-width:600px;
+}
+.hero-meta{text-align:right;}
+.meta-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.1em;color:var(--muted);
+  display:block;line-height:2;
+}
+.meta-badge b{color:var(--accent2);}
+
+/* ── LAYOUT ── */
+.course-wrap{
+  max-width:820px;margin:0 auto;padding:0 2rem 8rem;
+}
+
+/* ── SECTION HEADINGS ── */
+.sec-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.2em;color:var(--accent);margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.sec-label::before{content:'';width:1rem;height:1px;background:var(--accent);}
+.content-section{margin-bottom:4rem;padding-top:1rem;}
+h2{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:clamp(1.4rem,3vw,2rem);color:#fff;
+  margin-bottom:1.25rem;padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+h2::after{
+  content:'';position:absolute;bottom:-1px;left:0;
+  width:3rem;height:1px;background:var(--accent);
+}
+h3{
+  font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600;
+  color:var(--accent2);margin:1.75rem 0 0.6rem;
+}
+p{font-size:0.97rem;color:#b8cfe0;margin-bottom:1rem;}
+strong{color:var(--text);}
+
+/* ── CARDS ── */
+.fund-grid{display:grid;gap:1rem;margin-top:1rem;}
+.fund-card{
+  display:grid;grid-template-columns:3.5rem 1fr;
+  background:var(--card);border:1px solid var(--border);overflow:hidden;
+  transition:border-color 0.2s;
+}
+.fund-card:hover{border-color:var(--accent);}
+.fund-num{
+  background:var(--accent);display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;color:var(--bg);
+}
+.fund-body{padding:1.25rem 1.5rem;}
+.fund-body h3{margin-top:0;font-size:1rem;}
+.fund-body p{font-size:0.88rem;margin-bottom:0.5rem;}
+
+.sub-list{list-style:none;padding:0;margin-top:0.75rem;}
+.sub-list li{
+  display:flex;gap:0.75rem;padding:0.55rem 0;
+  border-bottom:1px solid var(--border);font-size:0.88rem;color:#8fb3cc;
+}
+.sub-list li:last-child{border-bottom:none;}
+.sub-badge{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  background:rgba(0,194,255,0.12);color:var(--accent);
+  min-width:1.4rem;height:1.4rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:0.1rem;
+}
+
+/* LOB GRID */
+.lob-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:1rem;}
+.lob-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:1.25rem;transition:all 0.2s;
+}
+.lob-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.lob-icon{font-size:1.8rem;margin-bottom:0.5rem;display:block;}
+.lob-card h3{margin:0 0 0.4rem;font-size:0.95rem;color:#fff;}
+.lob-card p{font-size:0.82rem;color:var(--muted);margin:0;}
+
+/* TABLES */
+.table-wrap{margin-bottom:2.5rem;overflow-x:auto;}
+.table-label{
+  font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:600;
+  color:#fff;margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.table-label::before{content:'';width:3px;height:1rem;background:var(--accent2);display:inline-block;}
+table.cmp{width:100%;border-collapse:collapse;font-size:0.86rem;}
+table.cmp thead tr{background:var(--surface2);}
+table.cmp thead th{
+  padding:0.6rem 1rem;text-align:left;
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);
+}
+table.cmp thead th:first-child{border-left:2px solid var(--accent3);color:var(--accent3);}
+table.cmp thead th:last-child{border-left:2px solid var(--danger);color:var(--danger);}
+table.cmp tbody tr{border-bottom:1px solid var(--border);}
+table.cmp tbody tr:hover{background:rgba(255,255,255,0.02);}
+table.cmp tbody td{padding:0.6rem 1rem;vertical-align:top;}
+table.cmp tbody td:first-child{color:var(--accent3);border-left:2px solid rgba(16,185,129,0.2);}
+table.cmp tbody td:last-child{color:#f87171;border-left:2px solid rgba(239,68,68,0.15);}
+
+/* PERMITS */
+.permits-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0.85rem;margin-top:1rem;}
+.permit-card{
+  background:var(--card);border:1px solid var(--border);
+  border-top:2px solid var(--accent2);padding:1rem;
+  transition:border-top-color 0.2s;
+}
+.permit-card:hover{border-top-color:var(--accent);}
+.permit-n{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--muted);margin-bottom:0.3rem;}
+.permit-card h4{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:0.3rem;}
+.permit-card p{font-size:0.78rem;color:var(--muted);margin:0;line-height:1.5;}
+
+/* CALLOUT */
+.callout{
+  border-left:3px solid var(--accent2);
+  background:rgba(245,158,11,0.06);
+  padding:1rem 1.25rem;margin:1.5rem 0;
+  font-style:italic;font-size:0.9rem;color:#c0a060;
+}
+
+/* ── QUIZ BLOCK ── */
+.quiz-block{
+  background:var(--surface);border:1px solid var(--border);
+  border-top:3px solid var(--accent2);
+  padding:2rem;margin:3.5rem 0;
+  position:relative;overflow:hidden;
+}
+.quiz-block::before{
+  content:'';position:absolute;top:0;right:0;
+  width:120px;height:120px;
+  background:radial-gradient(circle,rgba(245,158,11,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.quiz-header{
+  display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;
+}
+.quiz-icon{
+  width:2.5rem;height:2.5rem;background:rgba(245,158,11,0.12);
+  border:1px solid rgba(245,158,11,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.quiz-header-text{}
+.quiz-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;
+  color:#fff;
+}
+.quiz-subtitle{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:var(--accent2);letter-spacing:0.1em;margin-top:0.2rem;
+}
+
+/* QUESTION */
+.question{margin-bottom:1.75rem;}
+.q-text{
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:600;
+  color:#fff;margin-bottom:0.85rem;
+  display:flex;gap:0.75rem;
+}
+.q-num{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  background:var(--accent2);color:var(--bg);
+  min-width:1.5rem;height:1.5rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;margin-top:0.1rem;font-weight:500;
+}
+.options{display:flex;flex-direction:column;gap:0.5rem;padding-left:0.25rem;}
+.option-label{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.65rem 1rem;
+  background:var(--card);border:1px solid var(--border);
+  cursor:pointer;transition:all 0.15s;font-size:0.9rem;color:#b8cfe0;
+}
+.option-label:hover{border-color:var(--accent2);color:#fff;}
+.option-label input{display:none;}
+.option-label.selected{
+  background:rgba(245,158,11,0.08);border-color:var(--accent2);color:#fff;
+}
+.option-label.correct{background:rgba(16,185,129,0.12);border-color:var(--accent3);color:var(--accent3);}
+.option-label.wrong{background:rgba(239,68,68,0.1);border-color:var(--danger);color:var(--danger);}
+.option-label.reveal-correct{background:rgba(16,185,129,0.08);border-color:var(--accent3);color:var(--accent3);}
+.opt-letter{
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  background:var(--surface2);color:var(--muted);
+  min-width:1.4rem;height:1.4rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;transition:all 0.15s;
+}
+.option-label.selected .opt-letter{background:var(--accent2);color:var(--bg);}
+.option-label.correct .opt-letter{background:var(--accent3);color:var(--bg);}
+.option-label.wrong .opt-letter{background:var(--danger);color:#fff;}
+
+.quiz-footer{
+  display:flex;align-items:center;gap:1rem;margin-top:1.5rem;
+  padding-top:1.5rem;border-top:1px solid var(--border);
+}
+.btn-submit{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;
+  letter-spacing:0.05em;
+  background:var(--accent2);color:var(--bg);
+  border:none;padding:0.7rem 2rem;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-submit:hover{background:#fbbf24;transform:translateY(-1px);}
+.btn-submit:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none;}
+.quiz-result{
+  display:none;
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+  padding:0.75rem 1rem;flex:1;
+}
+.quiz-result.pass{
+  background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);
+  color:var(--accent3);
+}
+.quiz-result.fail{
+  background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);
+  color:var(--danger);
+}
+
+/* ── FINAL EXAM (10 questions) ── */
+.exam-block{
+  background:var(--surface);border:2px solid var(--accent);
+  padding:2.5rem;margin:4rem 0;position:relative;
+}
+.exam-block::after{
+  content:'FINAL EXAM';
+  position:absolute;top:-0.7rem;left:1.5rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.2em;background:var(--accent);color:var(--bg);
+  padding:0.2rem 0.75rem;font-weight:500;
+}
+
+/* ── CERTIFICATE ── */
+#cert-section{
+  display:none;
+  margin:4rem 0;
+  animation:fadeUp 0.8s both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.cert-unlock{
+  text-align:center;margin-bottom:2rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+  color:var(--accent3);letter-spacing:0.15em;
+}
+.cert-unlock::before{content:'✓ '}
+#certificate{
+  background:#fff;color:#111;
+  padding:3.5rem;
+  border:8px solid #c8922a;
+  box-shadow:0 0 0 2px #c8922a, 0 0 0 4px #fff, 0 0 0 6px #c8922a;
+  max-width:700px;margin:0 auto;
+  position:relative;font-family:'Lora',serif;
+  text-align:center;
+}
+.cert-corner{
+  position:absolute;width:50px;height:50px;
+  border:2px solid #c8922a;
+}
+.cert-corner.tl{top:12px;left:12px;border-right:none;border-bottom:none;}
+.cert-corner.tr{top:12px;right:12px;border-left:none;border-bottom:none;}
+.cert-corner.bl{bottom:12px;left:12px;border-right:none;border-top:none;}
+.cert-corner.br{bottom:12px;right:12px;border-left:none;border-top:none;}
+.cert-school{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.8rem;
+  letter-spacing:0.25em;color:#888;margin-bottom:0.5rem;text-transform:uppercase;
+}
+.cert-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;
+  color:#c8922a;letter-spacing:0.1em;margin-bottom:0.25rem;
+  text-transform:uppercase;
+}
+.cert-subtitle{font-size:0.85rem;color:#888;margin-bottom:1.5rem;letter-spacing:0.05em;}
+.cert-presents{font-size:0.9rem;color:#888;margin-bottom:0.5rem;}
+.cert-name{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;
+  color:#1a2535;margin:0.25rem 0 1.25rem;letter-spacing:-0.02em;
+  border-bottom:2px solid #c8922a;display:inline-block;padding-bottom:0.25rem;
+}
+.cert-body{font-size:0.9rem;color:#444;margin-bottom:1.5rem;line-height:1.6;}
+.cert-course{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;
+  color:#1a2535;margin-bottom:0.5rem;
+}
+.cert-grade{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;font-size:0.8rem;
+  background:#1a2535;color:#c8922a;
+  padding:0.3rem 1rem;margin-bottom:1.75rem;letter-spacing:0.1em;
+}
+.cert-sigs{
+  display:flex;justify-content:space-around;margin-top:1.5rem;
+  padding-top:1rem;border-top:1px solid #ddd;
+}
+.cert-sig{text-align:center;}
+.cert-sig-line{
+  width:120px;height:1px;background:#aaa;margin:0 auto 0.4rem;
+}
+.cert-sig-name{font-size:0.75rem;color:#555;letter-spacing:0.05em;}
+.cert-sig-role{font-size:0.65rem;color:#aaa;letter-spacing:0.05em;}
+.cert-seal{
+  position:absolute;bottom:1.5rem;right:2rem;
+  width:70px;height:70px;border-radius:50%;
+  border:3px solid #c8922a;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.5rem;font-family:'Syne',sans-serif;font-weight:700;
+  color:#c8922a;letter-spacing:0.1em;text-align:center;line-height:1.3;
+  text-transform:uppercase;
+}
+
+/* CERT FORM */
+.cert-form{
+  max-width:700px;margin:0 auto 2rem;
+  display:flex;gap:1rem;
+}
+.cert-form input{
+  flex:1;background:var(--card);border:1px solid var(--border);
+  color:#fff;padding:0.75rem 1rem;
+  font-family:'Lora',serif;font-size:0.95rem;outline:none;
+}
+.cert-form input:focus{border-color:var(--accent);}
+.cert-form input::placeholder{color:var(--muted);}
+.btn-cert{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;
+  background:var(--accent3);color:var(--bg);border:none;
+  padding:0.75rem 1.5rem;cursor:pointer;transition:background 0.2s;white-space:nowrap;
+}
+.btn-cert:hover{background:#34d399;}
+
+.btn-print{
+  display:block;margin:1.5rem auto 0;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;
+  background:transparent;color:var(--accent2);
+  border:1px solid var(--accent2);padding:0.65rem 2rem;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-print:hover{background:var(--accent2);color:var(--bg);}
+
+/* SCORE SUMMARY */
+#score-summary{
+  display:none;
+  background:var(--surface);border:1px solid var(--border);
+  padding:2rem;margin:3rem 0;text-align:center;
+}
+.score-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  margin:1.5rem 0;
+}
+.score-item{
+  background:var(--card);border:1px solid var(--border);padding:1rem;
+}
+.score-item-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  color:var(--muted);letter-spacing:0.1em;margin-bottom:0.4rem;
+}
+.score-item-val{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;
+}
+.score-item-val.good{color:var(--accent3);}
+.score-item-val.ok{color:var(--accent2);}
+.score-item-val.bad{color:var(--danger);}
+
+/* SECTION DIVIDER */
+.divider{
+  display:flex;align-items:center;gap:1rem;margin:3rem 0;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.divider span{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.2em;color:var(--muted);white-space:nowrap;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* PRINT */
+@media print{
+  body > *:not(#cert-section){display:none!important;}
+  #cert-section{display:block!important;}
+  #hud,.cert-form,.btn-print{display:none!important;}
+  #certificate{box-shadow:none!important;border:8px solid #c8922a!important;}
+}
+
+@media(max-width:600px){
+  .hero{grid-template-columns:1fr;}
+  .hero-meta{display:none;}
+  .score-grid{grid-template-columns:1fr;}
+  .cert-form{flex-direction:column;}
+  #certificate{padding:2rem 1.25rem;}
+  .fund-card{grid-template-columns:2.8rem 1fr;}
+}
 </style>
 </head>
 <body>
 
-<div class="header-rule"></div>
-<header>
-  <div class="header-inner">
-    <div>
-      <div class="header-eyebrow">Nex Genix Business School &nbsp;·&nbsp; Business Course</div>
-      <h1>Lesson 1:<br><em>The Basics</em></h1>
+<!-- ── PROGRESS HUD ── -->
+<div id="hud">
+  <div class="hud-inner">
+    <div class="hud-logo">NEX GENIX</div>
+    <div class="hud-lesson">LESSON 01</div>
+    <div class="hud-progress-wrap">
+      <div class="hud-progress-labels">
+        <span>Reading Progress</span>
+        <span id="pct-label">0%</span>
+      </div>
+      <div class="hud-bar"><div class="hud-bar-fill" id="scroll-bar"></div></div>
     </div>
-    <div class="header-meta">
-      <span>MODULE 01</span>
-      <span>FUNDAMENTALS</span>
-      <span>BEGINNER LEVEL</span>
+    <div class="hud-checkpoints" id="checkpoints">
+      <div class="checkpoint" id="cp0" title="Introduction"></div>
+      <div class="checkpoint" id="cp1" title="Fundamentals"></div>
+      <div class="checkpoint quiz" id="cp2" title="Quiz 1"></div>
+      <div class="checkpoint" id="cp3" title="LOB & Analysis"></div>
+      <div class="checkpoint" id="cp4" title="Permits"></div>
+      <div class="checkpoint quiz" id="cp5" title="Final Exam"></div>
+    </div>
+    <div class="hud-score" id="hud-score">Score: —</div>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<header>
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Business Course &nbsp;·&nbsp; Module 1</div>
+      <h1>The <span>Basics</span></h1>
+      <p class="hero-sub">Grasp the fundamentals of the business world — from choosing your line of business to securing your permits.</p>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-badge">Level <b>Beginner</b></span>
+      <span class="meta-badge">Est. time <b>25 min</b></span>
+      <span class="meta-badge">Quizzes <b>2</b></span>
+      <span class="meta-badge">Passing <b>70%</b></span>
     </div>
   </div>
-  <p class="header-tagline">Grasp the basics of the business world in the simplest manner</p>
-  <nav class="toc-bar">
-    <a href="#intro">Introduction</a>
-    <a href="#fundamentals">Fundamentals</a>
-    <a href="#lob">Lines of Business</a>
-    <a href="#comparison">Advantages & Disadvantages</a>
-    <a href="#permits">Business Permits</a>
-  </nav>
 </header>
 
-<main>
+<!-- ── COURSE CONTENT ── -->
+<div class="course-wrap">
 
-  <!-- INTRODUCTION -->
-  <section class="section" id="intro">
-    <div class="section-label">§ 01 — Overview</div>
+  <!-- §1 INTRODUCTION -->
+  <section class="content-section" id="sec-intro" data-checkpoint="0">
+    <div class="sec-label">§ 01 — Overview</div>
     <h2>Introduction</h2>
-    <div class="intro-card">
-      <p>Business, while being a straightforward source of income, is among the most intricate ventures to initiate. The global pandemic compelled people to adapt by delving into buying and selling, exchanging goods, and establishing small businesses. Although some pandemic-launched businesses flourished with soaring sales, many succumbed due to a lack of business acumen.</p>
-    </div>
-    <p>To thrive in the business realm, critical considerations include the <strong>line of business</strong>, <strong>capital/budget</strong>, <strong>workforce/human resources</strong>, <strong>business permits</strong>, <strong>target market</strong>, and <strong>location</strong>.</p>
+    <p>Business, while being a straightforward source of income, is among the most intricate ventures to initiate. The global pandemic — especially impacting the Philippines — compelled people to adapt by delving into buying and selling, exchanging goods, and establishing small businesses.</p>
+    <p>With restrictions on outdoor activities, Filipinos sought alternative ways to generate income while avoiding COVID-19 exposure. Although some pandemic-launched businesses flourished with soaring sales, many succumbed due to a lack of business acumen.</p>
+    <div class="callout">To thrive in the business realm, critical considerations include the <strong>line of business</strong>, <strong>capital/budget</strong>, <strong>workforce/human resources</strong>, <strong>business permits</strong>, <strong>target market</strong>, and <strong>location</strong>.</div>
   </section>
 
-  <div class="section-divider"><span>core concepts</span></div>
+  <div class="divider"><span>core framework</span></div>
 
-  <!-- FUNDAMENTALS -->
-  <section class="section" id="fundamentals">
-    <div class="section-label">§ 02 — Core Framework</div>
+  <!-- §2 FUNDAMENTALS -->
+  <section class="content-section" id="sec-fundamentals" data-checkpoint="1">
+    <div class="sec-label">§ 02 — Core Framework</div>
     <h2>Business Fundamentals</h2>
 
-    <div class="fundamentals-grid">
-
+    <div class="fund-grid">
       <div class="fund-card">
-        <div class="fund-number">1</div>
+        <div class="fund-num">1</div>
         <div class="fund-body">
           <h3>Line of Business (LOB)</h3>
-          <p>Determine the specific type of business you intend to establish — Food & Beverage, Law Firm, Retail, Real Estate, Car Rentals, and so on.</p>
-          <div class="callout">Keep it simple. Align your LOB with your interests — engaging in something you are highly interested in makes the task much easier.</div>
+          <p>Determine the specific type of business you intend to establish — Food & Beverage, Law Firm, Retail, Real Estate, Car Rentals, etc.</p>
+          <div class="callout" style="font-size:0.82rem;margin:0.5rem 0 0;">Keep it simple and align your LOB with your interests. Passion makes execution far easier.</div>
         </div>
       </div>
-
       <div class="fund-card">
-        <div class="fund-number">2</div>
+        <div class="fund-num">2</div>
         <div class="fund-body">
           <h3>Budget</h3>
           <ul class="sub-list">
-            <li data-alpha="A"><strong>Capital</strong> — Currency earmarked for tools, equipment, interior design, raw materials, and goods. Restaurants, for example, need funds for tables, chairs, appliances, and raw food.</li>
-            <li data-alpha="B"><strong>Labor / Human Resources</strong> — It is nearly impossible to operate a business single-handedly. Budget for compensation unless embarking on a very small solo venture like food stalls or freelancing.</li>
-            <li data-alpha="C"><strong>Business Permits</strong> — Various licenses such as Mayor's Permit, BIR, DTI, etc. These will be covered further in this lesson.</li>
+            <li><span class="sub-badge">A</span><span><strong>Capital</strong> — Money earmarked for tools, equipment, interior design, raw materials, and goods.</span></li>
+            <li><span class="sub-badge">B</span><span><strong>Labor / Human Resources</strong> — Budget for compensation. It is nearly impossible to operate a business single-handedly.</span></li>
+            <li><span class="sub-badge">C</span><span><strong>Business Permits</strong> — Various licenses: Mayor's Permit, BIR, DTI, etc.</span></li>
           </ul>
         </div>
       </div>
-
       <div class="fund-card">
-        <div class="fund-number">3</div>
+        <div class="fund-num">3</div>
         <div class="fund-body">
           <h3>Target Market</h3>
-          <p>Always recognize and understand your market. Ensure you are aware of their potential interests, their willingness to pay for your service or product, and consider factors such as their culture and religion.</p>
+          <p>Always recognize and understand your market. Be aware of their interests, their willingness to pay, and consider cultural and religious factors.</p>
         </div>
       </div>
-
       <div class="fund-card">
-        <div class="fund-number">4</div>
+        <div class="fund-num">4</div>
         <div class="fund-body">
           <h3>Location</h3>
-          <p>The location of your establishment is as important as your budget. Key considerations:</p>
           <ul class="sub-list">
-            <li data-alpha="A"><strong>Accessibility</strong> — How easy is it for your target audience to access your store?</li>
-            <li data-alpha="B"><strong>Distance</strong> — Position your business in close proximity to your target market for maximum convenience.</li>
-            <li data-alpha="C"><strong>Safe Zone</strong> — Always prioritize the safety of your customers. Ensure the area is secure for leisure.</li>
+            <li><span class="sub-badge">A</span><span><strong>Accessibility</strong> — How easy is it for your audience to reach your store?</span></li>
+            <li><span class="sub-badge">B</span><span><strong>Distance</strong> — Position near your target market for maximum convenience.</span></li>
+            <li><span class="sub-badge">C</span><span><strong>Safe Zone</strong> — Always prioritize customer safety at your location.</span></li>
           </ul>
         </div>
       </div>
-
     </div>
   </section>
 
-  <div class="section-divider"><span>business types</span></div>
+  <!-- ════════════════════════════════ QUIZ 1 ════════════════════════════════ -->
+  <div class="quiz-block" id="quiz1" data-checkpoint="2">
+    <div class="quiz-header">
+      <div class="quiz-icon">📝</div>
+      <div class="quiz-header-text">
+        <div class="quiz-title">Quiz 1 — Fundamentals Check</div>
+        <div class="quiz-subtitle">5 QUESTIONS &nbsp;·&nbsp; MULTIPLE CHOICE &nbsp;·&nbsp; PASSING: 60%</div>
+      </div>
+    </div>
 
-  <!-- LINES OF BUSINESS -->
-  <section class="section" id="lob">
-    <div class="section-label">§ 03 — Industry Overview</div>
+    <!-- Q1 -->
+    <div class="question" id="q1-1">
+      <div class="q-text"><span class="q-num">1</span>What does LOB stand for in business?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_1" value="A"><span class="opt-letter">A</span>Listing of Business</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="B"><span class="opt-letter">B</span>Line of Business</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="C"><span class="opt-letter">C</span>Level of Business</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="D"><span class="opt-letter">D</span>Log of Business</label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question" id="q1-2">
+      <div class="q-text"><span class="q-num">2</span>Which of the following is NOT one of the four Business Fundamentals covered in this lesson?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_2" value="A"><span class="opt-letter">A</span>Budget</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="B"><span class="opt-letter">B</span>Target Market</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="C"><span class="opt-letter">C</span>Marketing Strategy</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="D"><span class="opt-letter">D</span>Location</label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question" id="q1-3">
+      <div class="q-text"><span class="q-num">3</span>Under Budget, "Capital" specifically refers to:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_3" value="A"><span class="opt-letter">A</span>Employee salaries and compensation</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="B"><span class="opt-letter">B</span>Money for tools, equipment, raw materials, and goods</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="C"><span class="opt-letter">C</span>Government licensing fees</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="D"><span class="opt-letter">D</span>Marketing and advertising expenses</label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question" id="q1-4">
+      <div class="q-text"><span class="q-num">4</span>When choosing your Line of Business, the lesson advises you to:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_4" value="A"><span class="opt-letter">A</span>Choose the most profitable industry regardless of interest</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="B"><span class="opt-letter">B</span>Copy a competitor's business model exactly</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="C"><span class="opt-letter">C</span>Keep it simple and align with your personal interests</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="D"><span class="opt-letter">D</span>Always choose the lowest-risk industry first</label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question" id="q1-5">
+      <div class="q-text"><span class="q-num">5</span>Which location factor asks "How easy is it for your target audience to access your store?"</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_5" value="A"><span class="opt-letter">A</span>Safe Zone</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="B"><span class="opt-letter">B</span>Distance</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="C"><span class="opt-letter">C</span>Accessibility</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="D"><span class="opt-letter">D</span>Visibility</label>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-submit" id="submit-q1" onclick="submitQuiz(1)">Submit Quiz 1</button>
+      <div class="quiz-result" id="result-q1"></div>
+    </div>
+  </div>
+
+  <div class="divider"><span>types of business</span></div>
+
+  <!-- §3 LOB -->
+  <section class="content-section" id="sec-lob" data-checkpoint="3">
+    <div class="sec-label">§ 03 — Industry Overview</div>
     <h2>Lines of Business</h2>
-    <p>While there are various types of businesses, here are some commonly owned enterprises:</p>
+    <p>While there are various types of businesses, here are some commonly owned enterprises in the Philippines:</p>
 
     <div class="lob-grid">
-      <div class="lob-card">
-        <span class="lob-icon">🍽️</span>
-        <span class="lob-tag">F&B</span>
-        <h3>Food & Beverage</h3>
-        <p>Involves the preparation and serving of food and drinks, from casual eateries and fast-food joints to fine dining restaurants.</p>
-      </div>
-      <div class="lob-card">
-        <span class="lob-icon">🏪</span>
-        <span class="lob-tag">RETAIL</span>
-        <h3>Retail</h3>
-        <p>Sale of goods or services directly to the end consumer. The final stage in the distribution chain — brick-and-mortar or online.</p>
-      </div>
-      <div class="lob-card">
-        <span class="lob-icon">👗</span>
-        <span class="lob-tag">SPECIALTY</span>
-        <h3>Specialty Retail</h3>
-        <p>A niche segment focused on a specific and distinct range of products — boutiques, artisanal shops, gourmet stores, and niche bookshops.</p>
-      </div>
-      <div class="lob-card">
-        <span class="lob-icon">🛒</span>
-        <span class="lob-tag">E-COM</span>
-        <h3>E-Commerce</h3>
-        <p>Buying and selling goods and services over the internet. Covers B2C and B2B transactions through digital platforms and websites.</p>
-      </div>
-      <div class="lob-card">
-        <span class="lob-icon">🏠</span>
-        <span class="lob-tag">PROPERTY</span>
-        <h3>Real Estate Rentals</h3>
-        <p>Leasing of residential and commercial spaces to tenants in exchange for periodic payments. Covers houses, offices, retail, and industrial facilities.</p>
-      </div>
+      <div class="lob-card"><span class="lob-icon">🍽️</span><h3>Food & Beverage</h3><p>Preparation and serving of food and drinks — from casual eateries to fine dining restaurants.</p></div>
+      <div class="lob-card"><span class="lob-icon">🏪</span><h3>Retail</h3><p>Sale of goods directly to end consumers. The final stage in the distribution chain — brick-and-mortar or online.</p></div>
+      <div class="lob-card"><span class="lob-icon">👗</span><h3>Specialty Retail</h3><p>A niche segment offering a specific range of products — boutiques, artisanal shops, gourmet stores, niche bookshops.</p></div>
+      <div class="lob-card"><span class="lob-icon">🛒</span><h3>E-Commerce</h3><p>Buying and selling goods over the internet. Covers B2C and B2B transactions through digital platforms.</p></div>
+      <div class="lob-card"><span class="lob-icon">🏠</span><h3>Real Estate Rentals</h3><p>Leasing of residential and commercial properties — houses, offices, retail spaces, and industrial facilities.</p></div>
+    </div>
+
+    <h3 style="margin-top:2.5rem;">Advantages &amp; Disadvantages</h3>
+
+    <div class="table-wrap">
+      <div class="table-label">1. Restaurant / Eateries / Coffee Shop / Food Stalls</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Always in demand</td><td>High returns hence high risk</td></tr>
+        <tr><td>Fast-paced hence fast returns</td><td>Demands a significant workforce</td></tr>
+        <tr><td>Can start with low capital</td><td>Perishable goods</td></tr>
+        <tr><td>High returns potential</td><td>Must consistently adhere to trends</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-label">2. Grocery / Convenience Store / Frozen Goods</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Always in demand</td><td>High risk due to high returns</td></tr>
+        <tr><td>Fast-paced hence fast returns</td><td>Perishable goods</td></tr>
+        <tr><td>Can stay current with trends</td><td>Necessitates substantial capital</td></tr>
+        <tr><td>High returns potential</td><td>Must consistently align with trends</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-label">3. Boutique / Shoe Store</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Increased profit margin</td><td>Effective sales skills required</td></tr>
+        <tr><td>Reduced need for capital</td><td>Elevated marketing expenses</td></tr>
+        <tr><td>Enhanced customer relations</td><td>No bulk-buying savings</td></tr>
+        <tr><td>Financial credit arrangement</td><td>Intense competition</td></tr>
+        <tr><td>Limited liability</td><td>Needs an appropriate location</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-label">4. Online Selling (E-Commerce)</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Global reach</td><td>Security concerns</td></tr>
+        <tr><td>24/7 Availability</td><td>Lack of personal interaction</td></tr>
+        <tr><td>Cost efficiency</td><td>Dependence on technology</td></tr>
+        <tr><td>Data insights</td><td>Intense competition</td></tr>
+        <tr><td>Marketing opportunities</td><td>Return and refund issues</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-label">5a. Property Rentals — Short Term</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Higher income potential</td><td>Inconsistent occupancy</td></tr>
+        <tr><td>Flexibility for property use</td><td>Management intensity</td></tr>
+        <tr><td>Diversification of income</td><td>Regulatory challenges</td></tr>
+        <tr><td>Seasonal opportunities</td><td>Higher operating costs</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-label">5b. Property Rentals — Long Term</div>
+      <table class="cmp"><thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead><tbody>
+        <tr><td>Stable income</td><td>Fixed rental rates</td></tr>
+        <tr><td>Reduced turnover costs</td><td>Limited property flexibility</td></tr>
+        <tr><td>Predictable cash flow</td><td>Potential for problematic tenants</td></tr>
+        <tr><td>Lower vacancy rates</td><td>Less responsive to market trends</td></tr>
+      </tbody></table>
     </div>
   </section>
 
-  <div class="section-divider"><span>analysis</span></div>
+  <div class="divider"><span>legal compliance</span></div>
 
-  <!-- ADVANTAGES AND DISADVANTAGES -->
-  <section class="section" id="comparison">
-    <div class="section-label">§ 04 — Comparative Analysis</div>
-    <h2>Advantages &amp; Disadvantages</h2>
-
-    <!-- F&B -->
-    <div class="table-section">
-      <div class="table-title">1. Restaurant, Eateries, Coffee Shop, Food Stalls</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Always in demand</td><td>High returns hence high risk</td></tr>
-          <tr><td>Fast-paced hence fast returns</td><td>Demands a significant workforce</td></tr>
-          <tr><td>Fast-returns hence high returns</td><td>Perishable goods</td></tr>
-          <tr><td>Can start up with low capital</td><td>Must consistently adhere to trends (e.g. seasonal interior designs)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Grocery -->
-    <div class="table-section">
-      <div class="table-title">2. Grocery / Convenience Store, Flea Market, Frozen Goods</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Always in demand</td><td>High returns hence high risk</td></tr>
-          <tr><td>Fast-paced hence fast returns</td><td>Perishable goods</td></tr>
-          <tr><td>Fast-returns hence high returns</td><td>Must consistently align with current trends</td></tr>
-          <tr><td>Can stay current with trends</td><td>Necessitates substantial capital</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Boutique -->
-    <div class="table-section">
-      <div class="table-title">3. Boutique, Shoe Store</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Increased profit margin</td><td>Effective sales skills are necessary</td></tr>
-          <tr><td>Reduced need for capital</td><td>Elevated marketing expenses</td></tr>
-          <tr><td>Enhanced customer relations</td><td>No cost-saving advantages in purchasing</td></tr>
-          <tr><td>Financial credit arrangement</td><td>Intense competition</td></tr>
-          <tr><td>No liability</td><td>Necessitates an appropriate location</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- E-commerce -->
-    <div class="table-section">
-      <div class="table-title">4. Online Selling (E-Commerce)</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Global reach</td><td>Security concerns</td></tr>
-          <tr><td>24/7 Availability</td><td>Lack of personal interaction</td></tr>
-          <tr><td>Cost efficiency</td><td>Dependence on technology</td></tr>
-          <tr><td>Convenience</td><td>Intense competition</td></tr>
-          <tr><td>Data insights</td><td>Necessitates an appropriate platform</td></tr>
-          <tr><td>Marketing opportunities</td><td>Return and refund issues</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Property Short Term -->
-    <div class="table-section">
-      <div class="table-title">5a. Property Rentals — Short Term</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Higher income potential</td><td>Inconsistent occupancy</td></tr>
-          <tr><td>Flexibility for property use</td><td>Management intensity</td></tr>
-          <tr><td>Diversification of income streams</td><td>Regulatory challenges</td></tr>
-          <tr><td>Shorter commitment periods</td><td>Higher operating costs</td></tr>
-          <tr><td>Market demand and seasonal opportunities</td><td>Vulnerability to economic fluctuations</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Property Long Term -->
-    <div class="table-section">
-      <div class="table-title">5b. Property Rentals — Long Term</div>
-      <table class="adv-table">
-        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
-        <tbody>
-          <tr><td>Stable income</td><td>Fixed rental rates</td></tr>
-          <tr><td>Reduced turnover costs</td><td>Limited flexibility for property use</td></tr>
-          <tr><td>Predictable cash flow</td><td>Potential for problematic tenants</td></tr>
-          <tr><td>Lower vacancy rates</td><td>Market changes impact rental rates</td></tr>
-          <tr><td>Fewer management demands</td><td>Less responsive to market trends</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-  </section>
-
-  <div class="section-divider"><span>compliance</span></div>
-
-  <!-- PERMITS -->
-  <section class="section" id="permits">
-    <div class="section-label">§ 05 — Legal Requirements</div>
+  <!-- §4 PERMITS -->
+  <section class="content-section" id="sec-permits" data-checkpoint="4">
+    <div class="sec-label">§ 04 — Legal Requirements</div>
     <h2>Business Permits &amp; Licenses</h2>
-    <p>Starting a business involves various permits and licenses to ensure compliance with health, safety, and operational regulations. The specific requirements vary by location — always check with local authorities. Below is a general list for reference (illustrated using a restaurant example):</p>
+    <p>Starting a business involves various permits and licenses. Specific requirements vary by location — always consult local authorities. Below is a general list illustrated using a restaurant as an example:</p>
 
     <div class="permits-grid">
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 01</div>
-        <h4>Business License</h4>
-        <p>General requirement for operating any business; obtained from the local city or county government.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 02</div>
-        <h4>Food Service Establishment Permit</h4>
-        <p>Issued by the health department to ensure compliance with food safety regulations.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 03</div>
-        <h4>Alcohol License</h4>
-        <p>Required if you plan to serve alcoholic beverages. Type varies (beer & wine, liquor, etc.).</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 04</div>
-        <h4>Food Handler's Permit</h4>
-        <p>Required for employees who handle or prepare food, demonstrating knowledge of safe food handling.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 05</div>
-        <h4>Occupancy Permit</h4>
-        <p>Ensures the restaurant's occupancy capacity complies with local building and safety codes.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 06</div>
-        <h4>Sign Permit</h4>
-        <p>Required if you plan to install signage, to ensure compliance with local regulations.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 07</div>
-        <h4>Grease Trap Permit</h4>
-        <p>Required if your business disposes of grease waste to prevent environmental issues.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 08</div>
-        <h4>Health & Safety Inspections</h4>
-        <p>Regular inspections by the health department to ensure compliance with food safety standards.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 09</div>
-        <h4>Music License</h4>
-        <p>If you play music in your establishment, a license may be needed to comply with copyright laws.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 10</div>
-        <h4>Employee Identification Number (EIN)</h4>
-        <p>Required for tax purposes, especially if you have employees.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 11</div>
-        <h4>Building Permit</h4>
-        <p>Needed for any construction or renovation work on the business premises.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 12</div>
-        <h4>Environmental Permits</h4>
-        <p>May be required depending on location and size, related to waste disposal and environmental impact.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 13</div>
-        <h4>Fire Department Permits</h4>
-        <p>Ensures compliance with fire safety regulations, including fire exits and suppression systems.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 14</div>
-        <h4>Waste Disposal Permits</h4>
-        <p>Required for proper disposal of food waste and other materials generated by the business.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 15</div>
-        <h4>Outdoor Seating Permit</h4>
-        <p>Required if you plan to offer outdoor seating, obtained from local authorities.</p>
-      </div>
-      <div class="permit-card">
-        <div class="permit-num">PERMIT 16</div>
-        <h4>Special Events Permit</h4>
-        <p>May be required if you plan to host special events or promotions at your establishment.</p>
-      </div>
-    </div>
-
-    <div class="callout" style="margin-top:2rem;">
-      It is crucial to research the specific requirements in your local area and consult with relevant government agencies to ensure you have all necessary permits and licenses to operate legally.
+      <div class="permit-card"><div class="permit-n">PERMIT 01</div><h4>Business License</h4><p>General requirement from the local city or county government.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 02</div><h4>Food Service Establishment Permit</h4><p>Issued by the health department for food safety compliance.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 03</div><h4>Alcohol License</h4><p>Required if serving alcoholic beverages.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 04</div><h4>Food Handler's Permit</h4><p>Required for employees who handle or prepare food.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 05</div><h4>Occupancy Permit</h4><p>Ensures occupancy capacity complies with building codes.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 06</div><h4>Sign Permit</h4><p>Required for installing signage at your establishment.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 07</div><h4>Grease Trap Permit</h4><p>Required for grease waste disposal to prevent environmental issues.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 08</div><h4>Health & Safety Inspections</h4><p>Regular health department inspections for food safety.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 09</div><h4>Music License</h4><p>Required if you play music, for copyright compliance.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 10</div><h4>Employee Identification Number (EIN)</h4><p>Required for tax purposes when you have employees.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 11</div><h4>Building Permit</h4><p>Needed for construction or renovation work on premises.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 12</div><h4>Environmental Permits</h4><p>Related to waste disposal and environmental impact.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 13</div><h4>Fire Department Permits</h4><p>Ensures compliance with fire safety: exits and suppression systems.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 14</div><h4>Waste Disposal Permits</h4><p>For proper disposal of food waste and other materials.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 15</div><h4>Outdoor Seating Permit</h4><p>Required if you plan to offer outdoor seating areas.</p></div>
+      <div class="permit-card"><div class="permit-n">PERMIT 16</div><h4>Special Events Permit</h4><p>May be required for hosting special events or promotions.</p></div>
     </div>
   </section>
 
-</main>
+  <!-- ═══════════════════════════ FINAL EXAM (10 Qs) ══════════════════════════ -->
+  <div class="exam-block" id="quiz2" data-checkpoint="5">
+    <div class="quiz-header">
+      <div class="quiz-icon">🎓</div>
+      <div class="quiz-header-text">
+        <div class="quiz-title">Final Exam — Lesson 1 Comprehensive</div>
+        <div class="quiz-subtitle">10 QUESTIONS &nbsp;·&nbsp; MULTIPLE CHOICE &nbsp;·&nbsp; PASSING: 70% &nbsp;·&nbsp; EARNS CERTIFICATE</div>
+      </div>
+    </div>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo">Nex Genix Business School</div>
-    <p>contact@nexgenixbusinessschool.com</p>
-    <p>Zamboanga City, Zamboanga del Sur, Philippines</p>
-    <p style="margin-top:1rem; font-size:0.72rem;">All rights reserved © 2025 Nex Genix Business School</p>
+    <!-- Q1 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">1</span>Which type of business involves buying and selling goods and services over the internet?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_1" value="A"><span class="opt-letter">A</span>Specialty Retail</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="B"><span class="opt-letter">B</span>E-Commerce</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="C"><span class="opt-letter">C</span>Real Estate Rental</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="D"><span class="opt-letter">D</span>Food and Beverage</label>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">2</span>What is a key disadvantage of the Food & Beverage industry?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_2" value="A"><span class="opt-letter">A</span>Low profit margin</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="B"><span class="opt-letter">B</span>Very limited customer base</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="C"><span class="opt-letter">C</span>Perishable goods</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="D"><span class="opt-letter">D</span>Cannot start with low capital</label>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">3</span>Which permit is issued by the health department to ensure a restaurant complies with food safety regulations?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_3" value="A"><span class="opt-letter">A</span>Occupancy Permit</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="B"><span class="opt-letter">B</span>Business License</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="C"><span class="opt-letter">C</span>Food Service Establishment Permit</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="D"><span class="opt-letter">D</span>Sign Permit</label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">4</span>Long-term property rental has which of the following advantages over short-term rental?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_4" value="A"><span class="opt-letter">A</span>Higher income potential</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="B"><span class="opt-letter">B</span>More flexibility for property use</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="C"><span class="opt-letter">C</span>Stable, predictable income and lower vacancy rates</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="D"><span class="opt-letter">D</span>No risk of problematic tenants</label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">5</span>A boutique clothing store is an example of which business type?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_5" value="A"><span class="opt-letter">A</span>General Retail</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="B"><span class="opt-letter">B</span>Specialty Retail</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="C"><span class="opt-letter">C</span>E-Commerce</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="D"><span class="opt-letter">D</span>Food and Beverage</label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">6</span>Which of the following is a disadvantage of E-Commerce?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_6" value="A"><span class="opt-letter">A</span>Limited to local markets only</span></label>
+        <label class="option-label"><input type="radio" name="q2_6" value="B"><span class="opt-letter">B</span>Lack of personal interaction with customers</label>
+        <label class="option-label"><input type="radio" name="q2_6" value="C"><span class="opt-letter">C</span>Very high startup costs</label>
+        <label class="option-label"><input type="radio" name="q2_6" value="D"><span class="opt-letter">D</span>Cannot operate 24/7</label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">7</span>The Employee Identification Number (EIN) is required primarily for:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_7" value="A"><span class="opt-letter">A</span>Food safety compliance</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="B"><span class="opt-letter">B</span>Outdoor seating approval</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="C"><span class="opt-letter">C</span>Tax purposes, especially when you have employees</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="D"><span class="opt-letter">D</span>Alcohol service authorization</label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">8</span>Which location consideration involves ensuring customers won't face the risk of being mugged while at your store?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_8" value="A"><span class="opt-letter">A</span>Accessibility</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="B"><span class="opt-letter">B</span>Distance</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="C"><span class="opt-letter">C</span>Safe Zone</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="D"><span class="opt-letter">D</span>Visibility</label>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">9</span>Which permit would a restaurant need if it plans to dispose of cooking oil waste?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_9" value="A"><span class="opt-letter">A</span>Music License</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="B"><span class="opt-letter">B</span>Grease Trap Permit</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="C"><span class="opt-letter">C</span>Outdoor Seating Permit</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="D"><span class="opt-letter">D</span>Fire Department Permit</label>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question">
+      <div class="q-text"><span class="q-num">10</span>According to the lesson, which of the following best describes the three budget components for a business?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_10" value="A"><span class="opt-letter">A</span>Capital, Marketing, and Rent</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="B"><span class="opt-letter">B</span>Capital, Labor/Human Resources, and Business Permits</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="C"><span class="opt-letter">C</span>Equipment, Salaries, and Advertising</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="D"><span class="opt-letter">D</span>Inventory, Payroll, and Taxes</label>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-submit" id="submit-q2" onclick="submitQuiz(2)">Submit Final Exam</button>
+      <div class="quiz-result" id="result-q2"></div>
+    </div>
   </div>
-</footer>
-<div class="footer-rule"></div>
 
+  <!-- ── SCORE SUMMARY ── -->
+  <div id="score-summary">
+    <div class="sec-label" style="justify-content:center;margin-bottom:0.75rem;">Assessment Complete</div>
+    <h2 style="text-align:center;border:none;">Your Results</h2>
+    <div class="score-grid">
+      <div class="score-item">
+        <div class="score-item-label">QUIZ 1 SCORE</div>
+        <div class="score-item-val" id="sum-q1">—</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-label">FINAL EXAM SCORE</div>
+        <div class="score-item-val" id="sum-q2">—</div>
+      </div>
+      <div class="score-item">
+        <div class="score-item-label">OVERALL GRADE</div>
+        <div class="score-item-val" id="sum-overall">—</div>
+      </div>
+    </div>
+    <p id="sum-verdict" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--muted);"></p>
+  </div>
+
+  <!-- ── CERTIFICATE SECTION ── -->
+  <div id="cert-section">
+    <div class="cert-unlock">Certificate Unlocked — Enter your name to generate</div>
+    <div class="cert-form">
+      <input type="text" id="student-name" placeholder="Enter your full name…" maxlength="60">
+      <button class="btn-cert" onclick="generateCert()">Generate Certificate</button>
+    </div>
+
+    <div id="certificate">
+      <div class="cert-corner tl"></div>
+      <div class="cert-corner tr"></div>
+      <div class="cert-corner bl"></div>
+      <div class="cert-corner br"></div>
+
+      <div class="cert-school">Nex Genix Business School</div>
+      <div class="cert-title">Certificate</div>
+      <div class="cert-subtitle">of Completion</div>
+      <div class="cert-presents">This certifies that</div>
+      <div class="cert-name" id="cert-name-display">—</div>
+      <div class="cert-body">
+        has successfully completed all assessments for<br>
+        <strong>Module 1: Business Course — The Basics</strong><br>
+        demonstrating a solid understanding of business fundamentals,<br>
+        lines of business, and regulatory compliance.
+      </div>
+      <div class="cert-course">Business Course: The Basics</div>
+      <div class="cert-grade" id="cert-grade-display">GRADE: —</div>
+
+      <div class="cert-sigs">
+        <div class="cert-sig">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">Nex Genix</div>
+          <div class="cert-sig-role">Course Director</div>
+        </div>
+        <div class="cert-sig">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name" id="cert-date-display">—</div>
+          <div class="cert-sig-role">Date of Completion</div>
+        </div>
+      </div>
+
+      <div class="cert-seal">NEX<br>GENIX<br>★</div>
+    </div>
+
+    <button class="btn-print" onclick="window.print()">⎙ Save / Print Certificate</button>
+  </div>
+
+</div><!-- end course-wrap -->
+
+<script>
+// ══════════════════════════════════════════
+// ANSWER KEY
+// ══════════════════════════════════════════
+const ANSWERS = {
+  quiz1: { q1_1:'B', q1_2:'C', q1_3:'B', q1_4:'C', q1_5:'C' },
+  quiz2: { q2_1:'B', q2_2:'C', q2_3:'C', q2_4:'C', q2_5:'B',
+           q2_6:'B', q2_7:'C', q2_8:'C', q2_9:'B', q2_10:'B' }
+};
+
+let scores = { q1: null, q2: null };
+
+// ── Option click highlight ──
+document.querySelectorAll('.option-label').forEach(label => {
+  label.addEventListener('click', function() {
+    const name = this.querySelector('input').name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+      inp.closest('.option-label').classList.remove('selected');
+    });
+    this.classList.add('selected');
+  });
+});
+
+// ── Submit Quiz ──
+function submitQuiz(qNum) {
+  const isQuiz1 = qNum === 1;
+  const key = isQuiz1 ? 'quiz1' : 'quiz2';
+  const prefix = isQuiz1 ? 'q1_' : 'q2_';
+  const total = isQuiz1 ? 5 : 10;
+  const passing = isQuiz1 ? 0.6 : 0.7;
+  const answers = ANSWERS[key];
+  let correct = 0;
+
+  // lock all options in this quiz
+  const block = document.getElementById(isQuiz1 ? 'quiz1' : 'quiz2');
+  block.querySelectorAll('.option-label').forEach(label => {
+    label.style.cursor = 'default';
+    label.style.pointerEvents = 'none';
+  });
+
+  // grade each question
+  for (let i = 1; i <= total; i++) {
+    const qKey = prefix + i;
+    const correctAns = answers[qKey];
+    const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+    const labels = document.querySelectorAll(`input[name="${qKey}"]`);
+
+    // reveal correct answer
+    labels.forEach(inp => {
+      const lbl = inp.closest('.option-label');
+      if (inp.value === correctAns) lbl.classList.add('reveal-correct');
+    });
+
+    if (selected) {
+      const selLabel = selected.closest('.option-label');
+      if (selected.value === correctAns) {
+        selLabel.classList.remove('selected','reveal-correct');
+        selLabel.classList.add('correct');
+        correct++;
+      } else {
+        selLabel.classList.remove('selected');
+        selLabel.classList.add('wrong');
+      }
+    }
+  }
+
+  const pct = Math.round((correct / total) * 100);
+  const passed = pct >= (passing * 100);
+
+  scores[`q${qNum}`] = pct;
+
+  const resultEl = document.getElementById(`result-q${qNum}`);
+  resultEl.style.display = 'block';
+  resultEl.className = 'quiz-result ' + (passed ? 'pass' : 'fail');
+  resultEl.innerHTML = passed
+    ? `✓ PASSED &nbsp;|&nbsp; ${correct}/${total} correct &nbsp;(${pct}%) &nbsp;— Well done!`
+    : `✗ FAILED &nbsp;|&nbsp; ${correct}/${total} correct &nbsp;(${pct}%) &nbsp;— Review the material and try again.`;
+
+  document.getElementById(`submit-q${qNum}`).disabled = true;
+
+  // mark checkpoint
+  const cpId = isQuiz1 ? 'cp2' : 'cp5';
+  if (passed) document.getElementById(cpId).classList.add('done');
+
+  // update HUD score display
+  updateHudScore();
+
+  // check if both done
+  if (scores.q1 !== null && scores.q2 !== null) showSummary();
+}
+
+function updateHudScore() {
+  const parts = [];
+  if (scores.q1 !== null) parts.push(`Q1:${scores.q1}%`);
+  if (scores.q2 !== null) parts.push(`Exam:${scores.q2}%`);
+  document.getElementById('hud-score').textContent = parts.length ? parts.join('  ') : 'Score: —';
+}
+
+function showSummary() {
+  const s = document.getElementById('score-summary');
+  s.style.display = 'block';
+  s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const q1 = scores.q1;
+  const q2 = scores.q2;
+  const overall = Math.round((q1 * 1 + q2 * 2) / 3); // exam weighted 2x
+
+  const el1 = document.getElementById('sum-q1');
+  const el2 = document.getElementById('sum-q2');
+  const elO = document.getElementById('sum-overall');
+
+  el1.textContent = q1 + '%';
+  el1.className = 'score-item-val ' + colorClass(q1, 60);
+  el2.textContent = q2 + '%';
+  el2.className = 'score-item-val ' + colorClass(q2, 70);
+  elO.textContent = overall + '%';
+  elO.className = 'score-item-val ' + colorClass(overall, 65);
+
+  const examPassed = q2 >= 70;
+  document.getElementById('sum-verdict').textContent = examPassed
+    ? '🎓 Final Exam passed! You have unlocked your certificate below.'
+    : '📖 Final Exam not yet passed (need 70%). Review the lesson and resubmit.';
+
+  if (examPassed) {
+    setTimeout(() => {
+      const cs = document.getElementById('cert-section');
+      cs.style.display = 'block';
+      cs.scrollIntoView({ behavior: 'smooth' });
+    }, 600);
+  }
+}
+
+function colorClass(pct, threshold) {
+  if (pct >= threshold + 20) return 'good';
+  if (pct >= threshold) return 'ok';
+  return 'bad';
+}
+
+function generateCert() {
+  const name = document.getElementById('student-name').value.trim();
+  if (!name) { alert('Please enter your full name.'); return; }
+
+  const q2 = scores.q2;
+  let grade = '';
+  if (q2 >= 90) grade = 'A (Excellent)';
+  else if (q2 >= 80) grade = 'B (Very Good)';
+  else if (q2 >= 70) grade = 'C (Satisfactory)';
+  else grade = 'Below Passing';
+
+  document.getElementById('cert-name-display').textContent = name;
+  document.getElementById('cert-grade-display').textContent = `GRADE: ${grade} · ${q2}%`;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('cert-date-display').textContent = dateStr;
+}
+
+// ══════════════════════════════════════════
+// SCROLL PROGRESS + CHECKPOINT DETECTION
+// ══════════════════════════════════════════
+const checkpointEls = [
+  { id: 'sec-intro',        cp: 'cp0' },
+  { id: 'sec-fundamentals', cp: 'cp1' },
+  { id: 'quiz1',            cp: 'cp2' },
+  { id: 'sec-lob',          cp: 'cp3' },
+  { id: 'sec-permits',      cp: 'cp4' },
+  { id: 'quiz2',            cp: 'cp5' },
+];
+
+function onScroll() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.min(100, Math.round((scrollTop / docH) * 100)) : 0;
+
+  document.getElementById('scroll-bar').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+
+  // checkpoint visibility
+  checkpointEls.forEach(({ id, cp }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      const cpEl = document.getElementById(cp);
+      // don't override quiz done state
+      if (!cpEl.classList.contains('done') && !cpEl.classList.contains('quiz')) {
+        cpEl.classList.add('done');
+      } else if (cpEl.classList.contains('quiz') && !cpEl.classList.contains('done')) {
+        // quiz seen but not submitted — subtle pulse handled via CSS border
+      }
+    }
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+</script>
 </body>
 </html>
