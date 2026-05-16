@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2 — Business Course: Logo Design | Nex Genix LMS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0f14;
+  --surface: #111720;
+  --surface2: #16202e;
+  --border: #1e2d40;
+  --accent: #a78bfa;
+  --accent2: #f59e0b;
+  --accent3: #10b981;
+  --danger: #ef4444;
+  --text: #e2eaf4;
+  --muted: #5a7a99;
+  --card: #0f1923;
+  --pass: #10b981;
+  --fail: #ef4444;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Lora',serif;line-height:1.75;overflow-x:hidden}
+
+/* ── HUD ── */
+#hud{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(11,15,20,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.hud-inner{display:flex;align-items:center;gap:1rem;padding:0.6rem 1.5rem;max-width:1100px;margin:0 auto;}
+.hud-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;color:var(--accent);letter-spacing:0.05em;white-space:nowrap;}
+.hud-lesson{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;white-space:nowrap;}
+.hud-progress-wrap{flex:1;display:flex;flex-direction:column;gap:0.25rem;}
+.hud-progress-labels{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--muted);}
+.hud-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.hud-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width 0.3s ease;}
+.hud-score{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent2);white-space:nowrap;text-align:right;min-width:80px;}
+.hud-checkpoints{display:flex;gap:0.4rem;align-items:center;}
+.checkpoint{width:8px;height:8px;border-radius:50%;background:var(--border);border:1px solid var(--muted);transition:all 0.3s;}
+.checkpoint.done{background:var(--accent3);border-color:var(--accent3);box-shadow:0 0 6px var(--accent3);}
+.checkpoint.quiz{background:var(--border);border-color:var(--accent2);}
+.checkpoint.quiz.done{background:var(--accent2);border-color:var(--accent2);box-shadow:0 0 6px var(--accent2);}
+
+/* ── HERO ── */
+.hero{padding:7rem 2rem 4rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.25em;color:var(--accent);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.hero-eyebrow::before{content:'';width:2rem;height:1px;background:var(--accent);}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;color:#fff;letter-spacing:-0.03em;}
+.hero h1 span{color:var(--accent);}
+.hero-sub{margin-top:1rem;font-size:1.05rem;color:var(--muted);font-style:italic;max-width:600px;}
+.hero-meta{text-align:right;}
+.meta-badge{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--muted);display:block;line-height:2;}
+.meta-badge b{color:var(--accent2);}
+
+/* ── LAYOUT ── */
+.course-wrap{max-width:820px;margin:0 auto;padding:0 2rem 8rem;}
+
+/* ── HEADINGS ── */
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--accent);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem;}
+.sec-label::before{content:'';width:1rem;height:1px;background:var(--accent);}
+.content-section{margin-bottom:4rem;padding-top:1rem;}
+h2{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.4rem,3vw,2rem);color:#fff;margin-bottom:1.25rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-1px;left:0;width:3rem;height:1px;background:var(--accent);}
+h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:600;color:var(--accent2);margin:1.75rem 0 0.6rem;}
+p{font-size:0.97rem;color:#b8cfe0;margin-bottom:1rem;}
+strong{color:var(--text);}
+
+/* ── CALLOUT ── */
+.callout{border-left:3px solid var(--accent2);background:rgba(245,158,11,0.06);padding:1rem 1.25rem;margin:1.5rem 0;font-style:italic;font-size:0.9rem;color:#c0a060;}
+
+/* ── COLOR SWATCH CARDS ── */
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.25rem 0;}
+.color-card{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:transform 0.2s,border-color 0.2s;}
+.color-card:hover{transform:translateY(-2px);border-color:var(--accent);}
+.color-swatch{height:56px;width:100%;}
+.color-body{padding:0.9rem 1rem;}
+.color-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:#fff;margin-bottom:0.3rem;}
+.color-desc{font-size:0.8rem;color:var(--muted);line-height:1.5;}
+
+/* ── INDUSTRY BLOCKS ── */
+.industry-block{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.5rem 1.75rem;margin-bottom:2rem;}
+.industry-block h3{margin-top:0;color:var(--accent);}
+
+/* ── PALETTE SECTION TITLE ── */
+.palette-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin:1.25rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;}
+.palette-title::before{content:'';width:3px;height:1rem;background:var(--accent);display:inline-block;}
+
+/* ── QUIZ BLOCK ── */
+.quiz-block{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent2);padding:2rem;margin:3.5rem 0;position:relative;overflow:hidden;}
+.quiz-block::before{content:'';position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,rgba(245,158,11,0.06) 0%,transparent 70%);pointer-events:none;}
+.quiz-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.quiz-icon{width:2.5rem;height:2.5rem;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.quiz-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;color:#fff;}
+.quiz-subtitle{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent2);letter-spacing:0.1em;margin-top:0.2rem;}
+.question{margin-bottom:1.75rem;}
+.q-text{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.85rem;display:flex;gap:0.75rem;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:0.7rem;background:var(--accent2);color:var(--bg);min-width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:0.5rem;padding-left:0.25rem;}
+.option-label{display:flex;align-items:center;gap:0.75rem;padding:0.65rem 1rem;background:var(--card);border:1px solid var(--border);cursor:pointer;transition:all 0.15s;font-size:0.9rem;color:#b8cfe0;}
+.option-label:hover{border-color:var(--accent2);color:#fff;}
+.option-label input{display:none;}
+.option-label.selected{background:rgba(245,158,11,0.08);border-color:var(--accent2);color:#fff;}
+.option-label.correct{background:rgba(16,185,129,0.12);border-color:var(--accent3);color:var(--accent3);}
+.option-label.wrong{background:rgba(239,68,68,0.1);border-color:var(--danger);color:var(--danger);}
+.option-label.reveal-correct{background:rgba(16,185,129,0.08);border-color:var(--accent3);color:var(--accent3);}
+.opt-letter{font-family:'JetBrains Mono',monospace;font-size:0.65rem;background:var(--surface2);color:var(--muted);min-width:1.4rem;height:1.4rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}
+.option-label.selected .opt-letter{background:var(--accent2);color:var(--bg);}
+.option-label.correct .opt-letter{background:var(--accent3);color:var(--bg);}
+.option-label.wrong .opt-letter{background:var(--danger);color:#fff;}
+.quiz-footer{display:flex;align-items:center;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.btn-submit{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;background:var(--accent2);color:var(--bg);border:none;padding:0.7rem 2rem;cursor:pointer;transition:all 0.2s;}
+.btn-submit:hover{background:#fbbf24;transform:translateY(-1px);}
+.btn-submit:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none;}
+.quiz-result{display:none;font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.75rem 1rem;flex:1;}
+.quiz-result.pass{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--accent3);}
+.quiz-result.fail{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);color:var(--danger);}
+
+/* ── FINAL EXAM ── */
+.exam-block{background:var(--surface);border:2px solid var(--accent);padding:2.5rem;margin:4rem 0;position:relative;}
+.exam-block::after{content:'FINAL EXAM';position:absolute;top:-0.7rem;left:1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;background:var(--accent);color:var(--bg);padding:0.2rem 0.75rem;font-weight:500;}
+
+/* ── SCORE SUMMARY ── */
+#score-summary{display:none;background:var(--surface);border:1px solid var(--border);padding:2rem;margin:3rem 0;text-align:center;}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+.score-item{background:var(--card);border:1px solid var(--border);padding:1rem;}
+.score-item-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:0.4rem;}
+.score-item-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;}
+.score-item-val.good{color:var(--accent3);}
+.score-item-val.ok{color:var(--accent2);}
+.score-item-val.bad{color:var(--danger);}
+
+/* ── CERTIFICATE ── */
+#cert-section{display:none;margin:4rem 0;animation:fadeUp 0.8s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.cert-unlock{text-align:center;margin-bottom:2rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent3);letter-spacing:0.15em;}
+.cert-unlock::before{content:'✓ '}
+#certificate{background:#fff;color:#111;padding:3.5rem;border:8px solid #7c3aed;box-shadow:0 0 0 2px #7c3aed,0 0 0 4px #fff,0 0 0 6px #7c3aed;max-width:700px;margin:0 auto;position:relative;font-family:'Lora',serif;text-align:center;}
+.cert-corner{position:absolute;width:50px;height:50px;border:2px solid #7c3aed;}
+.cert-corner.tl{top:12px;left:12px;border-right:none;border-bottom:none;}
+.cert-corner.tr{top:12px;right:12px;border-left:none;border-bottom:none;}
+.cert-corner.bl{bottom:12px;left:12px;border-right:none;border-top:none;}
+.cert-corner.br{bottom:12px;right:12px;border-left:none;border-top:none;}
+.cert-school{font-family:'Syne',sans-serif;font-weight:800;font-size:0.8rem;letter-spacing:0.25em;color:#888;margin-bottom:0.5rem;text-transform:uppercase;}
+.cert-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#7c3aed;letter-spacing:0.1em;margin-bottom:0.25rem;text-transform:uppercase;}
+.cert-subtitle{font-size:0.85rem;color:#888;margin-bottom:1.5rem;letter-spacing:0.05em;}
+.cert-presents{font-size:0.9rem;color:#888;margin-bottom:0.5rem;}
+.cert-name{font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;color:#1a2535;margin:0.25rem 0 1.25rem;letter-spacing:-0.02em;border-bottom:2px solid #7c3aed;display:inline-block;padding-bottom:0.25rem;}
+.cert-body{font-size:0.9rem;color:#444;margin-bottom:1.5rem;line-height:1.6;}
+.cert-course{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:#1a2535;margin-bottom:0.5rem;}
+.cert-grade{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.8rem;background:#1a2535;color:#a78bfa;padding:0.3rem 1rem;margin-bottom:1.75rem;letter-spacing:0.1em;}
+.cert-sigs{display:flex;justify-content:space-around;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #ddd;}
+.cert-sig{text-align:center;}
+.cert-sig-line{width:120px;height:1px;background:#aaa;margin:0 auto 0.4rem;}
+.cert-sig-name{font-size:0.75rem;color:#555;letter-spacing:0.05em;}
+.cert-sig-role{font-size:0.65rem;color:#aaa;letter-spacing:0.05em;}
+.cert-seal{position:absolute;bottom:1.5rem;right:2rem;width:70px;height:70px;border-radius:50%;border:3px solid #7c3aed;display:flex;align-items:center;justify-content:center;font-size:0.5rem;font-family:'Syne',sans-serif;font-weight:700;color:#7c3aed;letter-spacing:0.1em;text-align:center;line-height:1.3;text-transform:uppercase;}
+.cert-form{max-width:700px;margin:0 auto 2rem;display:flex;gap:1rem;}
+.cert-form input{flex:1;background:var(--card);border:1px solid var(--border);color:#fff;padding:0.75rem 1rem;font-family:'Lora',serif;font-size:0.95rem;outline:none;}
+.cert-form input:focus{border-color:var(--accent);}
+.cert-form input::placeholder{color:var(--muted);}
+.btn-cert{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:var(--accent3);color:var(--bg);border:none;padding:0.75rem 1.5rem;cursor:pointer;transition:background 0.2s;white-space:nowrap;}
+.btn-cert:hover{background:#34d399;}
+.btn-print{display:block;margin:1.5rem auto 0;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;background:transparent;color:var(--accent2);border:1px solid var(--accent2);padding:0.65rem 2rem;cursor:pointer;transition:all 0.2s;}
+.btn-print:hover{background:var(--accent2);color:var(--bg);}
+
+/* ── DIVIDER ── */
+.divider{display:flex;align-items:center;gap:1rem;margin:3rem 0;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.divider span{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);white-space:nowrap;}
+
+/* ── LESSON NAV ── */
+.lesson-nav{display:flex;gap:1rem;margin-bottom:3rem;}
+.lesson-nav a{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:0.5rem 1rem;transition:all 0.2s;}
+.lesson-nav a:hover{border-color:var(--accent);color:var(--accent);}
+.lesson-nav a.active{border-color:var(--accent);color:var(--accent);background:rgba(167,139,250,0.08);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* PRINT */
+@media print{body>*:not(#cert-section){display:none!important;}#cert-section{display:block!important;}#hud,.cert-form,.btn-print{display:none!important;}#certificate{box-shadow:none!important;}}
+
+@media(max-width:600px){
+  .hero{grid-template-columns:1fr;}.hero-meta{display:none;}
+  .score-grid{grid-template-columns:1fr;}.cert-form{flex-direction:column;}
+  #certificate{padding:2rem 1.25rem;}.color-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HUD ── -->
+<div id="hud">
+  <div class="hud-inner">
+    <div class="hud-logo">NEX GENIX</div>
+    <div class="hud-lesson">LESSON 02</div>
+    <div class="hud-progress-wrap">
+      <div class="hud-progress-labels">
+        <span>Reading Progress</span>
+        <span id="pct-label">0%</span>
+      </div>
+      <div class="hud-bar"><div class="hud-bar-fill" id="scroll-bar"></div></div>
+    </div>
+    <div class="hud-checkpoints" id="checkpoints">
+      <div class="checkpoint" id="cp0" title="Introduction"></div>
+      <div class="checkpoint" id="cp1" title="Brand Name"></div>
+      <div class="checkpoint quiz" id="cp2" title="Quiz 1"></div>
+      <div class="checkpoint" id="cp3" title="Color Palettes"></div>
+      <div class="checkpoint" id="cp4" title="Industry Colors"></div>
+      <div class="checkpoint quiz" id="cp5" title="Final Exam"></div>
+    </div>
+    <div class="hud-score" id="hud-score">Score: —</div>
+  </div>
+</div>
+
+<!-- ── HERO ── -->
+<header>
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Business Course &nbsp;·&nbsp; Module 2</div>
+      <h1>Logo <span>Design</span></h1>
+      <p class="hero-sub">The artistry and impact of logo design — unveiling the essence of brand identity through color, typography, and strategy.</p>
+    </div>
+    <div class="hero-meta">
+      <span class="meta-badge">Level <b>Beginner</b></span>
+      <span class="meta-badge">Est. time <b>30 min</b></span>
+      <span class="meta-badge">Quizzes <b>2</b></span>
+      <span class="meta-badge">Passing <b>70%</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ── CONTENT ── -->
+<div class="course-wrap">
+
+  <div class="lesson-nav">
+    <a href="business-lms-lesson1.html">← Lesson 1: The Basics</a>
+    <a href="#" class="active">Lesson 2: Logo Design</a>
+  </div>
+
+  <!-- §1 INTRODUCTION -->
+  <section class="content-section" id="sec-intro" data-checkpoint="0">
+    <div class="sec-label">§ 01 — Overview</div>
+    <h2>What Is Logo Design?</h2>
+    <p>In the realm of visual communication and brand representation, few elements hold as much significance and power as the logo. A succinct symbol or emblem — often no larger than a few inches — the logo encapsulates the very essence of a brand, distilling its identity, values, and aspirations into a single image.</p>
+    <p>From the iconic swoosh of Nike to the golden arches of McDonald's, logos have become ingrained in our collective consciousness, serving as the visual shorthand for some of the world's most recognizable companies and organizations.</p>
+    <div class="callout">Logo design is not merely about crafting an attractive graphic. It is about crafting a visual representation that resonates with target audiences, communicates the brand's message effectively, and withstands the test of time.</div>
+    <p>At its core, logo making is a journey of discovery. Designers delve deep into the brand's identity, values, and target audience to unearth visual elements that best encapsulate its essence. This process begins with extensive research and brainstorming — analyzing market trends, studying competitor logos, and exploring design styles to identify the unique visual language that will set the brand apart.</p>
+    <p>From this foundation emerges the <strong>conceptualization phase</strong>, where ideas are sketched, refined, and iterated upon. Designers experiment with shapes, colors, typography, and symbolism, seeking the perfect balance between simplicity and complexity, tradition and innovation. Every element is carefully considered — from the curvature of a line to the spacing between letters.</p>
+    <p>A well-crafted logo not only captures the essence of a brand but also invites interpretation, sparking curiosity and engagement. It becomes a visual anchor, fostering brand recognition, loyalty, and trust across diverse demographics and cultures.</p>
+    <p>In today's digital age, a well-designed logo can transcend cultural and linguistic barriers, communicating the essence of a brand in an instant and leaving a lasting impression on consumers across the globe.</p>
+  </section>
+
+  <div class="divider"><span>brand identity</span></div>
+
+  <!-- §2 BRAND NAME -->
+  <section class="content-section" id="sec-brandname" data-checkpoint="1">
+    <div class="sec-label">§ 02 — Brand Name</div>
+    <h2>Establishing Your Brand Name</h2>
+    <p>Consider brainstorming a name that perfectly encapsulates your business. Aim for something <strong>catchy and memorable</strong>. Prioritize simplicity to ensure ease of recall. It is crucial to contemplate the brand name <em>before</em> finalizing the color palette, as it lays the foundation for the brand's identity and influences all aspects of its visual presentation.</p>
+
+    <h3>Why Brand Name Comes First</h3>
+    <p>Before diving into the intricacies of color selection, it is paramount to establish a strong foundation by defining the brand's identity through its name. The brand name serves as the cornerstone of its identity — encapsulating its essence, values, and positioning in the market.</p>
+    <p>Once the brand name is established, it serves as a guiding beacon for subsequent branding decisions, including the choice of color palette. The name sets the tone and personality of the brand, influencing the emotions and perceptions it evokes in consumers.</p>
+
+    <div class="color-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+      <div style="background:var(--card);border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--accent);font-size:0.9rem;margin-bottom:0.5rem;">✦ Example: Sophisticated Brand</div>
+        <p style="font-size:0.85rem;margin:0;color:var(--muted);">A name conveying elegance calls for a palette featuring subdued tones and neutral hues — reinforcing perceptions of refinement and luxury.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--accent2);font-size:0.9rem;margin-bottom:0.5rem;">✦ Example: Energetic Brand</div>
+        <p style="font-size:0.85rem;margin:0;color:var(--muted);">A name conveying energy and excitement calls for bold, vibrant colors to amplify the message and capture consumers' attention immediately.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:1.5rem;">By establishing the brand name as the starting point, businesses can ensure consistency and coherence across all brand touchpoints — creating a memorable identity that resonates with consumers and fosters brand loyalty.</div>
+  </section>
+
+  <!-- ════════ QUIZ 1 ════════ -->
+  <div class="quiz-block" id="quiz1" data-checkpoint="2">
+    <div class="quiz-header">
+      <div class="quiz-icon">📝</div>
+      <div class="quiz-header-text">
+        <div class="quiz-title">Quiz 1 — Logo Design Fundamentals</div>
+        <div class="quiz-subtitle">5 QUESTIONS &nbsp;·&nbsp; MULTIPLE CHOICE &nbsp;·&nbsp; PASSING: 60%</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">1</span>What is the primary purpose of a logo according to this lesson?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_1" value="A"><span class="opt-letter">A</span>To make a business look expensive</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="B"><span class="opt-letter">B</span>To distill a brand's identity, values, and aspirations into a single visual image</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="C"><span class="opt-letter">C</span>To list all the products a company sells</label>
+        <label class="option-label"><input type="radio" name="q1_1" value="D"><span class="opt-letter">D</span>To replace a brand's written name entirely</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">2</span>During the conceptualization phase, designers experiment with all of the following EXCEPT:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_2" value="A"><span class="opt-letter">A</span>Shapes and colors</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="B"><span class="opt-letter">B</span>Typography and symbolism</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="C"><span class="opt-letter">C</span>Competitor pricing strategies</label>
+        <label class="option-label"><input type="radio" name="q1_2" value="D"><span class="opt-letter">D</span>The balance between simplicity and complexity</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">3</span>Why should the brand name be established BEFORE choosing a color palette?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_3" value="A"><span class="opt-letter">A</span>Because color printing is expensive and must be budgeted first</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="B"><span class="opt-letter">B</span>Because the brand name sets the tone and personality that guides color selection</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="C"><span class="opt-letter">C</span>Because designers refuse to work without a name</label>
+        <label class="option-label"><input type="radio" name="q1_3" value="D"><span class="opt-letter">D</span>Because the name determines how many colors can be used</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">4</span>What does a "well-crafted logo" serve as for a brand, according to the lesson?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_4" value="A"><span class="opt-letter">A</span>A legal trademark document</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="B"><span class="opt-letter">B</span>A replacement for all marketing materials</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="C"><span class="opt-letter">C</span>A visual anchor fostering brand recognition, loyalty, and trust</label>
+        <label class="option-label"><input type="radio" name="q1_4" value="D"><span class="opt-letter">D</span>A guarantee of product quality</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">5</span>Which quality is described as essential for a brand name to ensure consumers can easily remember it?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q1_5" value="A"><span class="opt-letter">A</span>Length — it should be at least 3 words long</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="B"><span class="opt-letter">B</span>Simplicity and memorability</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="C"><span class="opt-letter">C</span>It must contain the founder's name</label>
+        <label class="option-label"><input type="radio" name="q1_5" value="D"><span class="opt-letter">D</span>It must be in a foreign language</label>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-submit" id="submit-q1" onclick="submitQuiz(1)">Submit Quiz 1</button>
+      <div class="quiz-result" id="result-q1"></div>
+    </div>
+  </div>
+
+  <div class="divider"><span>color psychology</span></div>
+
+  <!-- §3 COLOR PALETTE -->
+  <section class="content-section" id="sec-colors" data-checkpoint="3">
+    <div class="sec-label">§ 03 — Color Palette</div>
+    <h2>The Power of Color in Logo Design</h2>
+    <p>Designing a logo is paramount in establishing a business — it serves as the initial point of contact with potential customers. Crafting an attention-grabbing logo is essential to pique the interest of your target audience and encourage them to explore your business.</p>
+    <p>The color palette is carefully chosen to convey specific brand attributes, evoke emotional responses, and differentiate the brand in a competitive market. Below are the most commonly used colors across all industries and what they communicate.</p>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#dc2626;"></div>
+        <div class="color-body">
+          <div class="color-name">🔴 Red</div>
+          <div class="color-desc">Appetite stimulation, energy, passion. Conveys excitement, boldness, and indulgence. Used widely in food and beverage brands.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#1d4ed8;"></div>
+        <div class="color-body">
+          <div class="color-name">🔵 Blue</div>
+          <div class="color-desc">Trust, reliability, professionalism, purity. Evokes refreshing beverages, calm, and security. Popular in F&B, BPO, and education.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#92400e;"></div>
+        <div class="color-body">
+          <div class="color-name">🟤 Brown</div>
+          <div class="color-desc">Richness, warmth, comfort. Evokes roasted flavors, chocolate, coffee, baked goods. Conveys authenticity and nostalgia.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#ea580c;"></div>
+        <div class="color-body">
+          <div class="color-name">🟠 Orange</div>
+          <div class="color-desc">Energy, warmth, excitement. Associated with sweet, tangy, or spicy flavors. Adds zest and liveliness. Great for food and education.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#ca8a04;"></div>
+        <div class="color-body">
+          <div class="color-name">🟡 Yellow</div>
+          <div class="color-desc">Warmth, positivity, happiness. Represents tangy, citrusy, refreshing flavors. Evokes sweetness and optimism.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#16a34a;"></div>
+        <div class="color-body">
+          <div class="color-name">🟢 Green</div>
+          <div class="color-desc">Freshness, health, natural ingredients. Associated with organic and sustainable products. Conveys vitality and wellness.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#e879f9;"></div>
+        <div class="color-body">
+          <div class="color-name">🩷 Pink</div>
+          <div class="color-desc">Femininity, gentleness, romance. Softness and delicacy. Dominant in cosmetics, skincare, and personal care branding.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:linear-gradient(135deg,#d4af37,#f5e17a);"></div>
+        <div class="color-body">
+          <div class="color-name">✨ Gold</div>
+          <div class="color-desc">Luxury, sophistication, elegance. Signifies opulence and exclusivity. Common in high-end skincare and premium product branding.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#1f2937;"></div>
+        <div class="color-body">
+          <div class="color-name">⬛ Black</div>
+          <div class="color-desc">Power, sophistication, glamour. Conveys elegance and mystery. Used in luxury cosmetics and premium retail branding.</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#6b7280;"></div>
+        <div class="color-body">
+          <div class="color-name">⬜ Gray</div>
+          <div class="color-desc">Sophistication, neutrality, balance. Complements other colors. Conveys precision and professionalism — popular in BPO and tech.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><span>by industry</span></div>
+
+  <!-- §4 INDUSTRY COLOR PALETTES -->
+  <section class="content-section" id="sec-industry" data-checkpoint="4">
+    <div class="sec-label">§ 04 — Color by Industry</div>
+    <h2>Industry-Specific Color Strategies</h2>
+
+    <!-- FOOD & BEVERAGE -->
+    <div class="industry-block">
+      <h3>🍽️ Food &amp; Beverage</h3>
+      <p>Color palettes for food and beverage logos vary depending on the specific brand identity, target audience, and industry segment. Key choices include:</p>
+      <div class="color-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">
+        <div class="color-card"><div class="color-swatch" style="background:#dc2626;"></div><div class="color-body"><div class="color-name">Red</div><div class="color-desc">Appetite stimulation, excitement, savory indulgence</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#1d4ed8;"></div><div class="color-body"><div class="color-name">Blue</div><div class="color-desc">Trust, cleanliness, refreshing beverages</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#92400e;"></div><div class="color-body"><div class="color-name">Brown</div><div class="color-desc">Richness, coffee, baked goods, comfort</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#ea580c;"></div><div class="color-body"><div class="color-name">Orange</div><div class="color-desc">Sweet, tangy, fruity flavors, energy</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#ca8a04;"></div><div class="color-body"><div class="color-name">Yellow</div><div class="color-desc">Warmth, sweetness, citrus, happiness</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#16a34a;"></div><div class="color-body"><div class="color-name">Green</div><div class="color-desc">Freshness, organic, wholesome ingredients</div></div></div>
+      </div>
+    </div>
+
+    <!-- RETAIL -->
+    <div class="industry-block" style="border-left-color:var(--accent2);">
+      <h3 style="color:var(--accent2);">🏪 Retail</h3>
+      <p>Retail color palettes are strategic decisions aligned with brand identity, target audience, and market objectives:</p>
+      <div class="color-grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr));">
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(90deg,#111,#6b7280,#fff);"></div><div class="color-body"><div class="color-name">Neutral (Black, White, Gray)</div><div class="color-desc">Sophistication, timelessness. High-end and minimalist retailers. Lets products stand out.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(90deg,#dc2626,#ea580c,#ca8a04);"></div><div class="color-body"><div class="color-name">Bold &amp; Vibrant (Red, Orange, Yellow)</div><div class="color-desc">Attention-grabbing, energetic. Creates urgency. Common in food, fashion, and tech retail.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(90deg,#bfdbfe,#fbcfe8,#a7f3d0);"></div><div class="color-body"><div class="color-name">Soft &amp; Pastel</div><div class="color-desc">Calming, youthful, inviting. Baby products, beauty, home decor — targets families and children.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(90deg,#92400e,#16a34a,#d4b896);"></div><div class="color-body"><div class="color-name">Earth Tones (Brown, Green, Beige)</div><div class="color-desc">Grounded, natural, sustainable. Eco-friendly goods, outdoor gear, artisanal products.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(135deg,#7c3aed,#06b6d4,#f59e0b,#10b981);"></div><div class="color-body"><div class="color-name">Gradients &amp; Multicolor</div><div class="color-desc">Visual interest, diversity, creativity. Targets younger demographics and tech/lifestyle brands.</div></div></div>
+      </div>
+    </div>
+
+    <!-- COSMETICS -->
+    <div class="industry-block" style="border-left-color:#e879f9;">
+      <h3 style="color:#e879f9;">💄 Cosmetics &amp; Personal Care</h3>
+      <p>Color in cosmetics is carefully curated to reflect brand values, appeal to target consumers, and differentiate products in a highly competitive market:</p>
+      <div class="color-grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr));">
+        <div class="color-card"><div class="color-swatch" style="background:#f9a8d4;"></div><div class="color-body"><div class="color-name">Pink</div><div class="color-desc">Femininity, softness, beauty and self-care. Dominant in makeup and skincare.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#f5f5f5;border:1px solid #ddd;"></div><div class="color-body"><div class="color-name">White</div><div class="color-desc">Purity, cleanliness, freshness. Reinforces quality and safety perceptions.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(135deg,#d4af37,#f5e17a);"></div><div class="color-body"><div class="color-name">Gold</div><div class="color-desc">Luxury, sophistication, exclusivity. High-end fragrances and premium skincare.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:#111;"></div><div class="color-body"><div class="color-name">Black</div><div class="color-desc">Power, glamour, prestige. Luxury cosmetics and edgy or upscale demographics.</div></div></div>
+        <div class="color-card"><div class="color-swatch" style="background:linear-gradient(90deg,#a7f3d0,#e9d5ff,#bfdbfe);"></div><div class="color-body"><div class="color-name">Pastels</div><div class="color-desc">Freshness, youthfulness, playfulness. Bath & body and youth-targeted skincare.</div></div></div>
+      </div>
+    </div>
+
+    <!-- EDUCATION & BPO -->
+    <div class="industry-block" style="border-left-color:var(--accent3);">
+      <h3 style="color:var(--accent3);">🎓 Online Education &amp; BPO</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:0.5rem;">
+        <div>
+          <div class="palette-title">Virtual Education Sites</div>
+          <div class="color-grid" style="grid-template-columns:1fr;">
+            <div class="color-card"><div class="color-swatch" style="background:#1d4ed8;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Blue</div><div class="color-desc">Trust, professionalism, focus, credibility</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#16a34a;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Green</div><div class="color-desc">Growth, renewal, holistic learning</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ca8a04;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Yellow</div><div class="color-desc">Enlightenment, optimism, creativity</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ea580c;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Orange</div><div class="color-desc">Enthusiasm, motivation, dynamic energy</div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="palette-title" style="color:var(--accent3);">BPO Sites</div>
+          <div class="color-grid" style="grid-template-columns:1fr;">
+            <div class="color-card"><div class="color-swatch" style="background:#1d4ed8;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Blue</div><div class="color-desc">Trustworthiness, reliability, stability</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#6b7280;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Gray</div><div class="color-desc">Precision, balance, professionalism</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#16a34a;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Green</div><div class="color-desc">Growth, collaboration, success</div></div></div>
+            <div class="color-card"><div class="color-swatch" style="background:#ea580c;height:36px;"></div><div class="color-body" style="padding:0.65rem 1rem;"><div class="color-name" style="font-size:0.82rem;">Orange</div><div class="color-desc">Efficiency, agility, forward-thinking</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1.25rem;">In both cases, color palettes are chosen to align with brand identity, values, and target audience — creating a positive impression and conveying professionalism in a competitive market.</div>
+    </div>
+  </section>
+
+  <!-- ════════ FINAL EXAM ════════ -->
+  <div class="exam-block" id="quiz2" data-checkpoint="5">
+    <div class="quiz-header">
+      <div class="quiz-icon">🎓</div>
+      <div class="quiz-header-text">
+        <div class="quiz-title">Final Exam — Lesson 2 Comprehensive</div>
+        <div class="quiz-subtitle">10 QUESTIONS &nbsp;·&nbsp; MULTIPLE CHOICE &nbsp;·&nbsp; PASSING: 70% &nbsp;·&nbsp; EARNS CERTIFICATE</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">1</span>Which color is most commonly associated with appetite stimulation and is widely used in food and beverage logos?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_1" value="A"><span class="opt-letter">A</span>Blue</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="B"><span class="opt-letter">B</span>Green</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="C"><span class="opt-letter">C</span>Red</label>
+        <label class="option-label"><input type="radio" name="q2_1" value="D"><span class="opt-letter">D</span>Gray</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">2</span>A cosmetics brand targeting a luxury market would most likely use which color to convey opulence and exclusivity?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_2" value="A"><span class="opt-letter">A</span>Orange</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="B"><span class="opt-letter">B</span>Gold</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="C"><span class="opt-letter">C</span>Yellow</label>
+        <label class="option-label"><input type="radio" name="q2_2" value="D"><span class="opt-letter">D</span>Red</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">3</span>Which color palette strategy in retail creates a sense of urgency and excitement and is common in food and fashion industries?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_3" value="A"><span class="opt-letter">A</span>Soft and Pastel Colors</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="B"><span class="opt-letter">B</span>Earth Tones</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="C"><span class="opt-letter">C</span>Bold and Vibrant Colors (Red, Orange, Yellow)</label>
+        <label class="option-label"><input type="radio" name="q2_3" value="D"><span class="opt-letter">D</span>Neutral Colors</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">4</span>In the context of BPO logos, gray is used primarily to convey:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_4" value="A"><span class="opt-letter">A</span>Excitement and youth</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="B"><span class="opt-letter">B</span>Sophistication, neutrality, and precision</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="C"><span class="opt-letter">C</span>Natural and organic qualities</label>
+        <label class="option-label"><input type="radio" name="q2_4" value="D"><span class="opt-letter">D</span>Femininity and romance</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">5</span>Green is described in this lesson as appropriate for online education logos because it represents:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_5" value="A"><span class="opt-letter">A</span>Indulgence and comfort</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="B"><span class="opt-letter">B</span>Urgency and speed</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="C"><span class="opt-letter">C</span>Growth, renewal, and a dynamic evolving learning experience</label>
+        <label class="option-label"><input type="radio" name="q2_5" value="D"><span class="opt-letter">D</span>Power and glamour</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">6</span>Which retail color palette strategy would be most appropriate for a brand selling eco-friendly outdoor gear?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_6" value="A"><span class="opt-letter">A</span>Bold and Vibrant Colors</label>
+        <label class="option-label"><input type="radio" name="q2_6" value="B"><span class="opt-letter">B</span>Soft and Pastel Colors</label>
+        <label class="option-label"><input type="radio" name="q2_6" value="C"><span class="opt-letter">C</span>Earth Tones (Brown, Green, Beige)</label>
+        <label class="option-label"><input type="radio" name="q2_6" value="D"><span class="opt-letter">D</span>Color Gradients and Multicolor</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">7</span>Pink is the dominant color in cosmetics branding primarily because it is associated with:</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_7" value="A"><span class="opt-letter">A</span>Power and authority</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="B"><span class="opt-letter">B</span>Femininity, gentleness, and beauty and self-care</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="C"><span class="opt-letter">C</span>Environmental sustainability</label>
+        <label class="option-label"><input type="radio" name="q2_7" value="D"><span class="opt-letter">D</span>Trust and reliability</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">8</span>Logo design is described in this lesson as a combination of which two disciplines?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_8" value="A"><span class="opt-letter">A</span>Accounting and engineering</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="B"><span class="opt-letter">B</span>Art and science (creativity and strategy)</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="C"><span class="opt-letter">C</span>Photography and writing</label>
+        <label class="option-label"><input type="radio" name="q2_8" value="D"><span class="opt-letter">D</span>Sales and distribution</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">9</span>Which color in the cosmetics category conveys purity, cleanliness, and freshness — reassuring consumers about quality and safety?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_9" value="A"><span class="opt-letter">A</span>Black</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="B"><span class="opt-letter">B</span>Gold</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="C"><span class="opt-letter">C</span>White</label>
+        <label class="option-label"><input type="radio" name="q2_9" value="D"><span class="opt-letter">D</span>Pink</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">10</span>According to the lesson, what is the correct order when building a brand's visual identity?</div>
+      <div class="options">
+        <label class="option-label"><input type="radio" name="q2_10" value="A"><span class="opt-letter">A</span>Choose the color palette first, then design the logo, then name the brand</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="B"><span class="opt-letter">B</span>Design the logo first, then establish the brand name</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="C"><span class="opt-letter">C</span>Establish the brand name first, then use it to guide the color palette and visual identity</label>
+        <label class="option-label"><input type="radio" name="q2_10" value="D"><span class="opt-letter">D</span>The order does not matter as long as all elements are completed</label>
+      </div>
+    </div>
+
+    <div class="quiz-footer">
+      <button class="btn-submit" id="submit-q2" onclick="submitQuiz(2)">Submit Final Exam</button>
+      <div class="quiz-result" id="result-q2"></div>
+    </div>
+  </div>
+
+  <!-- ── SCORE SUMMARY ── -->
+  <div id="score-summary">
+    <div class="sec-label" style="justify-content:center;margin-bottom:0.75rem;">Assessment Complete</div>
+    <h2 style="text-align:center;border:none;">Your Results</h2>
+    <div class="score-grid">
+      <div class="score-item"><div class="score-item-label">QUIZ 1 SCORE</div><div class="score-item-val" id="sum-q1">—</div></div>
+      <div class="score-item"><div class="score-item-label">FINAL EXAM SCORE</div><div class="score-item-val" id="sum-q2">—</div></div>
+      <div class="score-item"><div class="score-item-label">OVERALL GRADE</div><div class="score-item-val" id="sum-overall">—</div></div>
+    </div>
+    <p id="sum-verdict" style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--muted);"></p>
+  </div>
+
+  <!-- ── CERTIFICATE ── -->
+  <div id="cert-section">
+    <div class="cert-unlock">Certificate Unlocked — Enter your name to generate</div>
+    <div class="cert-form">
+      <input type="text" id="student-name" placeholder="Enter your full name…" maxlength="60">
+      <button class="btn-cert" onclick="generateCert()">Generate Certificate</button>
+    </div>
+    <div id="certificate">
+      <div class="cert-corner tl"></div><div class="cert-corner tr"></div>
+      <div class="cert-corner bl"></div><div class="cert-corner br"></div>
+      <div class="cert-school">Nex Genix Business School</div>
+      <div class="cert-title">Certificate</div>
+      <div class="cert-subtitle">of Completion</div>
+      <div class="cert-presents">This certifies that</div>
+      <div class="cert-name" id="cert-name-display">—</div>
+      <div class="cert-body">
+        has successfully completed all assessments for<br>
+        <strong>Module 2: Business Course — Logo Design</strong><br>
+        demonstrating a solid understanding of brand identity,<br>
+        logo design principles, and color psychology.
+      </div>
+      <div class="cert-course">Business Course: Logo Design</div>
+      <div class="cert-grade" id="cert-grade-display">GRADE: —</div>
+      <div class="cert-sigs">
+        <div class="cert-sig"><div class="cert-sig-line"></div><div class="cert-sig-name">Nex Genix</div><div class="cert-sig-role">Course Director</div></div>
+        <div class="cert-sig"><div class="cert-sig-line"></div><div class="cert-sig-name" id="cert-date-display">—</div><div class="cert-sig-role">Date of Completion</div></div>
+      </div>
+      <div class="cert-seal">NEX<br>GENIX<br>★</div>
+    </div>
+    <button class="btn-print" onclick="window.print()">⎙ Save / Print Certificate</button>
+  </div>
+
+</div><!-- /course-wrap -->
+
+<script>
+// ── ANSWER KEY ──
+const ANSWERS = {
+  quiz1: { q1_1:'B', q1_2:'C', q1_3:'B', q1_4:'C', q1_5:'B' },
+  quiz2: { q2_1:'C', q2_2:'B', q2_3:'C', q2_4:'B', q2_5:'C',
+           q2_6:'C', q2_7:'B', q2_8:'B', q2_9:'C', q2_10:'C' }
+};
+let scores = { q1: null, q2: null };
+
+// Option highlight
+document.querySelectorAll('.option-label').forEach(label => {
+  label.addEventListener('click', function() {
+    const name = this.querySelector('input').name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(inp => {
+      inp.closest('.option-label').classList.remove('selected');
+    });
+    this.classList.add('selected');
+  });
+});
+
+function submitQuiz(qNum) {
+  const isQ1 = qNum === 1;
+  const key = isQ1 ? 'quiz1' : 'quiz2';
+  const prefix = isQ1 ? 'q1_' : 'q2_';
+  const total = isQ1 ? 5 : 10;
+  const passingPct = isQ1 ? 60 : 70;
+  const answers = ANSWERS[key];
+  let correct = 0;
+
+  const block = document.getElementById(isQ1 ? 'quiz1' : 'quiz2');
+  block.querySelectorAll('.option-label').forEach(l => { l.style.cursor='default'; l.style.pointerEvents='none'; });
+
+  for (let i = 1; i <= total; i++) {
+    const qKey = prefix + i;
+    const correctAns = answers[qKey];
+    const selected = document.querySelector(`input[name="${qKey}"]:checked`);
+    document.querySelectorAll(`input[name="${qKey}"]`).forEach(inp => {
+      if (inp.value === correctAns) inp.closest('.option-label').classList.add('reveal-correct');
+    });
+    if (selected) {
+      const lbl = selected.closest('.option-label');
+      if (selected.value === correctAns) { lbl.classList.remove('selected','reveal-correct'); lbl.classList.add('correct'); correct++; }
+      else { lbl.classList.remove('selected'); lbl.classList.add('wrong'); }
+    }
+  }
+
+  const pct = Math.round((correct / total) * 100);
+  const passed = pct >= passingPct;
+  scores[`q${qNum}`] = pct;
+
+  const resultEl = document.getElementById(`result-q${qNum}`);
+  resultEl.style.display = 'block';
+  resultEl.className = 'quiz-result ' + (passed ? 'pass' : 'fail');
+  resultEl.innerHTML = passed
+    ? `✓ PASSED &nbsp;|&nbsp; ${correct}/${total} correct &nbsp;(${pct}%) &nbsp;— Well done!`
+    : `✗ FAILED &nbsp;|&nbsp; ${correct}/${total} correct &nbsp;(${pct}%) &nbsp;— Review and try again.`;
+  document.getElementById(`submit-q${qNum}`).disabled = true;
+
+  if (passed) document.getElementById(isQ1 ? 'cp2' : 'cp5').classList.add('done');
+  updateHudScore();
+  if (scores.q1 !== null && scores.q2 !== null) showSummary();
+}
+
+function updateHudScore() {
+  const parts = [];
+  if (scores.q1 !== null) parts.push(`Q1:${scores.q1}%`);
+  if (scores.q2 !== null) parts.push(`Exam:${scores.q2}%`);
+  document.getElementById('hud-score').textContent = parts.length ? parts.join('  ') : 'Score: —';
+}
+
+function showSummary() {
+  const s = document.getElementById('score-summary');
+  s.style.display = 'block';
+  s.scrollIntoView({ behavior:'smooth', block:'start' });
+  const q1 = scores.q1, q2 = scores.q2;
+  const overall = Math.round((q1 + q2 * 2) / 3);
+  const el1 = document.getElementById('sum-q1');
+  const el2 = document.getElementById('sum-q2');
+  const elO = document.getElementById('sum-overall');
+  el1.textContent = q1 + '%'; el1.className = 'score-item-val ' + colorClass(q1, 60);
+  el2.textContent = q2 + '%'; el2.className = 'score-item-val ' + colorClass(q2, 70);
+  elO.textContent = overall + '%'; elO.className = 'score-item-val ' + colorClass(overall, 65);
+  const examPassed = q2 >= 70;
+  document.getElementById('sum-verdict').textContent = examPassed
+    ? '🎓 Final Exam passed! You have unlocked your certificate below.'
+    : '📖 Final Exam not yet passed (need 70%). Review the lesson and resubmit.';
+  if (examPassed) setTimeout(() => { const cs = document.getElementById('cert-section'); cs.style.display='block'; cs.scrollIntoView({behavior:'smooth'}); }, 600);
+}
+
+function colorClass(pct, threshold) {
+  if (pct >= threshold + 20) return 'good';
+  if (pct >= threshold) return 'ok';
+  return 'bad';
+}
+
+function generateCert() {
+  const name = document.getElementById('student-name').value.trim();
+  if (!name) { alert('Please enter your full name.'); return; }
+  const q2 = scores.q2;
+  const grade = q2 >= 90 ? 'A (Excellent)' : q2 >= 80 ? 'B (Very Good)' : q2 >= 70 ? 'C (Satisfactory)' : 'Below Passing';
+  document.getElementById('cert-name-display').textContent = name;
+  document.getElementById('cert-grade-display').textContent = `GRADE: ${grade} · ${q2}%`;
+  const dateStr = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('cert-date-display').textContent = dateStr;
+}
+
+// ── SCROLL PROGRESS ──
+const checkpointMap = [
+  { id:'sec-intro',     cp:'cp0' },
+  { id:'sec-brandname', cp:'cp1' },
+  { id:'quiz1',         cp:'cp2' },
+  { id:'sec-colors',    cp:'cp3' },
+  { id:'sec-industry',  cp:'cp4' },
+  { id:'quiz2',         cp:'cp5' },
+];
+
+function onScroll() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.min(100, Math.round((scrollTop / docH) * 100)) : 0;
+  document.getElementById('scroll-bar').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+  checkpointMap.forEach(({ id, cp }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+      const cpEl = document.getElementById(cp);
+      if (!cpEl.classList.contains('done') && !cpEl.classList.contains('quiz')) cpEl.classList.add('done');
+    }
+  });
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+</script>
+</body>
+</html>
