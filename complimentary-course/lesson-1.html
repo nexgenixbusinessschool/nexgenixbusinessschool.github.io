@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 — Business Course: The Basics</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --cream: #ede7d5;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --rust: #b84c2a;
+    --teal: #1a5f6a;
+    --teal-light: #2a8a9a;
+    --rule: #c8b896;
+    --muted: #7a6f5e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-rule {
+    height: 5px;
+    background: linear-gradient(90deg, var(--rust), var(--gold), var(--gold-light));
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+
+  h1 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .header-meta span {
+    display: block;
+    line-height: 1.8;
+  }
+
+  .header-tagline {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+    font-size: 1.05rem;
+    color: #a09585;
+    font-style: italic;
+    border-bottom: 1px solid #2a2620;
+  }
+
+  /* ─── PROGRESS NAV ─── */
+  .toc-bar {
+    background: var(--ink);
+    padding: 0.85rem 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .toc-bar::-webkit-scrollbar { display: none; }
+
+  .toc-bar a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6a5f50;
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    white-space: nowrap;
+    border-right: 1px solid #2a2620;
+    transition: color 0.2s;
+  }
+
+  .toc-bar a:first-child { padding-left: 0; }
+  .toc-bar a:hover { color: var(--gold); }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  /* ─── SECTION STYLES ─── */
+  .section {
+    margin-bottom: 5rem;
+    animation: fadeUp 0.6s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.12s; }
+  .section:nth-child(3) { animation-delay: 0.19s; }
+  .section:nth-child(4) { animation-delay: 0.26s; }
+  .section:nth-child(5) { animation-delay: 0.33s; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--rule);
+    position: relative;
+  }
+
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 3rem;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 2rem 0 0.75rem;
+  }
+
+  p {
+    margin-bottom: 1.1rem;
+    color: #3a3228;
+    font-size: 0.975rem;
+  }
+
+  /* ─── INTRO CARD ─── */
+  .intro-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 2.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .intro-card::before {
+    content: '❝';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.5rem;
+    font-size: 8rem;
+    color: rgba(200,146,42,0.12);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .intro-card p {
+    color: #c8b896;
+    font-size: 1rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── NUMBERED CARDS ─── */
+  .fundamentals-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .fund-card {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    transition: box-shadow 0.25s;
+  }
+
+  .fund-card:hover {
+    box-shadow: 6px 6px 0 var(--gold);
+  }
+
+  .fund-number {
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--cream);
+  }
+
+  .fund-body {
+    padding: 1.5rem 1.75rem;
+    background: white;
+  }
+
+  .fund-body h3 {
+    margin-top: 0;
+    font-size: 1.05rem;
+    color: var(--teal);
+  }
+
+  .fund-body p {
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── SUB-ITEMS ─── */
+  .sub-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+  }
+
+  .sub-list li {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 0.92rem;
+    color: #3a3228;
+  }
+
+  .sub-list li:last-child { border-bottom: none; }
+
+  .sub-list li::before {
+    content: attr(data-alpha);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    background: var(--gold);
+    color: var(--ink);
+    min-width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  /* ─── LOB SECTION ─── */
+  .lob-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .lob-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .lob-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(15,14,12,0.1);
+  }
+
+  .lob-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .lob-card h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .lob-card p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    margin-bottom: 0;
+  }
+
+  .lob-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    background: var(--cream);
+    color: var(--muted);
+    padding: 0.2rem 0.5rem;
+  }
+
+  /* ─── COMPARISON TABLES ─── */
+  .table-section {
+    margin-bottom: 3rem;
+  }
+
+  .table-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .table-title::before {
+    content: '';
+    width: 0.4rem;
+    height: 1.2rem;
+    background: var(--rust);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .adv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .adv-table thead tr {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .adv-table thead th {
+    padding: 0.65rem 1rem;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .adv-table thead th:first-child {
+    border-left: 4px solid var(--teal);
+  }
+
+  .adv-table thead th:last-child {
+    border-left: 4px solid var(--rust);
+  }
+
+  .adv-table tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+
+  .adv-table tbody tr:hover { background: var(--cream); }
+
+  .adv-table tbody td {
+    padding: 0.7rem 1rem;
+    vertical-align: top;
+  }
+
+  .adv-table tbody td:first-child {
+    color: var(--teal);
+    font-weight: 500;
+    border-left: 4px solid rgba(26,95,106,0.2);
+  }
+
+  .adv-table tbody td:last-child {
+    color: var(--rust);
+    border-left: 4px solid rgba(184,76,42,0.15);
+  }
+
+  .adv-table tbody tr:nth-child(even) { background: #faf7f0; }
+  .adv-table tbody tr:nth-child(even):hover { background: var(--cream); }
+
+  /* ─── PERMITS SECTION ─── */
+  .permits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .permit-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--gold);
+    padding: 1rem 1.1rem;
+    transition: border-top-color 0.2s;
+  }
+
+  .permit-card:hover { border-top-color: var(--teal); }
+
+  .permit-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.1em;
+  }
+
+  .permit-card h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .permit-card p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  /* ─── DIVIDER ─── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0;
+    color: var(--rule);
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-divider span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    border-left: 4px solid var(--gold);
+    background: linear-gradient(to right, rgba(200,146,42,0.06), transparent);
+    padding: 1.1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: #4a3f2e;
+    font-style: italic;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: #6a5f50;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: #6a5f50;
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold), var(--rust));
+    margin-bottom: 0;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--paper); }
+  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .fund-card { grid-template-columns: 3rem 1fr; }
+    .fund-number { font-size: 1.5rem; }
+    .lob-grid { grid-template-columns: 1fr; }
+    .permits-grid { grid-template-columns: 1fr 1fr; }
+    .intro-card { padding: 1.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-rule"></div>
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-eyebrow">Nex Genix Business School &nbsp;·&nbsp; Business Course</div>
+      <h1>Lesson 1:<br><em>The Basics</em></h1>
+    </div>
+    <div class="header-meta">
+      <span>MODULE 01</span>
+      <span>FUNDAMENTALS</span>
+      <span>BEGINNER LEVEL</span>
+    </div>
+  </div>
+  <p class="header-tagline">Grasp the basics of the business world in the simplest manner</p>
+  <nav class="toc-bar">
+    <a href="#intro">Introduction</a>
+    <a href="#fundamentals">Fundamentals</a>
+    <a href="#lob">Lines of Business</a>
+    <a href="#comparison">Advantages & Disadvantages</a>
+    <a href="#permits">Business Permits</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- INTRODUCTION -->
+  <section class="section" id="intro">
+    <div class="section-label">§ 01 — Overview</div>
+    <h2>Introduction</h2>
+    <div class="intro-card">
+      <p>Business, while being a straightforward source of income, is among the most intricate ventures to initiate. The global pandemic compelled people to adapt by delving into buying and selling, exchanging goods, and establishing small businesses. Although some pandemic-launched businesses flourished with soaring sales, many succumbed due to a lack of business acumen.</p>
+    </div>
+    <p>To thrive in the business realm, critical considerations include the <strong>line of business</strong>, <strong>capital/budget</strong>, <strong>workforce/human resources</strong>, <strong>business permits</strong>, <strong>target market</strong>, and <strong>location</strong>.</p>
+  </section>
+
+  <div class="section-divider"><span>core concepts</span></div>
+
+  <!-- FUNDAMENTALS -->
+  <section class="section" id="fundamentals">
+    <div class="section-label">§ 02 — Core Framework</div>
+    <h2>Business Fundamentals</h2>
+
+    <div class="fundamentals-grid">
+
+      <div class="fund-card">
+        <div class="fund-number">1</div>
+        <div class="fund-body">
+          <h3>Line of Business (LOB)</h3>
+          <p>Determine the specific type of business you intend to establish — Food & Beverage, Law Firm, Retail, Real Estate, Car Rentals, and so on.</p>
+          <div class="callout">Keep it simple. Align your LOB with your interests — engaging in something you are highly interested in makes the task much easier.</div>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <div class="fund-number">2</div>
+        <div class="fund-body">
+          <h3>Budget</h3>
+          <ul class="sub-list">
+            <li data-alpha="A"><strong>Capital</strong> — Currency earmarked for tools, equipment, interior design, raw materials, and goods. Restaurants, for example, need funds for tables, chairs, appliances, and raw food.</li>
+            <li data-alpha="B"><strong>Labor / Human Resources</strong> — It is nearly impossible to operate a business single-handedly. Budget for compensation unless embarking on a very small solo venture like food stalls or freelancing.</li>
+            <li data-alpha="C"><strong>Business Permits</strong> — Various licenses such as Mayor's Permit, BIR, DTI, etc. These will be covered further in this lesson.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <div class="fund-number">3</div>
+        <div class="fund-body">
+          <h3>Target Market</h3>
+          <p>Always recognize and understand your market. Ensure you are aware of their potential interests, their willingness to pay for your service or product, and consider factors such as their culture and religion.</p>
+        </div>
+      </div>
+
+      <div class="fund-card">
+        <div class="fund-number">4</div>
+        <div class="fund-body">
+          <h3>Location</h3>
+          <p>The location of your establishment is as important as your budget. Key considerations:</p>
+          <ul class="sub-list">
+            <li data-alpha="A"><strong>Accessibility</strong> — How easy is it for your target audience to access your store?</li>
+            <li data-alpha="B"><strong>Distance</strong> — Position your business in close proximity to your target market for maximum convenience.</li>
+            <li data-alpha="C"><strong>Safe Zone</strong> — Always prioritize the safety of your customers. Ensure the area is secure for leisure.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"><span>business types</span></div>
+
+  <!-- LINES OF BUSINESS -->
+  <section class="section" id="lob">
+    <div class="section-label">§ 03 — Industry Overview</div>
+    <h2>Lines of Business</h2>
+    <p>While there are various types of businesses, here are some commonly owned enterprises:</p>
+
+    <div class="lob-grid">
+      <div class="lob-card">
+        <span class="lob-icon">🍽️</span>
+        <span class="lob-tag">F&B</span>
+        <h3>Food & Beverage</h3>
+        <p>Involves the preparation and serving of food and drinks, from casual eateries and fast-food joints to fine dining restaurants.</p>
+      </div>
+      <div class="lob-card">
+        <span class="lob-icon">🏪</span>
+        <span class="lob-tag">RETAIL</span>
+        <h3>Retail</h3>
+        <p>Sale of goods or services directly to the end consumer. The final stage in the distribution chain — brick-and-mortar or online.</p>
+      </div>
+      <div class="lob-card">
+        <span class="lob-icon">👗</span>
+        <span class="lob-tag">SPECIALTY</span>
+        <h3>Specialty Retail</h3>
+        <p>A niche segment focused on a specific and distinct range of products — boutiques, artisanal shops, gourmet stores, and niche bookshops.</p>
+      </div>
+      <div class="lob-card">
+        <span class="lob-icon">🛒</span>
+        <span class="lob-tag">E-COM</span>
+        <h3>E-Commerce</h3>
+        <p>Buying and selling goods and services over the internet. Covers B2C and B2B transactions through digital platforms and websites.</p>
+      </div>
+      <div class="lob-card">
+        <span class="lob-icon">🏠</span>
+        <span class="lob-tag">PROPERTY</span>
+        <h3>Real Estate Rentals</h3>
+        <p>Leasing of residential and commercial spaces to tenants in exchange for periodic payments. Covers houses, offices, retail, and industrial facilities.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>analysis</span></div>
+
+  <!-- ADVANTAGES AND DISADVANTAGES -->
+  <section class="section" id="comparison">
+    <div class="section-label">§ 04 — Comparative Analysis</div>
+    <h2>Advantages &amp; Disadvantages</h2>
+
+    <!-- F&B -->
+    <div class="table-section">
+      <div class="table-title">1. Restaurant, Eateries, Coffee Shop, Food Stalls</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Always in demand</td><td>High returns hence high risk</td></tr>
+          <tr><td>Fast-paced hence fast returns</td><td>Demands a significant workforce</td></tr>
+          <tr><td>Fast-returns hence high returns</td><td>Perishable goods</td></tr>
+          <tr><td>Can start up with low capital</td><td>Must consistently adhere to trends (e.g. seasonal interior designs)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Grocery -->
+    <div class="table-section">
+      <div class="table-title">2. Grocery / Convenience Store, Flea Market, Frozen Goods</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Always in demand</td><td>High returns hence high risk</td></tr>
+          <tr><td>Fast-paced hence fast returns</td><td>Perishable goods</td></tr>
+          <tr><td>Fast-returns hence high returns</td><td>Must consistently align with current trends</td></tr>
+          <tr><td>Can stay current with trends</td><td>Necessitates substantial capital</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Boutique -->
+    <div class="table-section">
+      <div class="table-title">3. Boutique, Shoe Store</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Increased profit margin</td><td>Effective sales skills are necessary</td></tr>
+          <tr><td>Reduced need for capital</td><td>Elevated marketing expenses</td></tr>
+          <tr><td>Enhanced customer relations</td><td>No cost-saving advantages in purchasing</td></tr>
+          <tr><td>Financial credit arrangement</td><td>Intense competition</td></tr>
+          <tr><td>No liability</td><td>Necessitates an appropriate location</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- E-commerce -->
+    <div class="table-section">
+      <div class="table-title">4. Online Selling (E-Commerce)</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Global reach</td><td>Security concerns</td></tr>
+          <tr><td>24/7 Availability</td><td>Lack of personal interaction</td></tr>
+          <tr><td>Cost efficiency</td><td>Dependence on technology</td></tr>
+          <tr><td>Convenience</td><td>Intense competition</td></tr>
+          <tr><td>Data insights</td><td>Necessitates an appropriate platform</td></tr>
+          <tr><td>Marketing opportunities</td><td>Return and refund issues</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Property Short Term -->
+    <div class="table-section">
+      <div class="table-title">5a. Property Rentals — Short Term</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Higher income potential</td><td>Inconsistent occupancy</td></tr>
+          <tr><td>Flexibility for property use</td><td>Management intensity</td></tr>
+          <tr><td>Diversification of income streams</td><td>Regulatory challenges</td></tr>
+          <tr><td>Shorter commitment periods</td><td>Higher operating costs</td></tr>
+          <tr><td>Market demand and seasonal opportunities</td><td>Vulnerability to economic fluctuations</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Property Long Term -->
+    <div class="table-section">
+      <div class="table-title">5b. Property Rentals — Long Term</div>
+      <table class="adv-table">
+        <thead><tr><th>✓ Advantages</th><th>✗ Disadvantages</th></tr></thead>
+        <tbody>
+          <tr><td>Stable income</td><td>Fixed rental rates</td></tr>
+          <tr><td>Reduced turnover costs</td><td>Limited flexibility for property use</td></tr>
+          <tr><td>Predictable cash flow</td><td>Potential for problematic tenants</td></tr>
+          <tr><td>Lower vacancy rates</td><td>Market changes impact rental rates</td></tr>
+          <tr><td>Fewer management demands</td><td>Less responsive to market trends</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <div class="section-divider"><span>compliance</span></div>
+
+  <!-- PERMITS -->
+  <section class="section" id="permits">
+    <div class="section-label">§ 05 — Legal Requirements</div>
+    <h2>Business Permits &amp; Licenses</h2>
+    <p>Starting a business involves various permits and licenses to ensure compliance with health, safety, and operational regulations. The specific requirements vary by location — always check with local authorities. Below is a general list for reference (illustrated using a restaurant example):</p>
+
+    <div class="permits-grid">
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 01</div>
+        <h4>Business License</h4>
+        <p>General requirement for operating any business; obtained from the local city or county government.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 02</div>
+        <h4>Food Service Establishment Permit</h4>
+        <p>Issued by the health department to ensure compliance with food safety regulations.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 03</div>
+        <h4>Alcohol License</h4>
+        <p>Required if you plan to serve alcoholic beverages. Type varies (beer & wine, liquor, etc.).</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 04</div>
+        <h4>Food Handler's Permit</h4>
+        <p>Required for employees who handle or prepare food, demonstrating knowledge of safe food handling.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 05</div>
+        <h4>Occupancy Permit</h4>
+        <p>Ensures the restaurant's occupancy capacity complies with local building and safety codes.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 06</div>
+        <h4>Sign Permit</h4>
+        <p>Required if you plan to install signage, to ensure compliance with local regulations.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 07</div>
+        <h4>Grease Trap Permit</h4>
+        <p>Required if your business disposes of grease waste to prevent environmental issues.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 08</div>
+        <h4>Health & Safety Inspections</h4>
+        <p>Regular inspections by the health department to ensure compliance with food safety standards.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 09</div>
+        <h4>Music License</h4>
+        <p>If you play music in your establishment, a license may be needed to comply with copyright laws.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 10</div>
+        <h4>Employee Identification Number (EIN)</h4>
+        <p>Required for tax purposes, especially if you have employees.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 11</div>
+        <h4>Building Permit</h4>
+        <p>Needed for any construction or renovation work on the business premises.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 12</div>
+        <h4>Environmental Permits</h4>
+        <p>May be required depending on location and size, related to waste disposal and environmental impact.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 13</div>
+        <h4>Fire Department Permits</h4>
+        <p>Ensures compliance with fire safety regulations, including fire exits and suppression systems.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 14</div>
+        <h4>Waste Disposal Permits</h4>
+        <p>Required for proper disposal of food waste and other materials generated by the business.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 15</div>
+        <h4>Outdoor Seating Permit</h4>
+        <p>Required if you plan to offer outdoor seating, obtained from local authorities.</p>
+      </div>
+      <div class="permit-card">
+        <div class="permit-num">PERMIT 16</div>
+        <h4>Special Events Permit</h4>
+        <p>May be required if you plan to host special events or promotions at your establishment.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:2rem;">
+      It is crucial to research the specific requirements in your local area and consult with relevant government agencies to ensure you have all necessary permits and licenses to operate legally.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Nex Genix Business School</div>
+    <p>contact@nexgenixbusinessschool.com</p>
+    <p>Zamboanga City, Zamboanga del Sur, Philippines</p>
+    <p style="margin-top:1rem; font-size:0.72rem;">All rights reserved © 2025 Nex Genix Business School</p>
+  </div>
+</footer>
+<div class="footer-rule"></div>
+
+</body>
+</html>
